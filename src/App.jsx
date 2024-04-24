@@ -16,11 +16,7 @@ import { trendingGenreLoader } from "./pages/Trending";
 const router = createBrowserRouter(
 	createRoutesFromElements(
 		<Route path="/" element={<RootLayout />}>
-			<Route
-				index
-				loader={trendingGenreLoader}
-				element={<Home />}
-			/>
+			<Route index loader={trendingGenreLoader} element={<Home />} />
 		</Route>
 	)
 );

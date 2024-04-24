@@ -37,7 +37,6 @@ MovieShowCard.propTypes = {
 	title: PropTypes.string,
 	mediaType: PropTypes.string,
 	name: PropTypes.string,
-	number: PropTypes.number,
 	posterPath: PropTypes.string,
 	voteAverage: PropTypes.number,
 	genreIds: PropTypes.array,
