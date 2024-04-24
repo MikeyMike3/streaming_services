@@ -2,11 +2,13 @@
 import PropTypes from "prop-types";
 
 export const MovieShowCard = (props) => {
+	// console.log(movieShowId);
+
 	return (
 		<div className="movie-show-card">
 			<img
 				src={`https://image.tmdb.org/t/p/w500/${props.posterPath}.jpg`}
-				alt="asdwa"
+				alt="movie poster"
 			/>
 			<div className="movie-show-info">
 				<div className="genre-info">
