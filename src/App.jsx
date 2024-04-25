@@ -5,8 +5,6 @@ import { Home } from "./pages/Home";
 
 import {
 	Route,
-	// Link,
-	// NavLink,
 	createBrowserRouter,
 	createRoutesFromElements,
 	RouterProvider,

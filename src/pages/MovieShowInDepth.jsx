@@ -9,9 +9,35 @@ export const MovieShowInDepth = () => {
 	return (
 		<div>
 			{mediaType === "movie" ? (
-				<h2>{movieShowDetails[0].title}</h2>
+				<>
+					<h2>{movieShowDetails[0].title}</h2>
+					<p>{mediaType}</p>
+					<img
+						src={`https://image.tmdb.org/t/p/w500/${movieShowDetails[0].poster_path}.jpg`}
+						alt="movie poster"
+					/>
+					<img
+						src={`https://image.tmdb.org/t/p/w500/${movieShowDetails[0].backdrop_path}.jpg`}
+						alt="movie poster"
+					/>
+					<p>{movieShowDetails[0].vote_average}</p>
+					<p>{movieShowDetails[0].overview}</p>
+				</>
 			) : (
-				<h2>{movieShowDetails[0].name}</h2>
+				<>
+					<h2>{movieShowDetails[0].name}</h2>
+					<p>{mediaType}</p>
+					<img
+						src={`https://image.tmdb.org/t/p/w500/${movieShowDetails[0].poster_path}.jpg`}
+						alt="movie poster"
+					/>
+					<img
+						src={`https://image.tmdb.org/t/p/w500/${movieShowDetails[0].backdrop_path}.jpg`}
+						alt="movie poster"
+					/>
+					<p>{movieShowDetails[0].vote_average}</p>
+					<p>{movieShowDetails[0].overview}</p>
+				</>
 			)}
 		</div>
 	);
@@ -33,10 +59,40 @@ const fetchMovieDetails = async (movieId) => {
 	return res.json();
 };
 
+const fetchMovieProviders = async (movieId) => {
+	const res = await fetch(
+		`https://api.themoviedb.org/3/movie/${movieId}/watch/providers`,
+		options
+	);
+	return res.json();
+};
+
+const fetchMovieGenre = async () => {
+	const res = await fetch(
+		`https://api.themoviedb.org/3/genre/movie/list?language=en`
+	);
+	return res.json();
+};
+
 const fetchShowDetails = async (showId) => {
 	const res = await fetch(
 		`https://api.themoviedb.org/3/tv/${showId}?language=en-US`,
 		options
+	);
+	return res.json();
+};
+
+const fetchShowProviders = async (showId) => {
+	const res = await fetch(
+		`https://api.themoviedb.org/3/tv/${showId}/watch/providers`,
+		options
+	);
+	return res.json();
+};
+
+const fetchShowGenre = async () => {
+	const res = await fetch(
+		"https://api.themoviedb.org/3/genre/tv/list?language=en"
 	);
 	return res.json();
 };
@@ -46,10 +102,16 @@ export const movieShowInDepthLoader = async ({ params }) => {
 
 	if (mediaType === "movie") {
 		const movieDetails = await fetchMovieDetails(id);
-		return [movieDetails];
+		const movieProviders = await fetchMovieProviders(id);
+		const movieGenre = await fetchMovieGenre();
+
+		return [movieDetails, movieProviders, movieGenre];
 	} else {
 		const showDetails = await fetchShowDetails(id);
-		return [showDetails];
+		const showProviders = await fetchShowProviders(id);
+		const showGenre = await fetchShowGenre();
+
+		return [showDetails, showProviders, showGenre];
 	}
 
 	// return [movieDetails, showDetails];
