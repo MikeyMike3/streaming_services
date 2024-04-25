@@ -51,6 +51,7 @@ const options = {
 	},
 };
 
+// movies api calls
 const fetchMovieDetails = async (movieId) => {
 	const res = await fetch(
 		`https://api.themoviedb.org/3/movie/${movieId}?language=en-US`,
@@ -74,6 +75,7 @@ const fetchMovieGenre = async () => {
 	return res.json();
 };
 
+// show api calls
 const fetchShowDetails = async (showId) => {
 	const res = await fetch(
 		`https://api.themoviedb.org/3/tv/${showId}?language=en-US`,
