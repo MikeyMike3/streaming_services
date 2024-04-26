@@ -9,11 +9,10 @@ import {
 	createRoutesFromElements,
 	RouterProvider,
 } from "react-router-dom";
-import { trendingGenreLoader } from "./pages/Trending";
-import {
-	MovieShowInDepth,
-	movieShowInDepthLoader,
-} from "./pages/MovieShowInDepth";
+
+import { trendingGenreLoader } from "./loaders/trendingGenreLoader";
+import { MovieShowInDepth } from "./pages/MovieShowInDepth";
+import { movieShowInDepthLoader } from "./loaders/movieShowInDepthLoader";
 
 const router = createBrowserRouter(
 	createRoutesFromElements(

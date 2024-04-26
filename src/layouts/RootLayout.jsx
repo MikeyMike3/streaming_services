@@ -4,7 +4,9 @@ export const RootLayout = () => {
 	return (
 		<div>
 			<header>
-				<nav></nav>
+				<nav>
+					<p></p>
+				</nav>
 			</header>
 
 			<main>

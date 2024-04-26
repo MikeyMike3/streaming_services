@@ -5,6 +5,32 @@
 	box-sizing: border-box;
 }
 
+.loader-container {
+	width: 100vw;
+	height: 100vh;
+	position: fixed;
+	top: 0;
+	left: 0;
+	background-color: rgba(0, 0, 0, 0.849);
+	color: white;
+}
+
+.bar-loader {
+	width: 100%;
+}
+
+.retro {
+	color: aqua;
+}
+
+.site-logo {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 100%;
+	letter-spacing: 2px;
+}
+
 .movie-show-grid {
 	display: grid;
 	grid-template-columns: repeat(7, 1fr);

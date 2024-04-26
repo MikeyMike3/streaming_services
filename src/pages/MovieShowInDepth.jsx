@@ -1,9 +1,12 @@
 import { useEffect, useState } from "react";
-import { useLoaderData, useParams } from "react-router-dom";
+import { useLoaderData, useParams, useNavigation } from "react-router-dom";
+import { BarLoader } from "react-spinners";
+// import { movieShowInDepthLoader } from "../loaders/movieShowInDepthLoader";
 
 export const MovieShowInDepth = () => {
-	const { mediaType, id } = useParams();
+	const { mediaType } = useParams();
 	const movieShowDetails = useLoaderData();
+	const navigation = useNavigation();
 
 	const [flatRateStreamingServices, setFlatRateStreamingServices] = useState(
 		[]
@@ -71,6 +74,24 @@ export const MovieShowInDepth = () => {
 
 	return (
 		<div>
+			{navigation.state === "loading" ? (
+				<div className="loader-container">
+					<div className="bar-loader">
+						<BarLoader
+							color={"aqua"}
+							width={"100%"}
+							height={8}
+							speedMultiplier={0.5}
+						/>
+					</div>
+					<div className="site-logo">
+						<h1>
+							<span className="retro">Retro</span>Flix
+						</h1>
+					</div>
+				</div>
+			) : null}
+
 			{mediaType === "movie" ? (
 				<>
 					<h2>{movieShowDetails[0].title}</h2>
@@ -200,98 +221,4 @@ export const MovieShowInDepth = () => {
 			)}
 		</div>
 	);
-};
-const options = {
-	method: "GET",
-	headers: {
-		accept: "application/json",
-		Authorization:
-			"Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI4ZDZmMTNhYzg4ZWFkNmM0MTBmYmEzMDM3NWZiYTJhNyIsInN1YiI6IjY2MjJjYjdmOTYwY2RlMDEzMWE2MTJmOSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.NppGm2uYC8Gg7Pe0eUTVPYgwr3M9dw3JWk-8BgO-mtk",
-	},
-};
-
-// movies api calls
-const fetchMovieDetails = async (movieId) => {
-	const res = await fetch(
-		`https://api.themoviedb.org/3/movie/${movieId}?language=en-US`,
-		options
-	);
-	return res.json();
-};
-
-const fetchMovieProviders = async (movieId) => {
-	const res = await fetch(
-		`https://api.themoviedb.org/3/movie/${movieId}/watch/providers`,
-		options
-	);
-	return res.json();
-};
-
-const fetchMovieCredits = async (movieId) => {
-	const res = await fetch(
-		`https://api.themoviedb.org/3/movie/${movieId}/credits?language=en-US', options`,
-		options
-	);
-	return res.json();
-};
-
-const fetchMovieTrailer = async (movieId) => {
-	const res = await fetch(
-		`https://api.themoviedb.org/3/movie/${movieId}/videos?language=en-US`,
-		options
-	);
-	return res.json();
-};
-
-// show api calls
-const fetchShowDetails = async (showId) => {
-	const res = await fetch(
-		`https://api.themoviedb.org/3/tv/${showId}?language=en-US`,
-		options
-	);
-	return res.json();
-};
-
-const fetchShowProviders = async (showId) => {
-	const res = await fetch(
-		`https://api.themoviedb.org/3/tv/${showId}/watch/providers`,
-		options
-	);
-	return res.json();
-};
-
-const fetchShowCredits = async (showId) => {
-	const res = await fetch(
-		`https://api.themoviedb.org/3/tv/${showId}/credits?language=en-US`,
-		options
-	);
-	return res.json();
-};
-
-const fetchShowTrailer = async (showId) => {
-	const res = await fetch(
-		`https://api.themoviedb.org/3/tv/${showId}/videos?language=en-US`,
-		options
-	);
-	return res.json();
-};
-
-export const movieShowInDepthLoader = async ({ params }) => {
-	const { mediaType, id } = params;
-
-	if (mediaType === "movie") {
-		const movieDetails = await fetchMovieDetails(id);
-		const movieProviders = await fetchMovieProviders(id);
-		const movieCredits = await fetchMovieCredits(id);
-		const movieTrailer = await fetchMovieTrailer(id);
-
-		return [movieDetails, movieProviders, movieCredits, movieTrailer];
-	} else {
-		const showDetails = await fetchShowDetails(id);
-		const showProviders = await fetchShowProviders(id);
-		const showCredits = await fetchShowCredits(id);
-		const showTrailer = await fetchShowTrailer(id);
-
-		return [showDetails, showProviders, showCredits, showTrailer];
-	}
 };
