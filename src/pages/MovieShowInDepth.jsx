@@ -294,6 +294,4 @@ export const movieShowInDepthLoader = async ({ params }) => {
 
 		return [showDetails, showProviders, showCredits, showTrailer];
 	}
-
-	// return [movieDetails, showDetails];
 };
