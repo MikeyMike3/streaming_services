@@ -1,10 +1,73 @@
+import { useEffect, useState } from "react";
 import { useLoaderData, useParams } from "react-router-dom";
 
 export const MovieShowInDepth = () => {
 	const { mediaType, id } = useParams();
 	const movieShowDetails = useLoaderData();
 
-	// console.log(movieShowDetails);
+	const [flatRateStreamingServices, setFlatRateStreamingServices] = useState(
+		[]
+	);
+	const [buyStreamingServices, setBuyStreamingServices] = useState([]);
+	const [rentStreamingServices, setRentStreamingServices] = useState([]);
+
+	const [credits, setCredits] = useState([]);
+
+	const isEmpty = (obj) => {
+		return Object.keys(obj).length === 0;
+	};
+
+	useEffect(() => {
+		if (!isEmpty(movieShowDetails[1].results)) {
+			if (
+				typeof movieShowDetails[1].results.US.flatrate !== "undefined"
+			) {
+				setFlatRateStreamingServices(
+					movieShowDetails[1].results.US.flatrate
+				);
+			}
+		}
+	}, [movieShowDetails]);
+
+	useEffect(() => {
+		if (!isEmpty(movieShowDetails[1].results)) {
+			if (typeof movieShowDetails[1].results.US.buy !== "undefined") {
+				setBuyStreamingServices(movieShowDetails[1].results.US.buy);
+			}
+		}
+	}, [movieShowDetails]);
+
+	useEffect(() => {
+		if (!isEmpty(movieShowDetails[1].results)) {
+			if (typeof movieShowDetails[1].results.US.rent !== "undefined") {
+				setRentStreamingServices(movieShowDetails[1].results.US.rent);
+			}
+		}
+	}, [movieShowDetails]);
+
+	// useEffect(() => {
+	// 	console.log(buyStreamingServices);
+	// }, [buyStreamingServices]);
+
+	useEffect(() => {
+		if (typeof movieShowDetails[2].cast !== "undefined") {
+			const filteredCast = movieShowDetails[2].cast.filter(
+				(actor) => actor.known_for_department === "Acting"
+			);
+			setCredits(filteredCast);
+		}
+	}, [movieShowDetails]);
+
+	// useEffect(() => {
+	// 	console.log(credits);
+	// }, [credits]);
+
+	console.log(movieShowDetails);
+
+	let movieTrailerLink = movieShowDetails[3].results.find(
+		(vid) => vid.name === "Official Trailer"
+	);
+	console.log(movieTrailerLink);
 
 	return (
 		<div>
@@ -22,6 +85,53 @@ export const MovieShowInDepth = () => {
 					/>
 					<p>{movieShowDetails[0].vote_average}</p>
 					<p>{movieShowDetails[0].overview}</p>
+					<ul>
+						{movieShowDetails[0].genres.map((item) => (
+							<li key={item.id}>{item.name}</li>
+						))}
+					</ul>
+					<h3>Stream On:</h3>
+					{flatRateStreamingServices.map((item) => (
+						<img
+							className="provider-imgs"
+							key={item.provider_id}
+							src={`https://image.tmdb.org/t/p/w500/${item.logo_path}.jpg`}
+							alt="movie poster"
+						/>
+					))}
+					<h3>Buy On:</h3>
+					{buyStreamingServices.map((item) => (
+						<img
+							className="provider-imgs"
+							key={item.provider_id}
+							src={`https://image.tmdb.org/t/p/w500/${item.logo_path}.jpg`}
+							alt="movie poster"
+						/>
+					))}
+					<h3>Rent On:</h3>
+					{rentStreamingServices.map((item) => (
+						<img
+							className="provider-imgs"
+							key={item.provider_id}
+							src={`https://image.tmdb.org/t/p/w500/${item.logo_path}.jpg`}
+							alt="movie poster"
+						/>
+					))}
+					<h3>Trailer:</h3>
+					<p>{`https://www.youtube.com/watch?v=${movieTrailerLink.key}`}</p>
+
+					<h3>Cast:</h3>
+					{credits.map((item) => (
+						<div key={item.cast_id} className="cast-card">
+							<p>{item.character}</p>
+							<p>{item.name}</p>
+							{item.profile_path !== null ? (
+								<img
+									className="cast-card-img"
+									src={`https://image.tmdb.org/t/p/w500/${item.profile_path}.jpg`}></img>
+							) : null}
+						</div>
+					))}
 				</>
 			) : (
 				<>
@@ -37,6 +147,55 @@ export const MovieShowInDepth = () => {
 					/>
 					<p>{movieShowDetails[0].vote_average}</p>
 					<p>{movieShowDetails[0].overview}</p>
+					<ul>
+						{movieShowDetails[0].genres.map((item) => (
+							<li key={item.id}>{item.name}</li>
+						))}
+					</ul>
+
+					<h3>Stream On:</h3>
+					{flatRateStreamingServices.map((item) => (
+						<img
+							className="provider-imgs"
+							key={item.provider_id}
+							src={`https://image.tmdb.org/t/p/w500/${item.logo_path}.jpg`}
+							alt="movie poster"
+						/>
+					))}
+					<h3>Buy On:</h3>
+					{buyStreamingServices.map((item) => (
+						<img
+							className="provider-imgs"
+							key={item.provider_id}
+							src={`https://image.tmdb.org/t/p/w500/${item.logo_path}.jpg`}
+							alt="movie poster"
+						/>
+					))}
+					<h3>Rent On:</h3>
+					{rentStreamingServices.map((item) => (
+						<img
+							className="provider-imgs"
+							key={item.provider_id}
+							src={`https://image.tmdb.org/t/p/w500/${item.logo_path}.jpg`}
+							alt="movie poster"
+						/>
+					))}
+
+					<h3>Trailer:</h3>
+					<p>{`https://www.youtube.com/watch?v=${movieTrailerLink.key}`}</p>
+
+					<h3>Cast:</h3>
+					{credits.map((item) => (
+						<div key={item.id} className="cast-card">
+							<p>{item.character}</p>
+							<p>{item.name}</p>
+							{item.profile_path !== null ? (
+								<img
+									className="cast-card-img"
+									src={`https://image.tmdb.org/t/p/w500/${item.profile_path}.jpg`}></img>
+							) : null}
+						</div>
+					))}
 				</>
 			)}
 		</div>
@@ -68,9 +227,18 @@ const fetchMovieProviders = async (movieId) => {
 	return res.json();
 };
 
-const fetchMovieGenre = async () => {
+const fetchMovieCredits = async (movieId) => {
 	const res = await fetch(
-		`https://api.themoviedb.org/3/genre/movie/list?language=en`
+		`https://api.themoviedb.org/3/movie/${movieId}/credits?language=en-US', options`,
+		options
+	);
+	return res.json();
+};
+
+const fetchMovieTrailer = async (movieId) => {
+	const res = await fetch(
+		`https://api.themoviedb.org/3/movie/${movieId}/videos?language=en-US`,
+		options
 	);
 	return res.json();
 };
@@ -92,9 +260,18 @@ const fetchShowProviders = async (showId) => {
 	return res.json();
 };
 
-const fetchShowGenre = async () => {
+const fetchShowCredits = async (showId) => {
 	const res = await fetch(
-		"https://api.themoviedb.org/3/genre/tv/list?language=en"
+		`https://api.themoviedb.org/3/tv/${showId}/credits?language=en-US`,
+		options
+	);
+	return res.json();
+};
+
+const fetchShowTrailer = async (showId) => {
+	const res = await fetch(
+		`https://api.themoviedb.org/3/tv/${showId}/videos?language=en-US`,
+		options
 	);
 	return res.json();
 };
@@ -105,15 +282,17 @@ export const movieShowInDepthLoader = async ({ params }) => {
 	if (mediaType === "movie") {
 		const movieDetails = await fetchMovieDetails(id);
 		const movieProviders = await fetchMovieProviders(id);
-		const movieGenre = await fetchMovieGenre();
+		const movieCredits = await fetchMovieCredits(id);
+		const movieTrailer = await fetchMovieTrailer(id);
 
-		return [movieDetails, movieProviders, movieGenre];
+		return [movieDetails, movieProviders, movieCredits, movieTrailer];
 	} else {
 		const showDetails = await fetchShowDetails(id);
 		const showProviders = await fetchShowProviders(id);
-		const showGenre = await fetchShowGenre();
+		const showCredits = await fetchShowCredits(id);
+		const showTrailer = await fetchShowTrailer(id);
 
-		return [showDetails, showProviders, showGenre];
+		return [showDetails, showProviders, showCredits, showTrailer];
 	}
 
 	// return [movieDetails, showDetails];

@@ -34,3 +34,13 @@
 	flex-wrap: wrap;
 	gap: 15px;
 }
+
+.provider-imgs {
+	border-radius: 15px;
+	width: 100px;
+	margin-right: 15px;
+}
+
+.cast-card-img {
+	width: 50px;
+}
