@@ -1,4 +1,3 @@
-import React from "react";
 import { BarLoader } from "react-spinners";
 
 export const barLoader = (props) => {
