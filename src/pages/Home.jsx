@@ -13,7 +13,7 @@ export const Home = () => {
 							color={"aqua"}
 							width={"100%"}
 							height={8}
-							speedMultiplier={0.5}
+							speedMultiplier={1}
 						/>
 					</div>
 					<div className="site-logo">
