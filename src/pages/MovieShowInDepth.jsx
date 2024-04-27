@@ -1,5 +1,10 @@
 import { useEffect, useState } from "react";
-import { useLoaderData, useParams, useNavigation } from "react-router-dom";
+import {
+	useLoaderData,
+	useParams,
+	useNavigation,
+	Link,
+} from "react-router-dom";
 import { BarLoader } from "react-spinners";
 import YouTube from "react-youtube";
 
@@ -8,6 +13,10 @@ export const MovieShowInDepth = () => {
 	const movieShowDetails = useLoaderData();
 	const navigation = useNavigation();
 
+	window.scrollTo(0, 0);
+
+	console.log(movieShowDetails[0]);
+
 	const [flatRateStreamingServices, setFlatRateStreamingServices] = useState(
 		[]
 	);
@@ -15,6 +24,7 @@ export const MovieShowInDepth = () => {
 	const [rentStreamingServices, setRentStreamingServices] = useState([]);
 
 	const [credits, setCredits] = useState([]);
+	const [similar, setSimilar] = useState([]);
 
 	const isEmpty = (obj) => {
 		return Object.keys(obj).length === 0;
@@ -52,6 +62,24 @@ export const MovieShowInDepth = () => {
 	// 	console.log(buyStreamingServices);
 	// }, [buyStreamingServices]);
 
+	const renderTrailer = () => {
+		if (movieShowDetails[3].results.length > 0) {
+			const trailer = movieShowDetails[3].results.find(
+				(vid) => vid.name === "Official Trailer"
+			);
+			const key = trailer
+				? trailer.key
+				: movieShowDetails[3].results[0].key;
+
+			return (
+				<YouTube
+					videoId={key}
+					containerClassName={"youtube-container"}
+				/>
+			);
+		}
+	};
+
 	useEffect(() => {
 		if (typeof movieShowDetails[2].cast !== "undefined") {
 			const filteredCast = movieShowDetails[2].cast.filter(
@@ -65,23 +93,15 @@ export const MovieShowInDepth = () => {
 	// 	console.log(credits);
 	// }, [credits]);
 
-	console.log(movieShowDetails);
+	useEffect(() => {
+		if (!isEmpty(movieShowDetails[4].results)) {
+			setSimilar(movieShowDetails[4].results);
+		}
+	}, [movieShowDetails]);
 
-	let movieTrailerLink = movieShowDetails[3].results.find(
-		(vid) => vid.name === "Official Trailer"
-	);
-	console.log(movieTrailerLink);
-
-	const renderTrailer = () => {
-		const trailer = movieShowDetails[3].results.find(
-			(vid) => vid.name === "Official Trailer"
-		);
-		const key = trailer ? trailer.key : movieShowDetails[3].results[0].key;
-
-		return (
-			<YouTube videoId={key} containerClassName={"youtube-container"} />
-		);
-	};
+	// useEffect(() => {
+	// 	console.log(similar);
+	// }, [similar]);
 
 	return (
 		<div>
@@ -164,6 +184,21 @@ export const MovieShowInDepth = () => {
 							) : null}
 						</div>
 					))}
+
+					<h3>Similar Movies:</h3>
+					{similar.map((item) => (
+						<Link
+							key={item.id}
+							to={`/movie/${item.id.toString()}/similar`}>
+							<div className="similar-movie-show-container">
+								<img
+									src={`https://image.tmdb.org/t/p/w500/${item.poster_path}.jpg`}
+									alt="movie poster"
+								/>
+								<p>{item.title}</p>
+							</div>
+						</Link>
+					))}
 				</>
 			) : (
 				<>
@@ -228,6 +263,21 @@ export const MovieShowInDepth = () => {
 									src={`https://image.tmdb.org/t/p/w500/${item.profile_path}.jpg`}></img>
 							) : null}
 						</div>
+					))}
+
+					<h3>Similar Shows:</h3>
+					{similar.map((item) => (
+						<Link
+							key={item.id}
+							to={`/movie/${item.id.toString()}/similar`}>
+							<div className="similar-movie-show-container">
+								<img
+									src={`https://image.tmdb.org/t/p/w500/${item.poster_path}.jpg`}
+									alt="movie poster"
+								/>
+								<p>{item.name}</p>
+							</div>
+						</Link>
 					))}
 				</>
 			)}

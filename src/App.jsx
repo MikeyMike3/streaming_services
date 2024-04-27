@@ -23,6 +23,11 @@ const router = createBrowserRouter(
 				loader={movieShowInDepthLoader}
 				element={<MovieShowInDepth />}
 			/>
+			<Route
+				path=":mediaType/:id/similar"
+				loader={movieShowInDepthLoader}
+				element={<MovieShowInDepth />}
+			/>
 		</Route>
 	)
 );

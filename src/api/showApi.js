@@ -38,3 +38,11 @@ export const fetchShowTrailer = async (showId) => {
 	);
 	return res.json();
 };
+
+export const fetchSimilarShows = async (showId) => {
+	const res = await fetch(
+		`https://api.themoviedb.org/3/tv/${showId}/similar?language=en-US&page=1`,
+		options
+	);
+	return res.json();
+};
