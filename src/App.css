@@ -46,10 +46,12 @@ body {
 	background-color: black;
 	height: 100%;
 	color: white;
+	border-radius: 25px;
 }
 
 .movie-show-card img {
 	width: 100%;
+	border-radius: 25px;
 	/* height: 500px; */
 }
 
