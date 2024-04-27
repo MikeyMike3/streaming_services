@@ -46,6 +46,10 @@ body {
 	gap: 10px;
 }
 
+.movie-show-flex a {
+	text-decoration: none;
+}
+
 .movie-show-card {
 	min-width: 300px;
 	background-color: black;
