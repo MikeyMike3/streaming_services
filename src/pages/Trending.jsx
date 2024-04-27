@@ -2,9 +2,9 @@ import { Link, useLoaderData } from "react-router-dom";
 import { MovieShowCard } from "../components/MovieShowCard";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
-import "swiper/css/navigation";
-import "swiper/css/pagination";
-import "swiper/css/scrollbar";
+
+import "swiper/css/free-mode";
+import { FreeMode } from "swiper/modules";
 
 export const Trending = () => {
 	const trending = useLoaderData();
@@ -14,8 +14,12 @@ export const Trending = () => {
 			<Swiper
 				grabCursor={true}
 				spaceBetween={10}
-				slidesPerView={6.5}
-				direction="horizontal">
+				slidesPerView={"auto"}
+				direction="horizontal"
+				modules={[FreeMode]}
+				freeMode={{
+					freeMode: { enabled: true },
+				}}>
 				{trending[0].results.map((item) => (
 					<SwiperSlide key={item.id}>
 						<Link to={`${item.media_type}/${item.id.toString()}`}>

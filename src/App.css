@@ -36,9 +36,15 @@ body {
 	height: 100%;
 	letter-spacing: 2px;
 }
+/* adjusted this to make slider responsive */
+.movie-show-flex .swiper-slide {
+	width: 15%;
+}
 
 .movie-show-flex {
 	display: flex;
+	margin-left: 15px;
+	margin-right: 15px;
 }
 
 .movie-show-flex a {

@@ -8,6 +8,7 @@ export const barLoader = (props) => {
 				width={props.width}
 				height={props.height}
 				speedMultiplier={props.speedMultiplier}
+				modules={props.modules}
 			/>
 		</div>
 	);
