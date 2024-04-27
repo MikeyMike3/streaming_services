@@ -36,13 +36,18 @@ body {
 	letter-spacing: 2px;
 }
 
-.movie-show-grid {
-	display: grid;
-	grid-template-columns: repeat(7, 1fr);
-	grid-gap: 10px;
+.movie-show-flex {
+	margin-left: 10px;
+	margin-right: 10px;
+	padding-bottom: 10px;
+	overflow-x: scroll;
+	display: flex;
+	grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+	gap: 10px;
 }
 
 .movie-show-card {
+	min-width: 300px;
 	background-color: black;
 	height: 100%;
 	color: white;

@@ -5,7 +5,7 @@ export const Trending = () => {
 	const trending = useLoaderData();
 
 	return (
-		<div className="movie-show-grid">
+		<div className="movie-show-flex">
 			{trending[0].results.map((item) => (
 				<Link
 					to={`${item.media_type}/${item.id.toString()}`}
