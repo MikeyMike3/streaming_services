@@ -5,14 +5,18 @@
 	box-sizing: border-box;
 }
 
+body {
+	background-color: grey;
+}
+
 .loader-container {
 	width: 100vw;
 	height: 100vh;
 	position: fixed;
 	top: 0;
 	left: 0;
-	background-color: rgba(0, 0, 0, 0.849);
 	color: white;
+	transition: 400ms;
 }
 
 .bar-loader {

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useLoaderData, useParams, useNavigation } from "react-router-dom";
 import { BarLoader } from "react-spinners";
-// import { movieShowInDepthLoader } from "../loaders/movieShowInDepthLoader";
+import YouTube from "react-youtube";
 
 export const MovieShowInDepth = () => {
 	const { mediaType } = useParams();
@@ -72,6 +72,17 @@ export const MovieShowInDepth = () => {
 	);
 	console.log(movieTrailerLink);
 
+	const renderTrailer = () => {
+		const trailer = movieShowDetails[3].results.find(
+			(vid) => vid.name === "Official Trailer"
+		);
+		const key = trailer ? trailer.key : movieShowDetails[3].results[0].key;
+
+		return (
+			<YouTube videoId={key} containerClassName={"youtube-container"} />
+		);
+	};
+
 	return (
 		<div>
 			{navigation.state === "loading" ? (
@@ -139,7 +150,7 @@ export const MovieShowInDepth = () => {
 						/>
 					))}
 					<h3>Trailer:</h3>
-					<p>{`https://www.youtube.com/watch?v=${movieTrailerLink.key}`}</p>
+					{renderTrailer()}
 
 					<h3>Cast:</h3>
 					{credits.map((item) => (
@@ -203,7 +214,8 @@ export const MovieShowInDepth = () => {
 					))}
 
 					<h3>Trailer:</h3>
-					<p>{`https://www.youtube.com/watch?v=${movieTrailerLink.key}`}</p>
+
+					{renderTrailer()}
 
 					<h3>Cast:</h3>
 					{credits.map((item) => (
