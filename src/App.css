@@ -18,6 +18,7 @@ body {
 	background-color: rgba(0, 0, 0, 0.842);
 	color: white;
 	transition: 400ms;
+	z-index: 9999;
 }
 
 .bar-loader {
@@ -37,13 +38,7 @@ body {
 }
 
 .movie-show-flex {
-	margin-left: 10px;
-	margin-right: 10px;
-	padding-bottom: 10px;
-	overflow-x: scroll;
 	display: flex;
-	grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-	gap: 10px;
 }
 
 .movie-show-flex a {
@@ -51,17 +46,17 @@ body {
 }
 
 .movie-show-card {
-	min-width: 300px;
-	background-color: black;
 	height: 100%;
+	background-color: black;
 	color: white;
 	border-radius: 25px;
+	cursor: grab;
 }
 
 .movie-show-card img {
 	width: 100%;
-	border-radius: 25px;
-	/* height: 500px; */
+	border-top-right-radius: 25px;
+	border-top-left-radius: 25px;
 }
 
 .movie-show-info {
@@ -69,6 +64,7 @@ body {
 	justify-content: space-between;
 	gap: 50px;
 	padding: 15px;
+	flex: 1;
 }
 
 .genre-info {
