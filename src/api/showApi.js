@@ -46,3 +46,11 @@ export const fetchSimilarShows = async (showId) => {
 	);
 	return res.json();
 };
+
+export const fetchTopRatedShows = async () => {
+	const res = await fetch(
+		"https://api.themoviedb.org/3/tv/top_rated?language=en-US&page=1",
+		options
+	);
+	return res.json();
+};

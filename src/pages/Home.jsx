@@ -1,6 +1,8 @@
 import { useNavigation } from "react-router-dom";
-import { Trending } from "./Trending";
+import { Trending } from "../components/Trending";
 import { BarLoader } from "react-spinners";
+import { TopRatedMovies } from "../components/TopRatedMovies";
+import { TopRatedShows } from "../components/TopRatedShows";
 
 export const Home = () => {
 	const navigation = useNavigation();
@@ -27,6 +29,12 @@ export const Home = () => {
 			<div>
 				<h1>Trending Now</h1>
 				<Trending />
+
+				<h1>Top Rated Movies:</h1>
+				<TopRatedMovies />
+
+				<h1>Top Rated Shows:</h1>
+				<TopRatedShows />
 			</div>
 		</>
 	);

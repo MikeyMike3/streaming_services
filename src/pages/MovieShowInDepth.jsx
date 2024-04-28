@@ -15,8 +15,6 @@ export const MovieShowInDepth = () => {
 
 	window.scrollTo(0, 0);
 
-	console.log(movieShowDetails[0]);
-
 	const [flatRateStreamingServices, setFlatRateStreamingServices] = useState(
 		[]
 	);
@@ -32,28 +30,39 @@ export const MovieShowInDepth = () => {
 
 	useEffect(() => {
 		if (!isEmpty(movieShowDetails[1].results)) {
-			if (
-				typeof movieShowDetails[1].results.US.flatrate !== "undefined"
-			) {
-				setFlatRateStreamingServices(
-					movieShowDetails[1].results.US.flatrate
-				);
+			if (typeof movieShowDetails[1].results.US !== "undefined") {
+				if (
+					typeof movieShowDetails[1].results.US.flatrate !==
+					"undefined"
+				) {
+					setFlatRateStreamingServices(
+						movieShowDetails[1].results.US.flatrate
+					);
+				}
 			}
 		}
 	}, [movieShowDetails]);
 
 	useEffect(() => {
 		if (!isEmpty(movieShowDetails[1].results)) {
-			if (typeof movieShowDetails[1].results.US.buy !== "undefined") {
-				setBuyStreamingServices(movieShowDetails[1].results.US.buy);
+			if (typeof movieShowDetails[1].results.US !== "undefined") {
+				if (typeof movieShowDetails[1].results.US.buy !== "undefined") {
+					setBuyStreamingServices(movieShowDetails[1].results.US.buy);
+				}
 			}
 		}
 	}, [movieShowDetails]);
 
 	useEffect(() => {
 		if (!isEmpty(movieShowDetails[1].results)) {
-			if (typeof movieShowDetails[1].results.US.rent !== "undefined") {
-				setRentStreamingServices(movieShowDetails[1].results.US.rent);
+			if (typeof movieShowDetails[1].results.US !== "undefined") {
+				if (
+					typeof movieShowDetails[1].results.US.rent !== "undefined"
+				) {
+					setRentStreamingServices(
+						movieShowDetails[1].results.US.rent
+					);
+				}
 			}
 		}
 	}, [movieShowDetails]);
@@ -149,6 +158,7 @@ export const MovieShowInDepth = () => {
 							key={item.provider_id}
 							src={`https://image.tmdb.org/t/p/w500/${item.logo_path}.jpg`}
 							alt="movie poster"
+							title={item.provider_name}
 						/>
 					))}
 					<h3>Buy On:</h3>
@@ -158,6 +168,7 @@ export const MovieShowInDepth = () => {
 							key={item.provider_id}
 							src={`https://image.tmdb.org/t/p/w500/${item.logo_path}.jpg`}
 							alt="movie poster"
+							title={item.provider_name}
 						/>
 					))}
 					<h3>Rent On:</h3>
@@ -167,6 +178,7 @@ export const MovieShowInDepth = () => {
 							key={item.provider_id}
 							src={`https://image.tmdb.org/t/p/w500/${item.logo_path}.jpg`}
 							alt="movie poster"
+							title={item.provider_name}
 						/>
 					))}
 					<h3>Trailer:</h3>
@@ -227,6 +239,7 @@ export const MovieShowInDepth = () => {
 							key={item.provider_id}
 							src={`https://image.tmdb.org/t/p/w500/${item.logo_path}.jpg`}
 							alt="movie poster"
+							title={item.provider_name}
 						/>
 					))}
 					<h3>Buy On:</h3>
@@ -236,6 +249,7 @@ export const MovieShowInDepth = () => {
 							key={item.provider_id}
 							src={`https://image.tmdb.org/t/p/w500/${item.logo_path}.jpg`}
 							alt="movie poster"
+							title={item.provider_name}
 						/>
 					))}
 					<h3>Rent On:</h3>
@@ -245,6 +259,7 @@ export const MovieShowInDepth = () => {
 							key={item.provider_id}
 							src={`https://image.tmdb.org/t/p/w500/${item.logo_path}.jpg`}
 							alt="movie poster"
+							title={item.provider_name}
 						/>
 					))}
 
@@ -269,7 +284,7 @@ export const MovieShowInDepth = () => {
 					{similar.map((item) => (
 						<Link
 							key={item.id}
-							to={`/movie/${item.id.toString()}/similar`}>
+							to={`/tv/${item.id.toString()}/similar`}>
 							<div className="similar-movie-show-container">
 								<img
 									src={`https://image.tmdb.org/t/p/w500/${item.poster_path}.jpg`}

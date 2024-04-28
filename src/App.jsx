@@ -10,14 +10,14 @@ import {
 	RouterProvider,
 } from "react-router-dom";
 
-import { trendingGenreLoader } from "./loaders/trendingGenreLoader";
+import { homeLoader } from "./loaders/homeLoader";
 import { MovieShowInDepth } from "./pages/MovieShowInDepth";
 import { movieShowInDepthLoader } from "./loaders/movieShowInDepthLoader";
 
 const router = createBrowserRouter(
 	createRoutesFromElements(
 		<Route path="/" element={<RootLayout />}>
-			<Route index loader={trendingGenreLoader} element={<Home />} />
+			<Route index loader={homeLoader} element={<Home />} />
 			<Route
 				path=":mediaType/:id"
 				loader={movieShowInDepthLoader}

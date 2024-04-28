@@ -1,11 +1,11 @@
-import { Outlet } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
 
 export const RootLayout = () => {
 	return (
 		<div>
 			<header>
 				<nav>
-					<p></p>
+					<Link to={"/"}>Home</Link>
 				</nav>
 			</header>
 
