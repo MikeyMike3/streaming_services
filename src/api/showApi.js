@@ -41,7 +41,7 @@ export const fetchShowTrailer = async (showId) => {
 
 export const fetchSimilarShows = async (showId) => {
 	const res = await fetch(
-		`https://api.themoviedb.org/3/tv/${showId}/similar?language=en-US&page=1`,
+		`https://api.themoviedb.org/3/tv/${showId}/recommendations?language=en-US&page=1`,
 		options
 	);
 	return res.json();
