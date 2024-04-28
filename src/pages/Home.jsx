@@ -3,6 +3,7 @@ import { Trending } from "../components/Trending";
 import { BarLoader } from "react-spinners";
 import { TopRatedMovies } from "../components/TopRatedMovies";
 import { TopRatedShows } from "../components/TopRatedShows";
+import { NowPlaying } from "../components/NowPlaying";
 
 export const Home = () => {
 	const navigation = useNavigation();
@@ -29,6 +30,9 @@ export const Home = () => {
 			<div>
 				<h1>Trending Now</h1>
 				<Trending />
+
+				<h1>Now Playing In Theatres:</h1>
+				<NowPlaying />
 
 				<h1>Top Rated Movies:</h1>
 				<TopRatedMovies />

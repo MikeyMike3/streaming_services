@@ -1,4 +1,4 @@
-import { fetchTopRatedMovies } from "../api/movieApi";
+import { fetchTopRatedMovies, fetchNowPlaying } from "../api/movieApi";
 import { fetchTopRatedShows } from "../api/showApi";
 import {
 	fetchTrending,
@@ -7,14 +7,28 @@ import {
 } from "../api/trendingApi";
 
 export const homeLoader = async () => {
-	const [trending, movieGenre, showGenre, topRatedMovies, topRatedShows] =
-		await Promise.all([
-			fetchTrending(),
-			fetchMovieGenre(),
-			fetchShowGenre(),
-			fetchTopRatedMovies(),
-			fetchTopRatedShows(),
-		]);
+	const [
+		trending,
+		movieGenre,
+		showGenre,
+		topRatedMovies,
+		topRatedShows,
+		nowPlayingMovies,
+	] = await Promise.all([
+		fetchTrending(),
+		fetchMovieGenre(),
+		fetchShowGenre(),
+		fetchTopRatedMovies(),
+		fetchTopRatedShows(),
+		fetchNowPlaying(),
+	]);
 
-	return [trending, movieGenre, showGenre, topRatedMovies, topRatedShows];
+	return [
+		trending,
+		movieGenre,
+		showGenre,
+		topRatedMovies,
+		topRatedShows,
+		nowPlayingMovies,
+	];
 };
