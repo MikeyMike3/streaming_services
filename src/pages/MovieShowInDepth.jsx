@@ -181,7 +181,7 @@ export const MovieShowInDepth = () => {
 							title={item.provider_name}
 						/>
 					))}
-					<h3>Trailer:</h3>
+					<h3>Trailer (Hopefully):</h3>
 					{renderTrailer()}
 
 					<h3>Cast:</h3>
@@ -263,7 +263,7 @@ export const MovieShowInDepth = () => {
 						/>
 					))}
 
-					<h3>Trailer:</h3>
+					<h3>Trailer (Hopefully):</h3>
 
 					{renderTrailer()}
 

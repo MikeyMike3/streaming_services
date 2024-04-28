@@ -21,6 +21,14 @@ body {
 	z-index: 9999;
 }
 
+.heading-flex {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-left: 10px;
+	margin-right: 10px;
+}
+
 .bar-loader {
 	width: 100%;
 }

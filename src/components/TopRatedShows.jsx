@@ -4,41 +4,105 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { FreeMode } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/free-mode";
+import { useEffect, useState } from "react";
+import { options } from "../api/options";
 
 export const TopRatedShows = () => {
-	const topRatedShows = useLoaderData();
+	const loaderData = useLoaderData();
+	const [topRatedShows, setTopRatedShows] = useState([]);
+	const [loading, setLoading] = useState(true);
+	const [pages, setPages] = useState(1);
+
+	useEffect(() => {
+		console.log("loaderData:", loaderData);
+		const fetchData = async () => {
+			try {
+				const data = await loaderData;
+				setTopRatedShows(data);
+				setLoading(false);
+			} catch (error) {
+				console.error("Error fetching data:", error);
+				setLoading(false);
+			}
+		};
+
+		fetchData();
+	}, [loaderData]);
+
+	if (loading) {
+		return <div>Loading...</div>;
+	}
+
+	if (
+		!topRatedShows ||
+		topRatedShows.length < 6 ||
+		!topRatedShows[4] ||
+		!topRatedShows[4].results
+	) {
+		return <div>Data not available</div>;
+	}
+
+	const handleClick = () => {
+		const nextPage = pages + 1;
+		fetch(
+			`https://api.themoviedb.org/3/tv/top_rated?language=en-US&page=${nextPage}`,
+			options
+		)
+			.then((response) => response.json())
+			.then((response) => {
+				// Update only the 5th array's results property
+				const updatedData = [...topRatedShows];
+				updatedData[4].results = [
+					...updatedData[4].results,
+					...response.results,
+				];
+
+				// Update the state with the modified array
+				setTopRatedShows(updatedData);
+
+				// Update the page state
+				setPages(nextPage);
+			})
+			.catch((err) => console.error(err));
+	};
 	return (
-		<div className="movie-show-flex">
-			<Swiper
-				grabCursor={true}
-				spaceBetween={10}
-				slidesPerView={"auto"}
-				direction="horizontal"
-				modules={[FreeMode]}
-				freeMode={{
-					freeMode: { enabled: true },
-				}}>
-				{topRatedShows[4].results.map((item) => (
-					<SwiperSlide key={item.id}>
-						<Link to={`tv/${item.id.toString()}`}>
-							<MovieShowCard
-								genreIds={item.genre_ids}
-								id={item.id}
-								mediaType={item.media_type}
-								overview={item.overview}
-								posterPath={item.poster_path}
-								backdropPath={item.backdrop_path}
-								releaseDate={item.release_date}
-								voteAverage={item.vote_average}
-								title={item.title}
-								name={item.name}
-								movieGenres={topRatedShows[1].genres}
-								showGenres={topRatedShows[2].genres}
-							/>
-						</Link>
-					</SwiperSlide>
-				))}
-			</Swiper>
-		</div>
+		<>
+			<div className="heading-flex">
+				<h1>Top Rated Shows:</h1>
+				<button onClick={handleClick}>adw</button>
+			</div>
+			<div className="movie-show-flex">
+				<Swiper
+					grabCursor={true}
+					spaceBetween={10}
+					slidesPerView={"auto"}
+					direction="horizontal"
+					modules={[FreeMode]}
+					freeMode={{
+						freeMode: { enabled: true },
+					}}>
+					{topRatedShows[4].results.map((item) => (
+						<SwiperSlide key={item.id}>
+							<Link to={`tv/${item.id.toString()}`}>
+								<MovieShowCard
+									genreIds={item.genre_ids}
+									id={item.id}
+									mediaType={item.media_type}
+									overview={item.overview}
+									posterPath={item.poster_path}
+									backdropPath={item.backdrop_path}
+									releaseDate={item.release_date}
+									voteAverage={item.vote_average}
+									title={item.title}
+									name={item.name}
+									movieGenres={topRatedShows[1].genres}
+									showGenres={topRatedShows[2].genres}
+								/>
+							</Link>
+						</SwiperSlide>
+					))}
+				</Swiper>
+			</div>
+		</>
 	);
 };

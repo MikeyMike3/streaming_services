@@ -7,6 +7,7 @@ import { NowPlaying } from "../components/NowPlaying";
 
 export const Home = () => {
 	const navigation = useNavigation();
+
 	return (
 		<>
 			{navigation.state === "loading" ? (
@@ -28,16 +29,12 @@ export const Home = () => {
 			) : null}
 
 			<div>
-				<h1>Trending Now</h1>
 				<Trending />
 
-				<h1>Now Playing In Theatres:</h1>
 				<NowPlaying />
 
-				<h1>Top Rated Movies:</h1>
 				<TopRatedMovies />
 
-				<h1>Top Rated Shows:</h1>
 				<TopRatedShows />
 			</div>
 		</>
