@@ -14,7 +14,6 @@ export const PopularShows = () => {
 	const [pages, setPages] = useState(1);
 
 	useEffect(() => {
-		console.log("loaderData:", loaderData);
 		const fetchData = async () => {
 			try {
 				const data = await loaderData;

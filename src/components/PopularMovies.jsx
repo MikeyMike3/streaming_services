@@ -14,7 +14,6 @@ export const PopularMovies = () => {
 	const [pages, setPages] = useState(1);
 
 	useEffect(() => {
-		console.log("loaderData:", loaderData);
 		const fetchData = async () => {
 			try {
 				const data = await loaderData;
@@ -29,9 +28,7 @@ export const PopularMovies = () => {
 		fetchData();
 	}, [loaderData]);
 
-	useEffect(() => {
-		console.log("now playing", popularMovies);
-	}, [popularMovies]);
+	useEffect(() => {}, [popularMovies]);
 
 	if (loading) {
 		return <div>Loading...</div>;
