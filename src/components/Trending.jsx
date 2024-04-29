@@ -5,13 +5,13 @@ import "swiper/css";
 import "swiper/css/free-mode";
 import { FreeMode } from "swiper/modules";
 import { useEffect, useState } from "react";
-import { options } from "../api/options";
+// import { options } from "../api/options";
 
 export const Trending = () => {
 	const loaderData = useLoaderData();
 	const [trending, setTrending] = useState([]);
 	const [loading, setLoading] = useState(true);
-	const [pages, setPages] = useState(1);
+	// const [pages, setPages] = useState(1);
 
 	useEffect(() => {
 		const fetchData = async () => {
