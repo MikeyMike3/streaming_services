@@ -7,9 +7,9 @@ import "swiper/css/free-mode";
 import { useEffect, useState } from "react";
 import { options } from "../api/options";
 
-export const TopRatedShows = () => {
+export const PopularShows = () => {
 	const loaderData = useLoaderData();
-	const [topRatedShows, setTopRatedShows] = useState([]);
+	const [popularShows, setPopularShows] = useState([]);
 	const [loading, setLoading] = useState(true);
 	const [pages, setPages] = useState(1);
 
@@ -18,7 +18,7 @@ export const TopRatedShows = () => {
 		const fetchData = async () => {
 			try {
 				const data = await loaderData;
-				setTopRatedShows(data);
+				setPopularShows(data);
 				setLoading(false);
 			} catch (error) {
 				console.error("Error fetching data:", error);
@@ -34,10 +34,10 @@ export const TopRatedShows = () => {
 	}
 
 	if (
-		!topRatedShows ||
-		topRatedShows.length < 6 ||
-		!topRatedShows[4] ||
-		!topRatedShows[4].results
+		!popularShows ||
+		popularShows.length < 6 ||
+		!popularShows[4] ||
+		!popularShows[4].results
 	) {
 		return <div>Data not available</div>;
 	}
@@ -45,20 +45,20 @@ export const TopRatedShows = () => {
 	const handleClick = () => {
 		const nextPage = pages + 1;
 		fetch(
-			`https://api.themoviedb.org/3/tv/top_rated?language=en-US&page=${nextPage}`,
+			`https://api.themoviedb.org/3/tv/popular?language=en-US&page=${nextPage}`,
 			options
 		)
 			.then((response) => response.json())
 			.then((response) => {
 				// Update only the 5th array's results property
-				const updatedData = [...topRatedShows];
+				const updatedData = [...popularShows];
 				updatedData[4].results = [
 					...updatedData[4].results,
 					...response.results,
 				];
 
 				// Update the state with the modified array
-				setTopRatedShows(updatedData);
+				setPopularShows(updatedData);
 
 				// Update the page state
 				setPages(nextPage);
@@ -68,8 +68,8 @@ export const TopRatedShows = () => {
 	return (
 		<>
 			<div className="heading-flex">
-				<h1>Top Rated Shows:</h1>
-				<button onClick={handleClick}>adw</button>
+				<h1>Popular Shows:</h1>
+				<button onClick={handleClick}>See More</button>
 			</div>
 			<div className="movie-show-flex">
 				<Swiper
@@ -81,7 +81,7 @@ export const TopRatedShows = () => {
 					freeMode={{
 						freeMode: { enabled: true },
 					}}>
-					{topRatedShows[4].results.map((item) => (
+					{popularShows[4].results.map((item) => (
 						<SwiperSlide key={item.id}>
 							<Link to={`tv/${item.id.toString()}`}>
 								<MovieShowCard
@@ -95,8 +95,8 @@ export const TopRatedShows = () => {
 									voteAverage={item.vote_average}
 									title={item.title}
 									name={item.name}
-									movieGenres={topRatedShows[1].genres}
-									showGenres={topRatedShows[2].genres}
+									movieGenres={popularShows[1].genres}
+									showGenres={popularShows[2].genres}
 								/>
 							</Link>
 						</SwiperSlide>

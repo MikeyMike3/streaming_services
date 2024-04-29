@@ -40,9 +40,9 @@ export const fetchSimilarShows = async (showId) => {
 	return res.json();
 };
 
-export const fetchTopRatedShows = async () => {
+export const fetchPopularShows = async () => {
 	const res = await fetch(
-		"https://api.themoviedb.org/3/tv/top_rated?language=en-US&page=1",
+		"https://api.themoviedb.org/3/tv/popular?language=en-US&page=1",
 		options
 	);
 	return res.json();

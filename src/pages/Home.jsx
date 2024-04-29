@@ -1,8 +1,8 @@
 import { useNavigation } from "react-router-dom";
 import { Trending } from "../components/Trending";
 import { BarLoader } from "react-spinners";
-import { TopRatedMovies } from "../components/TopRatedMovies";
-import { TopRatedShows } from "../components/TopRatedShows";
+import { PopularMovies } from "../components/PopularMovies";
+import { PopularShows } from "../components/PopularShows";
 import { NowPlaying } from "../components/NowPlaying";
 
 export const Home = () => {
@@ -33,9 +33,9 @@ export const Home = () => {
 
 				<NowPlaying />
 
-				<TopRatedMovies />
+				<PopularMovies />
 
-				<TopRatedShows />
+				<PopularShows />
 			</div>
 		</>
 	);

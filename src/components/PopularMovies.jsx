@@ -7,9 +7,9 @@ import "swiper/css/free-mode";
 import { useEffect, useState } from "react";
 import { options } from "../api/options";
 
-export const TopRatedMovies = () => {
+export const PopularMovies = () => {
 	const loaderData = useLoaderData();
-	const [topRatedMovies, setTopRatedMovies] = useState([]);
+	const [popularMovies, setPopularMovies] = useState([]);
 	const [loading, setLoading] = useState(true);
 	const [pages, setPages] = useState(1);
 
@@ -18,7 +18,7 @@ export const TopRatedMovies = () => {
 		const fetchData = async () => {
 			try {
 				const data = await loaderData;
-				setTopRatedMovies(data);
+				setPopularMovies(data);
 				setLoading(false);
 			} catch (error) {
 				console.error("Error fetching data:", error);
@@ -30,19 +30,19 @@ export const TopRatedMovies = () => {
 	}, [loaderData]);
 
 	useEffect(() => {
-		console.log("now playing", topRatedMovies);
-	}, [topRatedMovies]);
+		console.log("now playing", popularMovies);
+	}, [popularMovies]);
 
 	if (loading) {
 		return <div>Loading...</div>;
 	}
 
-	// Ensure topRatedMovies[5] and topRatedMovies[5].results are defined
+	// Ensure popularMovies[5] and popularMovies[5].results are defined
 	if (
-		!topRatedMovies ||
-		topRatedMovies.length < 6 ||
-		!topRatedMovies[3] ||
-		!topRatedMovies[3].results
+		!popularMovies ||
+		popularMovies.length < 6 ||
+		!popularMovies[3] ||
+		!popularMovies[3].results
 	) {
 		return <div>Data not available</div>;
 	}
@@ -50,20 +50,20 @@ export const TopRatedMovies = () => {
 	const handleClick = () => {
 		const nextPage = pages + 1;
 		fetch(
-			`https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=${nextPage}`,
+			`https://api.themoviedb.org/3/movie/popular?language=en-US&page=${nextPage}`,
 			options
 		)
 			.then((response) => response.json())
 			.then((response) => {
 				// Update only the 5th array's results property
-				const updatedData = [...topRatedMovies];
+				const updatedData = [...popularMovies];
 				updatedData[3].results = [
 					...updatedData[3].results,
 					...response.results,
 				];
 
 				// Update the state with the modified array
-				setTopRatedMovies(updatedData);
+				setPopularMovies(updatedData);
 
 				// Update the page state
 				setPages(nextPage);
@@ -74,8 +74,8 @@ export const TopRatedMovies = () => {
 	return (
 		<>
 			<div className="heading-flex">
-				<h1>Top Rated Movies:</h1>
-				<button onClick={handleClick}>adw</button>
+				<h1>Popular Movies:</h1>
+				<button onClick={handleClick}>See More</button>
 			</div>
 			<div className="movie-show-flex">
 				<Swiper
@@ -87,7 +87,7 @@ export const TopRatedMovies = () => {
 					freeMode={{
 						freeMode: { enabled: true },
 					}}>
-					{topRatedMovies[3].results.map((item) => (
+					{popularMovies[3].results.map((item) => (
 						<SwiperSlide key={item.id}>
 							<Link to={`movie/${item.id.toString()}`}>
 								<MovieShowCard
@@ -101,8 +101,8 @@ export const TopRatedMovies = () => {
 									voteAverage={item.vote_average}
 									title={item.title}
 									name={item.name}
-									movieGenres={topRatedMovies[1].genres}
-									showGenres={topRatedMovies[2].genres}
+									movieGenres={popularMovies[1].genres}
+									showGenres={popularMovies[2].genres}
 								/>
 							</Link>
 						</SwiperSlide>

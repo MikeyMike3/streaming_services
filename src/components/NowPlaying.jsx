@@ -78,7 +78,7 @@ export const NowPlaying = () => {
 		<>
 			<div className="heading-flex">
 				<h1>Now Playing In Theatres:</h1>
-				<button onClick={handleClick}>adw</button>
+				<button onClick={handleClick}>See More</button>
 			</div>
 			<div className="movie-show-flex">
 				<Swiper
