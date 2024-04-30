@@ -7,13 +7,18 @@ import {
 } from "react-router-dom";
 import { BarLoader } from "react-spinners";
 import YouTube from "react-youtube";
+import { options } from "../api/options";
 
 export const MovieShowInDepth = () => {
-	const { mediaType } = useParams();
+	const { id, mediaType } = useParams();
 	const movieShowDetails = useLoaderData();
 	const navigation = useNavigation();
 
-	window.scrollTo(0, 0);
+	const [movieShowId, setMovieShowId] = useState(0);
+	const [movieShowMediaType, setMovieShowMediaType] = useState("");
+
+	const [backToTop, setBackToTop] = useState(true);
+	const [pages, setPages] = useState(1);
 
 	const [flatRateStreamingServices, setFlatRateStreamingServices] = useState(
 		[]
@@ -27,6 +32,10 @@ export const MovieShowInDepth = () => {
 	const isEmpty = (obj) => {
 		return Object.keys(obj).length === 0;
 	};
+
+	if (backToTop) {
+		window.scrollTo(0, 0);
+	}
 
 	useEffect(() => {
 		if (!isEmpty(movieShowDetails[1].results)) {
@@ -67,10 +76,6 @@ export const MovieShowInDepth = () => {
 		}
 	}, [movieShowDetails]);
 
-	// useEffect(() => {
-	// 	console.log(buyStreamingServices);
-	// }, [buyStreamingServices]);
-
 	const renderTrailer = () => {
 		if (movieShowDetails[3].results.length > 0) {
 			const trailer = movieShowDetails[3].results.find(
@@ -98,19 +103,62 @@ export const MovieShowInDepth = () => {
 		}
 	}, [movieShowDetails]);
 
-	// useEffect(() => {
-	// 	console.log(credits);
-	// }, [credits]);
-
 	useEffect(() => {
 		if (!isEmpty(movieShowDetails[4].results)) {
 			setSimilar(movieShowDetails[4].results);
 		}
 	}, [movieShowDetails]);
 
-	// useEffect(() => {
-	// 	console.log(similar);
-	// }, [similar]);
+	useEffect(() => {
+		setMovieShowId(id);
+	}, [id]);
+
+	useEffect(() => {
+		setMovieShowMediaType(mediaType);
+	}, [mediaType]);
+
+	const resetState = () => {
+		setBackToTop(true);
+		setPages(1);
+		setMovieShowMediaType("");
+		setMovieShowId(0);
+	};
+
+	const handleClick = () => {
+		const nextPage = pages + 1;
+		setBackToTop(false);
+		if (movieShowMediaType === "movie") {
+			fetch(
+				`https://api.themoviedb.org/3/movie/${movieShowId}/recommendations?language=en-US&page=${nextPage}`,
+				options
+			)
+				.then((response) => response.json())
+				.then((response) => {
+					setSimilar((prevState) => [
+						...prevState,
+						...response.results,
+					]);
+
+					setPages(nextPage);
+				})
+				.catch((err) => console.error(err));
+		} else {
+			fetch(
+				`https://api.themoviedb.org/3/tv/${movieShowId}/recommendations?language=en-US&page=${nextPage}`,
+				options
+			)
+				.then((response) => response.json())
+				.then((response) => {
+					setSimilar((prevState) => [
+						...prevState,
+						...response.results,
+					]);
+
+					setPages(nextPage);
+				})
+				.catch((err) => console.error(err));
+		}
+	};
 
 	return (
 		<div>
@@ -200,6 +248,7 @@ export const MovieShowInDepth = () => {
 					<h3>Similar Movies:</h3>
 					{similar.map((item) => (
 						<Link
+							onClick={resetState}
 							key={item.id}
 							to={`/movie/${item.id.toString()}/similar`}>
 							<div className="similar-movie-show-container">
@@ -211,6 +260,7 @@ export const MovieShowInDepth = () => {
 							</div>
 						</Link>
 					))}
+					<button onClick={handleClick}>See More</button>
 				</>
 			) : (
 				<>
@@ -283,6 +333,7 @@ export const MovieShowInDepth = () => {
 					<h3>Similar Shows:</h3>
 					{similar.map((item) => (
 						<Link
+							onClick={resetState}
 							key={item.id}
 							to={`/tv/${item.id.toString()}/similar`}>
 							<div className="similar-movie-show-container">
@@ -294,6 +345,7 @@ export const MovieShowInDepth = () => {
 							</div>
 						</Link>
 					))}
+					<button onClick={handleClick}>See More</button>
 				</>
 			)}
 		</div>

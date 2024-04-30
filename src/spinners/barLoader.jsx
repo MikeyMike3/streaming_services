@@ -2,7 +2,7 @@ import { BarLoader } from "react-spinners";
 
 export const barLoader = (props) => {
 	return (
-		<div>
+		<>
 			<BarLoader
 				color={props.color}
 				width={props.width}
@@ -10,6 +10,6 @@ export const barLoader = (props) => {
 				speedMultiplier={props.speedMultiplier}
 				modules={props.modules}
 			/>
-		</div>
+		</>
 	);
 };

@@ -29,7 +29,7 @@ export const NowPlaying = () => {
 	}, [loaderData]);
 
 	if (loading) {
-		return <div>Loading...</div>;
+		return <div className="display-none">Loading...</div>;
 	}
 
 	// Ensure nowPlaying[5] and nowPlaying[5].results are defined

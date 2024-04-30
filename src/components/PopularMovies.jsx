@@ -31,7 +31,7 @@ export const PopularMovies = () => {
 	useEffect(() => {}, [popularMovies]);
 
 	if (loading) {
-		return <div>Loading...</div>;
+		return <div className="display-none">Loading...</div>;
 	}
 
 	// Ensure popularMovies[5] and popularMovies[5].results are defined

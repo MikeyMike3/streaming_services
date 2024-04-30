@@ -29,7 +29,7 @@ export const PopularShows = () => {
 	}, [loaderData]);
 
 	if (loading) {
-		return <div>Loading...</div>;
+		return <div className="display-none">Loading...</div>;
 	}
 
 	if (
