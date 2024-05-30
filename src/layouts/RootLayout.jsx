@@ -6,6 +6,7 @@ export const RootLayout = () => {
 			<header>
 				<nav>
 					<Link to={"/"}>Home</Link>
+					<Link to={"search"}>Search</Link>
 				</nav>
 			</header>
 

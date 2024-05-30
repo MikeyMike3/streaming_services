@@ -13,6 +13,7 @@ import {
 import { homeLoader } from "./loaders/homeLoader";
 import { MovieShowInDepth } from "./pages/MovieShowInDepth";
 import { movieShowInDepthLoader } from "./loaders/movieShowInDepthLoader";
+import { Search } from "./pages/Search";
 
 const router = createBrowserRouter(
 	createRoutesFromElements(
@@ -28,6 +29,7 @@ const router = createBrowserRouter(
 				loader={movieShowInDepthLoader}
 				element={<MovieShowInDepth />}
 			/>
+			<Route path="search" element={<Search />} />
 		</Route>
 	)
 );
