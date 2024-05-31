@@ -8,6 +8,7 @@ import {
 import { BarLoader } from "react-spinners";
 import YouTube from "react-youtube";
 import { options } from "../api/options";
+import poster from "../imgs/tmdbPoster.jpg";
 
 export const MovieShowInDepth = () => {
 	const { id, mediaType } = useParams();
@@ -184,14 +185,23 @@ export const MovieShowInDepth = () => {
 				<>
 					<h2>{movieShowDetails[0].title}</h2>
 					<p>{mediaType}</p>
-					<img
-						src={`https://image.tmdb.org/t/p/w500/${movieShowDetails[0].poster_path}.jpg`}
-						alt="movie poster"
-					/>
-					<img
-						src={`https://image.tmdb.org/t/p/w500/${movieShowDetails[0].backdrop_path}.jpg`}
-						alt="movie poster"
-					/>
+					{movieShowDetails[0].poster_path === null ? (
+						<img src={poster} alt="movie poster placeholder" />
+					) : (
+						<img
+							src={`https://image.tmdb.org/t/p/w500/${movieShowDetails[0].poster_path}.jpg`}
+							alt="movie poster"
+						/>
+					)}
+					{movieShowDetails[0].backdrop_path === null ? (
+						<img src={poster} alt="movie backdrop place holder" />
+					) : (
+						<img
+							src={`https://image.tmdb.org/t/p/w500/${movieShowDetails[0].backdrop_path}.jpg`}
+							alt="movie backdrop"
+						/>
+					)}
+
 					<p>{movieShowDetails[0].vote_average}</p>
 					<p>{movieShowDetails[0].overview}</p>
 					<ul>
@@ -237,11 +247,19 @@ export const MovieShowInDepth = () => {
 						<div key={item.cast_id} className="cast-card">
 							<p>{item.character}</p>
 							<p>{item.name}</p>
-							{item.profile_path !== null ? (
+							{item.profile_path === null ? (
 								<img
 									className="cast-card-img"
-									src={`https://image.tmdb.org/t/p/w500/${item.profile_path}.jpg`}></img>
-							) : null}
+									src={poster}
+									alt="movie poster"
+								/>
+							) : (
+								<img
+									className="cast-card-img"
+									src={`https://image.tmdb.org/t/p/w500/${item.profile_path}.jpg`}
+									alt="movie poster"
+								/>
+							)}
 						</div>
 					))}
 
@@ -252,10 +270,14 @@ export const MovieShowInDepth = () => {
 							key={item.id}
 							to={`/movie/${item.id.toString()}/similar`}>
 							<div className="similar-movie-show-container">
-								<img
-									src={`https://image.tmdb.org/t/p/w500/${item.poster_path}.jpg`}
-									alt="movie poster"
-								/>
+								{item.poster_path === null ? (
+									<img src={poster} alt="movie poster" />
+								) : (
+									<img
+										src={`https://image.tmdb.org/t/p/w500/${item.poster_path}.jpg`}
+										alt="movie poster"
+									/>
+								)}
 								<p>{item.title}</p>
 							</div>
 						</Link>
@@ -266,14 +288,23 @@ export const MovieShowInDepth = () => {
 				<>
 					<h2>{movieShowDetails[0].name}</h2>
 					<p>{mediaType}</p>
-					<img
-						src={`https://image.tmdb.org/t/p/w500/${movieShowDetails[0].poster_path}.jpg`}
-						alt="movie poster"
-					/>
-					<img
-						src={`https://image.tmdb.org/t/p/w500/${movieShowDetails[0].backdrop_path}.jpg`}
-						alt="movie poster"
-					/>
+					{movieShowDetails[0].poster_path === null ? (
+						<img src={poster} alt="show poster placeholder" />
+					) : (
+						<img
+							src={`https://image.tmdb.org/t/p/w500/${movieShowDetails[0].poster_path}.jpg`}
+							alt="show poster"
+						/>
+					)}
+					{movieShowDetails[0].backdrop_path === null ? (
+						<img src={poster} alt="show poster placeholder" />
+					) : (
+						<img
+							src={`https://image.tmdb.org/t/p/w500/${movieShowDetails[0].backdrop_path}.jpg`}
+							alt="show poster"
+						/>
+					)}
+
 					<p>{movieShowDetails[0].vote_average}</p>
 					<p>{movieShowDetails[0].overview}</p>
 					<ul>
@@ -288,7 +319,7 @@ export const MovieShowInDepth = () => {
 							className="provider-imgs"
 							key={item.provider_id}
 							src={`https://image.tmdb.org/t/p/w500/${item.logo_path}.jpg`}
-							alt="movie poster"
+							alt="provider img"
 							title={item.provider_name}
 						/>
 					))}
@@ -298,7 +329,7 @@ export const MovieShowInDepth = () => {
 							className="provider-imgs"
 							key={item.provider_id}
 							src={`https://image.tmdb.org/t/p/w500/${item.logo_path}.jpg`}
-							alt="movie poster"
+							alt="provider img"
 							title={item.provider_name}
 						/>
 					))}
@@ -308,7 +339,7 @@ export const MovieShowInDepth = () => {
 							className="provider-imgs"
 							key={item.provider_id}
 							src={`https://image.tmdb.org/t/p/w500/${item.logo_path}.jpg`}
-							alt="movie poster"
+							alt="provider img"
 							title={item.provider_name}
 						/>
 					))}
@@ -322,11 +353,19 @@ export const MovieShowInDepth = () => {
 						<div key={item.id} className="cast-card">
 							<p>{item.character}</p>
 							<p>{item.name}</p>
-							{item.profile_path !== null ? (
+							{item.profile_path === null ? (
 								<img
 									className="cast-card-img"
-									src={`https://image.tmdb.org/t/p/w500/${item.profile_path}.jpg`}></img>
-							) : null}
+									src={poster}
+									alt="cast headshot placeholder"
+								/>
+							) : (
+								<img
+									className="cast-card-img"
+									src={`https://image.tmdb.org/t/p/w500/${item.profile_path}.jpg`}
+									alt="cast headshot"
+								/>
+							)}
 						</div>
 					))}
 
@@ -337,10 +376,17 @@ export const MovieShowInDepth = () => {
 							key={item.id}
 							to={`/tv/${item.id.toString()}/similar`}>
 							<div className="similar-movie-show-container">
-								<img
-									src={`https://image.tmdb.org/t/p/w500/${item.poster_path}.jpg`}
-									alt="movie poster"
-								/>
+								{item.poster_path === null ? (
+									<img
+										src={poster}
+										alt="show poster placeholder"
+									/>
+								) : (
+									<img
+										src={`https://image.tmdb.org/t/p/w500/${item.poster_path}.jpg`}
+										alt="show poster"
+									/>
+								)}
 								<p>{item.name}</p>
 							</div>
 						</Link>

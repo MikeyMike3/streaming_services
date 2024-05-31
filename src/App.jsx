@@ -30,6 +30,11 @@ const router = createBrowserRouter(
 				element={<MovieShowInDepth />}
 			/>
 			<Route path="search" element={<Search />} />
+			<Route
+				path="/:mediaType/:id"
+				loader={movieShowInDepthLoader}
+				element={<MovieShowInDepth />}
+			/>
 		</Route>
 	)
 );

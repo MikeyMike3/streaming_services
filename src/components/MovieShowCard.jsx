@@ -1,17 +1,23 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
 import PropTypes from "prop-types";
+import poster from "../imgs/tmdbPoster.jpg";
 
 export const MovieShowCard = (props) => {
 	// console.log(movieShowId);
 
 	return (
 		<div className="movie-show-card">
-			<img
-				src={`https://image.tmdb.org/t/p/w500/${props.posterPath}.jpg`}
-				alt="movie poster"
-			/>
+			{props.posterPath === null ? (
+				<img src={poster} alt="placeholder poster" />
+			) : (
+				<img
+					src={`https://image.tmdb.org/t/p/w500/${props.posterPath}.jpg`}
+					alt="poster"
+				/>
+			)}
+
 			<div className="movie-show-info">
-				<div className="genre-info">
+				{/* <div className="genre-info">
 					{props.mediaType === "movie"
 						? props.genreIds.map((genreID) =>
 								props.movieGenres.map((movieGenreId) =>
@@ -27,7 +33,7 @@ export const MovieShowCard = (props) => {
 									) : null
 								)
 						  )}
-				</div>
+				</div> */}
 				<p>{props.voteAverage}</p>
 			</div>
 		</div>
