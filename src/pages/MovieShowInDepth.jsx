@@ -39,43 +39,55 @@ export const MovieShowInDepth = () => {
 	}
 
 	useEffect(() => {
-		if (!isEmpty(movieShowDetails[1].results)) {
-			if (typeof movieShowDetails[1].results.US !== "undefined") {
-				if (
-					typeof movieShowDetails[1].results.US.flatrate !==
-					"undefined"
-				) {
-					setFlatRateStreamingServices(
-						movieShowDetails[1].results.US.flatrate
-					);
+		if (mediaType !== "person") {
+			if (!isEmpty(movieShowDetails[1].results)) {
+				if (typeof movieShowDetails[1].results.US !== "undefined") {
+					if (
+						typeof movieShowDetails[1].results.US.flatrate !==
+						"undefined"
+					) {
+						setFlatRateStreamingServices(
+							movieShowDetails[1].results.US.flatrate
+						);
+					}
 				}
 			}
 		}
-	}, [movieShowDetails]);
+	}, [movieShowDetails, mediaType]);
 
 	useEffect(() => {
-		if (!isEmpty(movieShowDetails[1].results)) {
-			if (typeof movieShowDetails[1].results.US !== "undefined") {
-				if (typeof movieShowDetails[1].results.US.buy !== "undefined") {
-					setBuyStreamingServices(movieShowDetails[1].results.US.buy);
+		if (mediaType !== "person") {
+			if (!isEmpty(movieShowDetails[1].results)) {
+				if (typeof movieShowDetails[1].results.US !== "undefined") {
+					if (
+						typeof movieShowDetails[1].results.US.buy !==
+						"undefined"
+					) {
+						setBuyStreamingServices(
+							movieShowDetails[1].results.US.buy
+						);
+					}
 				}
 			}
 		}
-	}, [movieShowDetails]);
+	}, [movieShowDetails, mediaType]);
 
 	useEffect(() => {
-		if (!isEmpty(movieShowDetails[1].results)) {
-			if (typeof movieShowDetails[1].results.US !== "undefined") {
-				if (
-					typeof movieShowDetails[1].results.US.rent !== "undefined"
-				) {
-					setRentStreamingServices(
-						movieShowDetails[1].results.US.rent
-					);
+		if (mediaType !== "person") {
+			if (!isEmpty(movieShowDetails[1].results)) {
+				if (typeof movieShowDetails[1].results.US !== "undefined") {
+					if (
+						typeof movieShowDetails[1].results.US.rent !==
+						"undefined"
+					) {
+						setRentStreamingServices(
+							movieShowDetails[1].results.US.rent
+						);
+					}
 				}
 			}
 		}
-	}, [movieShowDetails]);
+	}, [movieShowDetails, mediaType]);
 
 	const renderTrailer = () => {
 		if (movieShowDetails[3].results.length > 0) {
@@ -105,10 +117,12 @@ export const MovieShowInDepth = () => {
 	}, [movieShowDetails]);
 
 	useEffect(() => {
-		if (!isEmpty(movieShowDetails[4].results)) {
-			setSimilar(movieShowDetails[4].results);
+		if (mediaType !== "person") {
+			if (!isEmpty(movieShowDetails[4].results)) {
+				setSimilar(movieShowDetails[4].results);
+			}
 		}
-	}, [movieShowDetails]);
+	}, [movieShowDetails, mediaType]);
 
 	useEffect(() => {
 		setMovieShowId(id);
@@ -180,8 +194,7 @@ export const MovieShowInDepth = () => {
 					</div>
 				</div>
 			) : null}
-
-			{mediaType === "movie" ? (
+			{mediaType === "movie" && (
 				<>
 					<h2>{movieShowDetails[0].title}</h2>
 					<p>{mediaType}</p>
@@ -284,7 +297,8 @@ export const MovieShowInDepth = () => {
 					))}
 					<button onClick={handleClick}>See More</button>
 				</>
-			) : (
+			)}
+			{mediaType === "tv" && (
 				<>
 					<h2>{movieShowDetails[0].name}</h2>
 					<p>{mediaType}</p>
@@ -391,7 +405,13 @@ export const MovieShowInDepth = () => {
 							</div>
 						</Link>
 					))}
+
 					<button onClick={handleClick}>See More</button>
+				</>
+			)}
+			{mediaType === "person" && (
+				<>
+					<p>hey</p>
 				</>
 			)}
 		</div>
