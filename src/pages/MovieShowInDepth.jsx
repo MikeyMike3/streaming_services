@@ -411,7 +411,7 @@ export const MovieShowInDepth = () => {
 			)}
 			{mediaType === "person" && (
 				<>
-					<p>hey</p>
+					<p>person</p>
 				</>
 			)}
 		</div>
