@@ -14,6 +14,8 @@ import {
 	fetchSimilarShows,
 } from "../api/showApi";
 
+import { fetchPersonDetails, fetchPersonCredits } from "../api/personApi";
+
 export const movieShowInDepthLoader = async ({ params }) => {
 	const { mediaType, id } = params;
 
@@ -39,7 +41,7 @@ export const movieShowInDepthLoader = async ({ params }) => {
 			movieTrailer,
 			similarMovies,
 		];
-	} else {
+	} else if (mediaType === "tv") {
 		const [
 			showDetails,
 			showProviders,
@@ -61,5 +63,11 @@ export const movieShowInDepthLoader = async ({ params }) => {
 			showTrailer,
 			similarShows,
 		];
+	} else if (mediaType === "person") {
+		const [personDetails, personCredits] = await Promise.all([
+			fetchPersonDetails(id),
+			fetchPersonCredits(id),
+		]);
+		return [personDetails, personCredits];
 	}
 };

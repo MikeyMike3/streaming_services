@@ -68,6 +68,7 @@ export const Search = () => {
 										mediaType={item.media_type}
 										overview={item.overview}
 										posterPath={item.poster_path}
+										profilePath={item.profile_path}
 										backdropPath={item.backdrop_path}
 										releaseDate={item.release_date}
 										voteAverage={item.vote_average}

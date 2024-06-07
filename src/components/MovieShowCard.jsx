@@ -7,14 +7,41 @@ export const MovieShowCard = (props) => {
 
 	return (
 		<div className="movie-show-card">
-			{props.posterPath === null ? (
+			{/* {props.posterPath === null ? (
 				<img src={poster} alt="placeholder poster" />
 			) : (
 				<img
 					src={`https://image.tmdb.org/t/p/w500/${props.posterPath}.jpg`}
 					alt="poster"
 				/>
-			)}
+			)} */}
+			{typeof props.mediaType === "undefined" &&
+				(props.posterPath === null ? (
+					<img src={poster} alt="placeholder poster" />
+				) : (
+					<img
+						src={`https://image.tmdb.org/t/p/w500/${props.posterPath}.jpg`}
+						alt="poster"
+					/>
+				))}
+			{(props.mediaType === "tv" || props.mediaType === "movie") &&
+				(props.posterPath === null ? (
+					<img src={poster} alt="placeholder poster" />
+				) : (
+					<img
+						src={`https://image.tmdb.org/t/p/w500/${props.posterPath}`}
+						alt="poster"
+					/>
+				))}
+			{props.mediaType === "person" &&
+				(props.profilePath === null ? (
+					<img src={poster} alt="placeholder poster" />
+				) : (
+					<img
+						src={`https://image.tmdb.org/t/p/w500/${props.profilePath}.jpg`}
+						alt="poster"
+					/>
+				))}
 
 			<div className="movie-show-info">
 				{/* <div className="genre-info">
@@ -34,7 +61,13 @@ export const MovieShowCard = (props) => {
 								)
 						  )}
 				</div> */}
-				<p>{props.voteAverage}</p>
+				{(props.mediaType === "movie" || props.mediaType === "tv") && (
+					<p>{props.voteAverage}</p>
+				)}
+
+				{props.mediaType === "person" && <p>{props.name}</p>}
+
+				{typeof props.mediaType === "undefined" && props.voteAverage}
 			</div>
 		</div>
 	);
@@ -46,6 +79,7 @@ MovieShowCard.propTypes = {
 	mediaType: PropTypes.string,
 	name: PropTypes.string,
 	posterPath: PropTypes.string,
+	profilePath: PropTypes.string,
 	voteAverage: PropTypes.number,
 	genreIds: PropTypes.array,
 	movieGenres: PropTypes.array,
