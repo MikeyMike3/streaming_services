@@ -61,13 +61,16 @@ export const MovieShowCard = (props) => {
 								)
 						  )}
 				</div> */}
-				{(props.mediaType === "movie" || props.mediaType === "tv") && (
-					<p>{props.voteAverage}</p>
-				)}
+				{props.mediaType === "tv" && <p>{props.name}</p>}
+
+				{props.mediaType === "movie" && <p>{props.title}</p>}
 
 				{props.mediaType === "person" && <p>{props.name}</p>}
 
-				{typeof props.mediaType === "undefined" && props.voteAverage}
+				{typeof props.mediaType === "undefined" &&
+					typeof props.title === "undefined" && <p>{props.name}</p>}
+				{typeof props.mediaType === "undefined" &&
+					typeof props.name === "undefined" && <p>{props.title}</p>}
 			</div>
 		</div>
 	);

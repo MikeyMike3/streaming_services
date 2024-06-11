@@ -11,12 +11,12 @@ export const Trending = () => {
 	return (
 		<>
 			<div className="heading-flex">
-				<h1>Trending Now:</h1>
+				<h1>Trending Now</h1>
 			</div>
 			<div className="movie-show-flex">
 				<Swiper
 					grabCursor={true}
-					spaceBetween={10}
+					spaceBetween={0}
 					slidesPerView={"auto"}
 					direction="horizontal"
 					modules={[FreeMode]}

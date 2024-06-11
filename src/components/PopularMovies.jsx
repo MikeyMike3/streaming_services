@@ -4,7 +4,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { FreeMode } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/free-mode";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { options } from "../api/options";
 
 export const PopularMovies = () => {
@@ -12,6 +12,8 @@ export const PopularMovies = () => {
 	const [popularMovies, setPopularMovies] = useState([]);
 	const [loading, setLoading] = useState(true);
 	const [pages, setPages] = useState(1);
+
+	const swiperRef = useRef(null);
 
 	useEffect(() => {
 		const fetchData = async () => {
@@ -64,6 +66,14 @@ export const PopularMovies = () => {
 
 				// Update the page state
 				setPages(nextPage);
+
+				swiperRef.current.swiper.update();
+
+				setTimeout(() => {
+					swiperRef.current.swiper.slideTo(
+						swiperRef.current.swiper.slides.length - 21
+					);
+				}, 50);
 			})
 			.catch((err) => console.error(err));
 	};
@@ -71,13 +81,16 @@ export const PopularMovies = () => {
 	return (
 		<>
 			<div className="heading-flex">
-				<h1>Popular Movies:</h1>
-				<button onClick={handleClick}>See More</button>
+				<h1>Popular Movies</h1>
+				<button className="view-more-btn" onClick={handleClick}>
+					View More
+				</button>
 			</div>
 			<div className="movie-show-flex">
 				<Swiper
+					ref={swiperRef}
 					grabCursor={true}
-					spaceBetween={10}
+					spaceBetween={0}
 					slidesPerView={"auto"}
 					direction="horizontal"
 					modules={[FreeMode]}

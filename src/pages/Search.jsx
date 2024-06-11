@@ -47,10 +47,14 @@ export const Search = () => {
 					</div>
 				</div>
 			) : null}
-			<input
-				id="search"
-				onChange={changeHandler}
-				placeholder="Search"></input>
+
+			<div className="search-container">
+				<input
+					id="search"
+					onChange={changeHandler}
+					placeholder="Search"></input>
+				<button className="search-btn">Search</button>
+			</div>
 
 			{searchResults.length > 0 ? (
 				<div>

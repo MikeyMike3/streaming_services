@@ -69,13 +69,15 @@ export const NowPlaying = () => {
 	return (
 		<>
 			<div className="heading-flex">
-				<h1>Now Playing In Theatres:</h1>
-				<button onClick={handleClick}>See More</button>
+				<h1>Now Playing In Theatres</h1>
+				<button className="view-more-btn" onClick={handleClick}>
+					View More
+				</button>
 			</div>
 			<div className="movie-show-flex">
 				<Swiper
 					grabCursor={true}
-					spaceBetween={10}
+					spaceBetween={0}
 					slidesPerView={"auto"}
 					direction="horizontal"
 					modules={[FreeMode]}

@@ -321,7 +321,13 @@ export const MovieShowInDepth = () => {
 							</Link>
 						))}
 					</div>
-					<button onClick={handleClick}>See More</button>
+					<div className="view-more-btn-container">
+						<button
+							className="view-more-btn view-more-btn-in-depth"
+							onClick={handleClick}>
+							View More
+						</button>
+					</div>
 				</>
 			)}
 			{mediaType === "tv" && (
@@ -451,7 +457,13 @@ export const MovieShowInDepth = () => {
 						))}
 					</div>
 
-					<button onClick={handleClick}>See More</button>
+					<div className="view-more-btn-container">
+						<button
+							className="view-more-btn view-more-btn-in-depth"
+							onClick={handleClick}>
+							View More
+						</button>
+					</div>
 				</>
 			)}
 			{mediaType === "person" && (
