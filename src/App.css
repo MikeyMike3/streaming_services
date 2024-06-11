@@ -16,6 +16,7 @@ a {
 
 .search-container {
 	text-align: center;
+	height: 45px;
 	transition: transform 400ms, 400ms;
 }
 
@@ -26,27 +27,31 @@ a {
 #search {
 	font-size: 18px;
 	width: 500px;
-	padding: 10px;
-	background-color: black;
+	padding: 15px;
+	height: 100%;
+	background-color: white;
 	border: none;
 	outline: none;
 	border-top-left-radius: 15px;
 	border-bottom-left-radius: 15px;
-	color: white;
+	color: black;
 }
 
 .search-btn {
-	padding-top: 10px;
-	padding-bottom: 10px;
+	font-family: Arial, Helvetica, sans-serif;
+	height: 100%;
+	padding-top: 15px;
+	padding-bottom: 15px;
 	padding-left: 25px;
 	padding-right: 25px;
 	border-radius: 15px;
 	position: relative;
 	right: 15px;
+	top: 1px;
 	border: none;
 	cursor: pointer;
 	background-color: aqua;
-	font-size: 14px;
+	font-size: 16px;
 	transition: transform 400ms, 400ms;
 }
 
