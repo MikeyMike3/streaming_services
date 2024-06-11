@@ -50,6 +50,7 @@ export const Search = () => {
 
 			<div className="search-container">
 				<input
+					autoFocus
 					id="search"
 					onChange={changeHandler}
 					placeholder="Search"></input>
