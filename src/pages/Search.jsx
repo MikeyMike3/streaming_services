@@ -6,10 +6,33 @@ import { BarLoader } from "react-spinners";
 
 export const Search = () => {
 	const [searchResults, setSearchResults] = useState([]);
+	const [queryState, setQueryState] = useState("");
+	const [pages, setPages] = useState(1);
+	const [noResults, setNoResults] = useState(false);
 	const navigation = useNavigation();
+
+	const handleClick = () => {
+		const nextPage = pages + 1;
+
+		fetch(
+			`https://api.themoviedb.org/3/search/multi?query=${queryState}&include_adult=false&language=en-US&page=${nextPage}`,
+			options
+		)
+			.then((response) => response.json())
+			.then((response) => {
+				setSearchResults((prevState) => [
+					...prevState,
+					...response.results,
+				]);
+
+				setPages(nextPage);
+			})
+			.catch((err) => console.error(err));
+	};
 
 	const changeHandler = (e) => {
 		const query = e.target.value;
+		setQueryState(query);
 
 		if (query.length === 0) {
 			setSearchResults([]);
@@ -19,14 +42,21 @@ export const Search = () => {
 				options
 			)
 				.then((response) => response.json())
-				.then((data) => setSearchResults([data]))
+				.then((data) => {
+					setSearchResults(data.results);
+				})
+
 				.catch((error) => console.error("Error fetching data:", error));
 		}
 	};
 
 	useEffect(() => {
-		console.log(searchResults);
-	});
+		if (searchResults.length === 0 && queryState.length > 0) {
+			setNoResults(true);
+		} else {
+			setNoResults(false);
+		}
+	}, [searchResults, queryState]);
 
 	return (
 		<div>
@@ -57,11 +87,12 @@ export const Search = () => {
 				<button className="search-btn">Search</button>
 			</div>
 
-			{searchResults.length > 0 ? (
-				<div>
-					<h1>Search Results</h1>
+			{noResults && <p className="white">HEY</p>}
+
+			{searchResults.length > 0 && (
+				<>
 					<div className="search-grid">
-						{searchResults[0].results.map((item) => (
+						{searchResults.map((item) => (
 							<>
 								<Link
 									to={`/${
@@ -86,9 +117,15 @@ export const Search = () => {
 							</>
 						))}
 					</div>
-				</div>
-			) : (
-				<h1>No Results Found</h1>
+
+					<div className="view-more-btn-container">
+						<button
+							className="view-more-btn view-more-btn-in-depth"
+							onClick={handleClick}>
+							View More
+						</button>
+					</div>
+				</>
 			)}
 		</div>
 	);

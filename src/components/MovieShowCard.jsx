@@ -3,8 +3,6 @@ import PropTypes from "prop-types";
 import poster from "../imgs/tmdbPoster.jpg";
 
 export const MovieShowCard = (props) => {
-	// console.log(movieShowId);
-
 	return (
 		<div className="movie-show-card">
 			{/* {props.posterPath === null ? (

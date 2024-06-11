@@ -177,7 +177,7 @@ export const MovieShowInDepth = () => {
 	};
 
 	return (
-		<div>
+		<div className="white">
 			{navigation.state === "loading" ? (
 				<div className="loader-container">
 					<div className="bar-loader">
