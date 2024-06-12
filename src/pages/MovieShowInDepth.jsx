@@ -211,7 +211,7 @@ export const MovieShowInDepth = () => {
 						<img src={poster} alt="movie backdrop place holder" />
 					) : (
 						<img
-							src={`https://image.tmdb.org/t/p/w500/${movieShowDetails[0].backdrop_path}.jpg`}
+							src={`https://image.tmdb.org/t/p/w1280/${movieShowDetails[0].backdrop_path}.jpg`}
 							alt="movie backdrop"
 						/>
 					)}
@@ -263,7 +263,7 @@ export const MovieShowInDepth = () => {
 					<div className="cast-card-flex">
 						<Swiper
 							grabCursor={true}
-							spaceBetween={10}
+							spaceBetween={0}
 							slidesPerView={"auto"}
 							direction="horizontal"
 							modules={[FreeMode]}
@@ -272,25 +272,29 @@ export const MovieShowInDepth = () => {
 							}}>
 							{credits.map((item) => (
 								<SwiperSlide key={item.id}>
-									<div
-										key={item.cast_id}
-										className="cast-card">
-										{item.profile_path === null ? (
-											<img
-												className="cast-card-img"
-												src={poster}
-												alt="movie poster"
-											/>
-										) : (
-											<img
-												className="cast-card-img"
-												src={`https://image.tmdb.org/t/p/w500/${item.profile_path}.jpg`}
-												alt="movie poster"
-											/>
-										)}
-										<p>{item.character}</p>
-										<p>{item.name}</p>
-									</div>
+									<Link to={`/person/${item.id.toString()}`}>
+										<div
+											key={item.cast_id}
+											className="cast-card">
+											{item.profile_path === null ? (
+												<img
+													className="cast-card-img"
+													src={poster}
+													alt="movie poster"
+												/>
+											) : (
+												<img
+													className="cast-card-img"
+													src={`https://image.tmdb.org/t/p/w500/${item.profile_path}.jpg`}
+													alt="movie poster"
+												/>
+											)}
+
+											<p>
+												{item.name} as {item.character}
+											</p>
+										</div>
+									</Link>
 								</SwiperSlide>
 							))}
 						</Swiper>
@@ -346,7 +350,7 @@ export const MovieShowInDepth = () => {
 						<img src={poster} alt="show poster placeholder" />
 					) : (
 						<img
-							src={`https://image.tmdb.org/t/p/w500/${movieShowDetails[0].backdrop_path}.jpg`}
+							src={`https://image.tmdb.org/t/p/w1280/${movieShowDetails[0].backdrop_path}.jpg`}
 							alt="show poster"
 						/>
 					)}
@@ -398,7 +402,7 @@ export const MovieShowInDepth = () => {
 					<div className="cast-card-flex">
 						<Swiper
 							grabCursor={true}
-							spaceBetween={10}
+							spaceBetween={0}
 							slidesPerView={"auto"}
 							direction="horizontal"
 							modules={[FreeMode]}
@@ -407,25 +411,27 @@ export const MovieShowInDepth = () => {
 							}}>
 							{credits.map((item) => (
 								<SwiperSlide key={item.id}>
-									<div
-										key={item.cast_id}
-										className="cast-card">
-										{item.profile_path === null ? (
-											<img
-												className="cast-card-img"
-												src={poster}
-												alt="movie poster"
-											/>
-										) : (
-											<img
-												className="cast-card-img"
-												src={`https://image.tmdb.org/t/p/w500/${item.profile_path}.jpg`}
-												alt="movie poster"
-											/>
-										)}
-										<p>{item.character}</p>
-										<p>{item.name}</p>
-									</div>
+									<Link to={`/person/${item.id.toString()}`}>
+										<div
+											key={item.cast_id}
+											className="cast-card">
+											{item.profile_path === null ? (
+												<img
+													className="cast-card-img"
+													src={poster}
+													alt="movie poster"
+												/>
+											) : (
+												<img
+													className="cast-card-img"
+													src={`https://image.tmdb.org/t/p/w500/${item.profile_path}.jpg`}
+													alt="movie poster"
+												/>
+											)}
+											<p>{item.character}</p>
+											<p>{item.name}</p>
+										</div>
+									</Link>
 								</SwiperSlide>
 							))}
 						</Swiper>

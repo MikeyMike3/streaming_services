@@ -19,6 +19,8 @@ a {
 }
 
 .search-container {
+	margin-top: 50px;
+	margin-bottom: 50px;
 	text-align: center;
 	height: 45px;
 	transition: transform 400ms, 400ms;
@@ -137,15 +139,34 @@ a {
 /* start of header nav styles*/
 
 header {
+	position: sticky;
+	top: 0px;
+	z-index: 9999;
 	display: flex;
-	justify-content: end;
 	align-items: center;
 	line-height: 60px;
+	background-color: black;
 }
 
-nav {
+.header-content {
+	display: flex;
+	justify-content: space-between;
+	width: 100%;
+}
+
+.logo-container {
+	display: flex;
+	align-items: center;
+}
+
+.logo-container a {
+	color: white;
+}
+
+.nav-right {
 	display: flex;
 	gap: 15px;
+	align-items: center;
 }
 
 nav > * {
@@ -153,7 +174,6 @@ nav > * {
 	color: white;
 	padding: 5px;
 }
-
 .active {
 	text-decoration: underline aqua;
 }
@@ -179,7 +199,6 @@ nav > * {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	margin-left: 10px;
 	margin-right: 10px;
 	margin-top: 15px;
 	margin-bottom: 15px;
@@ -236,10 +255,27 @@ nav > * {
 .cast-card {
 	display: flex;
 	flex-direction: column;
+	transition: transform 400ms, 400ms;
+	transform: scale(0.95);
+}
+
+.cast-card p {
+	margin-top: 10px;
+}
+
+.cast-card:hover {
+	transform: scale(1);
+	color: aqua;
+}
+
+.cast-card-flex a {
+	text-decoration: none;
+	color: white;
 }
 
 .cast-card-img {
 	width: 100%;
+	border-radius: 15px;
 }
 
 .search-grid {
