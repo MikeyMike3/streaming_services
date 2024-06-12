@@ -207,11 +207,11 @@ nav > * {
 	width: 15%;
 }
 
-.movie-show-flex {
+/* .movie-show-flex {
 	display: flex;
 	margin-left: 15px;
 	margin-right: 15px;
-}
+} */
 
 .movie-show-flex a {
 	text-decoration: none;
@@ -229,8 +229,17 @@ nav > * {
 	margin-right: 15px;
 }
 
+.cast-card-flex .swiper-slide {
+	width: 10%;
+}
+
+.cast-card {
+	display: flex;
+	flex-direction: column;
+}
+
 .cast-card-img {
-	width: 50px;
+	width: 100%;
 }
 
 .search-grid {

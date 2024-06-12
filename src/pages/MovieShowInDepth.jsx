@@ -260,7 +260,7 @@ export const MovieShowInDepth = () => {
 					{renderTrailer()}
 
 					<h3>Cast:</h3>
-					<div className="movie-show-flex">
+					<div className="cast-card-flex">
 						<Swiper
 							grabCursor={true}
 							spaceBetween={10}
@@ -275,8 +275,6 @@ export const MovieShowInDepth = () => {
 									<div
 										key={item.cast_id}
 										className="cast-card">
-										<p>{item.character}</p>
-										<p>{item.name}</p>
 										{item.profile_path === null ? (
 											<img
 												className="cast-card-img"
@@ -290,6 +288,8 @@ export const MovieShowInDepth = () => {
 												alt="movie poster"
 											/>
 										)}
+										<p>{item.character}</p>
+										<p>{item.name}</p>
 									</div>
 								</SwiperSlide>
 							))}
@@ -395,7 +395,7 @@ export const MovieShowInDepth = () => {
 					{renderTrailer()}
 
 					<h3>Cast:</h3>
-					<div className="movie-show-flex">
+					<div className="cast-card-flex">
 						<Swiper
 							grabCursor={true}
 							spaceBetween={10}
@@ -410,8 +410,6 @@ export const MovieShowInDepth = () => {
 									<div
 										key={item.cast_id}
 										className="cast-card">
-										<p>{item.character}</p>
-										<p>{item.name}</p>
 										{item.profile_path === null ? (
 											<img
 												className="cast-card-img"
@@ -425,6 +423,8 @@ export const MovieShowInDepth = () => {
 												alt="movie poster"
 											/>
 										)}
+										<p>{item.character}</p>
+										<p>{item.name}</p>
 									</div>
 								</SwiperSlide>
 							))}
