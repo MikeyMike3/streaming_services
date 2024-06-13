@@ -6,7 +6,7 @@
 }
 
 body {
-	background-color: #0f0f0f;
+	background-color: black;
 	margin-bottom: 15px;
 }
 
@@ -190,16 +190,21 @@ nav > * {
 
 /* start of cast card styling*/
 
-.cast-card-container .swiper-slide {
+/* .cast-card-container .swiper-slide {
 	width: 10%;
-}
+} */
 
 .cast-card {
-	display: flex;
-	flex-direction: column;
 	transition: transform 400ms, 400ms;
 	transform: scale(0.95);
 }
+
+/* .cast-info {
+	display: flex;
+	flex-grow: 1;
+	justify-content: center;
+	align-items: center;
+} */
 
 .cast-card p {
 	margin-top: 10px;
@@ -210,6 +215,10 @@ nav > * {
 	color: aqua;
 }
 
+.cast-card-container {
+	width: 100%;
+}
+
 .cast-card-container a {
 	text-decoration: none;
 	color: white;
@@ -217,6 +226,7 @@ nav > * {
 
 .cast-card-img {
 	width: 100%;
+	height: 100%;
 	border-radius: 15px;
 }
 
@@ -230,19 +240,25 @@ nav > * {
 }
 
 .movie-show-details-backdrop {
+	position: relative;
+	z-index: -1;
+	background-attachment: fixed;
+	background-position: center top;
 	background-size: cover;
-	background-position: center;
 	height: 665px;
 	width: 100%;
 }
 
-.movie-show-details-backdrop-overlay {
+/* .movie-show-details-backdrop-overlay {
 	border-image: linear-gradient(
 			180deg,
 			rgba(15, 15, 15, 0) 0%,
 			rgba(15, 15, 15, 0.9066001400560224) 81%
 		)
 		fill 1;
+} */
+.movie-show-details-backdrop-overlay {
+	border-image: linear-gradient(to top, rgb(0, 0, 0), rgba(0, 0, 0, 0)) fill 1;
 }
 
 .movie-show-details-container {
@@ -255,6 +271,7 @@ nav > * {
 	display: flex;
 	flex-direction: column;
 	height: 100%;
+	min-width: 0;
 }
 
 .movie-show-details-poster img {
@@ -298,7 +315,7 @@ nav > * {
 }
 
 .movie-show-trailer {
-	flex-grow: 1; /* This will make the trailer fill the remaining space */
+	flex-grow: 1;
 }
 
 .youtube-trailer {
@@ -371,6 +388,14 @@ nav > * {
 .movie-show-flex .swiper-slide {
 	width: 15%;
 }
+/* adjusted this to make slider responsive */
+.cast-card-container .swiper-slide {
+	width: 15%;
+}
+
+/* .swiper-wrapper {
+	width: 100vh;
+} */
 
 .movie-show-flex a {
 	text-decoration: none;
@@ -389,8 +414,9 @@ nav > * {
 }
 
 .provider-img {
+	position: relative;
 	background-size: cover;
-	background-position: center;
+	background-position: center center;
 	height: 125px;
 	width: 125px;
 	border-radius: 15px;

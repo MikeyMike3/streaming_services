@@ -260,8 +260,50 @@ export const MovieShowInDepth = () => {
 									<p className="movie-show-overview">
 										{movieShowDetails[0].overview}
 									</p>
-									<div className="movie-show-trailer">
+									{/* <div className="movie-show-trailer">
 										{renderTrailer()}
+									</div> */}
+									<div className="cast-card-container">
+										<Swiper
+											grabCursor={true}
+											spaceBetween={0}
+											slidesPerView={"auto"}
+											direction="horizontal"
+											modules={[FreeMode]}
+											freeMode={{
+												freeMode: { enabled: true },
+											}}>
+											{credits.map((item) => (
+												<SwiperSlide key={item.id}>
+													<Link
+														to={`/person/${item.id.toString()}`}>
+														<div
+															key={item.cast_id}
+															className="cast-card">
+															{item.profile_path ===
+															null ? (
+																<img
+																	className="cast-card-img"
+																	src={poster}
+																	alt="movie poster"
+																/>
+															) : (
+																<img
+																	className="cast-card-img"
+																	src={`https://image.tmdb.org/t/p/w500/${item.profile_path}.jpg`}
+																	alt="movie poster"
+																/>
+															)}
+															<div className="cast-info">
+																<p>
+																	{item.name}
+																</p>
+															</div>
+														</div>
+													</Link>
+												</SwiperSlide>
+											))}
+										</Swiper>
 									</div>
 								</div>
 							</div>
@@ -270,7 +312,7 @@ export const MovieShowInDepth = () => {
 								<Swiper
 									grabCursor={true}
 									spaceBetween={0}
-									slidesPerView={"auto"}
+									slidesPerView={"8.5"}
 									direction="horizontal"
 									modules={[FreeMode]}
 									freeMode={{
@@ -299,17 +341,16 @@ export const MovieShowInDepth = () => {
 															alt="movie poster"
 														/>
 													)}
-
-													<p>
-														{item.name} as{" "}
-														{item.character}
-													</p>
+													<div className="cast-info">
+														<p>{item.name}</p>
+													</div>
 												</div>
 											</Link>
 										</SwiperSlide>
 									))}
 								</Swiper>
 							</div>
+
 							<div className="platform-container">
 								<h2 className="platform-headings">Stream On</h2>
 								<div className="provider-img-container">
@@ -382,6 +423,7 @@ export const MovieShowInDepth = () => {
 									</Link>
 								))}
 							</div>
+
 							<div className="view-more-btn-container">
 								<button
 									className="view-more-btn view-more-btn-in-depth"
