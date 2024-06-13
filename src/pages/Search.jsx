@@ -120,7 +120,7 @@ export const Search = () => {
 
 					<div className="view-more-btn-container">
 						<button
-							className="view-more-btn view-more-btn-in-depth"
+							className="view-more-btn view-more-btn-in-depth-search"
 							onClick={handleClick}>
 							View More
 						</button>

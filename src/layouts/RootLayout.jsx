@@ -22,11 +22,10 @@ export const RootLayout = () => {
 					</div>
 				</div>
 			</header>
-			<div className="wrapper">
-				<main>
-					<Outlet />
-				</main>
-			</div>
+
+			<main>
+				<Outlet />
+			</main>
 		</div>
 	);
 };

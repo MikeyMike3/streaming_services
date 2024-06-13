@@ -28,7 +28,7 @@ export const Home = () => {
 				</div>
 			) : null}
 
-			<div>
+			<div className="wrapper">
 				<Trending />
 
 				<NowPlaying />
