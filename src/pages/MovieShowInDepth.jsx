@@ -180,10 +180,11 @@ export const MovieShowInDepth = () => {
 	};
 
 	const formatRating = (rating) => {
-		const decimalPlaces = rating.toString().split(".")[1];
-		return decimalPlaces && decimalPlaces.length > 2
-			? parseFloat(rating).toFixed(2)
-			: rating;
+		const parsedRating = parseFloat(rating);
+
+		const roundedRating = Math.round(parsedRating);
+
+		return roundedRating.toString();
 	};
 
 	return (
@@ -252,7 +253,8 @@ export const MovieShowInDepth = () => {
 									)}
 									<p className="movie-show-rating">
 										{formatRating(
-											movieShowDetails[0].vote_average
+											movieShowDetails[0].vote_average *
+												10
 										)}
 									</p>
 									<p className="movie-show-overview">
