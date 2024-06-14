@@ -157,7 +157,7 @@ a {
 .movie-show-card img {
 	object-fit: cover;
 	width: 100%;
-	height: 80%;
+	height: 85%;
 	border-radius: 25px;
 }
 
@@ -329,7 +329,8 @@ nav > * {
 .cast-card-img {
 	object-fit: cover;
 	width: 100%;
-	height: 200px;
+	min-height: 200px;
+	max-height: 200px;
 	border-radius: 15px;
 }
 
