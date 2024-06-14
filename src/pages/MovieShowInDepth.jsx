@@ -345,25 +345,6 @@ export const MovieShowInDepth = () => {
 								)}
 							</div>
 
-							<h2 className="platform-headings">Buy On</h2>
-							<div className="heading-underline"></div>
-							<div className="provider-img-container">
-								{buyStreamingServices.length > 0 ? (
-									buyStreamingServices.map((item) => (
-										<div key={item.provider_id}>
-											<div
-												className="provider-img provider-img-overlay"
-												style={{
-													backgroundImage: `url(https://image.tmdb.org/t/p/w500/${item.logo_path})`,
-												}}
-												title={item.provider_name}
-											/>
-										</div>
-									))
-								) : (
-									<p>Currently unavailable for purchase.</p>
-								)}
-							</div>
 							<h2 className="platform-headings">Rent On</h2>
 							<div className="heading-underline"></div>
 							<div className="provider-img-container">
@@ -381,6 +362,25 @@ export const MovieShowInDepth = () => {
 									))
 								) : (
 									<p>Currently unavailable for rent.</p>
+								)}
+							</div>
+							<h2 className="platform-headings">Buy On</h2>
+							<div className="heading-underline"></div>
+							<div className="provider-img-container">
+								{buyStreamingServices.length > 0 ? (
+									buyStreamingServices.map((item) => (
+										<div key={item.provider_id}>
+											<div
+												className="provider-img provider-img-overlay"
+												style={{
+													backgroundImage: `url(https://image.tmdb.org/t/p/w500/${item.logo_path})`,
+												}}
+												title={item.provider_name}
+											/>
+										</div>
+									))
+								) : (
+									<p>Currently unavailable for purchase.</p>
 								)}
 							</div>
 						</div>
@@ -568,25 +568,6 @@ export const MovieShowInDepth = () => {
 								)}
 							</div>
 
-							<h2 className="platform-headings">Buy On</h2>
-							<div className="heading-underline"></div>
-							<div className="provider-img-container">
-								{buyStreamingServices.length > 0 ? (
-									buyStreamingServices.map((item) => (
-										<div key={item.provider_id}>
-											<div
-												className="provider-img provider-img-overlay"
-												style={{
-													backgroundImage: `url(https://image.tmdb.org/t/p/w500/${item.logo_path})`,
-												}}
-												title={item.provider_name}
-											/>
-										</div>
-									))
-								) : (
-									<p>Currently unavailable for purchase.</p>
-								)}
-							</div>
 							<h2 className="platform-headings">Rent On</h2>
 							<div className="heading-underline"></div>
 							<div className="provider-img-container">
@@ -604,6 +585,26 @@ export const MovieShowInDepth = () => {
 									))
 								) : (
 									<p>Currently unavailable for rent.</p>
+								)}
+							</div>
+
+							<h2 className="platform-headings">Buy On</h2>
+							<div className="heading-underline"></div>
+							<div className="provider-img-container">
+								{buyStreamingServices.length > 0 ? (
+									buyStreamingServices.map((item) => (
+										<div key={item.provider_id}>
+											<div
+												className="provider-img provider-img-overlay"
+												style={{
+													backgroundImage: `url(https://image.tmdb.org/t/p/w500/${item.logo_path})`,
+												}}
+												title={item.provider_name}
+											/>
+										</div>
+									))
+								) : (
+									<p>Currently unavailable for purchase.</p>
 								)}
 							</div>
 						</div>
