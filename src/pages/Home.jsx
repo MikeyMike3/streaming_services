@@ -29,13 +29,15 @@ export const Home = () => {
 			) : null}
 
 			<div className="wrapper">
-				<Trending />
+				<div className="home-container">
+					<Trending />
 
-				<NowPlaying />
+					<NowPlaying />
 
-				<PopularMovies />
+					<PopularMovies />
 
-				<PopularShows />
+					<PopularShows />
+				</div>
 			</div>
 		</>
 	);

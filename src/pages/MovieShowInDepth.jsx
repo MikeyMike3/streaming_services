@@ -13,7 +13,12 @@ import { MovieShowCard } from "../components/MovieShowCard";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/free-mode";
-import { FreeMode } from "swiper/modules";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+import { FreeMode, Navigation, Pagination } from "swiper/modules";
+
+import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
+import "react-circular-progressbar/dist/styles.css";
 
 export const MovieShowInDepth = () => {
 	const { id, mediaType } = useParams();
@@ -95,14 +100,18 @@ export const MovieShowInDepth = () => {
 
 	const renderTrailer = () => {
 		if (movieShowDetails[3].results.length > 0) {
-			const trailer = movieShowDetails[3].results.find(
-				(vid) => vid.name === "Official Trailer"
-			);
-			const key = trailer
-				? trailer.key
-				: movieShowDetails[3].results[0].key;
-
-			return <YouTube videoId={key} className="youtube-trailer" />;
+			return movieShowDetails[3].results.map((item, index) => {
+				const key = item.key
+					? item.key
+					: movieShowDetails[3].results[0].key;
+				return (
+					<SwiperSlide key={index}>
+						<YouTube videoId={key} className="youtube-trailer" />
+					</SwiperSlide>
+				);
+			});
+		} else {
+			return <p>No Videos Available.</p>;
 		}
 	};
 
@@ -187,6 +196,8 @@ export const MovieShowInDepth = () => {
 		return roundedRating.toString();
 	};
 
+	const percentage = formatRating(movieShowDetails[0].vote_average * 10);
+
 	return (
 		<>
 			{navigation.state === "loading" ? (
@@ -219,142 +230,106 @@ export const MovieShowInDepth = () => {
 					)}
 
 					<div className="wrapper">
-						<div className="movie-show-details-container-relative">
-							<div className="movie-show-details-container">
-								<div className="movie-show-details-poster">
-									{movieShowDetails[0].poster_path ===
-									null ? (
-										<img
-											src={poster}
-											alt="movie poster placeholder"
-										/>
-									) : (
-										<img
-											src={`https://image.tmdb.org/t/p/w500/${movieShowDetails[0].poster_path}.jpg`}
-											alt="movie poster"
-										/>
-									)}
-								</div>
-								<div className="movie-show-details">
-									<h2 className="movie-show-title">
-										{movieShowDetails[0].title}
-									</h2>
-									{typeof movieShowDetails[0].genres !==
-										"undefined" && (
-										<div className="movie-show-genres">
-											{movieShowDetails[0].genres.map(
-												(item) => (
-													<p key={item.id}>
-														{item.name}
-													</p>
-												)
-											)}
-										</div>
-									)}
-									<p className="movie-show-rating">
-										{formatRating(
-											movieShowDetails[0].vote_average *
-												10
+						<div className="movie-show-details-container">
+							<div className="movie-show-details-poster">
+								{movieShowDetails[0].poster_path === null ? (
+									<img
+										src={poster}
+										alt="movie poster placeholder"
+									/>
+								) : (
+									<img
+										src={`https://image.tmdb.org/t/p/w500/${movieShowDetails[0].poster_path}.jpg`}
+										alt="movie poster"
+									/>
+								)}
+							</div>
+							<div className="movie-show-details">
+								<h2 className="movie-show-title">
+									{movieShowDetails[0].title}
+								</h2>
+								{typeof movieShowDetails[0].genres !==
+									"undefined" && (
+									<div className="movie-show-genres-container">
+										<p className="movie-show-rating">
+											<CircularProgressbar
+												value={percentage}
+												text={`${percentage}`}
+												styles={buildStyles({
+													textSize: "30px",
+													textColor: "white",
+													trailColor: "white",
+													pathColor: "aqua",
+												})}
+											/>
+										</p>
+										{movieShowDetails[0].genres.map(
+											(item) => (
+												<p
+													className="movie-show-genres"
+													key={item.id}>
+													{item.name}
+												</p>
+											)
 										)}
-									</p>
-									<p className="movie-show-overview">
-										{movieShowDetails[0].overview}
-									</p>
-									{/* <div className="movie-show-trailer">
-										{renderTrailer()}
-									</div> */}
-									<div className="cast-card-container">
-										<Swiper
-											grabCursor={true}
-											spaceBetween={0}
-											slidesPerView={"auto"}
-											direction="horizontal"
-											modules={[FreeMode]}
-											freeMode={{
-												freeMode: { enabled: true },
-											}}>
-											{credits.map((item) => (
-												<SwiperSlide key={item.id}>
-													<Link
-														to={`/person/${item.id.toString()}`}>
-														<div
-															key={item.cast_id}
-															className="cast-card">
-															{item.profile_path ===
-															null ? (
-																<img
-																	className="cast-card-img"
-																	src={poster}
-																	alt="movie poster"
-																/>
-															) : (
-																<img
-																	className="cast-card-img"
-																	src={`https://image.tmdb.org/t/p/w500/${item.profile_path}.jpg`}
-																	alt="movie poster"
-																/>
-															)}
-															<div className="cast-info">
-																<p>
-																	{item.name}
-																</p>
-															</div>
-														</div>
-													</Link>
-												</SwiperSlide>
-											))}
-										</Swiper>
 									</div>
-								</div>
-							</div>
-							<h1 className="cast-heading">Cast</h1>
-							<div className="cast-card-container">
-								<Swiper
-									grabCursor={true}
-									spaceBetween={0}
-									slidesPerView={"8.5"}
-									direction="horizontal"
-									modules={[FreeMode]}
-									freeMode={{
-										freeMode: { enabled: true },
-									}}>
-									{credits.map((item) => (
-										<SwiperSlide
-											key={item.id}
-											className="swiper-slide">
-											<Link
-												to={`/person/${item.id.toString()}`}>
-												<div
-													key={item.cast_id}
-													className="cast-card">
-													{item.profile_path ===
-													null ? (
-														<img
-															className="cast-card-img"
-															src={poster}
-															alt="movie poster"
-														/>
-													) : (
-														<img
-															className="cast-card-img"
-															src={`https://image.tmdb.org/t/p/w500/${item.profile_path}.jpg`}
-															alt="movie poster"
-														/>
-													)}
-													<div className="cast-info">
-														<p>{item.name}</p>
+								)}
+
+								<p className="movie-show-overview">
+									{movieShowDetails[0].overview}
+								</p>
+
+								<h1 className="heading">Cast</h1>
+								<div className="heading-underline"></div>
+								<div className="cast-card-container">
+									<Swiper
+										grabCursor={true}
+										spaceBetween={0}
+										slidesPerView={"auto"}
+										direction="horizontal"
+										modules={[FreeMode]}
+										freeMode={{
+											freeMode: { enabled: true },
+										}}>
+										{credits.map((item) => (
+											<SwiperSlide key={item.id}>
+												<Link
+													to={`/person/${item.id.toString()}`}>
+													<div
+														key={item.cast_id}
+														className="cast-card">
+														{item.profile_path ===
+														null ? (
+															<img
+																className="cast-card-img"
+																src={poster}
+																alt="movie poster"
+															/>
+														) : (
+															<img
+																className="cast-card-img"
+																src={`https://image.tmdb.org/t/p/w500/${item.profile_path}.jpg`}
+																alt="movie poster"
+															/>
+														)}
+														<div className="cast-info">
+															<p>{item.name}</p>
+														</div>
 													</div>
-												</div>
-											</Link>
-										</SwiperSlide>
-									))}
-								</Swiper>
+												</Link>
+											</SwiperSlide>
+										))}
+									</Swiper>
+								</div>
 							</div>
+						</div>
 
-							<div className="platform-container">
-								<h2 className="platform-headings">Stream On</h2>
-								<div className="provider-img-container">
-									{flatRateStreamingServices.map((item) => (
+						<div className="platform-container">
+							<h2 className="platform-headings">Stream On</h2>
+							<div className="heading-underline"></div>
+							<div className="provider-img-container">
+								{flatRateStreamingServices.length > 0 ? (
+									flatRateStreamingServices.map((item) => (
 										<div key={item.provider_id}>
 											<div
 												className="provider-img provider-img-overlay"
@@ -364,12 +339,17 @@ export const MovieShowInDepth = () => {
 												title={item.provider_name}
 											/>
 										</div>
-									))}
-								</div>
+									))
+								) : (
+									<p>Currently unavailable to stream.</p>
+								)}
+							</div>
 
-								<h2 className="platform-headings">Buy On</h2>
-								<div className="provider-img-container">
-									{buyStreamingServices.map((item) => (
+							<h2 className="platform-headings">Buy On</h2>
+							<div className="heading-underline"></div>
+							<div className="provider-img-container">
+								{buyStreamingServices.length > 0 ? (
+									buyStreamingServices.map((item) => (
 										<div key={item.provider_id}>
 											<div
 												className="provider-img provider-img-overlay"
@@ -379,11 +359,16 @@ export const MovieShowInDepth = () => {
 												title={item.provider_name}
 											/>
 										</div>
-									))}
-								</div>
-								<h2 className="platform-headings">Rent On</h2>
-								<div className="provider-img-container">
-									{rentStreamingServices.map((item) => (
+									))
+								) : (
+									<p>Currently unavailable to purchase.</p>
+								)}
+							</div>
+							<h2 className="platform-headings">Rent On</h2>
+							<div className="heading-underline"></div>
+							<div className="provider-img-container">
+								{rentStreamingServices.length > 0 ? (
+									rentStreamingServices.map((item) => (
 										<div key={item.provider_id}>
 											<div
 												className="provider-img provider-img-overlay"
@@ -393,183 +378,286 @@ export const MovieShowInDepth = () => {
 												title={item.provider_name}
 											/>
 										</div>
-									))}
-								</div>
+									))
+								) : (
+									<p>Currently unavailable for rent.</p>
+								)}
 							</div>
-							<h1 className="similar-movies-heading">
-								Similar Movies
-							</h1>
-							<div className="search-grid">
-								{similar.map((item) => (
-									<Link
-										onClick={resetState}
-										key={item.id}
-										to={`/movie/${item.id.toString()}`}>
-										<MovieShowCard
-											genreIds={item.genre_ids}
-											id={item.id}
-											mediaType={item.media_type}
-											overview={item.overview}
-											posterPath={item.poster_path}
-											profilePath={item.profile_path}
-											backdropPath={item.backdrop_path}
-											releaseDate={item.release_date}
-											voteAverage={item.vote_average}
-											title={item.title}
-											name={item.name}
-											movieGenres={item.genre_ids}
-											showGenres={item.genre_ids}
-										/>
-									</Link>
-								))}
-							</div>
+						</div>
+						<h1 className="heading">Videos</h1>
+						<div className="heading-underline"></div>
+						<div className="movie-show-video">
+							<Swiper
+								navigation={true}
+								loop={true}
+								modules={[Navigation, Pagination]}
+								pagination={{
+									type: "progressbar",
+									clickable: { enabled: true },
+								}}
+								className="mySwiper">
+								{renderTrailer()}
+							</Swiper>
+						</div>
+						<h1 className="similar-movies-heading">
+							Similar Movies
+						</h1>
+						<div className="heading-underline"></div>
+						<div className="search-grid">
+							{similar.map((item) => (
+								<Link
+									onClick={resetState}
+									key={item.id}
+									to={`/movie/${item.id.toString()}`}>
+									<MovieShowCard
+										genreIds={item.genre_ids}
+										id={item.id}
+										mediaType={item.media_type}
+										overview={item.overview}
+										posterPath={item.poster_path}
+										profilePath={item.profile_path}
+										backdropPath={item.backdrop_path}
+										releaseDate={item.release_date}
+										voteAverage={item.vote_average}
+										title={item.title}
+										name={item.name}
+										movieGenres={item.genre_ids}
+										showGenres={item.genre_ids}
+									/>
+								</Link>
+							))}
+						</div>
 
-							<div className="view-more-btn-container">
-								<button
-									className="view-more-btn view-more-btn-in-depth"
-									onClick={handleClick}>
-									View More
-								</button>
-							</div>
+						<div className="view-more-btn-container">
+							<button
+								className="view-more-btn view-more-btn-in-depth"
+								onClick={handleClick}>
+								View More
+							</button>
 						</div>
 					</div>
 				</>
 			)}
 			{mediaType === "tv" && (
 				<>
-					<h2>{movieShowDetails[0].name}</h2>
-					<p>{mediaType}</p>
-					{movieShowDetails[0].poster_path === null ? (
-						<img src={poster} alt="show poster placeholder" />
-					) : (
-						<img
-							src={`https://image.tmdb.org/t/p/w500/${movieShowDetails[0].poster_path}.jpg`}
-							alt="show poster"
-						/>
-					)}
 					{movieShowDetails[0].backdrop_path === null ? (
-						<img src={poster} alt="show poster placeholder" />
+						<div
+							className="movie-show-details-backdrop movie-show-details-backdrop-overlay"
+							style={backdropImagePlaceHolderContainer}></div>
 					) : (
-						<img
-							src={`https://image.tmdb.org/t/p/w1280/${movieShowDetails[0].backdrop_path}.jpg`}
-							alt="show poster"
-						/>
+						<div
+							className="movie-show-details-backdrop movie-show-details-backdrop-overlay"
+							style={backdropImageContainer}></div>
 					)}
 
-					<p>{movieShowDetails[0].vote_average}</p>
-					<p>{movieShowDetails[0].overview}</p>
-					<ul>
-						{movieShowDetails[0].genres.map((item) => (
-							<li key={item.id}>{item.name}</li>
-						))}
-					</ul>
+					<div className="wrapper">
+						<div className="movie-show-details-container">
+							<div className="movie-show-details-poster">
+								{movieShowDetails[0].poster_path === null ? (
+									<img
+										src={poster}
+										alt="movie poster placeholder"
+									/>
+								) : (
+									<img
+										src={`https://image.tmdb.org/t/p/w500/${movieShowDetails[0].poster_path}.jpg`}
+										alt="movie poster"
+									/>
+								)}
+							</div>
+							<div className="movie-show-details">
+								<h2 className="movie-show-title">
+									{movieShowDetails[0].name}
+								</h2>
+								{typeof movieShowDetails[0].genres !==
+									"undefined" && (
+									<div className="movie-show-genres-container">
+										<p className="movie-show-rating">
+											<CircularProgressbar
+												value={percentage}
+												text={`${percentage}`}
+												styles={buildStyles({
+													textSize: "30px",
+													textColor: "white",
+													trailColor: "white",
+													pathColor: "aqua",
+												})}
+											/>
+										</p>
+										{movieShowDetails[0].genres.map(
+											(item) => (
+												<p
+													className="movie-show-genres"
+													key={item.id}>
+													{item.name}
+												</p>
+											)
+										)}
+									</div>
+								)}
 
-					<h3>Stream On:</h3>
-					{flatRateStreamingServices.map((item) => (
-						<img
-							className="provider-imgs"
-							key={item.provider_id}
-							src={`https://image.tmdb.org/t/p/w500/${item.logo_path}.jpg`}
-							alt="provider img"
-							title={item.provider_name}
-						/>
-					))}
-					<h3>Buy On:</h3>
-					{buyStreamingServices.map((item) => (
-						<img
-							className="provider-imgs"
-							key={item.provider_id}
-							src={`https://image.tmdb.org/t/p/w500/${item.logo_path}.jpg`}
-							alt="provider img"
-							title={item.provider_name}
-						/>
-					))}
-					<h3>Rent On:</h3>
-					{rentStreamingServices.map((item) => (
-						<img
-							className="provider-imgs"
-							key={item.provider_id}
-							src={`https://image.tmdb.org/t/p/w500/${item.logo_path}.jpg`}
-							alt="provider img"
-							title={item.provider_name}
-						/>
-					))}
+								<p className="movie-show-overview">
+									{movieShowDetails[0].overview}
+								</p>
+								{/* <div className="movie-show-trailer">
+									{renderTrailer()}
+								</div> */}
+								<h1 className="heading">Cast</h1>
+								<div className="heading-underline"></div>
+								<div className="cast-card-container">
+									<Swiper
+										grabCursor={true}
+										spaceBetween={0}
+										slidesPerView={"auto"}
+										direction="horizontal"
+										modules={[FreeMode]}
+										freeMode={{
+											freeMode: { enabled: true },
+										}}>
+										{credits.map((item) => (
+											<SwiperSlide key={item.id}>
+												<Link
+													to={`/person/${item.id.toString()}`}>
+													<div
+														key={item.cast_id}
+														className="cast-card">
+														{item.profile_path ===
+														null ? (
+															<img
+																className="cast-card-img"
+																src={poster}
+																alt="movie poster"
+															/>
+														) : (
+															<img
+																className="cast-card-img"
+																src={`https://image.tmdb.org/t/p/w500/${item.profile_path}.jpg`}
+																alt="movie poster"
+															/>
+														)}
+														<div className="cast-info">
+															<p>{item.name}</p>
+														</div>
+													</div>
+												</Link>
+											</SwiperSlide>
+										))}
+									</Swiper>
+								</div>
+							</div>
+						</div>
 
-					<h3>Trailer (Hopefully):</h3>
-
-					{renderTrailer()}
-
-					<h3>Cast:</h3>
-					<div className="cast-card-container">
-						<Swiper
-							grabCursor={true}
-							spaceBetween={0}
-							slidesPerView={"auto"}
-							direction="horizontal"
-							modules={[FreeMode]}
-							freeMode={{
-								freeMode: { enabled: true },
-							}}>
-							{credits.map((item) => (
-								<SwiperSlide key={item.id}>
-									<Link to={`/person/${item.id.toString()}`}>
-										<div
-											key={item.cast_id}
-											className="cast-card">
-											{item.profile_path === null ? (
-												<img
-													className="cast-card-img"
-													src={poster}
-													alt="movie poster"
-												/>
-											) : (
-												<img
-													className="cast-card-img"
-													src={`https://image.tmdb.org/t/p/w500/${item.profile_path}.jpg`}
-													alt="movie poster"
-												/>
-											)}
-											<p>{item.character}</p>
-											<p>{item.name}</p>
+						<div className="platform-container">
+							<h2 className="platform-headings">Stream On</h2>
+							<div className="heading-underline"></div>
+							<div className="provider-img-container">
+								{flatRateStreamingServices.length > 0 ? (
+									flatRateStreamingServices.map((item) => (
+										<div key={item.provider_id}>
+											<div
+												className="provider-img provider-img-overlay"
+												style={{
+													backgroundImage: `url(https://image.tmdb.org/t/p/w500/${item.logo_path})`,
+												}}
+												title={item.provider_name}
+											/>
 										</div>
-									</Link>
-								</SwiperSlide>
+									))
+								) : (
+									<p>Currently unavailable to stream.</p>
+								)}
+							</div>
+
+							<h2 className="platform-headings">Buy On</h2>
+							<div className="heading-underline"></div>
+							<div className="provider-img-container">
+								{buyStreamingServices.length > 0 ? (
+									buyStreamingServices.map((item) => (
+										<div key={item.provider_id}>
+											<div
+												className="provider-img provider-img-overlay"
+												style={{
+													backgroundImage: `url(https://image.tmdb.org/t/p/w500/${item.logo_path})`,
+												}}
+												title={item.provider_name}
+											/>
+										</div>
+									))
+								) : (
+									<p>Currently unavailable for purchase.</p>
+								)}
+							</div>
+							<h2 className="platform-headings">Rent On</h2>
+							<div className="heading-underline"></div>
+							<div className="provider-img-container">
+								{rentStreamingServices.length > 0 ? (
+									rentStreamingServices.map((item) => (
+										<div key={item.provider_id}>
+											<div
+												className="provider-img provider-img-overlay"
+												style={{
+													backgroundImage: `url(https://image.tmdb.org/t/p/w500/${item.logo_path})`,
+												}}
+												title={item.provider_name}
+											/>
+										</div>
+									))
+								) : (
+									<p>Currently unavailable for rent.</p>
+								)}
+							</div>
+						</div>
+						<h1 className="heading">Videos</h1>
+						<div className="heading-underline"></div>
+						<div className="movie-show-video">
+							<Swiper
+								navigation={true}
+								loop={true}
+								modules={[Navigation, Pagination]}
+								pagination={{
+									type: "progressbar",
+									clickable: { enabled: true },
+								}}
+								className="mySwiper">
+								{renderTrailer()}
+							</Swiper>
+						</div>
+						<h1 className="similar-movies-heading">
+							Similar Shows
+						</h1>
+						<div className="heading-underline"></div>
+						<div className="search-grid">
+							{similar.map((item) => (
+								<Link
+									onClick={resetState}
+									key={item.id}
+									to={`/tv/${item.id.toString()}`}>
+									<MovieShowCard
+										genreIds={item.genre_ids}
+										id={item.id}
+										mediaType={item.media_type}
+										overview={item.overview}
+										posterPath={item.poster_path}
+										profilePath={item.profile_path}
+										backdropPath={item.backdrop_path}
+										releaseDate={item.release_date}
+										voteAverage={item.vote_average}
+										title={item.title}
+										name={item.name}
+										movieGenres={item.genre_ids}
+										showGenres={item.genre_ids}
+									/>
+								</Link>
 							))}
-						</Swiper>
-					</div>
+						</div>
 
-					<h3>Similar Shows:</h3>
-					<div className="search-grid">
-						{similar.map((item) => (
-							<Link
-								onClick={resetState}
-								key={item.id}
-								to={`/tv/${item.id.toString()}`}>
-								<MovieShowCard
-									genreIds={item.genre_ids}
-									id={item.id}
-									mediaType={item.media_type}
-									overview={item.overview}
-									posterPath={item.poster_path}
-									profilePath={item.profile_path}
-									backdropPath={item.backdrop_path}
-									releaseDate={item.release_date}
-									voteAverage={item.vote_average}
-									title={item.title}
-									name={item.name}
-									movieGenres={item.genre_ids}
-									showGenres={item.genre_ids}
-								/>
-							</Link>
-						))}
-					</div>
-
-					<div className="view-more-btn-container">
-						<button
-							className="view-more-btn view-more-btn-in-depth"
-							onClick={handleClick}>
-							View More
-						</button>
+						<div className="view-more-btn-container">
+							<button
+								className="view-more-btn view-more-btn-in-depth"
+								onClick={handleClick}>
+								View More
+							</button>
+						</div>
 					</div>
 				</>
 			)}

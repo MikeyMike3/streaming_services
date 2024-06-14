@@ -1,10 +1,26 @@
 import { Link, NavLink, Outlet } from "react-router-dom";
+import { useState, useEffect } from "react";
 
 export const RootLayout = () => {
+	const [bgOpacity, setBgOpacity] = useState(0);
+
+	useEffect(() => {
+		const handleScroll = () => {
+			const scrollTop = window.scrollY;
+			const maxScroll = 500; // Adjust this value as needed
+			const opacity = Math.min(scrollTop / maxScroll, 1);
+			setBgOpacity(opacity);
+		};
+
+		window.addEventListener("scroll", handleScroll);
+		return () => {
+			window.removeEventListener("scroll", handleScroll);
+		};
+	}, []);
 	return (
 		<div>
-			<header>
-				<div className="wrapper">
+			<header style={{ backgroundColor: `rgba(0, 0, 0, ${bgOpacity})` }}>
+				<div className="header-wrapper">
 					<div className="header-content">
 						<div className="logo-container">
 							<Link to={"/"}>
