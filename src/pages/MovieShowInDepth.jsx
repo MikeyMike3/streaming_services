@@ -361,7 +361,7 @@ export const MovieShowInDepth = () => {
 										</div>
 									))
 								) : (
-									<p>Currently unavailable to purchase.</p>
+									<p>Currently unavailable for purchase.</p>
 								)}
 							</div>
 							<h2 className="platform-headings">Rent On</h2>
