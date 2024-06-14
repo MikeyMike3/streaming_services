@@ -141,6 +141,7 @@ a {
 	display: flex;
 	flex-direction: column;
 	height: 100%;
+	width: 100%;
 	color: white;
 	border-radius: 25px;
 	cursor: pointer;
@@ -154,13 +155,15 @@ a {
 }
 
 .movie-show-card img {
+	object-fit: cover;
 	width: 100%;
-	height: 100%;
+	height: 80%;
 	border-radius: 25px;
 }
 
 .movie-show-info {
-	text-align: center;
+	flex: 1;
+
 	padding-top: 15px;
 	padding-bottom: 15px;
 	display: flex;
@@ -306,7 +309,19 @@ nav > * {
 	width: 15%;
 }
 
+/* dont touch. This makes the cast cards all be the same height within the swiper*/
+.cast-card-container .swiper {
+	height: 100%;
+}
+
+.cast-card-container {
+	width: 100%;
+}
+
 .cast-card {
+	display: flex;
+	flex-direction: column;
+	height: 100%;
 	width: 100%;
 	transition: transform 400ms, 400ms;
 	transform: scale(0.95);
@@ -319,17 +334,23 @@ nav > * {
 	border-radius: 15px;
 }
 
-.cast-card p {
-	margin-top: 10px;
+.cast-info {
+	flex-grow: 1;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	height: 100%;
+	width: 100%;
+	display: flex;
+	align-items: center;
 }
+
+/* .cast-card p {
+	margin-top: 10px;
+} */
 
 .cast-card:hover {
 	transform: scale(1);
 	color: aqua;
-}
-
-.cast-card-container {
-	width: 100%;
 }
 
 .cast-card-container a {

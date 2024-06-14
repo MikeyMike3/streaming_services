@@ -5,14 +5,6 @@ import poster from "../imgs/tmdbPoster.jpg";
 export const MovieShowCard = (props) => {
 	return (
 		<div className="movie-show-card">
-			{/* {props.posterPath === null ? (
-				<img src={poster} alt="placeholder poster" />
-			) : (
-				<img
-					src={`https://image.tmdb.org/t/p/w500/${props.posterPath}.jpg`}
-					alt="poster"
-				/>
-			)} */}
 			{typeof props.mediaType === "undefined" &&
 				(props.posterPath === null ? (
 					<img src={poster} alt="placeholder poster" />
@@ -42,23 +34,6 @@ export const MovieShowCard = (props) => {
 				))}
 
 			<div className="movie-show-info">
-				{/* <div className="genre-info">
-					{props.mediaType === "movie"
-						? props.genreIds.map((genreID) =>
-								props.movieGenres.map((movieGenreId) =>
-									genreID === movieGenreId.id ? (
-										<p key={genreID}>{movieGenreId.name}</p>
-									) : null
-								)
-						  )
-						: props.genreIds.map((genreID) =>
-								props.showGenres.map((showGenreId) =>
-									genreID === showGenreId.id ? (
-										<p key={genreID}>{showGenreId.name}</p>
-									) : null
-								)
-						  )}
-				</div> */}
 				{props.mediaType === "tv" && <p>{props.name}</p>}
 
 				{props.mediaType === "movie" && <p>{props.title}</p>}
