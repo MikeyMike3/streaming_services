@@ -285,11 +285,11 @@ export const MovieShowInDepth = () => {
 									<Swiper
 										grabCursor={true}
 										spaceBetween={0}
+										navigation={true}
 										slidesPerView={"auto"}
-										direction="horizontal"
-										modules={[FreeMode]}
+										modules={[FreeMode, Navigation]}
 										freeMode={{
-											freeMode: { enabled: true },
+											freeMode: true,
 										}}>
 										{credits.map((item) => (
 											<SwiperSlide key={item.id}>
@@ -389,11 +389,9 @@ export const MovieShowInDepth = () => {
 						<div className="movie-show-video">
 							<Swiper
 								navigation={true}
-								loop={true}
 								modules={[Navigation, Pagination]}
 								pagination={{
 									type: "progressbar",
-									clickable: { enabled: true },
 								}}
 								className="mySwiper">
 								{renderTrailer()}
@@ -499,20 +497,18 @@ export const MovieShowInDepth = () => {
 								<p className="movie-show-overview">
 									{movieShowDetails[0].overview}
 								</p>
-								{/* <div className="movie-show-trailer">
-									{renderTrailer()}
-								</div> */}
+
 								<h1 className="heading">Cast</h1>
 								<div className="heading-underline"></div>
 								<div className="cast-card-container">
 									<Swiper
 										grabCursor={true}
 										spaceBetween={0}
+										navigation={true}
 										slidesPerView={"auto"}
-										direction="horizontal"
-										modules={[FreeMode]}
+										modules={[FreeMode, Navigation]}
 										freeMode={{
-											freeMode: { enabled: true },
+											freeMode: true,
 										}}>
 										{credits.map((item) => (
 											<SwiperSlide key={item.id}>
@@ -613,11 +609,9 @@ export const MovieShowInDepth = () => {
 						<div className="movie-show-video">
 							<Swiper
 								navigation={true}
-								loop={true}
 								modules={[Navigation, Pagination]}
 								pagination={{
 									type: "progressbar",
-									clickable: { enabled: true },
 								}}
 								className="mySwiper">
 								{renderTrailer()}

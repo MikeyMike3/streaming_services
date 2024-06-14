@@ -358,6 +358,11 @@ nav > * {
 	color: aqua;
 }
 
+.cast-card-container .swiper .swiper-button-disabled,
+.movie-show-video .swiper .swiper-button-disabled {
+	pointer-events: all;
+}
+
 .similar-movies-heading {
 	margin-top: 40px;
 }
