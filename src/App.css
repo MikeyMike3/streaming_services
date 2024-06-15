@@ -326,13 +326,13 @@ nav > * {
 }
 
 .cast-info {
+	display: flex;
+	align-items: center;
 	flex-grow: 1;
 	padding-top: 10px;
 	padding-bottom: 10px;
 	height: 100%;
 	width: 100%;
-	display: flex;
-	align-items: center;
 }
 
 /* .cast-card p {

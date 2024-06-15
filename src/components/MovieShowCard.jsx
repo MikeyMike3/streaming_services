@@ -20,7 +20,7 @@ export const MovieShowCard = (props) => {
 						}}></div>
 				)}
 
-				<h3 className="movie-title">{props.title || props.name}</h3>
+				<p className="movie-title">{props.title || props.name}</p>
 			</div>
 		</>
 	);
