@@ -19,9 +19,12 @@ import { FreeMode, Navigation, Pagination } from "swiper/modules";
 
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
+
 import { AdditionalMovieShowInfo } from "../components/movieShowInDepthComponents/AdditionalMovieShowInfo";
 import { Credits } from "../components/movieShowInDepthComponents/Credits";
 import { GeneralSwiper } from "../components/movieShowInDepthComponents/GeneralSwiper";
+import { MovieShowDetails } from "../components/movieShowInDepthComponents/MovieShowDetails";
+import { Grid } from "../components/movieShowInDepthComponents/Grid";
 
 export const MovieShowInDepth = () => {
 	const { id, mediaType } = useParams();
@@ -101,22 +104,7 @@ export const MovieShowInDepth = () => {
 		}
 	}, [movieShowDetails, mediaType]);
 
-	const renderTrailer = () => {
-		if (movieShowDetails[3].results.length > 0) {
-			return movieShowDetails[3].results.map((item, index) => {
-				const key = item.key
-					? item.key
-					: movieShowDetails[3].results[0].key;
-				return (
-					<SwiperSlide key={index}>
-						<YouTube videoId={key} className="youtube-trailer" />
-					</SwiperSlide>
-				);
-			});
-		} else {
-			return <p>No Videos Available.</p>;
-		}
-	};
+
 
 	useEffect(() => {
 		if (mediaType !== "person") {
@@ -191,16 +179,6 @@ export const MovieShowInDepth = () => {
 		backgroundImage: `url(${poster})`,
 	};
 
-	const formatRating = (rating) => {
-		const parsedRating = parseFloat(rating);
-
-		const roundedRating = Math.round(parsedRating);
-
-		return roundedRating.toString();
-	};
-
-	const percentage = formatRating(movieShowDetails[0].vote_average * 10);
-
 	return (
 		<>
 			{navigation.state === "loading" ? (
@@ -233,60 +211,9 @@ export const MovieShowInDepth = () => {
 					)}
 
 					<div className="wrapper">
-						<div className="movie-show-details-container">
-							<div className="movie-show-details-poster">
-								{movieShowDetails[0].poster_path === null ? (
-									<img
-										src={poster}
-										alt="movie poster placeholder"
-									/>
-								) : (
-									<img
-										src={`https://image.tmdb.org/t/p/w500/${movieShowDetails[0].poster_path}.jpg`}
-										alt="movie poster"
-									/>
-								)}
-							</div>
-							<div className="movie-show-details">
-								<h2 className="movie-show-title">
-									{movieShowDetails[0].title}
-								</h2>
-								{typeof movieShowDetails[0].genres !==
-									"undefined" && (
-									<div className="movie-show-genres-container">
-										<p className="movie-show-rating">
-											<CircularProgressbar
-												value={percentage}
-												text={`${percentage}`}
-												styles={buildStyles({
-													textSize: "30px",
-													textColor: "white",
-													trailColor: "white",
-													pathColor: "aqua",
-												})}
-											/>
-										</p>
-										{movieShowDetails[0].genres.map(
-											(item) => (
-												<p
-													className="movie-show-genres"
-													key={item.id}>
-													{item.name}
-												</p>
-											)
-										)}
-									</div>
-								)}
 
-								<p className="movie-show-overview">
-									{movieShowDetails[0].overview}
-								</p>
-
-								<Credits credits={credits} />
-
-								
-							</div>
-						</div>
+						<MovieShowDetails movieShowDetails={movieShowDetails[0]} 
+						credits={credits} />
 
 						<AdditionalMovieShowInfo
 							movieShowDetails={movieShowDetails[0]}
@@ -361,7 +288,7 @@ export const MovieShowInDepth = () => {
 							Similar Movies
 						</h1>
 						<div className="heading-underline"></div>
-						<div className="search-grid">
+						{/* <div className="search-grid">
 							{similar.map((item) => (
 								<Link
 									onClick={resetState}
@@ -384,7 +311,10 @@ export const MovieShowInDepth = () => {
 									/>
 								</Link>
 							))}
-						</div>
+						</div> */}
+						
+
+						<Grid array={similar} mediaType={mediaType} resetState={resetState} />
 
 						<div className="view-more-btn-container">
 							<button
@@ -409,58 +339,8 @@ export const MovieShowInDepth = () => {
 					)}
 
 					<div className="wrapper">
-						<div className="movie-show-details-container">
-							<div className="movie-show-details-poster">
-								{movieShowDetails[0].poster_path === null ? (
-									<img
-										src={poster}
-										alt="movie poster placeholder"
-									/>
-								) : (
-									<img
-										src={`https://image.tmdb.org/t/p/w500/${movieShowDetails[0].poster_path}.jpg`}
-										alt="movie poster"
-									/>
-								)}
-							</div>
-							<div className="movie-show-details">
-								<h2 className="movie-show-title">
-									{movieShowDetails[0].name}
-								</h2>
-								{typeof movieShowDetails[0].genres !==
-									"undefined" && (
-									<div className="movie-show-genres-container">
-										<p className="movie-show-rating">
-											<CircularProgressbar
-												value={percentage}
-												text={`${percentage}`}
-												styles={buildStyles({
-													textSize: "30px",
-													textColor: "white",
-													trailColor: "white",
-													pathColor: "aqua",
-												})}
-											/>
-										</p>
-										{movieShowDetails[0].genres.map(
-											(item) => (
-												<p
-													className="movie-show-genres"
-													key={item.id}>
-													{item.name}
-												</p>
-											)
-										)}
-									</div>
-								)}
-
-								<p className="movie-show-overview">
-									{movieShowDetails[0].overview}
-								</p>
-
-								<Credits credits={credits} />
-							</div>
-						</div>
+						<MovieShowDetails movieShowDetails={movieShowDetails[0]} 
+						credits={credits} />
 
 						<AdditionalMovieShowInfo
 							movieShowDetails={movieShowDetails[0]}
@@ -530,38 +410,15 @@ export const MovieShowInDepth = () => {
 						</div>
 						<h1 className="heading">Videos</h1>
 						<div className="heading-underline"></div>
-						
+
 						<GeneralSwiper array={movieShowDetails[3].results} />
 
 						<h1 className="similar-movies-heading">
 							Similar Shows
 						</h1>
 						<div className="heading-underline"></div>
-						<div className="search-grid">
-							{similar.map((item) => (
-								<Link
-									onClick={resetState}
-									key={item.id}
-									to={`/tv/${item.id.toString()}`}>
-									<MovieShowCard
-										genreIds={item.genre_ids}
-										id={item.id}
-										mediaType={item.media_type}
-										overview={item.overview}
-										posterPath={item.poster_path}
-										profilePath={item.profile_path}
-										backdropPath={item.backdrop_path}
-										releaseDate={item.release_date}
-										voteAverage={item.vote_average}
-										title={item.title}
-										name={item.name}
-										movieGenres={item.genre_ids}
-										showGenres={item.genre_ids}
-									/>
-								</Link>
-							))}
-						</div>
-
+						
+						<Grid array={similar} mediaType={mediaType} resetState={resetState} />
 						<div className="view-more-btn-container">
 							<button
 								className="view-more-btn view-more-btn-in-depth"
