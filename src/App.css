@@ -349,6 +349,12 @@ nav > * {
 	color: white;
 }
 
+.additional-info p {
+	font-size: 1rem;
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
 .heading {
 	margin-top: 40px;
 }
@@ -377,10 +383,6 @@ nav > * {
 
 .similar-movies-heading {
 	margin-top: 40px;
-}
-
-.platform-container {
-	margin-top: 80px;
 }
 
 /* end of movieShowInDepth styling */

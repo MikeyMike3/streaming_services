@@ -19,6 +19,7 @@ import { FreeMode, Navigation, Pagination } from "swiper/modules";
 
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
+import { AdditionalMovieShowInfo } from "../components/movieShowInDepthComponents/AdditionalMovieShowInfo";
 
 export const MovieShowInDepth = () => {
 	const { id, mediaType } = useParams();
@@ -324,6 +325,11 @@ export const MovieShowInDepth = () => {
 							</div>
 						</div>
 
+						<AdditionalMovieShowInfo
+							movieShowDetails={movieShowDetails[0]}
+							mediaType={mediaType}
+						/>
+
 						<div className="platform-container">
 							<h2 className="platform-headings">Stream On</h2>
 							<div className="heading-underline"></div>
@@ -542,6 +548,11 @@ export const MovieShowInDepth = () => {
 								</div>
 							</div>
 						</div>
+
+						<AdditionalMovieShowInfo
+							movieShowDetails={movieShowDetails[0]}
+							mediaType={mediaType}
+						/>
 
 						<div className="platform-container">
 							<h2 className="platform-headings">Stream On</h2>

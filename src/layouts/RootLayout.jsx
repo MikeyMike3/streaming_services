@@ -19,7 +19,8 @@ export const RootLayout = () => {
 	}, []);
 	return (
 		<div>
-			<header style={{ backgroundColor: `rgba(0, 0, 0, ${bgOpacity})` }}>
+			<header
+				style={{ backgroundColor: `rgba(20, 20, 20, ${bgOpacity})` }}>
 				<div className="header-wrapper">
 					<div className="header-content">
 						<div className="logo-container">
