@@ -20,6 +20,8 @@ import { FreeMode, Navigation, Pagination } from "swiper/modules";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 import { AdditionalMovieShowInfo } from "../components/movieShowInDepthComponents/AdditionalMovieShowInfo";
+import { Credits } from "../components/movieShowInDepthComponents/Credits";
+import { GeneralSwiper } from "../components/movieShowInDepthComponents/GeneralSwiper";
 
 export const MovieShowInDepth = () => {
 	const { id, mediaType } = useParams();
@@ -280,48 +282,9 @@ export const MovieShowInDepth = () => {
 									{movieShowDetails[0].overview}
 								</p>
 
-								<h1 className="heading">Cast</h1>
-								<div className="heading-underline"></div>
-								<div className="cast-card-container">
-									<Swiper
-										grabCursor={true}
-										spaceBetween={0}
-										navigation={true}
-										slidesPerView={"auto"}
-										modules={[FreeMode, Navigation]}
-										freeMode={{
-											freeMode: true,
-										}}>
-										{credits.map((item) => (
-											<SwiperSlide key={item.id}>
-												<Link
-													to={`/person/${item.id.toString()}`}>
-													<div
-														key={item.cast_id}
-														className="cast-card">
-														{item.profile_path ===
-														null ? (
-															<img
-																className="cast-card-img"
-																src={poster}
-																alt="movie poster"
-															/>
-														) : (
-															<img
-																className="cast-card-img"
-																src={`https://image.tmdb.org/t/p/w500/${item.profile_path}.jpg`}
-																alt="movie poster"
-															/>
-														)}
-														<div className="cast-info">
-															<p>{item.name}</p>
-														</div>
-													</div>
-												</Link>
-											</SwiperSlide>
-										))}
-									</Swiper>
-								</div>
+								<Credits credits={credits} />
+
+								
 							</div>
 						</div>
 
@@ -392,17 +355,8 @@ export const MovieShowInDepth = () => {
 						</div>
 						<h1 className="heading">Videos</h1>
 						<div className="heading-underline"></div>
-						<div className="movie-show-video">
-							<Swiper
-								navigation={true}
-								modules={[Navigation, Pagination]}
-								pagination={{
-									type: "progressbar",
-								}}
-								className="mySwiper">
-								{renderTrailer()}
-							</Swiper>
-						</div>
+						<GeneralSwiper array={movieShowDetails[3].results} />
+						
 						<h1 className="similar-movies-heading">
 							Similar Movies
 						</h1>
@@ -504,48 +458,7 @@ export const MovieShowInDepth = () => {
 									{movieShowDetails[0].overview}
 								</p>
 
-								<h1 className="heading">Cast</h1>
-								<div className="heading-underline"></div>
-								<div className="cast-card-container">
-									<Swiper
-										grabCursor={true}
-										spaceBetween={0}
-										navigation={true}
-										slidesPerView={"auto"}
-										modules={[FreeMode, Navigation]}
-										freeMode={{
-											freeMode: true,
-										}}>
-										{credits.map((item) => (
-											<SwiperSlide key={item.id}>
-												<Link
-													to={`/person/${item.id.toString()}`}>
-													<div
-														key={item.cast_id}
-														className="cast-card">
-														{item.profile_path ===
-														null ? (
-															<img
-																className="cast-card-img"
-																src={poster}
-																alt="movie poster"
-															/>
-														) : (
-															<img
-																className="cast-card-img"
-																src={`https://image.tmdb.org/t/p/w500/${item.profile_path}.jpg`}
-																alt="movie poster"
-															/>
-														)}
-														<div className="cast-info">
-															<p>{item.name}</p>
-														</div>
-													</div>
-												</Link>
-											</SwiperSlide>
-										))}
-									</Swiper>
-								</div>
+								<Credits credits={credits} />
 							</div>
 						</div>
 
@@ -617,17 +530,9 @@ export const MovieShowInDepth = () => {
 						</div>
 						<h1 className="heading">Videos</h1>
 						<div className="heading-underline"></div>
-						<div className="movie-show-video">
-							<Swiper
-								navigation={true}
-								modules={[Navigation, Pagination]}
-								pagination={{
-									type: "progressbar",
-								}}
-								className="mySwiper">
-								{renderTrailer()}
-							</Swiper>
-						</div>
+						
+						<GeneralSwiper array={movieShowDetails[3].results} />
+
 						<h1 className="similar-movies-heading">
 							Similar Shows
 						</h1>
