@@ -227,10 +227,8 @@ nav > * {
 
 .movie-show-details-container {
 	margin-top: -320px;
-
 	display: grid;
 	grid-template-columns: 500px 1fr;
-
 	gap: 25px;
 }
 
@@ -244,7 +242,6 @@ nav > * {
 .movie-show-details-poster img {
 	object-fit: cover;
 	width: 100%;
-
 	border-radius: 25px;
 }
 
