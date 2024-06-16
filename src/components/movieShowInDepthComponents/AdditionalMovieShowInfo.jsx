@@ -6,6 +6,12 @@ export const AdditionalMovieShowInfo = (props) => {
 	if (props.movieShowDetails.release_date !== undefined) {
 		releaseDateSplitArray = props.movieShowDetails.release_date.split("-");
 	}
+
+	if (props.movieShowDetails.first_air_date !== undefined) {
+		releaseDateSplitArray =
+			props.movieShowDetails.first_air_date.split("-");
+	}
+
 	return (
 		<>
 			<div className="additional-info">
