@@ -6,11 +6,17 @@ export const MovieShowCard = (props) => {
 	return (
 		<>
 			<div className="movie-show-card-container">
-				{props.posterPath === null ? (
+				{props.posterPath === null || props.profilePath === null ? (
 					<div
 						className="movie-show-card"
 						style={{
 							backgroundImage: `url(${poster})`,
+						}}></div>
+				) : props.mediaType === "person" ? (
+					<div
+						className="movie-show-card"
+						style={{
+							backgroundImage: `url(https://image.tmdb.org/t/p/w500/${props.profilePath})`,
 						}}></div>
 				) : (
 					<div

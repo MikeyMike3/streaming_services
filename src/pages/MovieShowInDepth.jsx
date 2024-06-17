@@ -45,6 +45,9 @@ export const MovieShowInDepth = () => {
 	const [credits, setCredits] = useState([]);
 	const [similar, setSimilar] = useState([]);
 
+	let formatPersonBirthday = [];
+	let formatPersonDeathday = [];
+
 	const isEmpty = (obj) => {
 		return Object.keys(obj).length === 0;
 	};
@@ -103,8 +106,6 @@ export const MovieShowInDepth = () => {
 			}
 		}
 	}, [movieShowDetails, mediaType]);
-
-
 
 	useEffect(() => {
 		if (mediaType !== "person") {
@@ -171,6 +172,24 @@ export const MovieShowInDepth = () => {
 		}
 	};
 
+	if (mediaType === "person") {
+		if (
+			movieShowDetails[0].birthday !== undefined &&
+			movieShowDetails[0].birthday !== null
+		) {
+			formatPersonBirthday = movieShowDetails[0].birthday.split("-");
+		}
+	}
+
+	if (mediaType === "person") {
+		if (
+			movieShowDetails[0].deathday !== undefined &&
+			movieShowDetails[0].deathday !== null
+		) {
+			formatPersonDeathday = movieShowDetails[0].deathday.split("-");
+		}
+	}
+
 	const backdropImageContainer = {
 		backgroundImage: `url(${`https://image.tmdb.org/t/p/original/${movieShowDetails[0].backdrop_path}.jpg`})`,
 	};
@@ -211,9 +230,10 @@ export const MovieShowInDepth = () => {
 					)}
 
 					<div className="wrapper">
-
-						<MovieShowDetails movieShowDetails={movieShowDetails[0]} 
-						credits={credits} />
+						<MovieShowDetails
+							movieShowDetails={movieShowDetails[0]}
+							credits={credits}
+						/>
 
 						<AdditionalMovieShowInfo
 							movieShowDetails={movieShowDetails[0]}
@@ -283,13 +303,17 @@ export const MovieShowInDepth = () => {
 						<h1 className="heading">Videos</h1>
 						<div className="heading-underline"></div>
 						<GeneralSwiper array={movieShowDetails[3].results} />
-						
+
 						<h1 className="similar-movies-heading">
 							Similar Movies
 						</h1>
 						<div className="heading-underline"></div>
-						
-						<Grid array={similar} mediaType={mediaType} resetState={resetState} />
+
+						<Grid
+							array={similar}
+							mediaType={mediaType}
+							resetState={resetState}
+						/>
 
 						<div className="view-more-btn-container">
 							<button
@@ -314,8 +338,10 @@ export const MovieShowInDepth = () => {
 					)}
 
 					<div className="wrapper">
-						<MovieShowDetails movieShowDetails={movieShowDetails[0]} 
-						credits={credits} />
+						<MovieShowDetails
+							movieShowDetails={movieShowDetails[0]}
+							credits={credits}
+						/>
 
 						<AdditionalMovieShowInfo
 							movieShowDetails={movieShowDetails[0]}
@@ -393,7 +419,11 @@ export const MovieShowInDepth = () => {
 						</h1>
 						<div className="heading-underline"></div>
 
-						<Grid array={similar} mediaType={mediaType} resetState={resetState} />
+						<Grid
+							array={similar}
+							mediaType={mediaType}
+							resetState={resetState}
+						/>
 						<div className="view-more-btn-container">
 							<button
 								className="view-more-btn view-more-btn-in-depth"
@@ -406,51 +436,52 @@ export const MovieShowInDepth = () => {
 			)}
 			{mediaType === "person" && (
 				<>
-					<h1>{movieShowDetails[0].name}</h1>
-					<p>{movieShowDetails[0].biography}</p>
-					<p>{movieShowDetails[0].place_of_birth}</p>
-					<p>{movieShowDetails[0].birthday}</p>
-					<p>{movieShowDetails[0].deathday}</p>
-					{movieShowDetails[0].profile_path === null ? (
-						<img
-							src={poster}
-							alt={`${movieShowDetails[0].name} placeholder picture`}
-						/>
-					) : (
-						<img
-							src={`https://image.tmdb.org/t/p/w500/${movieShowDetails[0].profile_path}.jpg`}
-							alt={`${movieShowDetails[0].name} picture`}
-						/>
-					)}
-					<h3>Known Department:</h3>
-					{movieShowDetails[0].known_for_department}
+					{console.log(movieShowDetails)}
 
-					<h3>Known Movies/Shows:</h3>
-					<div className="search-grid">
-						{movieShowDetails[1].cast.map((item) => (
-							<Link
-								onClick={resetState}
-								key={item.id}
-								to={`/${
-									item.media_type
-								}/${item.id.toString()}`}>
-								<MovieShowCard
-									genreIds={item.genre_ids}
-									id={item.id}
-									mediaType={item.media_type}
-									overview={item.overview}
-									posterPath={item.poster_path}
-									profilePath={item.profile_path}
-									backdropPath={item.backdrop_path}
-									releaseDate={item.release_date}
-									voteAverage={item.vote_average}
-									title={item.title}
-									name={item.name}
-									movieGenres={item.genre_ids}
-									showGenres={item.genre_ids}
+					<div
+						className="movie-show-details-backdrop movie-show-details-backdrop-overlay"
+						style={{ backgroundImage: `url(${poster})` }}></div>
+
+					<div className="wrapper">
+						<div className="person-flex">
+							{movieShowDetails[0].profile_path === null ? (
+								<img
+									src={poster}
+									alt={`${movieShowDetails[0].name} placeholder picture`}
 								/>
-							</Link>
-						))}
+							) : (
+								<img
+									src={`https://image.tmdb.org/t/p/w500/${movieShowDetails[0].profile_path}.jpg`}
+									alt={`${movieShowDetails[0].name} picture`}
+								/>
+							)}
+							<div className="person-overview">
+								<h1 className="movie-show-title">
+									{movieShowDetails[0].name}
+								</h1>
+								<p className="movie-show-overview">
+									{movieShowDetails[0].biography}
+								</p>
+								<p className="person-place-of-birth movie-show-overview">
+									{`${movieShowDetails[0].place_of_birth}`}
+								</p>
+								<p className="person-date-of-birth movie-show-overview">
+									{`${formatPersonBirthday[1]}-${formatPersonBirthday[2]}-${formatPersonBirthday[0]}`}
+								</p>
+								<p className="person-deathday movie-show-overview">
+									{movieShowDetails[0].deathday}
+								</p>
+								<h3>Known Department:</h3>
+								{movieShowDetails[0].known_for_department}
+							</div>
+						</div>
+
+						<h1 className="heading">Known Movies/Shows</h1>
+						<Grid
+							array={movieShowDetails[1].cast}
+							mediaType={mediaType}
+							resetState={resetState}
+						/>
 					</div>
 				</>
 			)}

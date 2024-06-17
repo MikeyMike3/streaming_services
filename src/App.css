@@ -578,3 +578,14 @@ nav > * {
 .platform-headings {
 	margin-top: 40px;
 }
+
+.person-flex {
+	display: flex;
+	gap: 25px;
+	margin-top: -320px;
+	margin-bottom: 40px;
+}
+
+.person-flex img {
+	border-radius: 15px;
+}
