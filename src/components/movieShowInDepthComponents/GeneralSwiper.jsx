@@ -1,4 +1,3 @@
-import React from 'react'
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
@@ -8,13 +7,10 @@ import { Navigation, Pagination } from "swiper/modules";
 import YouTube from "react-youtube";
 
 export const GeneralSwiper = (props) => {
-
-  const renderTrailer = () => {
+	const renderTrailer = () => {
 		if (props.array.length > 0) {
 			return props.array.map((item, index) => {
-				const key = item.key
-					? item.key
-					: props.array[0].key;
+				const key = item.key ? item.key : props.array[0].key;
 				return (
 					<SwiperSlide key={index}>
 						<YouTube videoId={key} className="youtube-trailer" />
@@ -26,17 +22,17 @@ export const GeneralSwiper = (props) => {
 		}
 	};
 
-  return (
-    <div className="movie-show-video">
-							<Swiper
-								navigation={true}
-								modules={[Navigation, Pagination]}
-								pagination={{
-									type: "progressbar",
-								}}
-								className="mySwiper">
-								{renderTrailer()}
-							</Swiper>
-						</div>
-  )
-}
+	return (
+		<div className="movie-show-video">
+			<Swiper
+				navigation={true}
+				modules={[Navigation, Pagination]}
+				pagination={{
+					type: "progressbar",
+				}}
+				className="mySwiper">
+				{renderTrailer()}
+			</Swiper>
+		</div>
+	);
+};

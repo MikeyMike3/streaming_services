@@ -29,14 +29,11 @@ export const Home = () => {
 				</div>
 			) : null}
 
+			<Hero />
+
 			<div className="wrapper">
 				<div className="home-container">
-
-					<Hero />
-
 					<Trending />
-
-					<NowPlaying />
 
 					<PopularMovies />
 

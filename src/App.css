@@ -19,9 +19,9 @@ a {
 	color: white;
 }
 
-.home-container {
+/* .home-container {
 	margin-top: 100px;
-}
+} */
 
 .heading-underline {
 	background-color: aqua;
@@ -208,6 +208,106 @@ nav > * {
 }
 
 /* end of header nav styles*/
+
+/* start of hero styling*/
+
+.hero-wrapper {
+	height: 100%;
+	width: 90%;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.hero-container {
+	position: relative;
+	height: 100%;
+
+	display: flex;
+	align-items: center;
+}
+
+.hero-backdrop {
+	position: relative;
+	top: 0;
+	z-index: -1;
+	background-position: center top;
+	background-size: cover;
+	height: 85vh;
+	width: 100%;
+}
+
+.hero-overlay {
+	border-image: linear-gradient(to right, rgb(0, 0, 0), rgba(0, 0, 0, 0)) fill
+		1;
+	z-index: 1;
+}
+
+/* hero bottom overlay  */
+.hero-container::before {
+	content: "";
+	width: 100%;
+	height: 30%;
+	position: absolute;
+	bottom: 0px;
+	left: 0px;
+	z-index: 2;
+	pointer-events: none;
+	background-image: linear-gradient(to top, rgb(0, 0, 0), rgba(0, 0, 0, 0));
+}
+
+.hero-overlay {
+	position: relative;
+}
+
+.hero-details-container {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	height: 100%;
+	max-width: 60%;
+}
+
+.hero-title {
+	font-size: 4rem;
+	font-weight: 700;
+}
+
+.hero-genres-container {
+	display: flex;
+	align-items: center;
+	gap: 15px;
+	margin-top: 40px;
+	font-size: 1rem;
+}
+
+.hero-overview {
+	margin-top: 40px;
+	line-height: 1.5;
+	letter-spacing: 0.00938em;
+	font-size: 1rem;
+}
+
+.hero-btn {
+	cursor: pointer;
+	margin-top: 40px;
+	padding-left: 10px;
+	padding-right: 10px;
+	padding-top: 8px;
+	padding-bottom: 8px;
+	color: white;
+	background-color: transparent;
+	border: 2px solid white;
+	border-radius: 15px;
+	font-size: 1.25rem;
+	transition: 400ms;
+}
+
+.hero-btn:hover {
+	border-color: aqua;
+	transform: scale(1.05);
+}
+
+/* end of hero styling*/
 
 /* start of movieShowInDepth styling */
 

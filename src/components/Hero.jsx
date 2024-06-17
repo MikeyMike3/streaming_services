@@ -1,11 +1,10 @@
-
+import { useEffect, useState } from "react";
 import { Link, useLoaderData } from "react-router-dom";
+
 import { Swiper, SwiperSlide } from "swiper/react";
-import { FreeMode } from "swiper/modules";
+import { Autoplay } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/free-mode";
-import { useEffect, useState } from "react";
-import { options } from "../api/options";
 
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
@@ -14,7 +13,16 @@ export const Hero = () => {
 	const loaderData = useLoaderData();
 	const [nowPlaying, setNowPlaying] = useState([]);
 	const [loading, setLoading] = useState(true);
-	const [pages, setPages] = useState(1);
+
+	const formatRating = (rating) => {
+		let percentage = 0;
+		const parsedRating = parseFloat(rating) * 10;
+
+		const roundedRating = Math.round(parsedRating);
+
+		percentage = roundedRating.toString();
+		return percentage;
+	};
 
 	useEffect(() => {
 		const fetchData = async () => {
@@ -45,79 +53,79 @@ export const Hero = () => {
 		return <div>Data not available</div>;
 	}
 
-	const handleClick = () => {
-		const nextPage = pages + 1;
-		fetch(
-			`https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=${nextPage}`,
-			options
-		)
-			.then((response) => response.json())
-			.then((response) => {
-				// Update only the 5th array's results property
-				const updatedData = [...nowPlaying];
-				updatedData[5].results = [
-					...updatedData[5].results,
-					...response.results,
-				];
-
-				// Update the state with the modified array
-				setNowPlaying(updatedData);
-
-				// Update the page state
-				setPages(nextPage);
-			})
-			.catch((err) => console.error(err));
-	};
-
 	return (
 		<>
-			<div className="heading-flex">
-				<h1>Now Playing In Theatres</h1>
-				<button className="view-more-btn" onClick={handleClick}>
-					View More
-				</button>
-			</div>
-			<div className="movie-show-flex">
+			<div className="hero-container">
 				<Swiper
 					grabCursor={true}
 					spaceBetween={0}
-					slidesPerView={"auto"}
+					slidesPerView={1}
 					direction="horizontal"
-					modules={[FreeMode]}
-					freeMode={{
-						freeMode: { enabled: true },
-					}}>
+					autoplay={{
+						delay: 8000,
+						disableOnInteraction: false,
+					}}
+					modules={[Autoplay]}>
 					{nowPlaying[5].results.map((item) => (
 						<SwiperSlide key={item.id}>
-							
-								 <div
-        className="hero-container"
-        style={{backgroundImage: `url(https://image.tmdb.org/t/p/w500/${item.background_path})`,}}>
-          <div className='hero-details'>
-            <h2>{item.title || item.name}</h2>
+							<div
+								className="hero-backdrop hero-overlay"
+								style={{
+									backgroundImage: `url(https://image.tmdb.org/t/p/original/${item.backdrop_path})`,
+								}}>
+								<div className="hero-wrapper">
+									<div className="hero-details-container">
+										<h2 className="hero-title">
+											{item.title || item.name}
+										</h2>
 
-						<p className="hero-rating">
-			 								<CircularProgressbar
-			 									value={percentage}
-			 									text={`${percentage}`}
-			 									styles={buildStyles({
-			 										textSize: "30px",
-			 										textColor: "white",
-			 										trailColor: "white",
-			 										pathColor: "aqua",
-			 									})}
-			 								/>
-			 							</p>
+										<div className="hero-genres-container">
+											<div className="movie-show-rating">
+												<CircularProgressbar
+													value={formatRating(
+														item.vote_average
+													)}
+													text={`${formatRating(
+														item.vote_average
+													)}`}
+													styles={buildStyles({
+														textSize: "30px",
+														textColor: "white",
+														trailColor: "white",
+														pathColor: "aqua",
+													})}
+												/>
+											</div>
 
-	<Link to={`/movie/${item.id.toString()}`}>
-               <button className='hero-btn'>
-                More Details
-               </button>
-             </Link>
+											{item.genre_ids.map((genreId) => {
+												return loaderData[1].genres.map(
+													(loaderGenre) => {
+														return loaderGenre.id ===
+															genreId ? (
+															<p className="movie-show-genres">
+																{
+																	loaderGenre.name
+																}
+															</p>
+														) : null;
+													}
+												);
+											})}
+										</div>
 
-			</div> 
-			</div>
-							
+										<p className="hero-overview">
+											{item.overview}
+										</p>
+
+										<Link
+											to={`/movie/${item.id.toString()}`}>
+											<button className=" hero-btn">
+												More Details
+											</button>
+										</Link>
+									</div>
+								</div>
+							</div>
 						</SwiperSlide>
 					))}
 				</Swiper>
@@ -125,5 +133,3 @@ export const Hero = () => {
 		</>
 	);
 };
-
-
