@@ -1,3 +1,5 @@
+import PropTypes from "prop-types";
+
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
@@ -35,4 +37,7 @@ export const GeneralSwiper = (props) => {
 			</Swiper>
 		</div>
 	);
+};
+GeneralSwiper.propTypes = {
+	array: PropTypes.array,
 };

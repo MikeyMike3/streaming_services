@@ -1,3 +1,5 @@
+import PropTypes from "prop-types";
+
 import { Swiper, SwiperSlide } from "swiper/react";
 import { FreeMode, Navigation } from "swiper/modules";
 import "swiper/css";
@@ -51,4 +53,7 @@ export const Credits = (props) => {
 			</div>
 		</>
 	);
+};
+Credits.propTypes = {
+	credits: PropTypes.array,
 };

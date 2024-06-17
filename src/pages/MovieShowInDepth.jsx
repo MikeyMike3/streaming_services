@@ -469,7 +469,7 @@ export const MovieShowInDepth = () => {
 									{`${formatPersonBirthday[1]}-${formatPersonBirthday[2]}-${formatPersonBirthday[0]}`}
 								</p>
 								<p className="person-deathday movie-show-overview">
-									{movieShowDetails[0].deathday}
+									{`${formatPersonDeathday[1]}-${formatPersonDeathday[2]}-${formatPersonDeathday[0]}`}
 								</p>
 								<h3>Known Department:</h3>
 								{movieShowDetails[0].known_for_department}
