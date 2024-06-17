@@ -3,7 +3,6 @@ import { Trending } from "../components/Trending";
 import { BarLoader } from "react-spinners";
 import { PopularMovies } from "../components/PopularMovies";
 import { PopularShows } from "../components/PopularShows";
-import { NowPlaying } from "../components/NowPlaying";
 import { Hero } from "../components/Hero";
 
 export const Home = () => {
