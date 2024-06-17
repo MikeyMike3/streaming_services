@@ -436,8 +436,6 @@ export const MovieShowInDepth = () => {
 			)}
 			{mediaType === "person" && (
 				<>
-					{console.log(movieShowDetails)}
-
 					<div
 						className="movie-show-details-backdrop movie-show-details-backdrop-overlay"
 						style={{ backgroundImage: `url(${poster})` }}></div>
@@ -462,15 +460,22 @@ export const MovieShowInDepth = () => {
 								<p className="movie-show-overview">
 									{movieShowDetails[0].biography}
 								</p>
+
 								<p className="person-place-of-birth movie-show-overview">
 									{`${movieShowDetails[0].place_of_birth}`}
 								</p>
-								<p className="person-date-of-birth movie-show-overview">
-									{`${formatPersonBirthday[1]}-${formatPersonBirthday[2]}-${formatPersonBirthday[0]}`}
-								</p>
-								<p className="person-deathday movie-show-overview">
-									{`${formatPersonDeathday[1]}-${formatPersonDeathday[2]}-${formatPersonDeathday[0]}`}
-								</p>
+								{formatPersonBirthday[0] !== undefined && (
+									<p className="person-date-of-birth movie-show-overview">
+										{`${formatPersonBirthday[1]}-${formatPersonBirthday[2]}-${formatPersonBirthday[0]}`}
+									</p>
+								)}
+
+								{formatPersonDeathday[0] !== undefined && (
+									<p className="person-date-of-birth movie-show-overview">
+										{`${formatPersonDeathday[1]}-${formatPersonDeathday[2]}-${formatPersonDeathday[0]}`}
+									</p>
+								)}
+
 								<h3>Known Department:</h3>
 								{movieShowDetails[0].known_for_department}
 							</div>
