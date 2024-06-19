@@ -34,6 +34,8 @@ export const RootLayout = () => {
 						</div>
 						<nav className="nav-right">
 							<NavLink to={"/"}>Home</NavLink>
+							<NavLink to={"movies"}>Movies</NavLink>
+							<NavLink to={"tv"}>TV Series</NavLink>
 							<NavLink to={"search"}>Search</NavLink>
 						</nav>
 					</div>

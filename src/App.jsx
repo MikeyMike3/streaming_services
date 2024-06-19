@@ -14,6 +14,8 @@ import { homeLoader } from "./loaders/homeLoader";
 import { MovieShowInDepth } from "./pages/MovieShowInDepth";
 import { movieShowInDepthLoader } from "./loaders/movieShowInDepthLoader";
 import { Search } from "./pages/Search";
+import { Movies } from "./pages/Movies";
+import { TvSeries } from "./pages/TvSeries";
 
 const router = createBrowserRouter(
 	createRoutesFromElements(
@@ -24,6 +26,8 @@ const router = createBrowserRouter(
 				loader={movieShowInDepthLoader}
 				element={<MovieShowInDepth />}
 			/>
+			<Route path="movies" element={<Movies />} loader={homeLoader} />
+			<Route path="tv" element={<TvSeries />} loader={homeLoader} />
 			<Route path="search" element={<Search />} />
 		</Route>
 	)

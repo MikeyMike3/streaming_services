@@ -589,3 +589,11 @@ nav > * {
 .person-flex img {
 	border-radius: 15px;
 }
+
+/* start of move/show page styling */
+
+.page-heading {
+	margin-top: 80px;
+}
+
+/* end of move/show page styling */

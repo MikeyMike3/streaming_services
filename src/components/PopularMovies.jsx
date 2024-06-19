@@ -1,17 +1,17 @@
-import { MovieShowCard } from "./MovieShowCard";
-import { Link, useLoaderData } from "react-router-dom";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { FreeMode } from "swiper/modules";
-import "swiper/css";
-import "swiper/css/free-mode";
 import { useEffect, useState, useRef } from "react";
+import { useLoaderData, useNavigation } from "react-router-dom";
+
 import { options } from "../api/options";
+import { Grid } from "./movieShowInDepthComponents/Grid";
+import { BarLoader } from "react-spinners";
 
 export const PopularMovies = () => {
 	const loaderData = useLoaderData();
 	const [popularMovies, setPopularMovies] = useState([]);
 	const [loading, setLoading] = useState(true);
 	const [pages, setPages] = useState(1);
+
+	const navigation = useNavigation();
 
 	const swiperRef = useRef(null);
 
@@ -80,44 +80,36 @@ export const PopularMovies = () => {
 
 	return (
 		<>
-			<div className="heading-flex">
-				<h1>Popular Movies</h1>
-				<button className="view-more-btn" onClick={handleClick}>
-					View More
-				</button>
-			</div>
-			<div className="movie-show-flex">
-				<Swiper
-					ref={swiperRef}
-					grabCursor={true}
-					spaceBetween={0}
-					slidesPerView={"auto"}
-					direction="horizontal"
-					modules={[FreeMode]}
-					freeMode={{
-						freeMode: { enabled: true },
-					}}>
-					{popularMovies[3].results.map((item) => (
-						<SwiperSlide key={item.id}>
-							<Link to={`movie/${item.id.toString()}`}>
-								<MovieShowCard
-									genreIds={item.genre_ids}
-									id={item.id}
-									mediaType={item.media_type}
-									overview={item.overview}
-									posterPath={item.poster_path}
-									backdropPath={item.backdrop_path}
-									releaseDate={item.release_date}
-									voteAverage={item.vote_average}
-									title={item.title}
-									name={item.name}
-									movieGenres={popularMovies[1].genres}
-									showGenres={popularMovies[2].genres}
-								/>
-							</Link>
-						</SwiperSlide>
-					))}
-				</Swiper>
+			{navigation.state === "loading" ? (
+				<div className="loader-container">
+					<div className="bar-loader">
+						<BarLoader
+							color={"aqua"}
+							width={"100%"}
+							height={8}
+							speedMultiplier={1}
+						/>
+					</div>
+					<div className="site-logo">
+						<h1>
+							<span className="retro">Retro</span>Flix
+						</h1>
+					</div>
+				</div>
+			) : null}
+
+			<div className="wrapper">
+				<h1 className="page-heading">Popular Movies</h1>
+
+				<Grid array={popularMovies[3].results} mediaType={"movie"} />
+
+				<div className="view-more-btn-container">
+					<button
+						className="view-more-btn view-more-btn-in-depth-search"
+						onClick={handleClick}>
+						View More
+					</button>
+				</div>
 			</div>
 		</>
 	);

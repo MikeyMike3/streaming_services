@@ -1,9 +1,10 @@
 import { useNavigation } from "react-router-dom";
+
 import { Trending } from "../components/Trending";
 import { BarLoader } from "react-spinners";
-import { PopularMovies } from "../components/PopularMovies";
-import { PopularShows } from "../components/PopularShows";
+import { PopularMoviesSlider } from "../components/PopularMoviesSlider";
 import { Hero } from "../components/Hero";
+import { PopularShowsSlider } from "../components/PopularShowsSlider";
 
 export const Home = () => {
 	const navigation = useNavigation();
@@ -34,9 +35,9 @@ export const Home = () => {
 				<div className="home-container">
 					<Trending />
 
-					<PopularMovies />
+					<PopularMoviesSlider />
 
-					<PopularShows />
+					<PopularShowsSlider />
 				</div>
 			</div>
 		</>
