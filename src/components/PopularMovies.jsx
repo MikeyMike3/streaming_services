@@ -3,6 +3,7 @@ import { useLoaderData, useNavigation } from "react-router-dom";
 
 import { options } from "../api/options";
 import { Grid } from "./movieShowInDepthComponents/Grid";
+import { ViewMoreButton } from "./ViewMoreButton";
 import { BarLoader } from "react-spinners";
 
 export const PopularMovies = () => {
@@ -52,14 +53,12 @@ export const PopularMovies = () => {
 		)
 			.then((response) => response.json())
 			.then((response) => {
-				// Update only the 5th array's results property
 				const updatedData = [...popularMovies];
 				updatedData[3].results = [
 					...updatedData[3].results,
 					...response.results,
 				];
 
-				// Update the state with the modified array
 				setPopularMovies(updatedData);
 
 				// Update the page state
@@ -93,13 +92,11 @@ export const PopularMovies = () => {
 
 				<Grid array={popularMovies[3].results} mediaType={"movie"} />
 
-				<div className="view-more-btn-container">
-					<button
-						className="view-more-btn view-more-btn-in-depth-search"
-						onClick={handleClick}>
-						View More
-					</button>
-				</div>
+				<ViewMoreButton
+					handleClick={handleClick}
+					currentPage={pages}
+					totalPages={popularMovies[3].total_pages}
+				/>
 			</div>
 		</>
 	);

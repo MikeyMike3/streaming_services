@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
+import PropTypes from "prop-types";
+
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper/modules";
 import "swiper/css";
@@ -51,8 +53,6 @@ export const Hero = (props) => {
 	) {
 		return <div>Data not available</div>;
 	}
-
-	console.log(props.loaderData);
 
 	return (
 		<>
@@ -139,4 +139,10 @@ export const Hero = (props) => {
 			</div>
 		</>
 	);
+};
+Hero.propTypes = {
+	loaderIndex: PropTypes.number,
+	genreIndex: PropTypes.number,
+	mediaType: PropTypes.string,
+	loaderData: PropTypes.array,
 };

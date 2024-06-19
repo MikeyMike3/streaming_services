@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
+import { Link, useNavigation } from "react-router-dom";
+
 import { options } from "../api/options";
 import { MovieShowCard } from "../components/MovieShowCard";
-import { Link, useNavigation } from "react-router-dom";
+import { ViewMoreButton } from "../components/ViewMoreButton";
 import { BarLoader } from "react-spinners";
 
 export const Search = () => {
@@ -10,6 +12,8 @@ export const Search = () => {
 	const [pages, setPages] = useState(1);
 	const [noResults, setNoResults] = useState(false);
 	const navigation = useNavigation();
+
+	const [totalPages, setTotalPages] = useState(0);
 
 	const handleClick = () => {
 		const nextPage = pages + 1;
@@ -44,6 +48,8 @@ export const Search = () => {
 				.then((response) => response.json())
 				.then((data) => {
 					setSearchResults(data.results);
+
+					setTotalPages(data.total_pages);
 				})
 
 				.catch((error) => console.error("Error fetching data:", error));
@@ -118,13 +124,11 @@ export const Search = () => {
 							))}
 						</div>
 
-						<div className="view-more-btn-container">
-							<button
-								className="view-more-btn view-more-btn-in-depth-search"
-								onClick={handleClick}>
-								View More
-							</button>
-						</div>
+						<ViewMoreButton
+							handleClick={handleClick}
+							currentPage={pages}
+							totalPages={totalPages}
+						/>
 					</>
 				)}
 			</div>

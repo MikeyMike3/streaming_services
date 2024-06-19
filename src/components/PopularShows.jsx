@@ -4,6 +4,7 @@ import { useLoaderData, useNavigation } from "react-router-dom";
 import { options } from "../api/options";
 import { Grid } from "./movieShowInDepthComponents/Grid";
 import { BarLoader } from "react-spinners";
+import { ViewMoreButton } from "./ViewMoreButton";
 
 export const PopularShows = () => {
 	const loaderData = useLoaderData();
@@ -89,13 +90,11 @@ export const PopularShows = () => {
 
 				<Grid array={popularShows[4].results} mediaType={"tv"} />
 
-				<div className="view-more-btn-container">
-					<button
-						className="view-more-btn view-more-btn-in-depth-search"
-						onClick={handleClick}>
-						View More
-					</button>
-				</div>
+				<ViewMoreButton
+					handleClick={handleClick}
+					currentPage={pages}
+					totalPages={popularShows[4].total_pages}
+				/>
 			</div>
 		</>
 	);
