@@ -1,7 +1,7 @@
 import { useNavigation, useLoaderData } from "react-router-dom";
 
 import { Trending } from "../components/Trending";
-import { BarLoader } from "react-spinners";
+import { Spinner } from "../components/Spinner";
 import { PopularMoviesSlider } from "../components/PopularMoviesSlider";
 import { Hero } from "../components/Hero";
 import { PopularShowsSlider } from "../components/PopularShowsSlider";
@@ -12,23 +12,7 @@ export const Home = () => {
 
 	return (
 		<>
-			{navigation.state === "loading" ? (
-				<div className="loader-container">
-					<div className="bar-loader">
-						<BarLoader
-							color={"aqua"}
-							width={"100%"}
-							height={8}
-							speedMultiplier={1}
-						/>
-					</div>
-					<div className="site-logo">
-						<h1>
-							<span className="retro">Retro</span>Flix
-						</h1>
-					</div>
-				</div>
-			) : null}
+			<Spinner navigation={navigation} />
 
 			<Hero
 				loaderData={loaderData}

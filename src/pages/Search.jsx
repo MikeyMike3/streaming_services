@@ -4,7 +4,7 @@ import { Link, useNavigation } from "react-router-dom";
 import { options } from "../api/options";
 import { MovieShowCard } from "../components/MovieShowCard";
 import { ViewMoreButton } from "../components/ViewMoreButton";
-import { BarLoader } from "react-spinners";
+import { Spinner } from "../components/Spinner";
 
 export const Search = () => {
 	const [searchResults, setSearchResults] = useState([]);
@@ -66,23 +66,7 @@ export const Search = () => {
 
 	return (
 		<div>
-			{navigation.state === "loading" ? (
-				<div className="loader-container">
-					<div className="bar-loader">
-						<BarLoader
-							color={"aqua"}
-							width={"100%"}
-							height={8}
-							speedMultiplier={1}
-						/>
-					</div>
-					<div className="site-logo">
-						<h1>
-							<span className="retro">Retro</span>Flix
-						</h1>
-					</div>
-				</div>
-			) : null}
+			<Spinner navigation={navigation} />
 			<div className="wrapper">
 				<div className="search-container">
 					<input

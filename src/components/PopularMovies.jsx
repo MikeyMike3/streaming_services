@@ -4,7 +4,7 @@ import { useLoaderData, useNavigation } from "react-router-dom";
 import { options } from "../api/options";
 import { Grid } from "./movieShowInDepthComponents/Grid";
 import { ViewMoreButton } from "./ViewMoreButton";
-import { BarLoader } from "react-spinners";
+import { Spinner } from "./Spinner";
 
 export const PopularMovies = () => {
 	const loaderData = useLoaderData();
@@ -69,23 +69,7 @@ export const PopularMovies = () => {
 
 	return (
 		<>
-			{navigation.state === "loading" ? (
-				<div className="loader-container">
-					<div className="bar-loader">
-						<BarLoader
-							color={"aqua"}
-							width={"100%"}
-							height={8}
-							speedMultiplier={1}
-						/>
-					</div>
-					<div className="site-logo">
-						<h1>
-							<span className="retro">Retro</span>Flix
-						</h1>
-					</div>
-				</div>
-			) : null}
+			<Spinner navigation={navigation} />
 
 			<div className="wrapper">
 				<h1 className="page-heading">Popular Movies</h1>

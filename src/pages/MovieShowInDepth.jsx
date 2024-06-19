@@ -5,7 +5,7 @@ import {
 	useNavigation,
 	Link,
 } from "react-router-dom";
-import { BarLoader } from "react-spinners";
+import { Spinner } from "../components/Spinner";
 import YouTube from "react-youtube";
 import { options } from "../api/options";
 import poster from "../imgs/tmdbPoster.jpg";
@@ -200,23 +200,7 @@ export const MovieShowInDepth = () => {
 
 	return (
 		<>
-			{navigation.state === "loading" ? (
-				<div className="loader-container">
-					<div className="bar-loader">
-						<BarLoader
-							color={"aqua"}
-							width={"100%"}
-							height={8}
-							speedMultiplier={1}
-						/>
-					</div>
-					<div className="site-logo">
-						<h1>
-							<span className="retro">Retro</span>Flix
-						</h1>
-					</div>
-				</div>
-			) : null}
+			<Spinner navigation={navigation} />
 			{mediaType === "movie" && (
 				<>
 					{movieShowDetails[0].backdrop_path === null ? (
