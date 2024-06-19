@@ -13,8 +13,6 @@ export const PopularShows = () => {
 
 	const navigation = useNavigation();
 
-	console.log(loaderData);
-
 	useEffect(() => {
 		const fetchData = async () => {
 			try {
