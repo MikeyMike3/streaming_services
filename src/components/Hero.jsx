@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link, useLoaderData } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper/modules";
@@ -9,8 +9,7 @@ import "swiper/css/free-mode";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 
-export const Hero = () => {
-	const loaderData = useLoaderData();
+export const Hero = (props) => {
 	const [nowPlaying, setNowPlaying] = useState([]);
 	const [loading, setLoading] = useState(true);
 
@@ -27,7 +26,7 @@ export const Hero = () => {
 	useEffect(() => {
 		const fetchData = async () => {
 			try {
-				const data = await loaderData;
+				const data = await props.loaderData;
 				setNowPlaying(data);
 				setLoading(false);
 			} catch (error) {
@@ -37,7 +36,7 @@ export const Hero = () => {
 		};
 
 		fetchData();
-	}, [loaderData]);
+	}, [props.loaderData]);
 
 	if (loading) {
 		return <div className="display-none">Loading...</div>;
@@ -53,6 +52,8 @@ export const Hero = () => {
 		return <div>Data not available</div>;
 	}
 
+	console.log(props.loaderData);
+
 	return (
 		<>
 			<div className="hero-container">
@@ -66,7 +67,7 @@ export const Hero = () => {
 						disableOnInteraction: false,
 					}}
 					modules={[Autoplay]}>
-					{nowPlaying[5].results.map((item) => (
+					{nowPlaying[props.loaderIndex].results.map((item) => (
 						<SwiperSlide key={item.id}>
 							<div
 								className="hero-backdrop hero-overlay"
@@ -98,27 +99,33 @@ export const Hero = () => {
 											</div>
 
 											{item.genre_ids.map((genreId) => {
-												return loaderData[1].genres.map(
-													(loaderGenre) => {
-														return loaderGenre.id ===
-															genreId ? (
-															<p className="movie-show-genres">
-																{
-																	loaderGenre.name
-																}
-															</p>
-														) : null;
-													}
-												);
+												return props.loaderData[
+													props.genreIndex
+												].genres.map((loaderGenre) => {
+													return loaderGenre.id ===
+														genreId ? (
+														<p className="movie-show-genres">
+															{loaderGenre.name}
+														</p>
+													) : null;
+												});
 											})}
 										</div>
 
-										<p className="hero-overview">
-											{item.overview}
-										</p>
+										{item.overview.length > 0 ? (
+											<p className="hero-overview">
+												{item.overview}
+											</p>
+										) : (
+											<p className="hero-overview">
+												Overview not available.
+											</p>
+										)}
 
 										<Link
-											to={`/movie/${item.id.toString()}`}>
+											to={`/${
+												props.mediaType
+											}/${item.id.toString()}`}>
 											<button className=" hero-btn">
 												More Details
 											</button>

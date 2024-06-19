@@ -1,4 +1,4 @@
-import { useNavigation } from "react-router-dom";
+import { useNavigation, useLoaderData } from "react-router-dom";
 
 import { Trending } from "../components/Trending";
 import { BarLoader } from "react-spinners";
@@ -7,6 +7,7 @@ import { Hero } from "../components/Hero";
 import { PopularShowsSlider } from "../components/PopularShowsSlider";
 
 export const Home = () => {
+	const loaderData = useLoaderData();
 	const navigation = useNavigation();
 
 	return (
@@ -29,7 +30,12 @@ export const Home = () => {
 				</div>
 			) : null}
 
-			<Hero />
+			<Hero
+				loaderData={loaderData}
+				loaderIndex={5}
+				genreIndex={1}
+				mediaType={"movie"}
+			/>
 
 			<div className="wrapper">
 				<div className="home-container">
