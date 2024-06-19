@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
 import { useLoaderData, useNavigation } from "react-router-dom";
 
 import { options } from "../api/options";
@@ -12,8 +12,6 @@ export const PopularMovies = () => {
 	const [pages, setPages] = useState(1);
 
 	const navigation = useNavigation();
-
-	const swiperRef = useRef(null);
 
 	useEffect(() => {
 		const fetchData = async () => {
@@ -66,14 +64,6 @@ export const PopularMovies = () => {
 
 				// Update the page state
 				setPages(nextPage);
-
-				swiperRef.current.swiper.update();
-
-				setTimeout(() => {
-					swiperRef.current.swiper.slideTo(
-						swiperRef.current.swiper.slides.length - 21
-					);
-				}, 50);
 			})
 			.catch((err) => console.error(err));
 	};
