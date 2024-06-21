@@ -1,27 +1,19 @@
 import { useEffect, useState } from "react";
-import {
-	useLoaderData,
-	useParams,
-	useNavigation,
-	Link,
-} from "react-router-dom";
+import { useLoaderData, useParams, useNavigation } from "react-router-dom";
 import { Spinner } from "../components/Spinner";
-import YouTube from "react-youtube";
+
 import { options } from "../api/options";
 import poster from "../imgs/tmdbPoster.jpg";
-import { MovieShowCard } from "../components/MovieShowCard";
-import { Swiper, SwiperSlide } from "swiper/react";
+
 import "swiper/css";
 import "swiper/css/free-mode";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
-import { FreeMode, Navigation, Pagination } from "swiper/modules";
 
-import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 
 import { AdditionalMovieShowInfo } from "../components/movieShowInDepthComponents/AdditionalMovieShowInfo";
-import { Credits } from "../components/movieShowInDepthComponents/Credits";
+
 import { GeneralSwiper } from "../components/movieShowInDepthComponents/GeneralSwiper";
 import { MovieShowDetails } from "../components/movieShowInDepthComponents/MovieShowDetails";
 import { Grid } from "../components/movieShowInDepthComponents/Grid";

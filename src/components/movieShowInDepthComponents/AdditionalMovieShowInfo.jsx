@@ -3,14 +3,22 @@ import PropTypes from "prop-types";
 export const AdditionalMovieShowInfo = (props) => {
 	let releaseDateSplitArray = [];
 
-	if (props.movieShowDetails.release_date !== undefined) {
+	if (
+		props.movieShowDetails.release_date !== undefined &&
+		props.movieShowDetails.release_date.length !== 0
+	) {
 		releaseDateSplitArray = props.movieShowDetails.release_date.split("-");
 	}
 
-	if (props.movieShowDetails.first_air_date !== undefined) {
+	if (
+		props.movieShowDetails.first_air_date !== undefined &&
+		props.movieShowDetails.first_air_date.length !== 0
+	) {
 		releaseDateSplitArray =
 			props.movieShowDetails.first_air_date.split("-");
 	}
+
+	console.log(releaseDateSplitArray);
 
 	return (
 		<>
@@ -30,7 +38,7 @@ export const AdditionalMovieShowInfo = (props) => {
 								available.
 							</p>
 						)}
-						{releaseDateSplitArray !== undefined ? (
+						{releaseDateSplitArray[0] !== undefined ? (
 							<p>
 								<strong>Released on: </strong>
 								{`${releaseDateSplitArray[1]}-${releaseDateSplitArray[2]}-${releaseDateSplitArray[0]}`}
