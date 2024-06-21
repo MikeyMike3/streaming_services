@@ -161,6 +161,6 @@ export const AdditionalMovieShowInfo = (props) => {
 };
 
 AdditionalMovieShowInfo.propTypes = {
-	movieShowDetails: PropTypes.array,
+	movieShowDetails: PropTypes.object,
 	mediaType: PropTypes.string,
 };

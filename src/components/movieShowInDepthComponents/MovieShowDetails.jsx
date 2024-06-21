@@ -66,6 +66,6 @@ export const MovieShowDetails = (props) => {
 };
 
 MovieShowDetails.propTypes = {
-	movieShowDetails: PropTypes.array,
+	movieShowDetails: PropTypes.object,
 	credits: PropTypes.array,
 };

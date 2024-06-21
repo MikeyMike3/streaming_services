@@ -21,5 +21,5 @@ export const Backdrop = (props) => {
 };
 
 Backdrop.propTypes = {
-	movieShowDetails: PropTypes.string,
+	movieShowDetails: PropTypes.array,
 };

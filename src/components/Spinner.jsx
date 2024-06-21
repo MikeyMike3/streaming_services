@@ -26,5 +26,5 @@ export const Spinner = (props) => {
 	);
 };
 Spinner.propTypes = {
-	navigation: PropTypes.oneOf(["idle", "loading", "submitting"]),
+	navigation: PropTypes.object,
 };
