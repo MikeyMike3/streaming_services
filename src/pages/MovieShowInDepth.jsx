@@ -25,6 +25,7 @@ import { Credits } from "../components/movieShowInDepthComponents/Credits";
 import { GeneralSwiper } from "../components/movieShowInDepthComponents/GeneralSwiper";
 import { MovieShowDetails } from "../components/movieShowInDepthComponents/MovieShowDetails";
 import { Grid } from "../components/movieShowInDepthComponents/Grid";
+import { PlatformSlider } from "../components/PlatformSlider";
 
 export const MovieShowInDepth = () => {
 	const { id, mediaType } = useParams();
@@ -224,66 +225,13 @@ export const MovieShowInDepth = () => {
 							mediaType={mediaType}
 						/>
 
-						<div className="platform-container">
-							<h2 className="platform-headings">Stream On</h2>
-							<div className="heading-underline"></div>
-							<div className="provider-img-container">
-								{flatRateStreamingServices.length > 0 ? (
-									flatRateStreamingServices.map((item) => (
-										<div key={item.provider_id}>
-											<div
-												className="provider-img provider-img-overlay"
-												style={{
-													backgroundImage: `url(https://image.tmdb.org/t/p/w500/${item.logo_path})`,
-												}}
-												title={item.provider_name}
-											/>
-										</div>
-									))
-								) : (
-									<p>Currently unavailable to stream.</p>
-								)}
-							</div>
-
-							<h2 className="platform-headings">Rent On</h2>
-							<div className="heading-underline"></div>
-							<div className="provider-img-container">
-								{rentStreamingServices.length > 0 ? (
-									rentStreamingServices.map((item) => (
-										<div key={item.provider_id}>
-											<div
-												className="provider-img provider-img-overlay"
-												style={{
-													backgroundImage: `url(https://image.tmdb.org/t/p/w500/${item.logo_path})`,
-												}}
-												title={item.provider_name}
-											/>
-										</div>
-									))
-								) : (
-									<p>Currently unavailable for rent.</p>
-								)}
-							</div>
-							<h2 className="platform-headings">Buy On</h2>
-							<div className="heading-underline"></div>
-							<div className="provider-img-container">
-								{buyStreamingServices.length > 0 ? (
-									buyStreamingServices.map((item) => (
-										<div key={item.provider_id}>
-											<div
-												className="provider-img provider-img-overlay"
-												style={{
-													backgroundImage: `url(https://image.tmdb.org/t/p/w500/${item.logo_path})`,
-												}}
-												title={item.provider_name}
-											/>
-										</div>
-									))
-								) : (
-									<p>Currently unavailable for purchase.</p>
-								)}
-							</div>
-						</div>
+						<PlatformSlider
+							flatRateStreamingServices={
+								flatRateStreamingServices
+							}
+							rentStreamingServices={rentStreamingServices}
+							buyStreamingServices={buyStreamingServices}
+						/>
 						<h1 className="heading">Videos</h1>
 						<div className="heading-underline"></div>
 						<GeneralSwiper array={movieShowDetails[3].results} />
@@ -332,67 +280,13 @@ export const MovieShowInDepth = () => {
 							mediaType={mediaType}
 						/>
 
-						<div className="platform-container">
-							<h2 className="platform-headings">Stream On</h2>
-							<div className="heading-underline"></div>
-							<div className="provider-img-container">
-								{flatRateStreamingServices.length > 0 ? (
-									flatRateStreamingServices.map((item) => (
-										<div key={item.provider_id}>
-											<div
-												className="provider-img provider-img-overlay"
-												style={{
-													backgroundImage: `url(https://image.tmdb.org/t/p/w500/${item.logo_path})`,
-												}}
-												title={item.provider_name}
-											/>
-										</div>
-									))
-								) : (
-									<p>Currently unavailable to stream.</p>
-								)}
-							</div>
-
-							<h2 className="platform-headings">Rent On</h2>
-							<div className="heading-underline"></div>
-							<div className="provider-img-container">
-								{rentStreamingServices.length > 0 ? (
-									rentStreamingServices.map((item) => (
-										<div key={item.provider_id}>
-											<div
-												className="provider-img provider-img-overlay"
-												style={{
-													backgroundImage: `url(https://image.tmdb.org/t/p/w500/${item.logo_path})`,
-												}}
-												title={item.provider_name}
-											/>
-										</div>
-									))
-								) : (
-									<p>Currently unavailable for rent.</p>
-								)}
-							</div>
-
-							<h2 className="platform-headings">Buy On</h2>
-							<div className="heading-underline"></div>
-							<div className="provider-img-container">
-								{buyStreamingServices.length > 0 ? (
-									buyStreamingServices.map((item) => (
-										<div key={item.provider_id}>
-											<div
-												className="provider-img provider-img-overlay"
-												style={{
-													backgroundImage: `url(https://image.tmdb.org/t/p/w500/${item.logo_path})`,
-												}}
-												title={item.provider_name}
-											/>
-										</div>
-									))
-								) : (
-									<p>Currently unavailable for purchase.</p>
-								)}
-							</div>
-						</div>
+						<PlatformSlider
+							flatRateStreamingServices={
+								flatRateStreamingServices
+							}
+							rentStreamingServices={rentStreamingServices}
+							buyStreamingServices={buyStreamingServices}
+						/>
 						<h1 className="heading">Videos</h1>
 						<div className="heading-underline"></div>
 

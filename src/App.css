@@ -550,18 +550,21 @@ nav > * {
 	gap: 15px;
 }
 
+.platform-container .swiper-slide {
+	width: 145px;
+}
+
 .provider-img-container {
-	display: flex;
-	gap: 15px;
-	margin-bottom: 50px;
+	height: 100%;
 }
 
 .provider-img {
 	position: relative;
 	background-size: cover;
 	background-position: center center;
-	height: 125px;
-	width: 125px;
+	/* height: 125px;
+	width: 125px; */
+	padding-top: 100%;
 	border-radius: 15px;
 }
 
