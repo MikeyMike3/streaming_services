@@ -26,6 +26,7 @@ import { GeneralSwiper } from "../components/movieShowInDepthComponents/GeneralS
 import { MovieShowDetails } from "../components/movieShowInDepthComponents/MovieShowDetails";
 import { Grid } from "../components/movieShowInDepthComponents/Grid";
 import { PlatformSlider } from "../components/PlatformSlider";
+import { ViewMoreButton } from "../components/ViewMoreButton";
 
 export const MovieShowInDepth = () => {
 	const { id, mediaType } = useParams();
@@ -247,13 +248,11 @@ export const MovieShowInDepth = () => {
 							resetState={resetState}
 						/>
 
-						<div className="view-more-btn-container">
-							<button
-								className="view-more-btn view-more-btn-in-depth"
-								onClick={handleClick}>
-								View More
-							</button>
-						</div>
+						<ViewMoreButton
+							handleClick={handleClick}
+							currentPage={pages}
+							totalPages={movieShowDetails[4].total_pages}
+						/>
 					</div>
 				</>
 			)}
@@ -302,13 +301,12 @@ export const MovieShowInDepth = () => {
 							mediaType={mediaType}
 							resetState={resetState}
 						/>
-						<div className="view-more-btn-container">
-							<button
-								className="view-more-btn view-more-btn-in-depth"
-								onClick={handleClick}>
-								View More
-							</button>
-						</div>
+						{console.log(movieShowDetails)}
+						<ViewMoreButton
+							handleClick={handleClick}
+							currentPage={pages}
+							totalPages={movieShowDetails[4].total_pages}
+						/>
 					</div>
 				</>
 			)}
