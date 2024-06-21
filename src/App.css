@@ -551,7 +551,7 @@ nav > * {
 }
 
 .platform-container .swiper-slide {
-	width: 145px;
+	width: 125px;
 }
 
 .provider-img-container {
@@ -562,8 +562,6 @@ nav > * {
 	position: relative;
 	background-size: cover;
 	background-position: center center;
-	/* height: 125px;
-	width: 125px; */
 	padding-top: 100%;
 	border-radius: 15px;
 }
