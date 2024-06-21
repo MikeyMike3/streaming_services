@@ -27,6 +27,7 @@ import { MovieShowDetails } from "../components/movieShowInDepthComponents/Movie
 import { Grid } from "../components/movieShowInDepthComponents/Grid";
 import { PlatformSlider } from "../components/movieShowInDepthComponents/PlatformSlider";
 import { ViewMoreButton } from "../components/ViewMoreButton";
+import { Backdrop } from "../components/movieShowInDepthComponents/Backdrop";
 
 export const MovieShowInDepth = () => {
 	const { id, mediaType } = useParams();
@@ -192,28 +193,12 @@ export const MovieShowInDepth = () => {
 		}
 	}
 
-	const backdropImageContainer = {
-		backgroundImage: `url(${`https://image.tmdb.org/t/p/original/${movieShowDetails[0].backdrop_path}.jpg`})`,
-	};
-
-	const backdropImagePlaceHolderContainer = {
-		backgroundImage: `url(${poster})`,
-	};
-
 	return (
 		<>
 			<Spinner navigation={navigation} />
 			{mediaType === "movie" && (
 				<>
-					{movieShowDetails[0].backdrop_path === null ? (
-						<div
-							className="movie-show-details-backdrop movie-show-details-backdrop-overlay"
-							style={backdropImagePlaceHolderContainer}></div>
-					) : (
-						<div
-							className="movie-show-details-backdrop movie-show-details-backdrop-overlay"
-							style={backdropImageContainer}></div>
-					)}
+					<Backdrop movieShowDetails={movieShowDetails} />
 
 					<div className="wrapper">
 						<MovieShowDetails
@@ -235,6 +220,7 @@ export const MovieShowInDepth = () => {
 						/>
 						<h1 className="heading">Videos</h1>
 						<div className="heading-underline"></div>
+
 						<GeneralSwiper array={movieShowDetails[3].results} />
 
 						<h1 className="similar-movies-heading">
@@ -258,15 +244,7 @@ export const MovieShowInDepth = () => {
 			)}
 			{mediaType === "tv" && (
 				<>
-					{movieShowDetails[0].backdrop_path === null ? (
-						<div
-							className="movie-show-details-backdrop movie-show-details-backdrop-overlay"
-							style={backdropImagePlaceHolderContainer}></div>
-					) : (
-						<div
-							className="movie-show-details-backdrop movie-show-details-backdrop-overlay"
-							style={backdropImageContainer}></div>
-					)}
+					<Backdrop movieShowDetails={movieShowDetails} />
 
 					<div className="wrapper">
 						<MovieShowDetails
