@@ -25,7 +25,7 @@ import { Credits } from "../components/movieShowInDepthComponents/Credits";
 import { GeneralSwiper } from "../components/movieShowInDepthComponents/GeneralSwiper";
 import { MovieShowDetails } from "../components/movieShowInDepthComponents/MovieShowDetails";
 import { Grid } from "../components/movieShowInDepthComponents/Grid";
-import { PlatformSlider } from "../components/PlatformSlider";
+import { PlatformSlider } from "../components/movieShowInDepthComponents/PlatformSlider";
 import { ViewMoreButton } from "../components/ViewMoreButton";
 
 export const MovieShowInDepth = () => {

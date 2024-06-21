@@ -480,6 +480,16 @@ nav > * {
 	pointer-events: all;
 }
 
+.movie-show-video .swiper {
+	padding-left: 4rem;
+	padding-right: 4rem;
+}
+
+.movie-show-video .swiper-slide-prev,
+.movie-show-video .swiper-slide-next {
+	opacity: 0.4;
+}
+
 .similar-movies-heading {
 	margin-top: 40px;
 }
