@@ -14,7 +14,8 @@ import "react-circular-progressbar/dist/styles.css";
 
 import { AdditionalMovieShowInfo } from "../components/movieShowInDepthComponents/AdditionalMovieShowInfo";
 
-import { GeneralSwiper } from "../components/movieShowInDepthComponents/GeneralSwiper";
+import { VideoSwiper } from "../components/movieShowInDepthComponents/VideoSwiper";
+import { BackdropSwiper } from "../components/movieShowInDepthComponents/BackdropSwiper";
 import { MovieShowDetails } from "../components/movieShowInDepthComponents/MovieShowDetails";
 import { Grid } from "../components/movieShowInDepthComponents/Grid";
 import { PlatformSlider } from "../components/movieShowInDepthComponents/PlatformSlider";
@@ -213,7 +214,14 @@ export const MovieShowInDepth = () => {
 						<h1 className="heading">Videos</h1>
 						<div className="heading-underline"></div>
 
-						<GeneralSwiper array={movieShowDetails[3].results} />
+						<VideoSwiper array={movieShowDetails[3].results} />
+
+						<h1 className="heading">Images</h1>
+						<div className="heading-underline"></div>
+						<BackdropSwiper array={movieShowDetails[5]} />
+
+						<h1 className="heading">Posters</h1>
+						<div className="heading-underline"></div>
 
 						<h1 className="similar-movies-heading">
 							Similar Movies
@@ -259,7 +267,7 @@ export const MovieShowInDepth = () => {
 						<h1 className="heading">Videos</h1>
 						<div className="heading-underline"></div>
 
-						<GeneralSwiper array={movieShowDetails[3].results} />
+						<VideoSwiper array={movieShowDetails[3].results} />
 
 						<h1 className="similar-movies-heading">
 							Similar Shows

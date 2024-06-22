@@ -90,3 +90,16 @@ export const fetchNowPlaying = async () => {
 		throw error;
 	}
 };
+
+export const fetchMovieImages = async (movieId) => {
+	try {
+		const res = await fetch(
+			`https://api.themoviedb.org/3/movie/${movieId}/images?include_image_language=null`,
+			options
+		);
+		return await res.json();
+	} catch (error) {
+		console.error("Error fetching images:", error);
+		throw error;
+	}
+};

@@ -8,7 +8,7 @@ import { Navigation, Pagination } from "swiper/modules";
 
 import YouTube from "react-youtube";
 
-export const GeneralSwiper = (props) => {
+export const VideoSwiper = (props) => {
 	const renderTrailer = () => {
 		if (props.array.length > 0) {
 			return props.array.map((item, index) => {
@@ -38,6 +38,6 @@ export const GeneralSwiper = (props) => {
 		</div>
 	);
 };
-GeneralSwiper.propTypes = {
+VideoSwiper.propTypes = {
 	array: PropTypes.array,
 };

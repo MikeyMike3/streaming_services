@@ -4,6 +4,7 @@ import {
 	fetchMovieProviders,
 	fetchMovieTrailer,
 	fetchSimilarMovies,
+	fetchMovieImages,
 } from "../api/movieApi";
 
 import {
@@ -26,12 +27,14 @@ export const movieShowInDepthLoader = async ({ params }) => {
 			movieCredits,
 			movieTrailer,
 			similarMovies,
+			fetchImages,
 		] = await Promise.all([
 			fetchMovieDetails(id),
 			fetchMovieProviders(id),
 			fetchMovieCredits(id),
 			fetchMovieTrailer(id),
 			fetchSimilarMovies(id),
+			fetchMovieImages(id),
 		]);
 
 		return [
@@ -40,6 +43,7 @@ export const movieShowInDepthLoader = async ({ params }) => {
 			movieCredits,
 			movieTrailer,
 			similarMovies,
+			fetchImages,
 		];
 	} else if (mediaType === "tv") {
 		const [
