@@ -472,7 +472,7 @@ nav > * {
 
 .swiper .swiper-button-prev,
 .swiper .swiper-button-next {
-	color: aqua;
+	color: white;
 }
 
 .cast-card-container .swiper .swiper-button-disabled,
@@ -505,7 +505,8 @@ nav > * {
 	position: fixed;
 	top: 0;
 	left: 0;
-	background-color: rgba(0, 0, 0, 0.842);
+	/* background-color: rgba(0, 0, 0, 0.842); */
+	background-color: black;
 	color: white;
 	transition: 400ms;
 	z-index: 9999;

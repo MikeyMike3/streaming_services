@@ -1,10 +1,9 @@
 import PropTypes from "prop-types";
 
 import { Swiper, SwiperSlide } from "swiper/react";
-import { FreeMode, Navigation } from "swiper/modules";
+import { FreeMode } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/free-mode";
-import "swiper/css/navigation";
 
 import { Link } from "react-router-dom";
 
@@ -19,9 +18,8 @@ export const Credits = (props) => {
 				<Swiper
 					grabCursor={true}
 					spaceBetween={0}
-					navigation={true}
 					slidesPerView={"auto"}
-					modules={[FreeMode, Navigation]}
+					modules={[FreeMode]}
 					freeMode={{
 						freeMode: true,
 					}}>
