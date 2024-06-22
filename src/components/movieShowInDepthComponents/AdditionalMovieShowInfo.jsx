@@ -18,8 +18,6 @@ export const AdditionalMovieShowInfo = (props) => {
 			props.movieShowDetails.first_air_date.split("-");
 	}
 
-	console.log(releaseDateSplitArray);
-
 	return (
 		<>
 			<div className="additional-info">

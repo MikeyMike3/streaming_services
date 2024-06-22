@@ -271,7 +271,7 @@ export const MovieShowInDepth = () => {
 							mediaType={mediaType}
 							resetState={resetState}
 						/>
-						{console.log(movieShowDetails)}
+
 						<ViewMoreButton
 							handleClick={handleClick}
 							currentPage={pages}
