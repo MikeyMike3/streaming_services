@@ -615,3 +615,14 @@ nav > * {
 	padding-top: 45%;
 	border-radius: 15px;
 }
+
+.poster-container .swiper-slide {
+	width: 20%;
+}
+
+.poster-image {
+	background-size: cover;
+	background-position: center center;
+	padding-top: 160%;
+	border-radius: 15px;
+}

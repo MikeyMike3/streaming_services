@@ -9,6 +9,7 @@ export const BackdropSwiper = (props) => {
 		<div className="movie-show-video">
 			<Swiper
 				navigation={true}
+				grabCursor={"true"}
 				modules={[Navigation, Pagination]}
 				pagination={{
 					type: "progressbar",

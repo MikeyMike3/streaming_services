@@ -21,6 +21,7 @@ import { Grid } from "../components/movieShowInDepthComponents/Grid";
 import { PlatformSlider } from "../components/movieShowInDepthComponents/PlatformSlider";
 import { ViewMoreButton } from "../components/ViewMoreButton";
 import { Backdrop } from "../components/movieShowInDepthComponents/Backdrop";
+import { PosterSlider } from "../components/movieShowInDepthComponents/PosterSlider";
 
 export const MovieShowInDepth = () => {
 	const { id, mediaType } = useParams();
@@ -222,6 +223,7 @@ export const MovieShowInDepth = () => {
 
 						<h1 className="heading">Posters</h1>
 						<div className="heading-underline"></div>
+						<PosterSlider array={movieShowDetails[5]} />
 
 						<h1 className="similar-movies-heading">
 							Similar Movies
