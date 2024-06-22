@@ -64,7 +64,7 @@ export const PopularShowsSlider = () => {
 						freeMode: { enabled: true },
 					}}>
 					{popularShows[4].results.map((item) => (
-						<SwiperSlide key={item.id}>
+						<SwiperSlide key={`popularShows${item.id}`}>
 							<Link to={`tv/${item.id.toString()}`}>
 								<MovieShowCard
 									genreIds={item.genre_ids}

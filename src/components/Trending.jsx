@@ -24,7 +24,7 @@ export const Trending = () => {
 						freeMode: { enabled: true },
 					}}>
 					{trending[0].results.map((item) => (
-						<SwiperSlide key={item.id}>
+						<SwiperSlide key={`trending${item.id}`}>
 							<Link
 								to={`${item.media_type}/${item.id.toString()}`}>
 								<MovieShowCard

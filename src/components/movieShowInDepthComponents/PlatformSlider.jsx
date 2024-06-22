@@ -26,7 +26,7 @@ export const PlatformSlider = (props) => {
 				<div className="provider-img-container">
 					{props.flatRateStreamingServices.length > 0 ? (
 						props.flatRateStreamingServices.map((item) => (
-							<SwiperSlide key={item.id}>
+							<SwiperSlide key={`stream${item.provider_id}`}>
 								<div
 									className="provider-img provider-img-overlay"
 									style={{
@@ -56,7 +56,7 @@ export const PlatformSlider = (props) => {
 				<div className="provider-img-container">
 					{props.rentStreamingServices.length > 0 ? (
 						props.rentStreamingServices.map((item) => (
-							<SwiperSlide key={item.id}>
+							<SwiperSlide key={`rent${item.provider_id}`}>
 								<div
 									className="provider-img provider-img-overlay"
 									style={{
@@ -85,7 +85,7 @@ export const PlatformSlider = (props) => {
 				<div className="provider-img-container">
 					{props.buyStreamingServices.length > 0 ? (
 						props.buyStreamingServices.map((item) => (
-							<SwiperSlide key={item.id}>
+							<SwiperSlide key={`buy ${item.provider_id}`}>
 								<div
 									className="provider-img provider-img-overlay"
 									style={{

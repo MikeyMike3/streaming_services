@@ -68,7 +68,7 @@ export const Hero = (props) => {
 					}}
 					modules={[Autoplay]}>
 					{nowPlaying[props.loaderIndex].results.map((item) => (
-						<SwiperSlide key={item.id}>
+						<SwiperSlide key={`hero${item.id}`}>
 							<div
 								className="hero-backdrop hero-overlay"
 								style={{
@@ -104,7 +104,9 @@ export const Hero = (props) => {
 												].genres.map((loaderGenre) => {
 													return loaderGenre.id ===
 														genreId ? (
-														<p className="movie-show-genres">
+														<p
+															key={loaderGenre.id}
+															className="movie-show-genres">
 															{loaderGenre.name}
 														</p>
 													) : null;
