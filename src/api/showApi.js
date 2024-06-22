@@ -77,3 +77,16 @@ export const fetchPopularShows = async () => {
 		throw error;
 	}
 };
+
+export const fetchShowImages = async (movieId) => {
+	try {
+		const res = await fetch(
+			`https://api.themoviedb.org/3/tv/${movieId}/images?include_image_language=null`,
+			options
+		);
+		return await res.json();
+	} catch (error) {
+		console.error("Error fetching images:", error);
+		throw error;
+	}
+};

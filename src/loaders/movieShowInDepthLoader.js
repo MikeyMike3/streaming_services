@@ -13,6 +13,7 @@ import {
 	fetchShowTrailer,
 	fetchShowProviders,
 	fetchSimilarShows,
+	fetchShowImages,
 } from "../api/showApi";
 
 import { fetchPersonDetails, fetchPersonCredits } from "../api/personApi";
@@ -52,12 +53,14 @@ export const movieShowInDepthLoader = async ({ params }) => {
 			showCredits,
 			showTrailer,
 			similarShows,
+			showImages,
 		] = await Promise.all([
 			fetchShowDetails(id),
 			fetchShowProviders(id),
 			fetchShowCredits(id),
 			fetchShowTrailer(id),
 			fetchSimilarShows(id),
+			fetchShowImages(id),
 		]);
 
 		return [
@@ -66,6 +69,7 @@ export const movieShowInDepthLoader = async ({ params }) => {
 			showCredits,
 			showTrailer,
 			similarShows,
+			showImages,
 		];
 	} else if (mediaType === "person") {
 		const [personDetails, personCredits] = await Promise.all([

@@ -217,7 +217,7 @@ export const MovieShowInDepth = () => {
 
 						<VideoSwiper array={movieShowDetails[3].results} />
 
-						<h1 className="heading">Images</h1>
+						<h1 className="heading">Backdrops</h1>
 						<div className="heading-underline"></div>
 						<BackdropSwiper array={movieShowDetails[5]} />
 
@@ -270,6 +270,14 @@ export const MovieShowInDepth = () => {
 						<div className="heading-underline"></div>
 
 						<VideoSwiper array={movieShowDetails[3].results} />
+
+						<h1 className="heading">Backdrops</h1>
+						<div className="heading-underline"></div>
+						<BackdropSwiper array={movieShowDetails[5]} />
+
+						<h1 className="heading">Posters</h1>
+						<div className="heading-underline"></div>
+						<PosterSlider array={movieShowDetails[5]} />
 
 						<h1 className="similar-movies-heading">
 							Similar Shows
