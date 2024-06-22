@@ -9,6 +9,7 @@ export const PosterSlider = (props) => {
 			<Swiper
 				slidesPerView={"auto"}
 				grabCursor={"true"}
+				spaceBetween={10}
 				modules={[FreeMode]}
 				freeMode={{
 					freeMode: true,
