@@ -52,7 +52,7 @@ export const PopularMoviesSlider = () => {
 			<div className="heading-flex">
 				<h1>Popular Movies</h1>
 				<button className="view-more-btn">
-					<Link to={"movies"}>View More</Link>
+					<Link to={"movie"}>View More</Link>
 				</button>
 			</div>
 			<div className="movie-show-flex">
