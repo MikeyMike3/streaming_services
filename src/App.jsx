@@ -26,7 +26,7 @@ const router = createBrowserRouter(
 				loader={movieShowInDepthLoader}
 				element={<MovieShowInDepth />}
 			/>
-			<Route path="movies" element={<Movies />} loader={homeLoader} />
+			<Route path="movie" element={<Movies />} loader={homeLoader} />
 			<Route path="tv" element={<TvSeries />} loader={homeLoader} />
 			<Route path="search" element={<Search />} />
 		</Route>
