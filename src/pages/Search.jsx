@@ -5,12 +5,14 @@ import { options } from "../api/options";
 import { MovieShowCard } from "../components/MovieShowCard";
 import { ViewMoreButton } from "../components/ViewMoreButton";
 import { Spinner } from "../components/Spinner";
+import { ViewMoreClipLoader } from "../spinners/ViewMoreClipLoader";
 
 export const Search = () => {
 	const [searchResults, setSearchResults] = useState([]);
 	const [queryState, setQueryState] = useState("");
 	const [pages, setPages] = useState(1);
 	const [isLoading, setIsLoading] = useState(false);
+	const [searchIsLoading, setSearchIsLoading] = useState(false);
 	const [noResults, setNoResults] = useState(false);
 	const navigation = useNavigation();
 
@@ -42,6 +44,7 @@ export const Search = () => {
 			setSearchResults([]);
 		} else {
 			try {
+				setSearchIsLoading(true);
 				const response = await fetch(
 					`https://api.themoviedb.org/3/search/multi?query=${query}&include_adult=false&language=en-US&page=1`,
 					options
@@ -51,6 +54,8 @@ export const Search = () => {
 				setTotalPages(data.total_pages);
 			} catch (error) {
 				console.error("Error fetching data:", error);
+			} finally {
+				setSearchIsLoading(false);
 			}
 		}
 	};
@@ -75,6 +80,12 @@ export const Search = () => {
 						placeholder="Search"></input>
 					<button className="search-btn">Search</button>
 				</div>
+
+				{searchIsLoading && (
+					<div className="view-more-button-loader-container">
+						<ViewMoreClipLoader />
+					</div>
+				)}
 
 				{noResults && <p className="white">HEY</p>}
 
