@@ -11,6 +11,7 @@ export const PopularMovies = () => {
 	const [popularMovies, setPopularMovies] = useState([]);
 	const [loading, setLoading] = useState(true);
 	const [pages, setPages] = useState(1);
+	const [isLoading, setIsLoading] = useState(false);
 
 	const navigation = useNavigation();
 
@@ -45,26 +46,28 @@ export const PopularMovies = () => {
 		return <div>Data not available</div>;
 	}
 
-	const handleClick = () => {
+	const handleClick = async () => {
+		setIsLoading(true);
 		const nextPage = pages + 1;
-		fetch(
-			`https://api.themoviedb.org/3/movie/popular?language=en-US&page=${nextPage}`,
-			options
-		)
-			.then((response) => response.json())
-			.then((response) => {
-				const updatedData = [...popularMovies];
-				updatedData[3].results = [
-					...updatedData[3].results,
-					...response.results,
-				];
+		try {
+			const response = await fetch(
+				`https://api.themoviedb.org/3/movie/popular?language=en-US&page=${nextPage}`,
+				options
+			);
+			const data = await response.json();
+			const updatedData = [...popularMovies];
+			updatedData[3].results = [
+				...updatedData[3].results,
+				...data.results,
+			];
 
-				setPopularMovies(updatedData);
-
-				// Update the page state
-				setPages(nextPage);
-			})
-			.catch((err) => console.error(err));
+			setPopularMovies(updatedData);
+			setPages(nextPage);
+		} catch (err) {
+			console.error(err);
+		} finally {
+			setIsLoading(false);
+		}
 	};
 
 	return (
@@ -80,6 +83,7 @@ export const PopularMovies = () => {
 					handleClick={handleClick}
 					currentPage={pages}
 					totalPages={popularMovies[3].total_pages}
+					isLoading={isLoading}
 				/>
 			</div>
 		</>

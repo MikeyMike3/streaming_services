@@ -626,3 +626,14 @@ nav > * {
 	padding-top: 160%;
 	border-radius: 15px;
 }
+
+.view-more-button-loader-container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-bottom: 50px;
+}
+
+.spinner {
+	opacity: 1;
+}

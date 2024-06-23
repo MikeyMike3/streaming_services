@@ -1,10 +1,14 @@
 import PropTypes from "prop-types";
 
+import { ViewMoreClipLoader } from "../spinners/ViewMoreClipLoader";
+
 export const ViewMoreButton = (props) => {
 	return (
 		<>
 			{props.isLoading ? (
-				<h1>lkjdiosjaiowdjoiad</h1>
+				<div className="view-more-button-loader-container">
+					<ViewMoreClipLoader />
+				</div>
 			) : props.totalPages !== props.currentPage ? (
 				<div className="view-more-btn-container">
 					<button
