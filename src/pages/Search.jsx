@@ -10,49 +10,48 @@ export const Search = () => {
 	const [searchResults, setSearchResults] = useState([]);
 	const [queryState, setQueryState] = useState("");
 	const [pages, setPages] = useState(1);
+	const [isloading, setIsLoading] = useState(false);
 	const [noResults, setNoResults] = useState(false);
 	const navigation = useNavigation();
 
 	const [totalPages, setTotalPages] = useState(0);
 
-	const handleClick = () => {
-		const nextPage = pages + 1;
-
-		fetch(
-			`https://api.themoviedb.org/3/search/multi?query=${queryState}&include_adult=false&language=en-US&page=${nextPage}`,
-			options
-		)
-			.then((response) => response.json())
-			.then((response) => {
-				setSearchResults((prevState) => [
-					...prevState,
-					...response.results,
-				]);
-
-				setPages(nextPage);
-			})
-			.catch((err) => console.error(err));
+	const handleClick = async () => {
+		try {
+			setIsLoading(true);
+			const nextPage = pages + 1;
+			const response = await fetch(
+				`https://api.themoviedb.org/3/search/multi?query=${queryState}&include_adult=false&language=en-US&page=${nextPage}`,
+				options
+			);
+			const data = await response.json();
+			setSearchResults((prevState) => [...prevState, ...data.results]);
+			setPages(nextPage);
+		} catch (err) {
+			console.error(err);
+		} finally {
+			setIsLoading(false);
+		}
 	};
 
-	const changeHandler = (e) => {
+	const changeHandler = async (e) => {
 		const query = e.target.value;
 		setQueryState(query);
 
 		if (query.length === 0) {
 			setSearchResults([]);
 		} else {
-			fetch(
-				`https://api.themoviedb.org/3/search/multi?query=${query}&include_adult=false&language=en-US&page=1`,
-				options
-			)
-				.then((response) => response.json())
-				.then((data) => {
-					setSearchResults(data.results);
-
-					setTotalPages(data.total_pages);
-				})
-
-				.catch((error) => console.error("Error fetching data:", error));
+			try {
+				const response = await fetch(
+					`https://api.themoviedb.org/3/search/multi?query=${query}&include_adult=false&language=en-US&page=1`,
+					options
+				);
+				const data = await response.json();
+				setSearchResults(data.results);
+				setTotalPages(data.total_pages);
+			} catch (error) {
+				console.error("Error fetching data:", error);
+			}
 		}
 	};
 
@@ -107,12 +106,15 @@ export const Search = () => {
 								</>
 							))}
 						</div>
-
-						<ViewMoreButton
-							handleClick={handleClick}
-							currentPage={pages}
-							totalPages={totalPages}
-						/>
+						{isloading ? (
+							<h1>lkjdiosjaiowdjoiad</h1>
+						) : (
+							<ViewMoreButton
+								handleClick={handleClick}
+								currentPage={pages}
+								totalPages={totalPages}
+							/>
+						)}
 					</>
 				)}
 			</div>
