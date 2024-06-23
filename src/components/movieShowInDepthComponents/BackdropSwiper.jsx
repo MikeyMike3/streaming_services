@@ -1,3 +1,5 @@
+import PropTypes from "prop-types";
+
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination } from "swiper/modules";
 import "swiper/css";
@@ -29,7 +31,7 @@ export const BackdropSwiper = (props) => {
 		</div>
 	);
 };
-// <img
 
-// 	src={`https://image.tmdb.org/t/p/w300/${item.file_path}`}
-// />
+BackdropSwiper.propTypes = {
+	array: PropTypes.object,
+};

@@ -1,9 +1,11 @@
+import PropTypes from "prop-types";
+
 import { Swiper, SwiperSlide } from "swiper/react";
 import { FreeMode } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/free-mode";
 
-export const PosterSlider = (props) => {
+export const PosterSwiper = (props) => {
 	return (
 		<div className="poster-container">
 			<Swiper
@@ -28,4 +30,8 @@ export const PosterSlider = (props) => {
 			</Swiper>
 		</div>
 	);
+};
+
+PosterSwiper.propTypes = {
+	array: PropTypes.object,
 };

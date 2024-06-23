@@ -18,10 +18,10 @@ import { VideoSwiper } from "../components/movieShowInDepthComponents/VideoSwipe
 import { BackdropSwiper } from "../components/movieShowInDepthComponents/BackdropSwiper";
 import { MovieShowDetails } from "../components/movieShowInDepthComponents/MovieShowDetails";
 import { Grid } from "../components/movieShowInDepthComponents/Grid";
-import { PlatformSlider } from "../components/movieShowInDepthComponents/PlatformSlider";
+import { PlatformSwiper } from "../components/movieShowInDepthComponents/PlatformSwiper";
 import { ViewMoreButton } from "../components/ViewMoreButton";
 import { Backdrop } from "../components/movieShowInDepthComponents/Backdrop";
-import { PosterSlider } from "../components/movieShowInDepthComponents/PosterSlider";
+import { PosterSwiper } from "../components/movieShowInDepthComponents/PosterSwiper";
 
 export const MovieShowInDepth = () => {
 	const { id, mediaType } = useParams();
@@ -205,7 +205,7 @@ export const MovieShowInDepth = () => {
 							mediaType={mediaType}
 						/>
 
-						<PlatformSlider
+						<PlatformSwiper
 							flatRateStreamingServices={
 								flatRateStreamingServices
 							}
@@ -223,7 +223,7 @@ export const MovieShowInDepth = () => {
 
 						<h1 className="heading">Posters</h1>
 						<div className="heading-underline"></div>
-						<PosterSlider array={movieShowDetails[5]} />
+						<PosterSwiper array={movieShowDetails[5]} />
 
 						<h1 className="similar-movies-heading">
 							Similar Movies
@@ -259,7 +259,7 @@ export const MovieShowInDepth = () => {
 							mediaType={mediaType}
 						/>
 
-						<PlatformSlider
+						<PlatformSwiper
 							flatRateStreamingServices={
 								flatRateStreamingServices
 							}
@@ -277,7 +277,7 @@ export const MovieShowInDepth = () => {
 
 						<h1 className="heading">Posters</h1>
 						<div className="heading-underline"></div>
-						<PosterSlider array={movieShowDetails[5]} />
+						<PosterSwiper array={movieShowDetails[5]} />
 
 						<h1 className="similar-movies-heading">
 							Similar Shows

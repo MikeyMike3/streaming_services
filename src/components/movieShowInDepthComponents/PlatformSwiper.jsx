@@ -9,7 +9,7 @@ import "swiper/css/free-mode";
 const swiperSpaceBetween = 10;
 const swiperGrab = true;
 
-export const PlatformSlider = (props) => {
+export const PlatformSwiper = (props) => {
 	return (
 		<div className="platform-container">
 			<h2 className="platform-headings">Stream On</h2>
@@ -103,7 +103,7 @@ export const PlatformSlider = (props) => {
 		</div>
 	);
 };
-PlatformSlider.propTypes = {
+PlatformSwiper.propTypes = {
 	buyStreamingServices: PropTypes.array,
 	rentStreamingServices: PropTypes.array,
 	flatRateStreamingServices: PropTypes.array,
