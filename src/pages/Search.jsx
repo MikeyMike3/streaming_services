@@ -10,7 +10,7 @@ export const Search = () => {
 	const [searchResults, setSearchResults] = useState([]);
 	const [queryState, setQueryState] = useState("");
 	const [pages, setPages] = useState(1);
-	const [isloading, setIsLoading] = useState(false);
+	const [isLoading, setIsLoading] = useState(false);
 	const [noResults, setNoResults] = useState(false);
 	const navigation = useNavigation();
 
@@ -106,15 +106,13 @@ export const Search = () => {
 								</>
 							))}
 						</div>
-						{isloading ? (
-							<h1>lkjdiosjaiowdjoiad</h1>
-						) : (
-							<ViewMoreButton
-								handleClick={handleClick}
-								currentPage={pages}
-								totalPages={totalPages}
-							/>
-						)}
+
+						<ViewMoreButton
+							handleClick={handleClick}
+							currentPage={pages}
+							totalPages={totalPages}
+							isLoading={isLoading}
+						/>
 					</>
 				)}
 			</div>

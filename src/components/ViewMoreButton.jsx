@@ -3,7 +3,9 @@ import PropTypes from "prop-types";
 export const ViewMoreButton = (props) => {
 	return (
 		<>
-			{props.totalPages !== props.currentPage ? (
+			{props.isLoading ? (
+				<h1>lkjdiosjaiowdjoiad</h1>
+			) : props.totalPages !== props.currentPage ? (
 				<div className="view-more-btn-container">
 					<button
 						className="view-more-btn view-more-btn-in-depth-search"
@@ -19,4 +21,5 @@ ViewMoreButton.propTypes = {
 	totalPages: PropTypes.number,
 	currentPage: PropTypes.number,
 	handleClick: PropTypes.func,
+	isLoading: PropTypes.bool,
 };

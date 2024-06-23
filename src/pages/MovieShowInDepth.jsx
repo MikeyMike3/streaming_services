@@ -42,6 +42,8 @@ export const MovieShowInDepth = () => {
 	const [credits, setCredits] = useState([]);
 	const [similar, setSimilar] = useState([]);
 
+	const [isLoading, setIsLoading] = useState(false);
+
 	let formatPersonBirthday = [];
 	let formatPersonDeathday = [];
 
@@ -133,39 +135,36 @@ export const MovieShowInDepth = () => {
 		setMovieShowId(0);
 	};
 
-	const handleClick = () => {
+	const handleClick = async () => {
 		const nextPage = pages + 1;
 		setBackToTop(false);
 
-		if (mediaType === "movie") {
-			fetch(
-				`https://api.themoviedb.org/3/movie/${movieShowId}/recommendations?language=en-US&page=${nextPage}`,
-				options
-			)
-				.then((response) => response.json())
-				.then((response) => {
-					setSimilar((prevState) => [
-						...prevState,
-						...response.results,
-					]);
+		try {
+			let response;
+			setIsLoading(true);
+			if (mediaType === "movie") {
+				response = await fetch(
+					`https://api.themoviedb.org/3/movie/${movieShowId}/recommendations?language=en-US&page=${nextPage}`,
+					options
+				);
+			} else if (mediaType === "tv") {
+				response = await fetch(
+					`https://api.themoviedb.org/3/tv/${movieShowId}/recommendations?language=en-US&page=${nextPage}`,
+					options
+				);
+			}
 
-					setPages(nextPage);
-				})
-				.catch((err) => console.error(err));
-		} else if (mediaType === "tv") {
-			fetch(
-				`https://api.themoviedb.org/3/tv/${movieShowId}/recommendations?language=en-US&page=${nextPage}`,
-				options
-			)
-				.then((response) => response.json())
-				.then((response) => {
-					setSimilar((prevState) => [
-						...prevState,
-						...response.results,
-					]);
-					setPages(nextPage);
-				})
-				.catch((err) => console.error(err));
+			if (response.ok) {
+				const data = await response.json();
+				setSimilar((prevState) => [...prevState, ...data.results]);
+				setPages(nextPage);
+			} else {
+				console.error("Error fetching data:", response.statusText);
+			}
+		} catch (err) {
+			console.error("Error fetching data:", err);
+		} finally {
+			setIsLoading(false);
 		}
 	};
 
@@ -240,6 +239,7 @@ export const MovieShowInDepth = () => {
 							handleClick={handleClick}
 							currentPage={pages}
 							totalPages={movieShowDetails[4].total_pages}
+							isLoading={isLoading}
 						/>
 					</div>
 				</>
@@ -294,6 +294,7 @@ export const MovieShowInDepth = () => {
 							handleClick={handleClick}
 							currentPage={pages}
 							totalPages={movieShowDetails[4].total_pages}
+							isLoading={isLoading}
 						/>
 					</div>
 				</>
