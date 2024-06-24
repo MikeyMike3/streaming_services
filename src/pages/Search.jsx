@@ -55,6 +55,7 @@ export const Search = () => {
 				);
 				const data = await response.json();
 				setSearchResults(data.results);
+				setPages(1);
 				setTotalPages(data.total_pages);
 
 				if (data.results.length === 0) {
