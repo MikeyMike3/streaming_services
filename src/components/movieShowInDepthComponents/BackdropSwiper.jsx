@@ -9,25 +9,29 @@ import "swiper/css/pagination";
 export const BackdropSwiper = (props) => {
 	return (
 		<div className="movie-show-video">
-			<Swiper
-				navigation={true}
-				grabCursor={"true"}
-				modules={[Navigation, Pagination]}
-				pagination={{
-					type: "progressbar",
-				}}
-				className="mySwiper">
-				{props.array.backdrops.map((item) => (
-					<SwiperSlide key={item.file_path}>
-						<div
-							className="backdrop-image"
-							style={{
-								backgroundImage: `url(https://image.tmdb.org/t/p/original/${item.file_path})`,
-							}}
-						/>
-					</SwiperSlide>
-				))}
-			</Swiper>
+			{props.array.backdrops.length > 0 ? (
+				<Swiper
+					navigation={true}
+					grabCursor={"true"}
+					modules={[Navigation, Pagination]}
+					pagination={{
+						type: "progressbar",
+					}}
+					className="mySwiper">
+					{props.array.backdrops.map((item) => (
+						<SwiperSlide key={item.file_path}>
+							<div
+								className="backdrop-image"
+								style={{
+									backgroundImage: `url(https://image.tmdb.org/t/p/original/${item.file_path})`,
+								}}
+							/>
+						</SwiperSlide>
+					))}
+				</Swiper>
+			) : (
+				<p>No backdrops available.</p>
+			)}
 		</div>
 	);
 };
