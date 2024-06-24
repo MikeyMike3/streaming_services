@@ -1,3 +1,5 @@
+import { useRef } from "react";
+
 import PropTypes from "prop-types";
 
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -9,6 +11,12 @@ import { Navigation, Pagination } from "swiper/modules";
 import YouTube from "react-youtube";
 
 export const VideoSwiper = (props) => {
+	const swiperRef = useRef(null);
+
+	if (swiperRef.current && swiperRef.current.swiper) {
+		swiperRef.current.swiper.slideTo(0);
+	}
+
 	const renderTrailer = () => {
 		if (props.array.length > 0) {
 			return props.array.map((item, index) => {
@@ -26,6 +34,7 @@ export const VideoSwiper = (props) => {
 		<div className="movie-show-video">
 			{props.array.length > 0 ? (
 				<Swiper
+					ref={swiperRef}
 					navigation={true}
 					modules={[Navigation, Pagination]}
 					pagination={{

@@ -1,3 +1,5 @@
+import { useRef } from "react";
+
 import PropTypes from "prop-types";
 
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -6,10 +8,16 @@ import "swiper/css";
 import "swiper/css/free-mode";
 
 export const PosterSwiper = (props) => {
+	const swiperRef = useRef(null);
+
+	if (swiperRef.current && swiperRef.current.swiper) {
+		swiperRef.current.swiper.slideTo(0);
+	}
 	return (
 		<div className="poster-container">
 			{props.array.posters.length > 0 ? (
 				<Swiper
+					ref={swiperRef}
 					slidesPerView={"auto"}
 					grabCursor={"true"}
 					spaceBetween={10}
