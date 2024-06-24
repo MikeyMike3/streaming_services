@@ -11,10 +11,12 @@ import { SearchRotateLoader } from "../spinners/SearchRotateLoader";
 export const Search = () => {
 	const [searchResults, setSearchResults] = useState([]);
 	const [queryState, setQueryState] = useState("");
+	const [inputQuery, setInputQuery] = useState("");
 	const [pages, setPages] = useState(1);
 	const [isLoading, setIsLoading] = useState(false);
 	const [searchIsLoading, setSearchIsLoading] = useState(false);
 	const [noResults, setNoResults] = useState(false);
+
 	const navigation = useNavigation();
 
 	const [totalPages, setTotalPages] = useState(0);
@@ -37,8 +39,9 @@ export const Search = () => {
 		}
 	};
 
-	const changeHandler = async (e) => {
-		const query = e.target.value;
+	const handleSubmit = async (e) => {
+		e.preventDefault();
+		const query = e.target.querySelector("#search").value;
 		setQueryState(query);
 
 		if (query.length === 0) {
@@ -53,42 +56,57 @@ export const Search = () => {
 				const data = await response.json();
 				setSearchResults(data.results);
 				setTotalPages(data.total_pages);
+
+				if (data.results.length === 0) {
+					setNoResults(true);
+				} else {
+					setNoResults(false);
+				}
 			} catch (error) {
 				console.error("Error fetching data:", error);
 			} finally {
 				setSearchIsLoading(false);
+				setQueryState(query);
 			}
 		}
 	};
 
+	const onChange = (e) => {
+		const query = e.target.value;
+		setInputQuery(query);
+	};
+
 	useEffect(() => {
-		if (searchResults.length === 0 && queryState.length > 0) {
-			setNoResults(true);
-		} else {
+		if (inputQuery.length === 0) {
 			setNoResults(false);
 		}
-	}, [searchResults, queryState]);
+	}, [inputQuery]);
 
 	return (
 		<div>
 			<Spinner navigation={navigation} />
 			<div className="wrapper">
-				<div className="search-container">
+				<form className="search-container" onSubmit={handleSubmit}>
 					<input
 						autoFocus
 						id="search"
-						onChange={changeHandler}
-						placeholder="Search"></input>
-					<button className="search-btn">Search</button>
-				</div>
+						placeholder="Search"
+						onChange={onChange}
+					/>
+					<button className="search-btn" type="submit">
+						Search
+					</button>
+				</form>
 
 				{searchIsLoading && (
-					<div className="view-more-button-loader-container">
+					<div className="search-loader-container">
 						<SearchRotateLoader />
 					</div>
 				)}
 
-				{noResults && <p className="white">HEY</p>}
+				{noResults && (
+					<p className="no-search-results">No results were found.</p>
+				)}
 
 				{searchResults.length > 0 && (
 					<>

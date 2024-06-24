@@ -79,6 +79,18 @@ a {
 	transform: scale(1.05);
 }
 
+.search-loader-container {
+	display: flex;
+	justify-content: center;
+	margin-top: 50px;
+	margin-bottom: 50px;
+}
+
+.no-search-results {
+	text-align: center;
+	margin-top: 50px;
+}
+
 .wrapper {
 	max-width: 1500px;
 	margin-left: auto;
