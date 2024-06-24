@@ -19,22 +19,24 @@ export const VideoSwiper = (props) => {
 					</SwiperSlide>
 				);
 			});
-		} else {
-			return <p>No Videos Available.</p>;
 		}
 	};
 
 	return (
 		<div className="movie-show-video">
-			<Swiper
-				navigation={true}
-				modules={[Navigation, Pagination]}
-				pagination={{
-					type: "progressbar",
-				}}
-				className="mySwiper">
-				{renderTrailer()}
-			</Swiper>
+			{props.array.length > 0 ? (
+				<Swiper
+					navigation={true}
+					modules={[Navigation, Pagination]}
+					pagination={{
+						type: "progressbar",
+					}}
+					className="mySwiper">
+					{renderTrailer()}
+				</Swiper>
+			) : (
+				<p>No Videos Available.</p>
+			)}
 		</div>
 	);
 };
