@@ -5,7 +5,8 @@ import { options } from "../api/options";
 import { MovieShowCard } from "../components/MovieShowCard";
 import { ViewMoreButton } from "../components/ViewMoreButton";
 import { Spinner } from "../components/Spinner";
-import { ViewMoreClipLoader } from "../spinners/ViewMoreClipLoader";
+
+import { SearchRotateLoader } from "../spinners/SearchRotateLoader";
 
 export const Search = () => {
 	const [searchResults, setSearchResults] = useState([]);
@@ -83,7 +84,7 @@ export const Search = () => {
 
 				{searchIsLoading && (
 					<div className="view-more-button-loader-container">
-						<ViewMoreClipLoader />
+						<SearchRotateLoader />
 					</div>
 				)}
 
