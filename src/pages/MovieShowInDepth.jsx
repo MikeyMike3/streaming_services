@@ -229,18 +229,25 @@ export const MovieShowInDepth = () => {
 						</h1>
 						<div className="heading-underline"></div>
 
-						<Grid
-							array={similar}
-							mediaType={mediaType}
-							resetState={resetState}
-						/>
-
-						<ViewMoreButton
-							handleClick={handleClick}
-							currentPage={pages}
-							totalPages={movieShowDetails[4].total_pages}
-							isLoading={isLoading}
-						/>
+						{similar.length > 0 ? (
+							<>
+								<Grid
+									array={similar}
+									mediaType={mediaType}
+									resetState={resetState}
+								/>
+								<ViewMoreButton
+									handleClick={handleClick}
+									currentPage={pages}
+									totalPages={movieShowDetails[4].total_pages}
+									isLoading={isLoading}
+								/>
+							</>
+						) : (
+							<p className="no-similar-movies-shows">
+								No similar movies available.
+							</p>
+						)}
 					</div>
 				</>
 			)}
@@ -284,18 +291,25 @@ export const MovieShowInDepth = () => {
 						</h1>
 						<div className="heading-underline"></div>
 
-						<Grid
-							array={similar}
-							mediaType={mediaType}
-							resetState={resetState}
-						/>
-
-						<ViewMoreButton
-							handleClick={handleClick}
-							currentPage={pages}
-							totalPages={movieShowDetails[4].total_pages}
-							isLoading={isLoading}
-						/>
+						{similar.length > 0 ? (
+							<>
+								<Grid
+									array={similar}
+									mediaType={mediaType}
+									resetState={resetState}
+								/>
+								<ViewMoreButton
+									handleClick={handleClick}
+									currentPage={pages}
+									totalPages={movieShowDetails[4].total_pages}
+									isLoading={isLoading}
+								/>
+							</>
+						) : (
+							<p className="no-similar-movies-shows">
+								No similar movies available.
+							</p>
+						)}
 					</div>
 				</>
 			)}

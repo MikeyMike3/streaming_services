@@ -646,3 +646,7 @@ nav > * {
 	margin-top: 24px;
 	margin-bottom: 50px;
 }
+
+.no-similar-movies-shows {
+	margin-bottom: 80px;
+}
