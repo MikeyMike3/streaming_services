@@ -351,10 +351,12 @@ nav > * {
 	min-width: 0;
 }
 
-.movie-show-details-poster img {
-	object-fit: cover;
-	width: 100%;
-	border-radius: 25px;
+.movie-show-details-poster {
+	background-position: top;
+	background-repeat: no-repeat;
+	background-size: cover;
+	padding-top: 160%;
+	border-radius: 15px;
 }
 
 .movie-show-title {
