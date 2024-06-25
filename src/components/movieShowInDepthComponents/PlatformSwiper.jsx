@@ -1,3 +1,5 @@
+import { useRef } from "react";
+
 import PropTypes from "prop-types";
 
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -10,11 +12,25 @@ const swiperSpaceBetween = 10;
 const swiperGrab = true;
 
 export const PlatformSwiper = (props) => {
+	const streamSwiperRef = useRef(null);
+	const rentSwiperRef = useRef(null);
+	const buySwiperRef = useRef(null);
+
+	if (streamSwiperRef.current && streamSwiperRef.current.swiper) {
+		streamSwiperRef.current.swiper.slideTo(0);
+	}
+	if (rentSwiperRef.current && rentSwiperRef.current.swiper) {
+		rentSwiperRef.current.swiper.slideTo(0);
+	}
+	if (buySwiperRef.current && buySwiperRef.current.swiper) {
+		buySwiperRef.current.swiper.slideTo(0);
+	}
 	return (
 		<div className="platform-container">
 			<h2 className="platform-headings">Stream On</h2>
 			<div className="heading-underline"></div>
 			<Swiper
+				ref={streamSwiperRef}
 				spaceBetween={swiperSpaceBetween}
 				grabCursor={swiperGrab}
 				slidesPerView={"auto"}
@@ -45,6 +61,7 @@ export const PlatformSwiper = (props) => {
 			<h2 className="platform-headings">Rent On</h2>
 			<div className="heading-underline"></div>
 			<Swiper
+				ref={rentSwiperRef}
 				spaceBetween={swiperSpaceBetween}
 				grabCursor={swiperGrab}
 				slidesPerView={"auto"}
@@ -74,6 +91,7 @@ export const PlatformSwiper = (props) => {
 			<h2 className="platform-headings">Buy On</h2>
 			<div className="heading-underline"></div>
 			<Swiper
+				ref={buySwiperRef}
 				spaceBetween={swiperSpaceBetween}
 				grabCursor={swiperGrab}
 				slidesPerView={"auto"}
