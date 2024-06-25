@@ -61,7 +61,7 @@ export const MovieShowDetails = (props) => {
 
 				{props.movieShowDetails.overview.length > 0 ? (
 					<p className="movie-show-overview">
-						props.movieShowDetails.overview
+						{props.movieShowDetails.overview}
 					</p>
 				) : (
 					<p className="movie-show-overview">
