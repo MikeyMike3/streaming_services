@@ -133,6 +133,9 @@ export const MovieShowInDepth = () => {
 		setBackToTop(true);
 		setPages(1);
 		setMovieShowId(0);
+		setFlatRateStreamingServices([]);
+		setBuyStreamingServices([]);
+		setRentStreamingServices([]);
 	};
 
 	const handleClick = async () => {
