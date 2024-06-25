@@ -320,16 +320,20 @@ export const MovieShowInDepth = () => {
 						style={{ backgroundImage: `url(${poster})` }}></div>
 
 					<div className="wrapper">
-						<div className="person-flex">
+						<div className="movie-show-details-container">
 							{movieShowDetails[0].profile_path === null ? (
-								<img
-									src={poster}
-									alt={`${movieShowDetails[0].name} placeholder picture`}
+								<div
+									className="movie-show-details-poster"
+									style={{
+										backgroundImage: `url(${poster})`,
+									}}
 								/>
 							) : (
-								<img
-									src={`https://image.tmdb.org/t/p/w500/${movieShowDetails[0].profile_path}.jpg`}
-									alt={`${movieShowDetails[0].name} picture`}
+								<div
+									className="movie-show-details-poster"
+									style={{
+										backgroundImage: `url(https://image.tmdb.org/t/p/w500/${movieShowDetails[0].profile_path})`,
+									}}
 								/>
 							)}
 							<div className="person-overview">
