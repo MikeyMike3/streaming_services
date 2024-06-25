@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useRef, useEffect } from "react";
 
 import PropTypes from "prop-types";
 
@@ -8,16 +8,19 @@ import "swiper/css";
 import "swiper/css/free-mode";
 
 export const PosterSwiper = (props) => {
-	const swiperRef = useRef(null);
+	const posterSwiperRef = useRef(null);
 
-	if (swiperRef.current && swiperRef.current.swiper) {
-		swiperRef.current.swiper.slideTo(0);
-	}
+	useEffect(() => {
+		if (posterSwiperRef.current && posterSwiperRef.current.swiper) {
+			posterSwiperRef.current.swiper.slideTo(0);
+		}
+	}, [props.array.posters]);
+
 	return (
 		<div className="poster-container">
 			{props.array.posters.length > 0 ? (
 				<Swiper
-					ref={swiperRef}
+					ref={posterSwiperRef}
 					slidesPerView={"auto"}
 					grabCursor={"true"}
 					spaceBetween={10}

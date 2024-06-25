@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useRef, useEffect } from "react";
 
 import PropTypes from "prop-types";
 
@@ -11,11 +11,13 @@ import { Navigation, Pagination } from "swiper/modules";
 import YouTube from "react-youtube";
 
 export const VideoSwiper = (props) => {
-	const swiperRef = useRef(null);
+	const videoSwiperRef = useRef(null);
 
-	if (swiperRef.current && swiperRef.current.swiper) {
-		swiperRef.current.swiper.slideTo(0);
-	}
+	useEffect(() => {
+		if (videoSwiperRef.current && videoSwiperRef.current.swiper) {
+			videoSwiperRef.current.swiper.slideTo(0);
+		}
+	}, [props.array.posters]);
 
 	const renderTrailer = () => {
 		if (props.array.length > 0) {
@@ -34,7 +36,7 @@ export const VideoSwiper = (props) => {
 		<div className="movie-show-video">
 			{props.array.length > 0 ? (
 				<Swiper
-					ref={swiperRef}
+					ref={videoSwiperRef}
 					navigation={true}
 					modules={[Navigation, Pagination]}
 					pagination={{

@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useRef, useEffect } from "react";
 
 import PropTypes from "prop-types";
 
@@ -9,16 +9,19 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 
 export const BackdropSwiper = (props) => {
-	const swiperRef = useRef(null);
+	const backdropSwiperRef = useRef(null);
 
-	if (swiperRef.current && swiperRef.current.swiper) {
-		swiperRef.current.swiper.slideTo(0);
-	}
+	useEffect(() => {
+		if (backdropSwiperRef.current && backdropSwiperRef.current.swiper) {
+			backdropSwiperRef.current.swiper.slideTo(0);
+		}
+	}, [props.array.posters]);
+
 	return (
 		<div className="movie-show-video">
 			{props.array.backdrops.length > 0 ? (
 				<Swiper
-					ref={swiperRef}
+					ref={backdropSwiperRef}
 					navigation={true}
 					grabCursor={"true"}
 					modules={[Navigation, Pagination]}
