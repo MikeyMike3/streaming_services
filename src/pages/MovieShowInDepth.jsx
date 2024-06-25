@@ -340,9 +340,17 @@ export const MovieShowInDepth = () => {
 								<h1 className="movie-show-title">
 									{movieShowDetails[0].name}
 								</h1>
-								<p className="movie-show-overview">
-									{movieShowDetails[0].biography}
-								</p>
+
+								{console.log(movieShowDetails[0])}
+								{movieShowDetails[0].biography !== "" ? (
+									<p className="movie-show-overview">
+										{movieShowDetails[0].biography}
+									</p>
+								) : (
+									<p className="movie-show-overview">
+										No biography available.
+									</p>
+								)}
 
 								<p className="person-place-of-birth movie-show-overview">
 									{`${movieShowDetails[0].place_of_birth}`}

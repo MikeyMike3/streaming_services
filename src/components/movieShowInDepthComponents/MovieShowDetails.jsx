@@ -59,9 +59,15 @@ export const MovieShowDetails = (props) => {
 					</div>
 				)}
 
-				<p className="movie-show-overview">
-					{props.movieShowDetails.overview}
-				</p>
+				{props.movieShowDetails.overview.length > 0 ? (
+					<p className="movie-show-overview">
+						props.movieShowDetails.overview
+					</p>
+				) : (
+					<p className="movie-show-overview">
+						No overview available.
+					</p>
+				)}
 
 				<Credits credits={props.credits} />
 			</div>
