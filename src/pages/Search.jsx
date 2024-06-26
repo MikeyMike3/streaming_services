@@ -21,19 +21,31 @@ export const Search = () => {
 
 	const [totalPages, setTotalPages] = useState(0);
 
+	const [handleClickError, setHandleClickError] = useState(false);
+
 	const handleClick = async () => {
+		let nextPage = pages + 1;
 		try {
+			let response;
 			setIsLoading(true);
-			const nextPage = pages + 1;
-			const response = await fetch(
+
+			response = await fetch(
 				`https://api.themoviedb.org/3/search/multi?query=${queryState}&include_adult=false&language=en-US&page=${nextPage}`,
 				options
 			);
-			const data = await response.json();
-			setSearchResults((prevState) => [...prevState, ...data.results]);
-			setPages(nextPage);
+			if (response.ok) {
+				const data = await response.json();
+				setSearchResults((prevState) => [
+					...prevState,
+					...data.results,
+				]);
+				setPages(nextPage);
+				setHandleClickError(false);
+			}
 		} catch (err) {
 			console.error(err);
+			setHandleClickError(true);
+			nextPage -= 1;
 		} finally {
 			setIsLoading(false);
 		}
@@ -140,6 +152,7 @@ export const Search = () => {
 
 						<ViewMoreButton
 							handleClick={handleClick}
+							handleClickError={handleClickError}
 							currentPage={pages}
 							totalPages={totalPages}
 							isLoading={isLoading}

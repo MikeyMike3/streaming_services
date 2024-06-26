@@ -12,6 +12,7 @@ export const PopularShows = () => {
 	const [loading, setLoading] = useState(true);
 	const [pages, setPages] = useState(1);
 	const [isLoading, setIsLoading] = useState(false);
+	const [handleClickError, setHandleClickError] = useState(false);
 
 	const navigation = useNavigation();
 
@@ -45,23 +46,28 @@ export const PopularShows = () => {
 
 	const handleClick = async () => {
 		setIsLoading(true);
-		const nextPage = pages + 1;
+		let nextPage = pages + 1;
 		try {
 			const response = await fetch(
 				`https://api.themoviedb.org/3/tv/popular?language=en-US&page=${nextPage}`,
 				options
 			);
-			const data = await response.json();
-			const updatedData = [...popularShows];
-			updatedData[4].results = [
-				...updatedData[4].results,
-				...data.results,
-			];
+			if (response.ok) {
+				const data = await response.json();
+				const updatedData = [...popularShows];
+				updatedData[4].results = [
+					...updatedData[4].results,
+					...data.results,
+				];
 
-			setPopularShows(updatedData);
-			setPages(nextPage);
+				setPopularShows(updatedData);
+				setPages(nextPage);
+			}
+			setHandleClickError(false);
 		} catch (err) {
 			console.error(err);
+			setHandleClickError(true);
+			nextPage = -1;
 		} finally {
 			setIsLoading(false);
 		}
@@ -77,6 +83,7 @@ export const PopularShows = () => {
 
 				<ViewMoreButton
 					handleClick={handleClick}
+					handleClickError={handleClickError}
 					currentPage={pages}
 					totalPages={popularShows[4].total_pages}
 					isLoading={isLoading}

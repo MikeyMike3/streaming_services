@@ -45,6 +45,8 @@ export const MovieShowInDepth = () => {
 
 	const [isLoading, setIsLoading] = useState(false);
 
+	const [handleClickError, setHandleClickError] = useState(false);
+
 	let formatPersonBirthday = [];
 	let formatPersonDeathday = [];
 
@@ -152,12 +154,13 @@ export const MovieShowInDepth = () => {
 	};
 
 	const handleClick = async () => {
-		const nextPage = pages + 1;
+		let nextPage = pages + 1;
 		setBackToTop(false);
 
 		try {
 			let response;
 			setIsLoading(true);
+
 			if (mediaType === "movie") {
 				response = await fetch(
 					`https://api.themoviedb.org/3/movie/${movieShowId}/recommendations?language=en-US&page=${nextPage}`,
@@ -173,14 +176,18 @@ export const MovieShowInDepth = () => {
 			if (response.ok) {
 				const data = await response.json();
 				setSimilar((prevState) => [...prevState, ...data.results]);
+
 				setPages(nextPage);
 			} else {
 				console.error("Error fetching data:", response.statusText);
 			}
 		} catch (err) {
 			console.error("Error fetching data:", err);
+			setHandleClickError(true);
+			nextPage -= 1;
 		} finally {
 			setIsLoading(false);
+			setHandleClickError(false);
 		}
 	};
 
@@ -262,6 +269,7 @@ export const MovieShowInDepth = () => {
 								/>
 								<ViewMoreButton
 									handleClick={handleClick}
+									handleClickError={handleClickError}
 									currentPage={pages}
 									totalPages={movieShowDetails[4].total_pages}
 									isLoading={isLoading}
@@ -323,6 +331,7 @@ export const MovieShowInDepth = () => {
 									resetState={resetState}
 								/>
 								<ViewMoreButton
+									handleClickError={handleClickError}
 									handleClick={handleClick}
 									currentPage={pages}
 									totalPages={movieShowDetails[4].total_pages}
