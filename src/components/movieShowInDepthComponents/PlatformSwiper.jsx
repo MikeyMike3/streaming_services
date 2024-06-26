@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 
 import PropTypes from "prop-types";
 
@@ -16,15 +16,18 @@ export const PlatformSwiper = (props) => {
 	const rentSwiperRef = useRef(null);
 	const buySwiperRef = useRef(null);
 
-	if (streamSwiperRef.current && streamSwiperRef.current.swiper) {
-		streamSwiperRef.current.swiper.slideTo(0);
-	}
-	if (rentSwiperRef.current && rentSwiperRef.current.swiper) {
-		rentSwiperRef.current.swiper.slideTo(0);
-	}
-	if (buySwiperRef.current && buySwiperRef.current.swiper) {
-		buySwiperRef.current.swiper.slideTo(0);
-	}
+	useEffect(() => {
+		if (streamSwiperRef.current && streamSwiperRef.current.swiper) {
+			streamSwiperRef.current.swiper.slideTo(0);
+		}
+		if (rentSwiperRef.current && rentSwiperRef.current.swiper) {
+			rentSwiperRef.current.swiper.slideTo(0);
+		}
+		if (buySwiperRef.current && buySwiperRef.current.swiper) {
+			buySwiperRef.current.swiper.slideTo(0);
+		}
+	});
+
 	return (
 		<div className="platform-container">
 			<h2 className="platform-headings">Stream On</h2>
