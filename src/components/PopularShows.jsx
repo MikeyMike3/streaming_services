@@ -9,7 +9,7 @@ import { ViewMoreButton } from "./ViewMoreButton";
 export const PopularShows = () => {
 	const loaderData = useLoaderData();
 	const [popularShows, setPopularShows] = useState([]);
-	const [loading, setLoading] = useState(true);
+
 	const [pages, setPages] = useState(1);
 	const [isLoading, setIsLoading] = useState(false);
 	const [handleClickError, setHandleClickError] = useState(false);
@@ -21,19 +21,13 @@ export const PopularShows = () => {
 			try {
 				const data = await loaderData;
 				setPopularShows(data);
-				setLoading(false);
 			} catch (error) {
 				console.error("Error fetching data:", error);
-				setLoading(false);
 			}
 		};
 
 		fetchData();
 	}, [loaderData]);
-
-	if (loading) {
-		return <div className="display-none">Loading...</div>;
-	}
 
 	if (
 		!popularShows ||
@@ -41,7 +35,7 @@ export const PopularShows = () => {
 		!popularShows[4] ||
 		!popularShows[4].results
 	) {
-		return <div>Data not available</div>;
+		return null;
 	}
 
 	const handleClick = async () => {

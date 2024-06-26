@@ -12,8 +12,6 @@ export const Home = () => {
 	const loaderData = useLoaderData();
 	const navigation = useNavigation();
 
-	console.log(loaderData);
-
 	if (loaderData[6] !== null) {
 		return <GeneralApiErrorMessage />;
 	}

@@ -9,7 +9,7 @@ import { Spinner } from "./Spinner";
 export const PopularMovies = () => {
 	const loaderData = useLoaderData();
 	const [popularMovies, setPopularMovies] = useState([]);
-	const [loading, setLoading] = useState(true);
+
 	const [pages, setPages] = useState(1);
 	const [isLoading, setIsLoading] = useState(false);
 	const [handleClickError, setHandleClickError] = useState(false);
@@ -21,10 +21,8 @@ export const PopularMovies = () => {
 			try {
 				const data = await loaderData;
 				setPopularMovies(data);
-				setLoading(false);
 			} catch (error) {
 				console.error("Error fetching data:", error);
-				setLoading(false);
 			}
 		};
 
@@ -33,10 +31,6 @@ export const PopularMovies = () => {
 
 	useEffect(() => {}, [popularMovies]);
 
-	if (loading) {
-		return <div className="display-none">Loading...</div>;
-	}
-
 	// Ensure popularMovies[5] and popularMovies[5].results are defined
 	if (
 		!popularMovies ||
@@ -44,7 +38,7 @@ export const PopularMovies = () => {
 		!popularMovies[3] ||
 		!popularMovies[3].results
 	) {
-		return <div>Data not available</div>;
+		return null;
 	}
 
 	const handleClick = async () => {

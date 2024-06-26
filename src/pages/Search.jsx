@@ -22,6 +22,7 @@ export const Search = () => {
 	const [totalPages, setTotalPages] = useState(0);
 
 	const [handleClickError, setHandleClickError] = useState(false);
+	const [searchHandleClickError, setSearchHandleClickError] = useState(false);
 
 	const handleClick = async () => {
 		let nextPage = pages + 1;
@@ -75,10 +76,14 @@ export const Search = () => {
 				} else {
 					setNoResults(false);
 				}
+				setSearchHandleClickError(false);
 			} catch (error) {
 				console.error("Error fetching data:", error);
+				setSearchHandleClickError(true);
+				setSearchResults([]);
 			} finally {
 				setSearchIsLoading(false);
+
 				setQueryState(query);
 			}
 		}
@@ -115,6 +120,12 @@ export const Search = () => {
 					<div className="search-loader-container">
 						<SearchRotateLoader />
 					</div>
+				)}
+
+				{searchHandleClickError && (
+					<p className="no-search-results">
+						An error ocurred. Please try again.
+					</p>
 				)}
 
 				{noResults && (

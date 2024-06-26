@@ -13,7 +13,6 @@ import "react-circular-progressbar/dist/styles.css";
 
 export const Hero = (props) => {
 	const [nowPlaying, setNowPlaying] = useState([]);
-	const [loading, setLoading] = useState(true);
 
 	const formatRating = (rating) => {
 		let percentage = 0;
@@ -30,19 +29,13 @@ export const Hero = (props) => {
 			try {
 				const data = await props.loaderData;
 				setNowPlaying(data);
-				setLoading(false);
 			} catch (error) {
 				console.error("Error fetching data:", error);
-				setLoading(false);
 			}
 		};
 
 		fetchData();
 	}, [props.loaderData]);
-
-	if (loading) {
-		return <div className="display-none">Loading...</div>;
-	}
 
 	// Ensure nowPlaying[5] and nowPlaying[5].results are defined
 	if (
@@ -51,7 +44,7 @@ export const Hero = (props) => {
 		!nowPlaying[5] ||
 		!nowPlaying[5].results
 	) {
-		return <div>Data not available</div>;
+		return null;
 	}
 
 	return (
