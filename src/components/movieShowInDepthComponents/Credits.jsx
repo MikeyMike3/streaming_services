@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
 
 import PropTypes from "prop-types";
@@ -11,11 +11,13 @@ import "swiper/css/free-mode";
 import poster from "../../imgs/tmdbPoster.jpg";
 
 export const Credits = (props) => {
-	const swiperRef = useRef(null);
+	const creditsSwiperRef = useRef(null);
 
-	if (swiperRef.current && swiperRef.current.swiper) {
-		swiperRef.current.swiper.slideTo(0);
-	}
+	useEffect(() => {
+		if (creditsSwiperRef.current && creditsSwiperRef.current.swiper) {
+			creditsSwiperRef.current.swiper.slideTo(0);
+		}
+	}, [props.credits]);
 	return (
 		<>
 			<h1 className="heading">Cast</h1>
@@ -23,7 +25,7 @@ export const Credits = (props) => {
 			<div className="cast-card-container">
 				{props.credits.length > 0 ? (
 					<Swiper
-						ref={swiperRef}
+						ref={creditsSwiperRef}
 						grabCursor={true}
 						spaceBetween={0}
 						slidesPerView={"auto"}

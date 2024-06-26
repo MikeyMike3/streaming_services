@@ -139,7 +139,7 @@ export const MovieShowInDepth = () => {
 		if (movieShowDetails[movieShowDetails.length - 1] === null) {
 			setMovieShowId(id);
 		}
-	}, [id]);
+	}, [id, movieShowDetails]);
 
 	const resetState = () => {
 		setBackToTop(true);
