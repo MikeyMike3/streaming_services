@@ -5,13 +5,22 @@ import { Spinner } from "../components/Spinner";
 import { PopularMoviesSlider } from "../components/PopularMoviesSlider";
 import { Hero } from "../components/Hero";
 import { PopularShowsSlider } from "../components/PopularShowsSlider";
+import { HomeLoaderIcon } from "../components/HomeLoaderIcon";
 
 export const Home = () => {
 	const loaderData = useLoaderData();
 	const navigation = useNavigation();
 
+	console.log(loaderData);
+
+	if (loaderData[6] !== null) {
+		return <p>console.error();</p>;
+	}
+
 	return (
 		<>
+			<HomeLoaderIcon />
+
 			<Spinner navigation={navigation} />
 
 			<Hero

@@ -189,6 +189,10 @@ export const MovieShowInDepth = () => {
 		}
 	}
 
+	if (movieShowDetails[movieShowDetails.length - 1] !== null) {
+		return <p>console.error();</p>;
+	}
+
 	return (
 		<>
 			<Spinner navigation={navigation} />

@@ -7,28 +7,34 @@ import {
 } from "../api/trendingApi";
 
 export const homeLoader = async () => {
-	const [
-		trending,
-		movieGenre,
-		showGenre,
-		popularMovies,
-		popularShows,
-		nowPlayingMovies,
-	] = await Promise.all([
-		fetchTrending(),
-		fetchMovieGenre(),
-		fetchShowGenre(),
-		fetchPopularMovies(),
-		fetchPopularShows(),
-		fetchNowPlaying(),
-	]);
+	const results = [null, null, null, null, null, null, null]; // Initialize array with null values
 
-	return [
-		trending,
-		movieGenre,
-		showGenre,
-		popularMovies,
-		popularShows,
-		nowPlayingMovies,
-	];
+	try {
+		const [
+			trending,
+			movieGenre,
+			showGenre,
+			popularMovies,
+			popularShows,
+			nowPlayingMovies,
+		] = await Promise.all([
+			fetchTrending(),
+			fetchMovieGenre(),
+			fetchShowGenre(),
+			fetchPopularMovies(),
+			fetchPopularShows(),
+			fetchNowPlaying(),
+		]);
+
+		results[0] = trending;
+		results[1] = movieGenre;
+		results[2] = showGenre;
+		results[3] = popularMovies;
+		results[4] = popularShows;
+		results[5] = nowPlayingMovies;
+	} catch (error) {
+		results[6] = error.message || "An error occurred while fetching data."; // Set error message at the last index
+	}
+
+	return results;
 };
