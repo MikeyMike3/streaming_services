@@ -652,3 +652,10 @@ nav > * {
 .no-similar-movies-shows {
 	margin-bottom: 80px;
 }
+
+.general-error-message-container {
+	height: 100vh;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}

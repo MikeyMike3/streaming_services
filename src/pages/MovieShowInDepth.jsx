@@ -22,6 +22,7 @@ import { PlatformSwiper } from "../components/movieShowInDepthComponents/Platfor
 import { ViewMoreButton } from "../components/ViewMoreButton";
 import { Backdrop } from "../components/movieShowInDepthComponents/Backdrop";
 import { PosterSwiper } from "../components/movieShowInDepthComponents/PosterSwiper";
+import { GeneralApiErrorMessage } from "../components/GeneralApiErrorMessage";
 
 export const MovieShowInDepth = () => {
 	const { id, mediaType } = useParams();
@@ -208,7 +209,7 @@ export const MovieShowInDepth = () => {
 	console.log(movieShowDetails);
 
 	if (movieShowDetails[movieShowDetails.length - 1] !== null) {
-		return <p>console.error();</p>;
+		return <GeneralApiErrorMessage />;
 	}
 
 	return (

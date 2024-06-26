@@ -6,6 +6,7 @@ import { PopularMoviesSlider } from "../components/PopularMoviesSlider";
 import { Hero } from "../components/Hero";
 import { PopularShowsSlider } from "../components/PopularShowsSlider";
 import { HomeLoaderIcon } from "../components/HomeLoaderIcon";
+import { GeneralApiErrorMessage } from "../components/GeneralApiErrorMessage";
 
 export const Home = () => {
 	const loaderData = useLoaderData();
@@ -14,7 +15,7 @@ export const Home = () => {
 	console.log(loaderData);
 
 	if (loaderData[6] !== null) {
-		return <p>console.error();</p>;
+		return <GeneralApiErrorMessage />;
 	}
 
 	return (
