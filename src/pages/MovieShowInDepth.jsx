@@ -56,16 +56,18 @@ export const MovieShowInDepth = () => {
 	}
 
 	useEffect(() => {
-		if (mediaType !== "person") {
-			if (!isEmpty(movieShowDetails[1].results)) {
-				if (typeof movieShowDetails[1].results.US !== "undefined") {
-					if (
-						typeof movieShowDetails[1].results.US.flatrate !==
-						"undefined"
-					) {
-						setFlatRateStreamingServices(
-							movieShowDetails[1].results.US.flatrate
-						);
+		if (movieShowDetails[movieShowDetails.length - 1] === null) {
+			if (mediaType !== "person") {
+				if (!isEmpty(movieShowDetails[1].results)) {
+					if (typeof movieShowDetails[1].results.US !== "undefined") {
+						if (
+							typeof movieShowDetails[1].results.US.flatrate !==
+							"undefined"
+						) {
+							setFlatRateStreamingServices(
+								movieShowDetails[1].results.US.flatrate
+							);
+						}
 					}
 				}
 			}
@@ -73,16 +75,18 @@ export const MovieShowInDepth = () => {
 	}, [movieShowDetails, mediaType]);
 
 	useEffect(() => {
-		if (mediaType !== "person") {
-			if (!isEmpty(movieShowDetails[1].results)) {
-				if (typeof movieShowDetails[1].results.US !== "undefined") {
-					if (
-						typeof movieShowDetails[1].results.US.buy !==
-						"undefined"
-					) {
-						setBuyStreamingServices(
-							movieShowDetails[1].results.US.buy
-						);
+		if (movieShowDetails[movieShowDetails.length - 1] === null) {
+			if (mediaType !== "person") {
+				if (!isEmpty(movieShowDetails[1].results)) {
+					if (typeof movieShowDetails[1].results.US !== "undefined") {
+						if (
+							typeof movieShowDetails[1].results.US.buy !==
+							"undefined"
+						) {
+							setBuyStreamingServices(
+								movieShowDetails[1].results.US.buy
+							);
+						}
 					}
 				}
 			}
@@ -90,16 +94,18 @@ export const MovieShowInDepth = () => {
 	}, [movieShowDetails, mediaType]);
 
 	useEffect(() => {
-		if (mediaType !== "person") {
-			if (!isEmpty(movieShowDetails[1].results)) {
-				if (typeof movieShowDetails[1].results.US !== "undefined") {
-					if (
-						typeof movieShowDetails[1].results.US.rent !==
-						"undefined"
-					) {
-						setRentStreamingServices(
-							movieShowDetails[1].results.US.rent
-						);
+		if (movieShowDetails[movieShowDetails.length - 1] === null) {
+			if (mediaType !== "person") {
+				if (!isEmpty(movieShowDetails[1].results)) {
+					if (typeof movieShowDetails[1].results.US !== "undefined") {
+						if (
+							typeof movieShowDetails[1].results.US.rent !==
+							"undefined"
+						) {
+							setRentStreamingServices(
+								movieShowDetails[1].results.US.rent
+							);
+						}
 					}
 				}
 			}
@@ -107,26 +113,32 @@ export const MovieShowInDepth = () => {
 	}, [movieShowDetails, mediaType]);
 
 	useEffect(() => {
-		if (mediaType !== "person") {
-			if (typeof movieShowDetails[2].cast !== "undefined") {
-				const filteredCast = movieShowDetails[2].cast.filter(
-					(actor) => actor.known_for_department === "Acting"
-				);
-				setCredits(filteredCast);
+		if (movieShowDetails[movieShowDetails.length - 1] === null) {
+			if (mediaType !== "person") {
+				if (typeof movieShowDetails[2].cast !== "undefined") {
+					const filteredCast = movieShowDetails[2].cast.filter(
+						(actor) => actor.known_for_department === "Acting"
+					);
+					setCredits(filteredCast);
+				}
 			}
 		}
 	}, [movieShowDetails, mediaType]);
 
 	useEffect(() => {
-		if (mediaType !== "person") {
-			if (!isEmpty(movieShowDetails[4].results)) {
-				setSimilar(movieShowDetails[4].results);
+		if (movieShowDetails[movieShowDetails.length - 1] === null) {
+			if (mediaType !== "person") {
+				if (!isEmpty(movieShowDetails[4].results)) {
+					setSimilar(movieShowDetails[4].results);
+				}
 			}
 		}
 	}, [movieShowDetails, mediaType]);
 
 	useEffect(() => {
-		setMovieShowId(id);
+		if (movieShowDetails[movieShowDetails.length - 1] === null) {
+			setMovieShowId(id);
+		}
 	}, [id]);
 
 	const resetState = () => {
@@ -171,23 +183,29 @@ export const MovieShowInDepth = () => {
 		}
 	};
 
-	if (mediaType === "person") {
-		if (
-			movieShowDetails[0].birthday !== undefined &&
-			movieShowDetails[0].birthday !== null
-		) {
-			formatPersonBirthday = movieShowDetails[0].birthday.split("-");
+	if (movieShowDetails[movieShowDetails.length - 1] === null) {
+		if (mediaType === "person") {
+			if (
+				movieShowDetails[0].birthday !== undefined &&
+				movieShowDetails[0].birthday !== null
+			) {
+				formatPersonBirthday = movieShowDetails[0].birthday.split("-");
+			}
 		}
 	}
 
-	if (mediaType === "person") {
-		if (
-			movieShowDetails[0].deathday !== undefined &&
-			movieShowDetails[0].deathday !== null
-		) {
-			formatPersonDeathday = movieShowDetails[0].deathday.split("-");
+	if (movieShowDetails[movieShowDetails.length - 1] === null) {
+		if (mediaType === "person") {
+			if (
+				movieShowDetails[0].deathday !== undefined &&
+				movieShowDetails[0].deathday !== null
+			) {
+				formatPersonDeathday = movieShowDetails[0].deathday.split("-");
+			}
 		}
 	}
+
+	console.log(movieShowDetails);
 
 	if (movieShowDetails[movieShowDetails.length - 1] !== null) {
 		return <p>console.error();</p>;
