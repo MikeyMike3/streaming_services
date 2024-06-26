@@ -206,8 +206,6 @@ export const MovieShowInDepth = () => {
 		}
 	}
 
-	console.log(movieShowDetails);
-
 	if (movieShowDetails[movieShowDetails.length - 1] !== null) {
 		return <GeneralApiErrorMessage />;
 	}
