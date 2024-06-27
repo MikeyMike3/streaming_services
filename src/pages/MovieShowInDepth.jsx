@@ -47,8 +47,8 @@ export const MovieShowInDepth = () => {
 
 	const [handleClickError, setHandleClickError] = useState(false);
 
-	let formatPersonBirthday = [];
-	let formatPersonDeathday = [];
+	// let formatPersonBirthday = [];
+	// let formatPersonDeathday = [];
 
 	const isEmpty = (obj) => {
 		return Object.keys(obj).length === 0;
@@ -191,27 +191,27 @@ export const MovieShowInDepth = () => {
 		}
 	};
 
-	if (movieShowDetails[movieShowDetails.length - 1] === null) {
-		if (mediaType === "person") {
-			if (
-				movieShowDetails[0].birthday !== undefined &&
-				movieShowDetails[0].birthday !== null
-			) {
-				formatPersonBirthday = movieShowDetails[0].birthday.split("-");
-			}
-		}
-	}
+	// if (movieShowDetails[movieShowDetails.length - 1] === null) {
+	// 	if (mediaType === "person") {
+	// 		if (
+	// 			movieShowDetails[0].birthday !== undefined &&
+	// 			movieShowDetails[0].birthday !== null
+	// 		) {
+	// 			formatPersonBirthday = movieShowDetails[0].birthday.split("-");
+	// 		}
+	// 	}
+	// }
 
-	if (movieShowDetails[movieShowDetails.length - 1] === null) {
-		if (mediaType === "person") {
-			if (
-				movieShowDetails[0].deathday !== undefined &&
-				movieShowDetails[0].deathday !== null
-			) {
-				formatPersonDeathday = movieShowDetails[0].deathday.split("-");
-			}
-		}
-	}
+	// if (movieShowDetails[movieShowDetails.length - 1] === null) {
+	// 	if (mediaType === "person") {
+	// 		if (
+	// 			movieShowDetails[0].deathday !== undefined &&
+	// 			movieShowDetails[0].deathday !== null
+	// 		) {
+	// 			formatPersonDeathday = movieShowDetails[0].deathday.split("-");
+	// 		}
+	// 	}
+	// }
 
 	if (movieShowDetails[movieShowDetails.length - 1] !== null) {
 		return <GeneralApiErrorMessage />;
@@ -385,7 +385,7 @@ export const MovieShowInDepth = () => {
 									</p>
 								)}
 
-								<p className="person-place-of-birth movie-show-overview">
+								{/* <p className="person-place-of-birth movie-show-overview">
 									{`${movieShowDetails[0].place_of_birth}`}
 								</p>
 								{formatPersonBirthday[0] !== undefined && (
@@ -401,7 +401,7 @@ export const MovieShowInDepth = () => {
 								)}
 
 								<h3>Known Department:</h3>
-								{movieShowDetails[0].known_for_department}
+								{movieShowDetails[0].known_for_department} */}
 							</div>
 						</div>
 
