@@ -192,7 +192,6 @@ header {
 	display: flex;
 	justify-content: space-between;
 	width: 100%;
-	padding: 0 20px;
 }
 
 .logo-container {
@@ -261,22 +260,6 @@ nav > * {
 	text-decoration: none;
 }
 
-@media (max-width: 768px) {
-	.nav-right {
-		display: none;
-	}
-
-	.hamburger {
-		display: block;
-	}
-}
-
-@media (max-width: 480px) {
-	.hamburger {
-		display: block;
-	}
-}
-
 /* end of header nav styles*/
 
 /* start of hero styling*/
@@ -340,6 +323,10 @@ nav > * {
 .hero-title {
 	font-size: 4rem;
 	font-weight: 700;
+	display: -webkit-box;
+	overflow: hidden;
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: 3;
 }
 
 .hero-genres-container {
@@ -355,6 +342,10 @@ nav > * {
 	line-height: 1.5;
 	letter-spacing: 0.00938em;
 	font-size: 1rem;
+	display: -webkit-box;
+	overflow: hidden;
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: 3;
 }
 
 .hero-btn {
@@ -717,4 +708,94 @@ nav > * {
 	display: flex;
 	align-items: center;
 	justify-content: center;
+}
+
+@media (max-width: 1530px) {
+	.wrapper {
+		width: 95%;
+	}
+}
+
+@media (max-width: 1075px) {
+	.search-grid {
+		grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+	}
+
+	.hero-backdrop {
+		height: 725px;
+	}
+}
+
+@media (max-width: 768px) {
+	.wrapper {
+		width: 90%;
+	}
+
+	.nav-right {
+		display: none;
+	}
+
+	.hamburger {
+		display: block;
+	}
+
+	.hero-backdrop {
+		height: 585px;
+	}
+
+	.hero-details-container {
+		min-width: 100%;
+	}
+
+	.hero-title {
+		font-size: 2rem;
+		-webkit-line-clamp: 2;
+	}
+
+	.hero-genres-container {
+		flex-wrap: wrap;
+		max-height: 106px;
+		overflow: hidden;
+	}
+
+	.movie-show-genres {
+		padding-top: 4px;
+		padding-bottom: 4px;
+		padding-left: 10px;
+		padding-right: 10px;
+	}
+
+	.page-heading {
+		font-size: 1.75rem;
+	}
+}
+
+@media (max-width: 735px) {
+	.search-grid {
+		grid-template-columns: repeat(auto-fill, minmax(175px, 1fr));
+	}
+}
+
+@media (max-width: 480px) {
+	.search-grid {
+		grid-template-columns: repeat(auto-fill, minmax(125px, 0.5fr));
+	}
+}
+
+@media (max-width: 330px) {
+	.search-grid {
+		grid-template-columns: repeat(auto-fill, minmax(100px, 0.5fr));
+	}
+}
+
+@media (max-width: 275px) {
+	.search-grid {
+		grid-template-columns: repeat(auto-fill, minmax(90px, 0.5fr));
+	}
+}
+
+@media (max-width: 250px) {
+	.search-grid {
+		grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
+	}
 }

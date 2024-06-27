@@ -59,18 +59,10 @@ export const RootLayout = () => {
 							</Link>
 						</div>
 						<nav className="nav-right">
-							<NavLink to={"/"} onClick={toggleMenu}>
-								Home
-							</NavLink>
-							<NavLink to={"movie"} onClick={toggleMenu}>
-								Movies
-							</NavLink>
-							<NavLink to={"tv"} onClick={toggleMenu}>
-								TV Series
-							</NavLink>
-							<NavLink to={"search"} onClick={toggleMenu}>
-								Search
-							</NavLink>
+							<NavLink to={"/"}>Home</NavLink>
+							<NavLink to={"movie"}>Movies</NavLink>
+							<NavLink to={"tv"}>TV Series</NavLink>
+							<NavLink to={"search"}>Search</NavLink>
 						</nav>
 
 						<div className="hamburger" onClick={toggleMenu}>
