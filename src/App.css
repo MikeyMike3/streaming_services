@@ -192,6 +192,7 @@ header {
 	display: flex;
 	justify-content: space-between;
 	width: 100%;
+	padding: 0 20px;
 }
 
 .logo-container {
@@ -214,8 +215,66 @@ nav > * {
 	color: white;
 	padding: 5px;
 }
+
 .active {
 	text-decoration: underline aqua;
+}
+
+.hamburger {
+	display: none;
+	font-size: 2rem;
+	color: white;
+	cursor: pointer;
+}
+
+.slide-menu {
+	position: fixed;
+	top: 0;
+	right: -100%;
+	width: 70%;
+	height: 100%;
+	background-color: rgba(20, 20, 20, 0.9);
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	transition: right 0.3s ease-in-out;
+}
+
+.slide-menu.open {
+	right: 0;
+}
+
+.close-btn {
+	position: absolute;
+	top: 0;
+	right: 40px;
+	font-size: 3rem;
+	color: white;
+	cursor: pointer;
+}
+
+.slide-menu a {
+	font-size: 1.5rem;
+	color: white;
+	padding: 10px;
+	text-decoration: none;
+}
+
+@media (max-width: 768px) {
+	.nav-right {
+		display: none;
+	}
+
+	.hamburger {
+		display: block;
+	}
+}
+
+@media (max-width: 480px) {
+	.hamburger {
+		display: block;
+	}
 }
 
 /* end of header nav styles*/

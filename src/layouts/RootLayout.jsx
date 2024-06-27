@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 
 export const RootLayout = () => {
 	const [bgOpacity, setBgOpacity] = useState(0);
+	const [menuOpen, setMenuOpen] = useState(false);
 
 	useEffect(() => {
 		const handleScroll = () => {
@@ -17,8 +18,30 @@ export const RootLayout = () => {
 			window.removeEventListener("scroll", handleScroll);
 		};
 	}, []);
+
+	const toggleMenu = () => {
+		event.stopPropagation();
+		setMenuOpen(!menuOpen);
+	};
+
+	const handleClickOutside = (event) => {
+		if (menuOpen && !event.target.closest(".slide-menu")) {
+			setMenuOpen(false);
+		}
+	};
+
+	useEffect(() => {
+		if (menuOpen) {
+			document.addEventListener("click", handleClickOutside);
+		} else {
+			document.removeEventListener("click", handleClickOutside);
+		}
+		return () => {
+			document.removeEventListener("click", handleClickOutside);
+		};
+	}, [menuOpen, handleClickOutside]);
 	return (
-		<div>
+		<>
 			<header
 				style={{ backgroundColor: `rgba(20, 20, 20, ${bgOpacity})` }}>
 				<div className="header-wrapper">
@@ -33,11 +56,40 @@ export const RootLayout = () => {
 							</Link>
 						</div>
 						<nav className="nav-right">
-							<NavLink to={"/"}>Home</NavLink>
-							<NavLink to={"movie"}>Movies</NavLink>
-							<NavLink to={"tv"}>TV Series</NavLink>
-							<NavLink to={"search"}>Search</NavLink>
+							<NavLink to={"/"} onClick={toggleMenu}>
+								Home
+							</NavLink>
+							<NavLink to={"movie"} onClick={toggleMenu}>
+								Movies
+							</NavLink>
+							<NavLink to={"tv"} onClick={toggleMenu}>
+								TV Series
+							</NavLink>
+							<NavLink to={"search"} onClick={toggleMenu}>
+								Search
+							</NavLink>
 						</nav>
+
+						<div className="hamburger" onClick={toggleMenu}>
+							&#9776;
+						</div>
+						<div className={`slide-menu ${menuOpen ? "open" : ""}`}>
+							<div className="close-btn" onClick={toggleMenu}>
+								&times;
+							</div>
+							<NavLink to={"/"} onClick={toggleMenu}>
+								Home
+							</NavLink>
+							<NavLink to={"movie"} onClick={toggleMenu}>
+								Movies
+							</NavLink>
+							<NavLink to={"tv"} onClick={toggleMenu}>
+								TV Series
+							</NavLink>
+							<NavLink to={"search"} onClick={toggleMenu}>
+								Search
+							</NavLink>
+						</div>
 					</div>
 				</div>
 			</header>
@@ -45,6 +97,6 @@ export const RootLayout = () => {
 			<main>
 				<Outlet />
 			</main>
-		</div>
+		</>
 	);
 };
