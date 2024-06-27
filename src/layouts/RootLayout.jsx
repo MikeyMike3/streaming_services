@@ -1,5 +1,5 @@
 import { Link, NavLink, Outlet } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 
 export const RootLayout = () => {
 	const [bgOpacity, setBgOpacity] = useState(0);
@@ -24,11 +24,14 @@ export const RootLayout = () => {
 		setMenuOpen(!menuOpen);
 	};
 
-	const handleClickOutside = (event) => {
-		if (menuOpen && !event.target.closest(".slide-menu")) {
-			setMenuOpen(false);
-		}
-	};
+	const handleClickOutside = useCallback(
+		(event) => {
+			if (menuOpen && !event.target.closest(".slide-menu")) {
+				setMenuOpen(false);
+			}
+		},
+		[menuOpen]
+	);
 
 	useEffect(() => {
 		if (menuOpen) {
