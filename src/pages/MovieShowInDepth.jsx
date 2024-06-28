@@ -354,22 +354,24 @@ export const MovieShowInDepth = () => {
 
 					<div className="wrapper">
 						<div className="movie-show-details-container">
-							{movieShowDetails[0].profile_path === null ? (
-								<div
-									className="movie-show-details-poster"
-									style={{
-										backgroundImage: `url(${poster})`,
-									}}
-								/>
-							) : (
-								<div
-									className="movie-show-details-poster"
-									style={{
-										backgroundImage: `url(https://image.tmdb.org/t/p/w500/${movieShowDetails[0].profile_path})`,
-									}}
-								/>
-							)}
-							<div className="person-overview">
+							<div className="movie-show-poster-container">
+								{movieShowDetails[0].profile_path === null ? (
+									<div
+										className="movie-show-details-poster"
+										style={{
+											backgroundImage: `url(${poster})`,
+										}}
+									/>
+								) : (
+									<div
+										className="movie-show-details-poster"
+										style={{
+											backgroundImage: `url(https://image.tmdb.org/t/p/w500/${movieShowDetails[0].profile_path})`,
+										}}
+									/>
+								)}
+							</div>
+							<div className="movie-show-details">
 								<h1 className="movie-show-title">
 									{movieShowDetails[0].name}
 								</h1>
