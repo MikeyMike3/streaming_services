@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { MovieShowCard } from "../MovieShowCard";
 
 export const Grid = (props) => {
+	console.log(props.array);
 	return (
 		<div className="search-grid">
 			{props.array.map((item) => {
@@ -12,7 +13,7 @@ export const Grid = (props) => {
 					return (
 						<Link
 							onClick={props.resetState}
-							key={item.id}
+							key={item.id + props.mediaType}
 							to={`/${props.mediaType}/${item.id.toString()}`}>
 							<MovieShowCard
 								genreIds={item.genre_ids}
@@ -35,7 +36,7 @@ export const Grid = (props) => {
 					return (
 						<Link
 							onClick={props.resetState}
-							key={item.id}
+							key={item.id + item.media_type}
 							to={`/${item.media_type}/${item.id.toString()}`}>
 							<MovieShowCard
 								genreIds={item.genre_ids}
