@@ -374,7 +374,6 @@ export const MovieShowInDepth = () => {
 									{movieShowDetails[0].name}
 								</h1>
 
-								{console.log(movieShowDetails[0])}
 								{movieShowDetails[0].biography !== "" ? (
 									<p className="movie-show-overview">
 										{movieShowDetails[0].biography}
@@ -406,6 +405,7 @@ export const MovieShowInDepth = () => {
 						</div>
 
 						<h1 className="heading">Known Movies/Shows</h1>
+						<div className="heading-underline"></div>
 						<Grid
 							array={movieShowDetails[1].cast}
 							mediaType={mediaType}

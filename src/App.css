@@ -388,16 +388,21 @@ nav > * {
 
 .movie-show-details-container {
 	margin-top: -320px;
-	display: grid;
-	grid-template-columns: 500px 1fr;
+	display: flex;
 	gap: 25px;
 }
 
 .movie-show-details {
 	display: flex;
+	flex: 1.1;
 	flex-direction: column;
 	height: 100%;
 	min-width: 0;
+}
+
+.movie-show-poster-container {
+	width: 100%;
+	flex: 0.6;
 }
 
 .movie-show-details-poster {
@@ -458,7 +463,7 @@ nav > * {
 
 /* adjusted this to make slider responsive */
 .cast-card-container .swiper-slide {
-	width: 15%;
+	width: 150px;
 }
 
 /* dont touch. This makes the cast cards all be the same height within the swiper*/
@@ -715,6 +720,12 @@ nav > * {
 	}
 }
 
+/* @media (max-width: 1250px) {
+	.cast-card-container .swiper-slide {
+		width: 150px;
+	}
+} */
+
 @media (max-width: 1075px) {
 	.search-grid {
 		grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
@@ -727,6 +738,40 @@ nav > * {
 	.movie-show-flex .swiper-slide {
 		width: 24%;
 	}
+
+	.movie-show-details-backdrop {
+		height: 600px;
+	}
+
+	.movie-show-poster-container {
+		width: 40%;
+		margin-left: auto;
+		margin-right: auto;
+		flex: 0.6;
+	}
+
+	.movie-show-details-container {
+		margin-top: -320px;
+		display: flex;
+		flex-direction: column;
+		gap: 25px;
+	}
+}
+
+@media (max-width: 1020px) {
+	.poster-container .swiper-slide {
+		width: 190px;
+	}
+
+	.movie-show-video .swiper {
+		padding-left: 2rem;
+		padding-right: 2rem;
+	}
+
+	/* .movie-show-video .swiper-slide {
+		width: 190px;
+		height: 190px;
+	} */
 }
 
 @media (max-width: 768px) {
@@ -779,6 +824,10 @@ nav > * {
 	.heading-flex .view-more-btn {
 		font-size: 1rem;
 	}
+
+	.movie-show-title {
+		font-size: 3rem;
+	}
 }
 
 @media (max-width: 735px) {
@@ -791,17 +840,37 @@ nav > * {
 	#search {
 		width: 80%;
 	}
+
+	.movie-show-poster-container {
+		width: 60%;
+	}
+
+	.movie-show-video .youtube-trailer iframe {
+		height: 550px;
+	}
 }
 
 @media (max-width: 560px) {
 	#search {
 		width: 70%;
 	}
+
+	.backdrop-image {
+		padding: 45%;
+	}
 }
 
 @media (max-width: 520px) {
 	.movie-show-flex .swiper-slide {
 		width: 35%;
+	}
+
+	.movie-show-title {
+		font-size: 2.5rem;
+	}
+
+	.movie-show-video .youtube-trailer iframe {
+		height: 500px;
 	}
 }
 
@@ -814,6 +883,15 @@ nav > * {
 @media (max-width: 425px) {
 	.movie-show-flex .swiper-slide {
 		width: 45%;
+	}
+
+	.movie-show-details-backdrop {
+		height: 500px;
+	}
+
+	.movie-show-video .swiper {
+		padding-left: 1rem;
+		padding-right: 1rem;
 	}
 }
 
@@ -843,6 +921,14 @@ nav > * {
 
 	.heading-flex .view-more-btn {
 		font-size: 1rem;
+	}
+
+	.movie-show-poster-container {
+		width: 80%;
+	}
+
+	.movie-show-video .youtube-trailer iframe {
+		height: 300px;
 	}
 }
 

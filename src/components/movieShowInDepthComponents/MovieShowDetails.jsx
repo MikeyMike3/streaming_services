@@ -18,19 +18,21 @@ export const MovieShowDetails = (props) => {
 	const percentage = formatRating(props.movieShowDetails.vote_average * 10);
 	return (
 		<div className="movie-show-details-container">
-			{props.movieShowDetails.poster_path === null ? (
-				<div
-					className="movie-show-details-poster"
-					style={{ backgroundImage: `url(${poster})` }}
-				/>
-			) : (
-				<div
-					className="movie-show-details-poster"
-					style={{
-						backgroundImage: `url(https://image.tmdb.org/t/p/original/${props.movieShowDetails.poster_path})`,
-					}}
-				/>
-			)}
+			<div className="movie-show-poster-container">
+				{props.movieShowDetails.poster_path === null ? (
+					<div
+						className="movie-show-details-poster"
+						style={{ backgroundImage: `url(${poster})` }}
+					/>
+				) : (
+					<div
+						className="movie-show-details-poster"
+						style={{
+							backgroundImage: `url(https://image.tmdb.org/t/p/original/${props.movieShowDetails.poster_path})`,
+						}}
+					/>
+				)}
+			</div>
 
 			<div className="movie-show-details">
 				<h2 className="movie-show-title">
