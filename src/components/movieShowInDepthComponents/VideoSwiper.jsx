@@ -46,7 +46,7 @@ export const VideoSwiper = (props) => {
 					{renderTrailer()}
 				</Swiper>
 			) : (
-				<p>No Videos Available.</p>
+				<p>No videos available.</p>
 			)}
 		</div>
 	);
