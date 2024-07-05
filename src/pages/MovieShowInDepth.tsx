@@ -45,7 +45,7 @@ interface Genres {
 
 // MovieShowDetails index 1
 interface CountryResult {
-	link: string | null;
+	link?: string | null;
 	flatrate?: Provider[] | null;
 	rent?: Provider[] | null;
 	buy?: Provider[] | null;
@@ -132,6 +132,8 @@ interface Images {
 	width: number | null;
 }
 
+// movies
+
 interface MovieShowDetailsMovie0 {
 	adult: boolean | null;
 	backdrop_path: string | null;
@@ -159,7 +161,6 @@ interface MovieShowDetailsMovie0 {
 	vote_average: number | null;
 	vote_count: number | null;
 }
-interface MovieShowDetailsShow0 {}
 
 interface MovieShowDetailsMovie1 {
 	id: number;
@@ -179,7 +180,9 @@ interface MovieShowDetailsMovie3 {
 
 interface MovieShowDetailsMovie4 {
 	page: number | null;
-	results: SimilarResults[] | null;
+	results: SimilarResults[];
+	total_pages: number | null;
+	total_results: number | null;
 }
 
 interface MovieShowDetailsMovie5 {
@@ -188,6 +191,22 @@ interface MovieShowDetailsMovie5 {
 	logos?: Images[] | null;
 	posters?: Images[] | null;
 }
+
+//  shows
+
+interface MovieShowDetailsShow0 {}
+
+interface MovieShowDetailsShow1 {}
+
+interface MovieShowDetailsShow2 {
+	cast: ShowCast[];
+}
+
+interface MovieShowDetailsShow3 {}
+
+interface MovieShowDetailsShow4 {}
+
+interface MovieShowDetailsShow5 {}
 
 type MovieShowDetails =
 	| MovieShowDetailsMovie0
@@ -202,19 +221,23 @@ export const MovieShowInDepth = () => {
 	const movieShowDetails = useLoaderData() as MovieShowDetails[];
 	const navigation = useNavigation();
 
-	const [movieShowId, setMovieShowId] = useState(0);
+	const [movieShowId, setMovieShowId] = useState("");
 
 	const [backToTop, setBackToTop] = useState(true);
 	const [pages, setPages] = useState(1);
 
-	const [flatRateStreamingServices, setFlatRateStreamingServices] = useState(
-		[]
-	);
-	const [buyStreamingServices, setBuyStreamingServices] = useState([]);
-	const [rentStreamingServices, setRentStreamingServices] = useState([]);
+	const [flatRateStreamingServices, setFlatRateStreamingServices] = useState<
+		Provider[]
+	>([]);
+	const [buyStreamingServices, setBuyStreamingServices] = useState<
+		Provider[]
+	>([]);
+	const [rentStreamingServices, setRentStreamingServices] = useState<
+		Provider[]
+	>([]);
 
-	const [credits, setCredits] = useState([]);
-	const [similar, setSimilar] = useState([]);
+	const [credits, setCredits] = useState<MovieCast[]>([]);
+	const [similar, setSimilar] = useState<SimilarResults[]>([]);
 
 	const [isLoading, setIsLoading] = useState(false);
 
@@ -223,7 +246,9 @@ export const MovieShowInDepth = () => {
 	// let formatPersonBirthday = [];
 	// let formatPersonDeathday = [];
 
-	const isEmpty = (obj) => {
+	const isEmpty = (
+		obj: { [countryCode: string]: CountryResult } | SimilarResults[]
+	) => {
 		return Object.keys(obj).length === 0;
 	};
 
@@ -234,18 +259,28 @@ export const MovieShowInDepth = () => {
 	useEffect(() => {
 		if (movieShowDetails[movieShowDetails.length - 1] === null) {
 			if (mediaType !== "person") {
-				if (!isEmpty(movieShowDetails[1].results)) {
+				if (
+					!isEmpty(
+						(movieShowDetails as MovieShowDetailsMovie1[])[1]
+							.results
+					)
+				) {
 					if (
 						typeof (movieShowDetails as MovieShowDetailsMovie1[])[1]
 							.results.US !== "undefined"
 					) {
 						if (
-							typeof movieShowDetails[1].results.US.flatrate !==
-							"undefined"
+							typeof (
+								movieShowDetails as MovieShowDetailsMovie1[]
+							)[1].results.US.flatrate !== "undefined"
 						) {
-							setFlatRateStreamingServices(
-								movieShowDetails[1].results.US.flatrate
-							);
+							const usFlatrate = (
+								movieShowDetails as MovieShowDetailsMovie1[]
+							)[1]?.results?.US?.flatrate;
+
+							if (usFlatrate) {
+								setFlatRateStreamingServices(usFlatrate);
+							}
 						}
 					}
 				}
@@ -256,15 +291,28 @@ export const MovieShowInDepth = () => {
 	useEffect(() => {
 		if (movieShowDetails[movieShowDetails.length - 1] === null) {
 			if (mediaType !== "person") {
-				if (!isEmpty(movieShowDetails[1].results)) {
-					if (typeof movieShowDetails[1].results.US !== "undefined") {
+				if (
+					!isEmpty(
+						(movieShowDetails as MovieShowDetailsMovie1[])[1]
+							.results
+					)
+				) {
+					if (
+						typeof (movieShowDetails as MovieShowDetailsMovie1[])[1]
+							.results.US !== "undefined"
+					) {
 						if (
-							typeof movieShowDetails[1].results.US.buy !==
-							"undefined"
+							typeof (
+								movieShowDetails as MovieShowDetailsMovie1[]
+							)[1].results.US.buy !== "undefined"
 						) {
-							setBuyStreamingServices(
-								movieShowDetails[1].results.US.buy
-							);
+							const usBuy = (
+								movieShowDetails as MovieShowDetailsMovie1[]
+							)[1]?.results?.US?.buy;
+
+							if (usBuy) {
+								setBuyStreamingServices(usBuy);
+							}
 						}
 					}
 				}
@@ -273,17 +321,26 @@ export const MovieShowInDepth = () => {
 	}, [movieShowDetails, mediaType]);
 
 	useEffect(() => {
+		const movieShowDetailsPlatform =
+			movieShowDetails as MovieShowDetailsMovie1[];
+
 		if (movieShowDetails[movieShowDetails.length - 1] === null) {
 			if (mediaType !== "person") {
-				if (!isEmpty(movieShowDetails[1].results)) {
-					if (typeof movieShowDetails[1].results.US !== "undefined") {
+				if (!isEmpty(movieShowDetailsPlatform[1].results)) {
+					if (
+						typeof movieShowDetailsPlatform[1].results.US !==
+						"undefined"
+					) {
 						if (
-							typeof movieShowDetails[1].results.US.rent !==
-							"undefined"
+							typeof movieShowDetailsPlatform[1].results.US
+								.rent !== "undefined"
 						) {
-							setRentStreamingServices(
-								movieShowDetails[1].results.US.rent
-							);
+							const usRent =
+								movieShowDetailsPlatform[1]?.results?.US?.rent;
+
+							if (usRent) {
+								setRentStreamingServices(usRent);
+							}
 						}
 					}
 				}
@@ -292,30 +349,48 @@ export const MovieShowInDepth = () => {
 	}, [movieShowDetails, mediaType]);
 
 	useEffect(() => {
+		const movieShowDetailsMovieCast =
+			movieShowDetails as MovieShowDetailsMovie2[];
+
+		const movieShowDetailsShowCast =
+			movieShowDetails as MovieShowDetailsShow2[];
+
 		if (movieShowDetails[movieShowDetails.length - 1] === null) {
 			if (mediaType !== "person") {
-				if (typeof movieShowDetails[2].cast !== "undefined") {
-					const filteredCast = movieShowDetails[2].cast.filter(
-						(actor) => actor.known_for_department === "Acting"
-					);
-					setCredits(filteredCast);
+				if (mediaType === "movie") {
+					if (
+						typeof movieShowDetailsMovieCast[2].cast !== "undefined"
+					) {
+						const filteredCast =
+							movieShowDetailsMovieCast[2].cast.filter(
+								(actor) =>
+									actor.known_for_department === "Acting"
+							);
+
+						setCredits(filteredCast);
+					}
 				}
 			}
 		}
 	}, [movieShowDetails, mediaType]);
 
 	useEffect(() => {
+		const movieShowDetailsSimilar =
+			movieShowDetails as MovieShowDetailsMovie4[];
 		if (movieShowDetails[movieShowDetails.length - 1] === null) {
 			if (mediaType !== "person") {
-				if (!isEmpty(movieShowDetails[4].results)) {
-					setSimilar(movieShowDetails[4].results);
+				if (!isEmpty(movieShowDetailsSimilar[4].results)) {
+					setSimilar(movieShowDetailsSimilar[4].results);
 				}
 			}
 		}
 	}, [movieShowDetails, mediaType]);
 
 	useEffect(() => {
-		if (movieShowDetails[movieShowDetails.length - 1] === null) {
+		if (
+			movieShowDetails[movieShowDetails.length - 1] === null &&
+			id !== undefined
+		) {
 			setMovieShowId(id);
 		}
 	}, [id, movieShowDetails]);
@@ -323,7 +398,7 @@ export const MovieShowInDepth = () => {
 	const resetState = () => {
 		setBackToTop(true);
 		setPages(1);
-		setMovieShowId(0);
+		setMovieShowId("0");
 		setFlatRateStreamingServices([]);
 		setBuyStreamingServices([]);
 		setRentStreamingServices([]);
@@ -353,13 +428,17 @@ export const MovieShowInDepth = () => {
 				);
 			}
 
-			if (response.ok) {
+			if (response !== undefined && response.ok) {
 				const data = await response.json();
 				setSimilar((prevState) => [...prevState, ...data.results]);
 
 				setPages(nextPage);
 			} else {
-				console.error("Error fetching data:", response.statusText);
+				if (response !== undefined) {
+					console.error("Error fetching data:", response.statusText);
+				} else {
+					console.error("Error fetching data");
+				}
 			}
 		} catch (err) {
 			console.error("Error fetching data:", err);
@@ -451,7 +530,11 @@ export const MovieShowInDepth = () => {
 									handleClick={handleClick}
 									handleClickError={handleClickError}
 									currentPage={pages}
-									totalPages={movieShowDetails[4].total_pages}
+									totalPages={
+										(
+											movieShowDetails as MovieShowDetailsMovie4[]
+										)[4].total_pages
+									}
 									isLoading={isLoading}
 								/>
 							</>
