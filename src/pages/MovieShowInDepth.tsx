@@ -155,7 +155,7 @@ interface Images {
 
 // movies
 
-interface MovieShowDetailsMovie0 {
+export interface MovieShowDetailsMovie0 {
 	adult: boolean | null;
 	backdrop_path: string | null;
 	belongs_to_collection: string | null;
@@ -539,7 +539,11 @@ export const MovieShowInDepth = () => {
 			<Spinner navigation={navigation} />
 			{mediaType === "movie" && (
 				<>
-					<Backdrop movieShowDetails={movieShowDetails} />
+					<Backdrop
+						movieShowDetails={
+							(movieShowDetails as MovieShowDetailsMovie0[])[0]
+						}
+					/>
 
 					<div className="wrapper">
 						<MovieShowDetails

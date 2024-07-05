@@ -2,10 +2,16 @@ import PropTypes from "prop-types";
 
 import poster from "../../imgs/tmdbPoster.jpg";
 
-export const Backdrop = (props) => {
+import { MovieShowDetailsMovie0 } from "../../pages/MovieShowInDepth";
+
+type BackdropProps = {
+	movieShowDetails: MovieShowDetailsMovie0;
+};
+
+export const Backdrop = (props: BackdropProps) => {
 	return (
 		<>
-			{props.movieShowDetails[0].backdrop_path === null ? (
+			{props.movieShowDetails.backdrop_path === null ? (
 				<div
 					className="movie-show-details-backdrop movie-show-details-backdrop-overlay"
 					style={{ backgroundImage: `url(${poster})` }}></div>
@@ -13,7 +19,7 @@ export const Backdrop = (props) => {
 				<div
 					className="movie-show-details-backdrop movie-show-details-backdrop-overlay"
 					style={{
-						backgroundImage: `url(${`https://image.tmdb.org/t/p/original/${props.movieShowDetails[0].backdrop_path}.jpg`})`,
+						backgroundImage: `url(${`https://image.tmdb.org/t/p/original/${props.movieShowDetails.backdrop_path}.jpg`})`,
 					}}></div>
 			)}
 		</>
