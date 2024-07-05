@@ -24,9 +24,182 @@ import { Backdrop } from "../components/movieShowInDepthComponents/Backdrop";
 import { PosterSwiper } from "../components/movieShowInDepthComponents/PosterSwiper";
 import { GeneralApiErrorMessage } from "../components/GeneralApiErrorMessage";
 
+// MovieShowDetails index 0
+interface SpokenLanguages {
+	english_name: string | null;
+	iso_639_1: string | null;
+	name: string | null;
+}
+
+interface ProductionCompanies {
+	id: number | null;
+	logo_path: string | null;
+	name: string | null;
+	origin_country: string | null;
+}
+
+interface Genres {
+	id: number | null;
+	name: string | null;
+}
+
+// MovieShowDetails index 1
+interface CountryResult {
+	link: string | null;
+	flatrate?: Provider[] | null;
+	rent?: Provider[] | null;
+	buy?: Provider[] | null;
+}
+
+interface Provider {
+	logo_path: string | null;
+	provider_id: number | null;
+	provider_name: string | null;
+	display_priority: number | null;
+}
+
+// MovieShowDetails index 2
+interface MovieCast {
+	adult: boolean | null;
+	gender: number | null;
+	id: number | null;
+	known_for_department: string | null;
+	name: string | null;
+	original_name: string | null;
+	popularity: number | null;
+	profile_path: string | null;
+	cast_id: number | null;
+	character: string | null;
+	credit_id: string | null;
+	order: number | null;
+}
+
+interface ShowCast {
+	adult: boolean | null;
+	gender: number | null;
+	id: number | null;
+	known_for_department: string | null;
+	name: string | null;
+	original_name: string | null;
+	popularity: number | null;
+	profile_path: string | null;
+	character: string | null;
+	credit_id: string | null;
+	order: number | null;
+}
+
+// MovieShowDetails index 3
+
+interface VideoResults {
+	iso_639_1: string | null;
+	iso_3166_1: string | null;
+	name: string | null;
+	key: string | null;
+	site: string | null;
+	size: number | null;
+	type: string | null;
+	official: boolean | null;
+	id: string | null;
+}
+
+// MovieShowDetails index 4
+
+interface SimilarResults {
+	adult: boolean | null;
+	genre_ids: number[] | null;
+	id: number | null;
+	original_language: string | null;
+	original_title: string | null;
+	overview: string | null;
+	popularity: number | null;
+	poster_path: string | null;
+	release_date: string | null;
+	title: string | null;
+	video: boolean | null;
+	vote_average: number | null;
+	vote_count: number | null;
+}
+
+// MovieShowDetails index 5
+
+interface Images {
+	aspect_ratio: number | null;
+	height: number | null;
+	iso_639_1: string | null;
+	file_path: string | null;
+	vote_average: number | null;
+	vote_count: number | null;
+	width: number | null;
+}
+
+interface MovieShowDetailsMovie0 {
+	adult: boolean | null;
+	backdrop_path: string | null;
+	belongs_to_collection: string | null;
+	budget: number | null;
+	genres: Genres[] | null;
+	homepage: string | null;
+	id: number | null;
+	imdb_id: string | null;
+	origin_country: string[] | null;
+	original_language: string | null;
+	original_title: string | null;
+	overview: string | null;
+	popularity: number | null;
+	poster_path: string | null;
+	production_companies: ProductionCompanies[] | null;
+	release_date: string | null;
+	revenue: number | null;
+	runtime: number | null;
+	spoken_languages: SpokenLanguages[] | null;
+	status: string | null;
+	tagline: string | null;
+	title: string | null;
+	video: boolean | null;
+	vote_average: number | null;
+	vote_count: number | null;
+}
+interface MovieShowDetailsShow0 {}
+
+interface MovieShowDetailsMovie1 {
+	id: number;
+	results: {
+		[countryCode: string]: CountryResult;
+	};
+}
+
+interface MovieShowDetailsMovie2 {
+	cast: MovieCast[];
+}
+
+interface MovieShowDetailsMovie3 {
+	id: number | null;
+	results: VideoResults[];
+}
+
+interface MovieShowDetailsMovie4 {
+	page: number | null;
+	results: SimilarResults[] | null;
+}
+
+interface MovieShowDetailsMovie5 {
+	backdrops?: Images[] | null;
+	id?: number | null;
+	logos?: Images[] | null;
+	posters?: Images[] | null;
+}
+
+type MovieShowDetails =
+	| MovieShowDetailsMovie0
+	| MovieShowDetailsMovie1
+	| MovieShowDetailsMovie2
+	| MovieShowDetailsMovie3
+	| MovieShowDetailsMovie4
+	| MovieShowDetailsMovie5;
+
 export const MovieShowInDepth = () => {
 	const { id, mediaType } = useParams();
-	const movieShowDetails = useLoaderData();
+	const movieShowDetails = useLoaderData() as MovieShowDetails[];
 	const navigation = useNavigation();
 
 	const [movieShowId, setMovieShowId] = useState(0);
@@ -62,7 +235,10 @@ export const MovieShowInDepth = () => {
 		if (movieShowDetails[movieShowDetails.length - 1] === null) {
 			if (mediaType !== "person") {
 				if (!isEmpty(movieShowDetails[1].results)) {
-					if (typeof movieShowDetails[1].results.US !== "undefined") {
+					if (
+						typeof (movieShowDetails as MovieShowDetailsMovie1[])[1]
+							.results.US !== "undefined"
+					) {
 						if (
 							typeof movieShowDetails[1].results.US.flatrate !==
 							"undefined"
@@ -152,6 +328,10 @@ export const MovieShowInDepth = () => {
 		setBuyStreamingServices([]);
 		setRentStreamingServices([]);
 	};
+
+	useEffect(() => {
+		console.log(similar);
+	}, [similar]);
 
 	const handleClick = async () => {
 		let nextPage = pages + 1;
@@ -245,7 +425,7 @@ export const MovieShowInDepth = () => {
 						<h1 className="heading">Videos</h1>
 						<div className="heading-underline"></div>
 
-						<VideoSwiper array={movieShowDetails[3].results} />
+						{/* <VideoSwiper array={movieShowDetails[3].results} /> */}
 
 						<h1 className="heading">Backdrops</h1>
 						<div className="heading-underline"></div>
