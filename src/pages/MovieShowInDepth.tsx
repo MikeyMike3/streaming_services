@@ -610,7 +610,11 @@ export const MovieShowInDepth = () => {
 			)}
 			{mediaType === "tv" && (
 				<>
-					<Backdrop movieShowDetails={movieShowDetails} />
+					<Backdrop
+						movieShowDetails={
+							(movieShowDetails as MovieShowDetailsMovie0[])[0]
+						}
+					/>
 
 					<div className="wrapper">
 						<MovieShowDetails
