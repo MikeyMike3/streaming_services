@@ -23,6 +23,7 @@ import { ViewMoreButton } from "../components/ViewMoreButton";
 import { Backdrop } from "../components/movieShowInDepthComponents/Backdrop";
 import { PosterSwiper } from "../components/movieShowInDepthComponents/PosterSwiper";
 import { GeneralApiErrorMessage } from "../components/GeneralApiErrorMessage";
+import { NullLiteral } from "typescript";
 
 // MovieShowDetails index 0
 interface SpokenLanguages {
@@ -86,6 +87,27 @@ interface ShowCast {
 	character: string | null;
 	credit_id: string | null;
 	order: number | null;
+}
+
+interface PersonCast {
+	adult: boolean | null;
+	backdrop_path: string | null;
+	genre_ids: number[];
+	id: number | null;
+	original_language: string | null;
+	original_title: string | null;
+	overview: string | null;
+	popularity: number | null;
+	poster_path: string | null;
+	release_date: string | null;
+	title: string | null;
+	video: boolean | null;
+	vote_average: number | null;
+	vote_count: number | null;
+	character: string | null;
+	credit_id: string | null;
+	order: number | null;
+	media_type: string | null;
 }
 
 // MovieShowDetails index 3
@@ -208,13 +230,38 @@ interface MovieShowDetailsShow4 {}
 
 interface MovieShowDetailsShow5 {}
 
+//   person
+
+interface Person0 {
+	adult: boolean | null;
+	also_known_as: string[];
+	biography: string | null;
+	birthday: string | null;
+	deathday: string | null;
+	gender: number | null;
+	homepage: string | null;
+	id: number | null;
+	imdb_id: string | null;
+	known_for_department: string | null;
+	name: string | null;
+	place_of_birth: string | null;
+	popularity: number | null;
+	profile_path: string | null;
+}
+
+interface Person1 {
+	cast: PersonCast[];
+}
+
 type MovieShowDetails =
 	| MovieShowDetailsMovie0
 	| MovieShowDetailsMovie1
 	| MovieShowDetailsMovie2
 	| MovieShowDetailsMovie3
 	| MovieShowDetailsMovie4
-	| MovieShowDetailsMovie5;
+	| MovieShowDetailsMovie5
+	| Person0
+	| Person1;
 
 export const MovieShowInDepth = () => {
 	const { id, mediaType } = useParams();
@@ -583,7 +630,13 @@ export const MovieShowInDepth = () => {
 						<h1 className="heading">Videos</h1>
 						<div className="heading-underline"></div>
 
-						<VideoSwiper array={movieShowDetails[3].results} />
+						<VideoSwiper
+							array={
+								(
+									movieShowDetails as MovieShowDetailsMovie3[]
+								)[3].results
+							}
+						/>
 
 						<h1 className="heading">Backdrops</h1>
 						<div className="heading-underline"></div>
@@ -609,7 +662,11 @@ export const MovieShowInDepth = () => {
 									handleClickError={handleClickError}
 									handleClick={handleClick}
 									currentPage={pages}
-									totalPages={movieShowDetails[4].total_pages}
+									totalPages={
+										(
+											movieShowDetails as MovieShowDetailsMovie4[]
+										)[4].total_pages
+									}
 									isLoading={isLoading}
 								/>
 							</>
@@ -630,7 +687,8 @@ export const MovieShowInDepth = () => {
 					<div className="wrapper">
 						<div className="movie-show-details-container">
 							<div className="movie-show-poster-container">
-								{movieShowDetails[0].profile_path === null ? (
+								{(movieShowDetails as Person0[])[0]
+									.profile_path === null ? (
 									<div
 										className="movie-show-details-poster"
 										style={{
@@ -641,19 +699,23 @@ export const MovieShowInDepth = () => {
 									<div
 										className="movie-show-details-poster"
 										style={{
-											backgroundImage: `url(https://image.tmdb.org/t/p/w500/${movieShowDetails[0].profile_path})`,
+											backgroundImage: `url(https://image.tmdb.org/t/p/w500/${(movieShowDetails as Person0[])[0].profile_path})`,
 										}}
 									/>
 								)}
 							</div>
 							<div className="movie-show-details">
 								<h1 className="movie-show-title">
-									{movieShowDetails[0].name}
+									{(movieShowDetails as Person0[])[0].name}
 								</h1>
 
-								{movieShowDetails[0].biography !== "" ? (
+								{(movieShowDetails as Person0[])[0]
+									.biography !== "" ? (
 									<p className="movie-show-overview">
-										{movieShowDetails[0].biography}
+										{
+											(movieShowDetails as Person0[])[0]
+												.biography
+										}
 									</p>
 								) : (
 									<p className="movie-show-overview">
@@ -684,7 +746,7 @@ export const MovieShowInDepth = () => {
 						<h1 className="heading">Known Movies/Shows</h1>
 						<div className="heading-underline"></div>
 						<Grid
-							array={movieShowDetails[1].cast}
+							array={(movieShowDetails as Person1[])[1].cast}
 							mediaType={mediaType}
 							resetState={resetState}
 						/>
