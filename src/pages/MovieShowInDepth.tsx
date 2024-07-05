@@ -236,7 +236,7 @@ export const MovieShowInDepth = () => {
 		Provider[]
 	>([]);
 
-	const [credits, setCredits] = useState<MovieCast[]>([]);
+	const [credits, setCredits] = useState<MovieCast[] | ShowCast[]>([]);
 	const [similar, setSimilar] = useState<SimilarResults[]>([]);
 
 	const [isLoading, setIsLoading] = useState(false);
@@ -363,6 +363,18 @@ export const MovieShowInDepth = () => {
 					) {
 						const filteredCast =
 							movieShowDetailsMovieCast[2].cast.filter(
+								(actor) =>
+									actor.known_for_department === "Acting"
+							);
+
+						setCredits(filteredCast);
+					}
+				} else if (mediaType === "tv") {
+					if (
+						typeof movieShowDetailsShowCast[2].cast !== "undefined"
+					) {
+						const filteredCast =
+							movieShowDetailsShowCast[2].cast.filter(
 								(actor) =>
 									actor.known_for_department === "Acting"
 							);
