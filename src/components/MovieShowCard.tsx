@@ -2,7 +2,15 @@
 import PropTypes from "prop-types";
 import poster from "../imgs/tmdbPoster.jpg";
 
-export const MovieShowCard = (props) => {
+type MovieShowCardProps = {
+	profilePath: string | null;
+	posterPath: string | null;
+	title: string | null;
+	name: string | null;
+	mediaType: string;
+};
+
+export const MovieShowCard = (props: MovieShowCardProps) => {
 	return (
 		<>
 			<div className="movie-show-card-container">

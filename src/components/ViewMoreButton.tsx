@@ -2,7 +2,15 @@ import PropTypes from "prop-types";
 
 import { ViewMoreClipLoader } from "../spinners/ViewMoreClipLoader";
 
-export const ViewMoreButton = (props) => {
+type ViewMoreButtonProps = {
+	isLoading: boolean;
+	totalPages: number | null;
+	currentPage: number | null;
+	handleClick: () => Promise<void>;
+	handleClickError: boolean;
+};
+
+export const ViewMoreButton = (props: ViewMoreButtonProps) => {
 	return (
 		<>
 			{!props.handleClickError &&

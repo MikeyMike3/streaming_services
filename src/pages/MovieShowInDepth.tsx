@@ -23,7 +23,6 @@ import { ViewMoreButton } from "../components/ViewMoreButton";
 import { Backdrop } from "../components/movieShowInDepthComponents/Backdrop";
 import { PosterSwiper } from "../components/movieShowInDepthComponents/PosterSwiper";
 import { GeneralApiErrorMessage } from "../components/GeneralApiErrorMessage";
-import { NullLiteral } from "typescript";
 
 // MovieShowDetails index 0
 interface SpokenLanguages {
