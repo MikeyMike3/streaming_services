@@ -24,200 +24,22 @@ import { Backdrop } from "../components/movieShowInDepthComponents/Backdrop";
 import { PosterSwiper } from "../components/movieShowInDepthComponents/PosterSwiper";
 import { GeneralApiErrorMessage } from "../components/GeneralApiErrorMessage";
 
-// MovieShowDetails index 0
-interface SpokenLanguages {
-	english_name: string | null;
-	iso_639_1: string | null;
-	name: string | null;
-}
-
-interface ProductionCompanies {
-	id: number | null;
-	logo_path: string | null;
-	name: string | null;
-	origin_country: string | null;
-}
-
-interface Genres {
-	id: number | null;
-	name: string | null;
-}
-
-// MovieShowDetails index 1
-interface CountryResult {
-	link?: string | null;
-	flatrate?: Provider[] | null;
-	rent?: Provider[] | null;
-	buy?: Provider[] | null;
-}
-
-interface Provider {
-	logo_path: string | null;
-	provider_id: number | null;
-	provider_name: string | null;
-	display_priority: number | null;
-}
-
-// MovieShowDetails index 2
-export interface MovieCast {
-	adult: boolean | null;
-	gender: number | null;
-	id: number;
-	known_for_department: string | null;
-	name: string | null;
-	original_name: string | null;
-	popularity: number | null;
-	profile_path: string | null;
-	cast_id: number | null;
-	character: string | null;
-	credit_id: string | null;
-	order: number | null;
-}
-
-export interface ShowCast {
-	adult: boolean | null;
-	gender: number | null;
-	id: number;
-	known_for_department: string | null;
-	name: string | null;
-	original_name: string | null;
-	popularity: number | null;
-	profile_path: string | null;
-	character: string | null;
-	credit_id: string | null;
-	order: number | null;
-}
-
-export interface PersonCast {
-	adult: boolean | null;
-	backdrop_path: string | null;
-	genre_ids: number[];
-	id: number;
-	original_language: string | null;
-	original_title: string | null;
-	overview: string | null;
-	popularity: number | null;
-	poster_path: string | null;
-	release_date: string | null;
-	title: string | null;
-	video: boolean | null;
-	vote_average: number | null;
-	vote_count: number | null;
-	character: string | null;
-	credit_id: string | null;
-	order: number | null;
-	media_type: string;
-	profile_path: string | null;
-	name: string | null;
-}
-
-// MovieShowDetails index 3
-
-interface VideoResults {
-	iso_639_1: string | null;
-	iso_3166_1: string | null;
-	name: string | null;
-	key: string | null;
-	site: string | null;
-	size: number | null;
-	type: string | null;
-	official: boolean | null;
-	id: string | null;
-}
-
-// MovieShowDetails index 4
-
-export interface SimilarResults {
-	adult: boolean | null;
-	genre_ids: number[] | null;
-	id: number;
-	original_language: string | null;
-	original_title: string | null;
-	overview: string | null;
-	popularity: number | null;
-	poster_path: string | null;
-	release_date: string | null;
-	title: string | null;
-	video: boolean | null;
-	vote_average: number | null;
-	vote_count: number | null;
-	media_type: string;
-	profile_path: string | null;
-	backdrop_path: string | null;
-	name: string | null;
-}
-
-// MovieShowDetails index 5
-
-interface Images {
-	aspect_ratio: number | null;
-	height: number | null;
-	iso_639_1: string | null;
-	file_path: string | null;
-	vote_average: number | null;
-	vote_count: number | null;
-	width: number | null;
-}
-
-// movies
-
-export interface MovieShowDetailsMovie0 {
-	adult: boolean | null;
-	backdrop_path: string | null;
-	belongs_to_collection: string | null;
-	budget: number | null;
-	genres: Genres[] | null;
-	homepage: string | null;
-	id: number | null;
-	imdb_id: string | null;
-	origin_country: string[] | null;
-	original_language: string | null;
-	original_title: string | null;
-	overview: string | null;
-	popularity: number | null;
-	poster_path: string | null;
-	production_companies: ProductionCompanies[] | null;
-	release_date: string | null;
-	revenue: number | null;
-	runtime: number | null;
-	spoken_languages: SpokenLanguages[] | null;
-	status: string | null;
-	tagline: string | null;
-	title: string | null;
-	video: boolean | null;
-	vote_average: number | null;
-	vote_count: number | null;
-}
-
-interface MovieShowDetailsMovie1 {
-	id: number;
-	results: {
-		[countryCode: string]: CountryResult;
-	};
-}
-
-interface MovieShowDetailsMovie2 {
-	cast: MovieCast[];
-}
-
-interface MovieShowDetailsMovie3 {
-	id: number | null;
-	results: VideoResults[];
-}
-
-interface MovieShowDetailsMovie4 {
-	page: number | null;
-	results: SimilarResults[];
-	total_pages: number | null;
-	total_results: number | null;
-}
-
-interface MovieShowDetailsMovie5 {
-	backdrops?: Images[] | null;
-	id?: number | null;
-	logos?: Images[] | null;
-	posters?: Images[] | null;
-}
+import {
+	CountryResult,
+	Provider,
+	MovieCast,
+	ShowCast,
+	SimilarResults,
+	MovieShowDetailsMovie0,
+	MovieShowDetailsMovie1,
+	MovieShowDetailsMovie2,
+	MovieShowDetailsMovie3,
+	MovieShowDetailsMovie4,
+	MovieShowDetailsMovie5,
+	MovieShowDetailsShow2,
+	Person0,
+	Person1,
+} from "../types/movieShowInDepthTypes";
 
 //  shows
 
@@ -225,38 +47,11 @@ interface MovieShowDetailsShow0 {}
 
 interface MovieShowDetailsShow1 {}
 
-interface MovieShowDetailsShow2 {
-	cast: ShowCast[];
-}
-
 interface MovieShowDetailsShow3 {}
 
 interface MovieShowDetailsShow4 {}
 
 interface MovieShowDetailsShow5 {}
-
-//   person
-
-interface Person0 {
-	adult: boolean | null;
-	also_known_as: string[];
-	biography: string | null;
-	birthday: string | null;
-	deathday: string | null;
-	gender: number | null;
-	homepage: string | null;
-	id: number | null;
-	imdb_id: string | null;
-	known_for_department: string | null;
-	name: string | null;
-	place_of_birth: string | null;
-	popularity: number | null;
-	profile_path: string | null;
-}
-
-export interface Person1 {
-	cast: PersonCast[];
-}
 
 type MovieShowDetails =
 	| MovieShowDetailsMovie0
@@ -549,18 +344,22 @@ export const MovieShowInDepth = () => {
 				<>
 					<Backdrop
 						movieShowDetails={
-							(movieShowDetails as MovieShowDetailsMovie0[])[0]
+							movieShowDetails[0] as MovieShowDetailsMovie0
 						}
 					/>
 
 					<div className="wrapper">
 						<MovieShowDetails
-							movieShowDetails={movieShowDetails[0]}
+							movieShowDetails={
+								movieShowDetails[0] as MovieShowDetailsMovie0
+							}
 							credits={credits}
 						/>
 
 						<AdditionalMovieShowInfo
-							movieShowDetails={movieShowDetails[0]}
+							movieShowDetails={
+								movieShowDetails[0] as MovieShowDetailsMovie0
+							}
 							mediaType={mediaType}
 						/>
 
@@ -578,11 +377,19 @@ export const MovieShowInDepth = () => {
 
 						<h1 className="heading">Backdrops</h1>
 						<div className="heading-underline"></div>
-						<BackdropSwiper array={movieShowDetails[5]} />
+						<BackdropSwiper
+							array={
+								movieShowDetails[5] as MovieShowDetailsMovie5
+							}
+						/>
 
 						<h1 className="heading">Posters</h1>
 						<div className="heading-underline"></div>
-						<PosterSwiper array={movieShowDetails[5]} />
+						<PosterSwiper
+							array={
+								movieShowDetails[5] as MovieShowDetailsMovie5
+							}
+						/>
 
 						<h1 className="similar-movies-heading">
 							Similar Movies
@@ -620,18 +427,22 @@ export const MovieShowInDepth = () => {
 				<>
 					<Backdrop
 						movieShowDetails={
-							(movieShowDetails as MovieShowDetailsMovie0[])[0]
+							movieShowDetails[0] as MovieShowDetailsMovie0
 						}
 					/>
 
 					<div className="wrapper">
 						<MovieShowDetails
-							movieShowDetails={movieShowDetails[0]}
+							movieShowDetails={
+								movieShowDetails[0] as MovieShowDetailsMovie0
+							}
 							credits={credits}
 						/>
 
 						<AdditionalMovieShowInfo
-							movieShowDetails={movieShowDetails[0]}
+							movieShowDetails={
+								movieShowDetails[0] as MovieShowDetailsMovie0
+							}
 							mediaType={mediaType}
 						/>
 
@@ -655,11 +466,19 @@ export const MovieShowInDepth = () => {
 
 						<h1 className="heading">Backdrops</h1>
 						<div className="heading-underline"></div>
-						<BackdropSwiper array={movieShowDetails[5]} />
+						<BackdropSwiper
+							array={
+								movieShowDetails[5] as MovieShowDetailsMovie5
+							}
+						/>
 
 						<h1 className="heading">Posters</h1>
 						<div className="heading-underline"></div>
-						<PosterSwiper array={movieShowDetails[5]} />
+						<PosterSwiper
+							array={
+								movieShowDetails[5] as MovieShowDetailsMovie5
+							}
+						/>
 
 						<h1 className="similar-movies-heading">
 							Similar Shows

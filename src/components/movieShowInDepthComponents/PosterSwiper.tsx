@@ -1,14 +1,18 @@
 import { useRef, useEffect } from "react";
 
-import PropTypes from "prop-types";
-
 import { Swiper, SwiperSlide } from "swiper/react";
 import { FreeMode } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/free-mode";
 
-export const PosterSwiper = (props) => {
-	const posterSwiperRef = useRef(null);
+import { MovieShowDetailsMovie5 } from "../../types/movieShowInDepthTypes";
+
+type PosterSwiperProps = {
+	array: MovieShowDetailsMovie5;
+};
+
+export const PosterSwiper = (props: PosterSwiperProps) => {
+	const posterSwiperRef: any = useRef(null);
 
 	useEffect(() => {
 		if (posterSwiperRef.current && posterSwiperRef.current.swiper) {
@@ -18,16 +22,14 @@ export const PosterSwiper = (props) => {
 
 	return (
 		<div className="poster-container">
-			{props.array.posters.length > 0 ? (
+			{props.array.posters !== null && props.array.posters.length > 0 ? (
 				<Swiper
 					ref={posterSwiperRef}
 					slidesPerView={"auto"}
-					grabCursor={"true"}
+					grabCursor={true}
 					spaceBetween={10}
 					modules={[FreeMode]}
-					freeMode={{
-						freeMode: true,
-					}}
+					freeMode={true}
 					className="mySwiper">
 					{props.array.posters.map((item) => (
 						<SwiperSlide key={item.file_path}>
@@ -45,8 +47,4 @@ export const PosterSwiper = (props) => {
 			)}
 		</div>
 	);
-};
-
-PosterSwiper.propTypes = {
-	array: PropTypes.object,
 };

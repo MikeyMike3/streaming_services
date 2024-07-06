@@ -8,8 +8,25 @@ import { PopularShowsSlider } from "../components/PopularShowsSlider";
 import { HomeLoaderIcon } from "../components/HomeLoaderIcon";
 import { GeneralApiErrorMessage } from "../components/GeneralApiErrorMessage";
 
+import {
+	HomeLoader0,
+	HomeLoader1,
+	HomeLoader2,
+	HomeLoader3,
+	HomeLoader4,
+	HomeLoader5,
+} from "../types/homeTypes";
+
+type HomeLoader =
+	| HomeLoader0
+	| HomeLoader1
+	| HomeLoader2
+	| HomeLoader3
+	| HomeLoader4
+	| HomeLoader5;
+
 export const Home = () => {
-	const loaderData = useLoaderData();
+	const loaderData = useLoaderData() as HomeLoader[];
 	const navigation = useNavigation();
 
 	if (loaderData[6] !== null) {

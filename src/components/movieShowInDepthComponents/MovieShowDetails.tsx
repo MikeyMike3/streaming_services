@@ -1,21 +1,42 @@
-import PropTypes from "prop-types";
-
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 
 import { Credits } from "./Credits";
 import poster from "../../imgs/tmdbPoster.jpg";
 
-export const MovieShowDetails = (props) => {
-	const formatRating = (rating) => {
-		const parsedRating = parseFloat(rating);
+import {
+	MovieShowDetailsMovie0,
+	MovieShowDetailsShow0,
+	ShowCast,
+	MovieCast,
+} from "../../types/movieShowInDepthTypes";
 
-		const roundedRating = Math.round(parsedRating);
+type MovieShowDetailsProps = {
+	movieShowDetails: MovieShowDetailsMovie0 | MovieShowDetailsShow0;
+	credits: ShowCast[] | MovieCast[];
+};
 
-		return roundedRating.toString();
+function isMovie(
+	details: MovieShowDetailsMovie0 | MovieShowDetailsShow0
+): details is MovieShowDetailsMovie0 {
+	return (details as MovieShowDetailsMovie0).release_date !== undefined;
+}
+
+function isShow(
+	details: MovieShowDetailsMovie0 | MovieShowDetailsShow0
+): details is MovieShowDetailsShow0 {
+	return (details as MovieShowDetailsShow0).number_of_seasons !== undefined;
+}
+
+export const MovieShowDetails = (props: MovieShowDetailsProps) => {
+	const formatRating = (rating: number): number => {
+		const roundedRating = Math.round(rating);
+
+		return roundedRating;
 	};
 
 	const percentage = formatRating(props.movieShowDetails.vote_average * 10);
+
 	return (
 		<div className="movie-show-details-container">
 			<div className="movie-show-poster-container">
@@ -36,7 +57,9 @@ export const MovieShowDetails = (props) => {
 
 			<div className="movie-show-details">
 				<h2 className="movie-show-title">
-					{props.movieShowDetails.title ||
+					{isMovie(props.movieShowDetails) &&
+						props.movieShowDetails.title}
+					{isShow(props.movieShowDetails) &&
 						props.movieShowDetails.name}
 				</h2>
 				{typeof props.movieShowDetails.genres !== "undefined" && (
@@ -71,13 +94,8 @@ export const MovieShowDetails = (props) => {
 					</p>
 				)}
 
-				<Credits credits={props.credits} />
+				<Credits credits={props.credits as ShowCast[] | MovieCast[]} />
 			</div>
 		</div>
 	);
-};
-
-MovieShowDetails.propTypes = {
-	movieShowDetails: PropTypes.object,
-	credits: PropTypes.array,
 };
