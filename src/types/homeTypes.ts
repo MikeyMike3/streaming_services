@@ -1,4 +1,4 @@
-interface HomeLoaderMovieResults {
+export interface HomeLoaderMovieResults {
 	id: number;
 	title: string | null;
 	poster_path: string | null;
@@ -7,9 +7,10 @@ interface HomeLoaderMovieResults {
 	genre_ids: number[];
 	release_date: string;
 	vote_average: number;
+	backdrop_path: string;
 }
 
-interface HomeLoaderShowResults {
+export interface HomeLoaderShowResults {
 	id: number;
 	name: string | null;
 	poster_path: string | null;
@@ -17,6 +18,7 @@ interface HomeLoaderShowResults {
 	genre_ids: number[];
 	release_date: string;
 	vote_average: number;
+	backdrop_path: string;
 }
 
 interface Genres {

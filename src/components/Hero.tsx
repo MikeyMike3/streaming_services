@@ -1,8 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
-import PropTypes from "prop-types";
-
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper/modules";
 import "swiper/css";
@@ -11,15 +9,54 @@ import "swiper/css/free-mode";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 
+import {
+	HomeLoader0,
+	HomeLoader1,
+	HomeLoader2,
+	HomeLoader3,
+	HomeLoader4,
+	HomeLoader5,
+	HomeLoaderMovieResults,
+	HomeLoaderShowResults,
+} from "../types/homeTypes";
+
+type HomeLoader =
+	| HomeLoader0
+	| HomeLoader1
+	| HomeLoader2
+	| HomeLoader3
+	| HomeLoader4
+	| HomeLoader5;
+
+type HomeLoaderMovieShow =
+	| HomeLoader5[]
+	| HomeLoader4[]
+	| HomeLoader3[]
+	| HomeLoader0[];
+
+type HomeLoaderGenre = HomeLoader1[] | HomeLoader2[];
+
 type HeroProps = {
-	loaderData: ;
+	loaderData: HomeLoader[];
 	loaderIndex: number;
 	genreIndex: number;
 	mediaType: string;
 };
 
+function isMovie(
+	details: HomeLoaderMovieResults | HomeLoaderShowResults
+): details is HomeLoaderMovieResults {
+	return (details as HomeLoaderMovieResults).title !== undefined;
+}
+
+function isShow(
+	details: HomeLoaderMovieResults | HomeLoaderShowResults
+): details is HomeLoaderShowResults {
+	return (details as HomeLoaderShowResults).name !== undefined;
+}
+
 export const Hero = (props: HeroProps) => {
-	const [nowPlaying, setNowPlaying] = useState([]);
+	const [nowPlaying, setNowPlaying] = useState<HomeLoader[]>([]);
 
 	const formatRating = (rating: number): number => {
 		const roundedRating = Math.round(rating);
@@ -45,7 +82,7 @@ export const Hero = (props: HeroProps) => {
 		!nowPlaying ||
 		nowPlaying.length < 6 ||
 		!nowPlaying[5] ||
-		!nowPlaying[5].results
+		!(nowPlaying as HomeLoader5[])[5].results
 	) {
 		return null;
 	}
@@ -63,7 +100,9 @@ export const Hero = (props: HeroProps) => {
 						disableOnInteraction: false,
 					}}
 					modules={[Autoplay]}>
-					{nowPlaying[props.loaderIndex].results.map((item) => (
+					{(nowPlaying as HomeLoaderMovieShow)[
+						props.loaderIndex
+					].results.map((item) => (
 						<SwiperSlide key={`hero${item.id}`}>
 							<div
 								className="hero-backdrop hero-overlay"
@@ -73,7 +112,9 @@ export const Hero = (props: HeroProps) => {
 								<div className="hero-wrapper">
 									<div className="hero-details-container">
 										<h2 className="hero-title">
-											{item.title || item.name}
+											{isMovie(item)
+												? item.title
+												: item.name}
 										</h2>
 
 										<div className="hero-genres-container">
@@ -95,18 +136,24 @@ export const Hero = (props: HeroProps) => {
 											</div>
 
 											{item.genre_ids.map((genreId) => {
-												return props.loaderData[
-													props.genreIndex
-												].genres.map((loaderGenre) => {
-													return loaderGenre.id ===
-														genreId ? (
-														<p
-															key={loaderGenre.id}
-															className="movie-show-genres">
-															{loaderGenre.name}
-														</p>
-													) : null;
-												});
+												return (
+													props.loaderData as HomeLoaderGenre
+												)[props.genreIndex].genres.map(
+													(loaderGenre) => {
+														return loaderGenre.id ===
+															genreId ? (
+															<p
+																key={
+																	loaderGenre.id
+																}
+																className="movie-show-genres">
+																{
+																	loaderGenre.name
+																}
+															</p>
+														) : null;
+													}
+												);
 											})}
 										</div>
 
@@ -137,10 +184,4 @@ export const Hero = (props: HeroProps) => {
 			</div>
 		</>
 	);
-};
-Hero.propTypes = {
-	loaderIndex: PropTypes.number,
-	genreIndex: PropTypes.number,
-	mediaType: PropTypes.string,
-	loaderData: PropTypes.array,
 };
