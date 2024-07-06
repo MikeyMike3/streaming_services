@@ -391,7 +391,11 @@ export const MovieShowInDepth = () => {
 
 						<h1 className="heading">Posters</h1>
 						<div className="heading-underline"></div>
-						<PosterSwiper array={movieShowDetails[5]} />
+						<PosterSwiper
+							array={
+								movieShowDetails[5] as MovieShowDetailsMovie5
+							}
+						/>
 
 						<h1 className="similar-movies-heading">
 							Similar Movies
@@ -476,7 +480,11 @@ export const MovieShowInDepth = () => {
 
 						<h1 className="heading">Posters</h1>
 						<div className="heading-underline"></div>
-						<PosterSwiper array={movieShowDetails[5]} />
+						<PosterSwiper
+							array={
+								movieShowDetails[5] as MovieShowDetailsMovie5
+							}
+						/>
 
 						<h1 className="similar-movies-heading">
 							Similar Shows
