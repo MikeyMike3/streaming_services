@@ -1,17 +1,23 @@
 import { useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
 
-import PropTypes from "prop-types";
-
 import { Swiper, SwiperSlide } from "swiper/react";
+
 import { FreeMode } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/free-mode";
 
 import poster from "../../imgs/tmdbPoster.jpg";
 
-export const Credits = (props) => {
-	const creditsSwiperRef = useRef(null);
+import { ShowCast } from "../../pages/MovieShowInDepth";
+import { MovieCast } from "../../pages/MovieShowInDepth";
+
+type CreditsProps = {
+	credits: ShowCast[] | MovieCast[];
+};
+
+export const Credits = (props: CreditsProps) => {
+	const creditsSwiperRef: any = useRef(null);
 
 	useEffect(() => {
 		if (creditsSwiperRef.current && creditsSwiperRef.current.swiper) {
@@ -30,15 +36,11 @@ export const Credits = (props) => {
 						spaceBetween={0}
 						slidesPerView={"auto"}
 						modules={[FreeMode]}
-						freeMode={{
-							freeMode: true,
-						}}>
+						freeMode={true}>
 						{props.credits.map((item) => (
 							<SwiperSlide key={item.id}>
 								<Link to={`/person/${item.id.toString()}`}>
-									<div
-										key={item.cast_id}
-										className="cast-card">
+									<div key={item.id} className="cast-card">
 										{item.profile_path === null ? (
 											<img
 												className="cast-card-img"
@@ -66,7 +68,4 @@ export const Credits = (props) => {
 			</div>
 		</>
 	);
-};
-Credits.propTypes = {
-	credits: PropTypes.array,
 };

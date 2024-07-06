@@ -1,5 +1,4 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
-import PropTypes from "prop-types";
 import poster from "../imgs/tmdbPoster.jpg";
 
 type MovieShowCardProps = {
@@ -38,17 +37,4 @@ export const MovieShowCard = (props: MovieShowCardProps) => {
 			</div>
 		</>
 	);
-};
-
-MovieShowCard.propTypes = {
-	id: PropTypes.number,
-	title: PropTypes.string,
-	mediaType: PropTypes.string,
-	name: PropTypes.string,
-	posterPath: PropTypes.string,
-	profilePath: PropTypes.string,
-	voteAverage: PropTypes.number,
-	genreIds: PropTypes.array,
-	movieGenres: PropTypes.array,
-	showGenres: PropTypes.array,
 };

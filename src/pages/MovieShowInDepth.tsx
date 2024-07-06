@@ -59,10 +59,10 @@ interface Provider {
 }
 
 // MovieShowDetails index 2
-interface MovieCast {
+export interface MovieCast {
 	adult: boolean | null;
 	gender: number | null;
-	id: number | null;
+	id: number;
 	known_for_department: string | null;
 	name: string | null;
 	original_name: string | null;
@@ -74,10 +74,10 @@ interface MovieCast {
 	order: number | null;
 }
 
-interface ShowCast {
+export interface ShowCast {
 	adult: boolean | null;
 	gender: number | null;
-	id: number | null;
+	id: number;
 	known_for_department: string | null;
 	name: string | null;
 	original_name: string | null;
@@ -88,7 +88,7 @@ interface ShowCast {
 	order: number | null;
 }
 
-interface PersonCast {
+export interface PersonCast {
 	adult: boolean | null;
 	backdrop_path: string | null;
 	genre_ids: number[];

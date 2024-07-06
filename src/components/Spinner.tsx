@@ -1,5 +1,3 @@
-import PropTypes from "prop-types";
-
 import { BarLoader } from "react-spinners";
 
 type SpinnerProps = {
@@ -30,7 +28,4 @@ export const Spinner = (props: SpinnerProps) => {
 			)}
 		</>
 	);
-};
-Spinner.propTypes = {
-	navigation: PropTypes.object,
 };

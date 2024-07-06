@@ -1,7 +1,4 @@
-import PropTypes from "prop-types";
-
 import poster from "../../imgs/tmdbPoster.jpg";
-
 import { MovieShowDetailsMovie0 } from "../../pages/MovieShowInDepth";
 
 type BackdropProps = {
@@ -24,8 +21,4 @@ export const Backdrop = (props: BackdropProps) => {
 			)}
 		</>
 	);
-};
-
-Backdrop.propTypes = {
-	movieShowDetails: PropTypes.array,
 };
