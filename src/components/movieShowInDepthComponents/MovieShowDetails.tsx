@@ -1,5 +1,3 @@
-import PropTypes from "prop-types";
-
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 
@@ -9,10 +7,13 @@ import poster from "../../imgs/tmdbPoster.jpg";
 import {
 	MovieShowDetailsMovie0,
 	MovieShowDetailsShow0,
+	ShowCast,
+	MovieCast,
 } from "../../types/movieShowInDepthTypes";
 
 type MovieShowDetailsProps = {
 	movieShowDetails: MovieShowDetailsMovie0 | MovieShowDetailsShow0;
+	credits: ShowCast[] | MovieCast[];
 };
 
 function isMovie(
@@ -93,13 +94,8 @@ export const MovieShowDetails = (props: MovieShowDetailsProps) => {
 					</p>
 				)}
 
-				<Credits credits={props.credits} />
+				<Credits credits={props.credits as ShowCast[] | MovieCast[]} />
 			</div>
 		</div>
 	);
-};
-
-MovieShowDetails.propTypes = {
-	movieShowDetails: PropTypes.object,
-	credits: PropTypes.array,
 };
