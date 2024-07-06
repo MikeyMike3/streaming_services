@@ -149,15 +149,15 @@ export interface SimilarResults {
 
 // MovieShowDetails index 5
 
-// export interface Images {
-// 	aspect_ratio: number | null;
-// 	height: number | null;
-// 	iso_639_1: string | null;
-// 	file_path: string | null;
-// 	vote_average: number | null;
-// 	vote_count: number | null;
-// 	width: number | null;
-// }
+export interface Images {
+	aspect_ratio: number | null;
+	height: number | null;
+	iso_639_1: string | null;
+	file_path: string | null;
+	vote_average: number | null;
+	vote_count: number | null;
+	width: number | null;
+}
 
 // movies
 
@@ -217,17 +217,6 @@ export interface MovieShowDetailsMovie5 {
 	id: number | null;
 	logos: Images[] | null;
 	posters: Images[] | null;
-}
-
-// delete
-export interface Images {
-	aspect_ratio: number;
-	height: number;
-	iso_639_1: string;
-	file_path: string;
-	vote_average: number;
-	vote_count: number;
-	width: number;
 }
 
 //  shows
