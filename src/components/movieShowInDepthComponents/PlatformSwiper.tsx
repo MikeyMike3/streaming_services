@@ -1,20 +1,26 @@
 import { useEffect, useRef } from "react";
 
-import PropTypes from "prop-types";
-
 import { Swiper, SwiperSlide } from "swiper/react";
 import { FreeMode } from "swiper/modules";
 import "swiper/css";
 import "swiper/css";
 import "swiper/css/free-mode";
 
+import { Provider } from "../../types/movieShowInDepthTypes";
+
 const swiperSpaceBetween = 10;
 const swiperGrab = true;
 
-export const PlatformSwiper = (props) => {
-	const streamSwiperRef = useRef(null);
-	const rentSwiperRef = useRef(null);
-	const buySwiperRef = useRef(null);
+type PlatformSwiperProps = {
+	flatRateStreamingServices: Provider[];
+	rentStreamingServices: Provider[];
+	buyStreamingServices: Provider[];
+};
+
+export const PlatformSwiper = (props: PlatformSwiperProps) => {
+	const streamSwiperRef: any = useRef(null);
+	const rentSwiperRef: any = useRef(null);
+	const buySwiperRef: any = useRef(null);
 
 	useEffect(() => {
 		if (streamSwiperRef.current && streamSwiperRef.current.swiper) {
@@ -39,9 +45,7 @@ export const PlatformSwiper = (props) => {
 				slidesPerView={"auto"}
 				direction="horizontal"
 				modules={[FreeMode]}
-				freeMode={{
-					freeMode: { enabled: true },
-				}}>
+				freeMode={true}>
 				<div className="provider-img-container">
 					{props.flatRateStreamingServices.length > 0 ? (
 						props.flatRateStreamingServices.map((item) => (
@@ -70,9 +74,7 @@ export const PlatformSwiper = (props) => {
 				slidesPerView={"auto"}
 				direction="horizontal"
 				modules={[FreeMode]}
-				freeMode={{
-					freeMode: { enabled: true },
-				}}>
+				freeMode={true}>
 				<div className="provider-img-container">
 					{props.rentStreamingServices.length > 0 ? (
 						props.rentStreamingServices.map((item) => (
@@ -100,9 +102,7 @@ export const PlatformSwiper = (props) => {
 				slidesPerView={"auto"}
 				direction="horizontal"
 				modules={[FreeMode]}
-				freeMode={{
-					freeMode: { enabled: true },
-				}}>
+				freeMode={true}>
 				<div className="provider-img-container">
 					{props.buyStreamingServices.length > 0 ? (
 						props.buyStreamingServices.map((item) => (
@@ -123,9 +123,4 @@ export const PlatformSwiper = (props) => {
 			</Swiper>
 		</div>
 	);
-};
-PlatformSwiper.propTypes = {
-	buyStreamingServices: PropTypes.array,
-	rentStreamingServices: PropTypes.array,
-	flatRateStreamingServices: PropTypes.array,
 };

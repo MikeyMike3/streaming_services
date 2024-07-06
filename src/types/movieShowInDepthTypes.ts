@@ -28,7 +28,7 @@ export interface CountryResult {
 export interface Provider {
 	logo_path: string | null;
 	provider_id: number | null;
-	provider_name: string | null;
+	provider_name: string | undefined;
 	display_priority: number | null;
 }
 
@@ -196,6 +196,7 @@ export interface MovieShowDetailsMovie5 {
 //  shows
 
 export interface MovieShowDetailsShow0 {
+	name: string;
 	backdrop_path: string | null;
 	poster_path: string | null;
 	episode_run_time: number[];
