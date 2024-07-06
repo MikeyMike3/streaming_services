@@ -92,7 +92,7 @@ export interface PersonCast {
 	adult: boolean | null;
 	backdrop_path: string | null;
 	genre_ids: number[];
-	id: number | null;
+	id: number;
 	original_language: string | null;
 	original_title: string | null;
 	overview: string | null;
@@ -106,7 +106,9 @@ export interface PersonCast {
 	character: string | null;
 	credit_id: string | null;
 	order: number | null;
-	media_type: string | null;
+	media_type: string;
+	profile_path: string | null;
+	name: string | null;
 }
 
 // MovieShowDetails index 3
@@ -125,10 +127,10 @@ interface VideoResults {
 
 // MovieShowDetails index 4
 
-interface SimilarResults {
+export interface SimilarResults {
 	adult: boolean | null;
 	genre_ids: number[] | null;
-	id: number | null;
+	id: number;
 	original_language: string | null;
 	original_title: string | null;
 	overview: string | null;
@@ -139,6 +141,10 @@ interface SimilarResults {
 	video: boolean | null;
 	vote_average: number | null;
 	vote_count: number | null;
+	media_type: string;
+	profile_path: string | null;
+	backdrop_path: string | null;
+	name: string | null;
 }
 
 // MovieShowDetails index 5
@@ -248,7 +254,7 @@ interface Person0 {
 	profile_path: string | null;
 }
 
-interface Person1 {
+export interface Person1 {
 	cast: PersonCast[];
 }
 
@@ -453,13 +459,15 @@ export const MovieShowInDepth = () => {
 		}
 	}, [id, movieShowDetails]);
 
-	const resetState = () => {
+	const resetState = (): null => {
 		setBackToTop(true);
 		setPages(1);
 		setMovieShowId("0");
 		setFlatRateStreamingServices([]);
 		setBuyStreamingServices([]);
 		setRentStreamingServices([]);
+
+		return null;
 	};
 
 	useEffect(() => {
