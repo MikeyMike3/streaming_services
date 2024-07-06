@@ -1,8 +1,12 @@
-import PropTypes from "prop-types";
-
 import { BarLoader } from "react-spinners";
 
-export const Spinner = (props) => {
+type SpinnerProps = {
+	navigation: {
+		state: string;
+	};
+};
+
+export const Spinner = (props: SpinnerProps) => {
 	return (
 		<>
 			{props.navigation.state === "loading" && (
@@ -24,7 +28,4 @@ export const Spinner = (props) => {
 			)}
 		</>
 	);
-};
-Spinner.propTypes = {
-	navigation: PropTypes.object,
 };
