@@ -9,8 +9,8 @@ import "swiper/css/free-mode";
 
 import poster from "../../imgs/tmdbPoster.jpg";
 
-import { ShowCast } from "../../pages/MovieShowInDepth";
-import { MovieCast } from "../../pages/MovieShowInDepth";
+import { ShowCast } from "../../types/movieShowInDepthTypes";
+import { MovieCast } from "../../types/movieShowInDepthTypes";
 
 type CreditsProps = {
 	credits: ShowCast[] | MovieCast[];

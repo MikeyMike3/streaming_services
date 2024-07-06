@@ -1,5 +1,3 @@
-import PropTypes from "prop-types";
-
 import {
 	MovieShowDetailsMovie0,
 	MovieShowDetailsShow0,
@@ -74,7 +72,6 @@ export const AdditionalMovieShowInfo = (
 									date available.
 								</p>
 							)}
-
 							{props.movieShowDetails.original_language !==
 							undefined ? (
 								<p>
@@ -185,9 +182,4 @@ export const AdditionalMovieShowInfo = (
 			</div>
 		</>
 	);
-};
-
-AdditionalMovieShowInfo.propTypes = {
-	movieShowDetails: PropTypes.object,
-	mediaType: PropTypes.string,
 };

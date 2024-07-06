@@ -140,14 +140,14 @@ export interface MovieShowDetailsMovie0 {
 	backdrop_path: string | null;
 	belongs_to_collection: string | null;
 	budget: number | null;
-	genres: Genres[] | null;
+	genres: Genres[];
 	homepage: string | null;
 	id: number | null;
 	imdb_id: string | null;
 	origin_country: string[] | null;
 	original_language: string | undefined;
 	original_title: string | null;
-	overview: string | null;
+	overview: string;
 	popularity: number | null;
 	poster_path: string | null;
 	production_companies: ProductionCompanies[] | null;
@@ -159,7 +159,7 @@ export interface MovieShowDetailsMovie0 {
 	tagline: string | null;
 	title: string | null;
 	video: boolean | null;
-	vote_average: number | null;
+	vote_average: number;
 	vote_count: number | null;
 }
 
@@ -197,11 +197,15 @@ export interface MovieShowDetailsMovie5 {
 
 export interface MovieShowDetailsShow0 {
 	backdrop_path: string | null;
+	poster_path: string | null;
 	episode_run_time: number[];
 	number_of_episodes: number | undefined;
 	number_of_seasons: number | undefined;
 	original_language: string | undefined;
 	first_air_date: string;
+	vote_average: number;
+	genres: Genres[];
+	overview: string;
 }
 
 interface MovieShowDetailsShow1 {}

@@ -356,7 +356,9 @@ export const MovieShowInDepth = () => {
 
 					<div className="wrapper">
 						<MovieShowDetails
-							movieShowDetails={movieShowDetails[0]}
+							movieShowDetails={
+								movieShowDetails[0] as MovieShowDetailsMovie0
+							}
 							credits={credits}
 						/>
 
@@ -433,7 +435,9 @@ export const MovieShowInDepth = () => {
 
 					<div className="wrapper">
 						<MovieShowDetails
-							movieShowDetails={movieShowDetails[0]}
+							movieShowDetails={
+								movieShowDetails[0] as MovieShowDetailsMovie0
+							}
 							credits={credits}
 						/>
 
