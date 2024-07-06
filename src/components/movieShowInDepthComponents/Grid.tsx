@@ -1,5 +1,3 @@
-import PropTypes from "prop-types";
-
 import { Link } from "react-router-dom";
 
 import { MovieShowCard } from "../MovieShowCard";
@@ -51,9 +49,4 @@ export const Grid = (props: GridProps) => {
 			})}
 		</div>
 	);
-};
-Grid.propTypes = {
-	array: PropTypes.array,
-	mediaType: PropTypes.string,
-	resetState: PropTypes.func,
 };

@@ -149,15 +149,15 @@ export interface SimilarResults {
 
 // MovieShowDetails index 5
 
-interface Images {
-	aspect_ratio: number | null;
-	height: number | null;
-	iso_639_1: string | null;
-	file_path: string | null;
-	vote_average: number | null;
-	vote_count: number | null;
-	width: number | null;
-}
+// export interface Images {
+// 	aspect_ratio: number | null;
+// 	height: number | null;
+// 	iso_639_1: string | null;
+// 	file_path: string | null;
+// 	vote_average: number | null;
+// 	vote_count: number | null;
+// 	width: number | null;
+// }
 
 // movies
 
@@ -212,11 +212,22 @@ interface MovieShowDetailsMovie4 {
 	total_results: number | null;
 }
 
-interface MovieShowDetailsMovie5 {
-	backdrops?: Images[] | null;
-	id?: number | null;
-	logos?: Images[] | null;
-	posters?: Images[] | null;
+export interface MovieShowDetailsMovie5 {
+	backdrops: Images[] | null;
+	id: number | null;
+	logos: Images[] | null;
+	posters: Images[] | null;
+}
+
+// delete
+export interface Images {
+	aspect_ratio: number;
+	height: number;
+	iso_639_1: string;
+	file_path: string;
+	vote_average: number;
+	vote_count: number;
+	width: number;
 }
 
 //  shows
@@ -578,7 +589,11 @@ export const MovieShowInDepth = () => {
 
 						<h1 className="heading">Backdrops</h1>
 						<div className="heading-underline"></div>
-						<BackdropSwiper array={movieShowDetails[5]} />
+						<BackdropSwiper
+							array={
+								movieShowDetails[5] as MovieShowDetailsMovie5
+							}
+						/>
 
 						<h1 className="heading">Posters</h1>
 						<div className="heading-underline"></div>
@@ -655,7 +670,11 @@ export const MovieShowInDepth = () => {
 
 						<h1 className="heading">Backdrops</h1>
 						<div className="heading-underline"></div>
-						<BackdropSwiper array={movieShowDetails[5]} />
+						<BackdropSwiper
+							array={
+								movieShowDetails[5] as MovieShowDetailsMovie5
+							}
+						/>
 
 						<h1 className="heading">Posters</h1>
 						<div className="heading-underline"></div>

@@ -1,15 +1,18 @@
 import { useRef, useEffect } from "react";
 
-import PropTypes from "prop-types";
-
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
+import { MovieShowDetailsMovie5 } from "../../pages/MovieShowInDepth";
 
-export const BackdropSwiper = (props) => {
-	const backdropSwiperRef = useRef(null);
+type BackdropSwiperProps = {
+	array: MovieShowDetailsMovie5;
+};
+
+export const BackdropSwiper = (props: BackdropSwiperProps) => {
+	const backdropSwiperRef: any = useRef(null);
 
 	useEffect(() => {
 		if (backdropSwiperRef.current && backdropSwiperRef.current.swiper) {
@@ -19,11 +22,12 @@ export const BackdropSwiper = (props) => {
 
 	return (
 		<div className="movie-show-video">
-			{props.array.backdrops.length > 0 ? (
+			{props.array.backdrops !== null &&
+			props.array.backdrops.length > 0 ? (
 				<Swiper
 					ref={backdropSwiperRef}
 					navigation={true}
-					grabCursor={"true"}
+					grabCursor={true}
 					modules={[Navigation, Pagination]}
 					pagination={{
 						type: "progressbar",
@@ -45,8 +49,4 @@ export const BackdropSwiper = (props) => {
 			)}
 		</div>
 	);
-};
-
-BackdropSwiper.propTypes = {
-	array: PropTypes.object,
 };
