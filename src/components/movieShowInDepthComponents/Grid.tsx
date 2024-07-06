@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 
 import { MovieShowCard } from "../MovieShowCard";
-import { SimilarResults, PersonCast } from "../../pages/MovieShowInDepth";
+import { SimilarResults, PersonCast } from "../../types/movieShowInDepthTypes";
 
 type GridProps = {
 	array: SimilarResults[] | PersonCast[];

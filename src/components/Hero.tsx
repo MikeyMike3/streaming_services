@@ -11,17 +11,20 @@ import "swiper/css/free-mode";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 
-export const Hero = (props) => {
+type HeroProps = {
+	loaderData: ;
+	loaderIndex: number;
+	genreIndex: number;
+	mediaType: string;
+};
+
+export const Hero = (props: HeroProps) => {
 	const [nowPlaying, setNowPlaying] = useState([]);
 
-	const formatRating = (rating) => {
-		let percentage = 0;
-		const parsedRating = parseFloat(rating) * 10;
+	const formatRating = (rating: number): number => {
+		const roundedRating = Math.round(rating);
 
-		const roundedRating = Math.round(parsedRating);
-
-		percentage = roundedRating.toString();
-		return percentage;
+		return roundedRating;
 	};
 
 	useEffect(() => {

@@ -1,7 +1,5 @@
 import { useRef, useEffect } from "react";
 
-import PropTypes from "prop-types";
-
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
@@ -9,15 +7,20 @@ import "swiper/css/pagination";
 import { Navigation, Pagination } from "swiper/modules";
 
 import YouTube from "react-youtube";
+import { VideoResults } from "../../types/movieShowInDepthTypes";
 
-export const VideoSwiper = (props) => {
-	const videoSwiperRef = useRef(null);
+type VideoSwiperProps = {
+	array: VideoResults[];
+};
+
+export const VideoSwiper = (props: VideoSwiperProps) => {
+	const videoSwiperRef: any = useRef(null);
 
 	useEffect(() => {
 		if (videoSwiperRef.current && videoSwiperRef.current.swiper) {
 			videoSwiperRef.current.swiper.slideTo(0);
 		}
-	}, [props.array.posters]);
+	}, [props.array]);
 
 	const renderTrailer = () => {
 		if (props.array.length > 0) {
@@ -50,7 +53,4 @@ export const VideoSwiper = (props) => {
 			)}
 		</div>
 	);
-};
-VideoSwiper.propTypes = {
-	array: PropTypes.array,
 };

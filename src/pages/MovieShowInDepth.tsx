@@ -25,17 +25,11 @@ import { PosterSwiper } from "../components/movieShowInDepthComponents/PosterSwi
 import { GeneralApiErrorMessage } from "../components/GeneralApiErrorMessage";
 
 import {
-	SpokenLanguages,
-	ProductionCompanies,
-	Genres,
 	CountryResult,
 	Provider,
 	MovieCast,
 	ShowCast,
-	PersonCast,
-	VideoResults,
 	SimilarResults,
-	Images,
 	MovieShowDetailsMovie0,
 	MovieShowDetailsMovie1,
 	MovieShowDetailsMovie2,
