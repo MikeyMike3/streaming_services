@@ -145,13 +145,13 @@ export interface MovieShowDetailsMovie0 {
 	id: number | null;
 	imdb_id: string | null;
 	origin_country: string[] | null;
-	original_language: string | null;
+	original_language: string | undefined;
 	original_title: string | null;
 	overview: string | null;
 	popularity: number | null;
 	poster_path: string | null;
 	production_companies: ProductionCompanies[] | null;
-	release_date: string | null;
+	release_date: string | undefined;
 	revenue: number | null;
 	runtime: number | null;
 	spoken_languages: SpokenLanguages[] | null;
@@ -195,7 +195,14 @@ export interface MovieShowDetailsMovie5 {
 
 //  shows
 
-interface MovieShowDetailsShow0 {}
+export interface MovieShowDetailsShow0 {
+	backdrop_path: string | null;
+	episode_run_time: number[];
+	number_of_episodes: number | undefined;
+	number_of_seasons: number | undefined;
+	original_language: string | undefined;
+	first_air_date: string;
+}
 
 interface MovieShowDetailsShow1 {}
 

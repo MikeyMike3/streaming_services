@@ -1,5 +1,5 @@
 import poster from "../../imgs/tmdbPoster.jpg";
-import { MovieShowDetailsMovie0 } from "../../pages/MovieShowInDepth";
+import { MovieShowDetailsMovie0 } from "../../types/movieShowInDepthTypes";
 
 type BackdropProps = {
 	movieShowDetails: MovieShowDetailsMovie0;
