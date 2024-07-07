@@ -31,9 +31,9 @@ export const PopularMovies = () => {
 	const loaderData = useLoaderData() as HomeLoader[];
 	const [popularMovies, setPopularMovies] = useState<HomeLoader3>();
 
-	const [pages, setPages] = useState(1);
-	const [isLoading, setIsLoading] = useState(false);
-	const [handleClickError, setHandleClickError] = useState(false);
+	const [pages, setPages] = useState<number>(1);
+	const [isLoading, setIsLoading] = useState<boolean>(false);
+	const [handleClickError, setHandleClickError] = useState<boolean>(false);
 
 	const navigation = useNavigation();
 
@@ -85,8 +85,6 @@ export const PopularMovies = () => {
 			setIsLoading(false);
 		}
 	};
-
-	console.log(popularMovies);
 
 	return (
 		<>
