@@ -49,17 +49,12 @@ function isMovie(
 	return (details as HomeLoaderMovieResults).title !== undefined;
 }
 
-function isShow(
-	details: HomeLoaderMovieResults | HomeLoaderShowResults
-): details is HomeLoaderShowResults {
-	return (details as HomeLoaderShowResults).name !== undefined;
-}
-
 export const Hero = (props: HeroProps) => {
 	const [nowPlaying, setNowPlaying] = useState<HomeLoader[]>([]);
 
 	const formatRating = (rating: number): number => {
-		const roundedRating = Math.round(rating);
+		let percentage = rating * 10;
+		const roundedRating = Math.round(percentage);
 
 		return roundedRating;
 	};
