@@ -8,6 +8,8 @@ export interface HomeLoaderMovieResults {
 	release_date: string;
 	vote_average: number;
 	backdrop_path: string;
+	profile_path: string;
+	name: string | null;
 }
 
 export interface HomeLoaderShowResults {
@@ -19,6 +21,7 @@ export interface HomeLoaderShowResults {
 	release_date: string;
 	vote_average: number;
 	backdrop_path: string;
+	profile_path: string;
 }
 
 interface Genres {
@@ -42,6 +45,7 @@ export interface HomeLoader2 {
 export interface HomeLoader3 {
 	page: number;
 	results: HomeLoaderMovieResults[];
+	total_pages: number;
 }
 
 export interface HomeLoader4 {

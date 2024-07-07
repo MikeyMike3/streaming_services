@@ -2,11 +2,12 @@ import { Link } from "react-router-dom";
 
 import { MovieShowCard } from "../MovieShowCard";
 import { SimilarResults, PersonCast } from "../../types/movieShowInDepthTypes";
+import { HomeLoaderMovieResults } from "../../types/homeTypes";
 
 type GridProps = {
-	array: SimilarResults[] | PersonCast[];
+	array: SimilarResults[] | PersonCast[] | HomeLoaderMovieResults[];
 	mediaType: string;
-	resetState: () => null;
+	resetState?: () => null;
 };
 
 export const Grid = (props: GridProps) => {
