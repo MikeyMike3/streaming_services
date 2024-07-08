@@ -9,7 +9,6 @@ export interface HomeLoaderMovieResults {
 	vote_average: number;
 	backdrop_path: string;
 	profile_path: string;
-	name: string | null;
 }
 
 export interface HomeLoaderShowResults {
@@ -29,14 +28,13 @@ interface Genres {
 	name: string;
 }
 
-// export interface HomeLoader {
-// 	[index: number]: {
-// 		page: number;
-// 		results: HomeLoaderMovieResults[] | HomeLoaderShowResults[];
-// 		total_pages?: number;
-// 		genres?: Genres[];
-// 	};
-// }
+export interface HomeLoader {
+	page: number;
+	results: HomeLoaderMovieResults[] | HomeLoaderShowResults[];
+	total_pages: number;
+	genres?: Genres[];
+}
+
 export interface HomeLoader0 {
 	page: number;
 	results: HomeLoaderMovieResults[];

@@ -63,6 +63,7 @@ export interface ShowCast {
 }
 
 export interface PersonCast {
+	movieShow: string;
 	adult: boolean | null;
 	backdrop_path: string | null;
 	genre_ids: number[];
@@ -102,6 +103,7 @@ export interface VideoResults {
 // MovieShowDetails index 4
 
 export interface SimilarResults {
+	movieShow: string;
 	adult: boolean | null;
 	genre_ids: number[] | null;
 	id: number;

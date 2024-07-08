@@ -4,8 +4,8 @@ import poster from "../imgs/tmdbPoster.jpg";
 type MovieShowCardProps = {
 	profilePath: string | null;
 	posterPath: string | null;
-	title: string | null;
-	name: string | null;
+	title?: string | null;
+	name?: string | null;
 	mediaType: string;
 };
 

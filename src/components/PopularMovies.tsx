@@ -6,30 +6,15 @@ import { Grid } from "./movieShowInDepthComponents/Grid";
 import { ViewMoreButton } from "./ViewMoreButton";
 import { Spinner } from "./Spinner";
 
-import {
-	HomeLoader0,
-	HomeLoader1,
-	HomeLoader2,
-	HomeLoader3,
-	HomeLoader4,
-	HomeLoader5,
-} from "../types/homeTypes";
+import { HomeLoader } from "../types/homeTypes";
 
-type HomeLoader =
-	| HomeLoader0
-	| HomeLoader1
-	| HomeLoader2
-	| HomeLoader3
-	| HomeLoader4
-	| HomeLoader5;
-
-function isHomeLoader3(loader: HomeLoader): loader is HomeLoader3 {
-	return (loader as HomeLoader3).total_pages !== undefined;
-}
+// function isHomeLoader3(loader: HomeLoader): loader is HomeLoader3 {
+// 	return (loader as HomeLoader3).total_pages !== undefined;
+// }
 
 export const PopularMovies = () => {
 	const loaderData = useLoaderData() as HomeLoader[];
-	const [popularMovies, setPopularMovies] = useState<HomeLoader3>();
+	const [popularMovies, setPopularMovies] = useState<HomeLoader>();
 
 	const [pages, setPages] = useState<number>(1);
 	const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -37,18 +22,12 @@ export const PopularMovies = () => {
 
 	const navigation = useNavigation();
 
-	let homeLoader3: HomeLoader3;
-
 	useEffect(() => {
 		const fetchData = async () => {
 			try {
 				const data = await loaderData;
-				console.log(data);
-				if (data.length > 3 && isHomeLoader3(data[3])) {
-					homeLoader3 = data[3];
-				}
-
-				setPopularMovies(homeLoader3);
+				let newData = data[3];
+				setPopularMovies(newData);
 			} catch (error) {
 				console.error("Error fetching data:", error);
 			}
