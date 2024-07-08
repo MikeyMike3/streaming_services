@@ -8,10 +8,6 @@ import { Spinner } from "./Spinner";
 
 import { HomeLoader } from "../types/homeTypes";
 
-// function isHomeLoader3(loader: HomeLoader): loader is HomeLoader3 {
-// 	return (loader as HomeLoader3).total_pages !== undefined;
-// }
-
 export const PopularMovies = () => {
 	const loaderData = useLoaderData() as HomeLoader[];
 	const [popularMovies, setPopularMovies] = useState<HomeLoader>();
