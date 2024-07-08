@@ -28,12 +28,14 @@ interface Genres {
 	name: string;
 }
 
-export interface HomeLoader {
-	page: number;
-	results: HomeLoaderMovieResults[] | HomeLoaderShowResults[];
-	total_pages: number;
-	genres?: Genres[];
-}
+export type HomeLoaderTuple = [
+	HomeLoader0,
+	HomeLoader1,
+	HomeLoader2,
+	HomeLoader3,
+	HomeLoader4,
+	HomeLoader5,
+];
 
 export interface HomeLoader0 {
 	page: number;

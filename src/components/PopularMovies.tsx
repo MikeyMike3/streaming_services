@@ -6,11 +6,11 @@ import { Grid } from "./movieShowInDepthComponents/Grid";
 import { ViewMoreButton } from "./ViewMoreButton";
 import { Spinner } from "./Spinner";
 
-import { HomeLoader } from "../types/homeTypes";
+import { HomeLoaderTuple, HomeLoader3 } from "../types/homeTypes";
 
 export const PopularMovies = () => {
-	const loaderData = useLoaderData() as HomeLoader[];
-	const [popularMovies, setPopularMovies] = useState<HomeLoader>();
+	const loaderData = useLoaderData() as HomeLoaderTuple;
+	const [popularMovies, setPopularMovies] = useState<HomeLoader3>();
 
 	const [pages, setPages] = useState<number>(1);
 	const [isLoading, setIsLoading] = useState<boolean>(false);
