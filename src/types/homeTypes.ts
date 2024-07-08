@@ -40,6 +40,7 @@ export type HomeLoaderTuple = [
 export interface HomeLoader0 {
 	page: number;
 	results: HomeLoaderMovieResults[];
+	total_pages: number;
 }
 
 export interface HomeLoader1 {
@@ -59,9 +60,11 @@ export interface HomeLoader3 {
 export interface HomeLoader4 {
 	page: number;
 	results: HomeLoaderShowResults[];
+	total_pages: number;
 }
 
 export interface HomeLoader5 {
 	page: number;
 	results: HomeLoaderMovieResults[];
+	total_pages: number;
 }

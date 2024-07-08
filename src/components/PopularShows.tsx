@@ -6,9 +6,11 @@ import { Grid } from "./movieShowInDepthComponents/Grid";
 import { Spinner } from "./Spinner";
 import { ViewMoreButton } from "./ViewMoreButton";
 
+import { HomeLoaderTuple } from "../types/homeTypes";
+
 export const PopularShows = () => {
-	const loaderData = useLoaderData();
-	const [popularShows, setPopularShows] = useState([]);
+	const loaderData = useLoaderData() as HomeLoaderTuple;
+	const [popularShows, setPopularShows] = useState<HomeLoaderTuple>();
 
 	const [pages, setPages] = useState(1);
 	const [isLoading, setIsLoading] = useState(false);
@@ -48,7 +50,8 @@ export const PopularShows = () => {
 			);
 			if (response.ok) {
 				const data = await response.json();
-				const updatedData = [...popularShows];
+				const updatedData: HomeLoaderTuple = [...popularShows];
+				console.log(updatedData);
 				updatedData[4].results = [
 					...updatedData[4].results,
 					...data.results,
