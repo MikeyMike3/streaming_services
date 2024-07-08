@@ -85,7 +85,6 @@ export const Grid = (props: GridProps) => {
 									mediaType={item.media_type}
 									posterPath={item.poster_path}
 									profilePath={item.profile_path}
-									title={item.title}
 									name={item.name}
 								/>
 							</Link>

@@ -15,6 +15,7 @@ export interface HomeLoaderShowResults {
 	id: number;
 	name: string | null;
 	poster_path: string | null;
+	media_type: string;
 	overview: string;
 	genre_ids: number[];
 	release_date: string;
@@ -39,7 +40,7 @@ export type HomeLoaderTuple = [
 
 export interface HomeLoader0 {
 	page: number;
-	results: HomeLoaderMovieResults[];
+	results: HomeLoaderMovieResults[] | HomeLoaderShowResults[];
 	total_pages: number;
 }
 
