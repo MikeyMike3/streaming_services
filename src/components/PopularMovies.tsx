@@ -22,8 +22,8 @@ export const PopularMovies = () => {
 		const fetchData = async () => {
 			try {
 				const data = await loaderData;
-				let newData = data[3];
-				setPopularMovies(newData);
+
+				setPopularMovies(data[3]);
 			} catch (error) {
 				console.error("Error fetching data:", error);
 			}
