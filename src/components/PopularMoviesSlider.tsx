@@ -9,9 +9,11 @@ import "swiper/css/free-mode";
 
 import { MovieShowCard } from "./MovieShowCard";
 
+import { HomeLoaderTuple } from "../types/homeTypes";
+
 export const PopularMoviesSlider = () => {
-	const loaderData = useLoaderData();
-	const [popularMovies, setPopularMovies] = useState([]);
+	const loaderData = useLoaderData() as HomeLoaderTuple;
+	const [popularMovies, setPopularMovies] = useState<HomeLoaderTuple>();
 	const [loading, setLoading] = useState(true);
 
 	const swiperRef = useRef(null);
@@ -63,25 +65,14 @@ export const PopularMoviesSlider = () => {
 					slidesPerView={"auto"}
 					direction="horizontal"
 					modules={[FreeMode]}
-					freeMode={{
-						freeMode: { enabled: true },
-					}}>
+					freeMode={true}>
 					{popularMovies[3].results.map((item) => (
 						<SwiperSlide key={`popularMovies${item.id}`}>
 							<Link to={`movie/${item.id.toString()}`}>
 								<MovieShowCard
-									genreIds={item.genre_ids}
-									id={item.id}
 									mediaType={item.media_type}
-									overview={item.overview}
 									posterPath={item.poster_path}
-									backdropPath={item.backdrop_path}
-									releaseDate={item.release_date}
-									voteAverage={item.vote_average}
 									title={item.title}
-									name={item.name}
-									movieGenres={popularMovies[1].genres}
-									showGenres={popularMovies[2].genres}
 								/>
 							</Link>
 						</SwiperSlide>
