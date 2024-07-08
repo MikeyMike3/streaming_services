@@ -36,6 +36,7 @@ export type HomeLoaderTuple = [
 	HomeLoader3,
 	HomeLoader4,
 	HomeLoader5,
+	string | null,
 ];
 
 export interface HomeLoader0 {

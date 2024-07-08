@@ -10,36 +10,15 @@ import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 
 import {
-	HomeLoader0,
-	HomeLoader1,
-	HomeLoader2,
-	HomeLoader3,
-	HomeLoader4,
-	HomeLoader5,
 	HomeLoaderMovieResults,
 	HomeLoaderShowResults,
+	HomeLoaderTuple,
 } from "../types/homeTypes";
 
-type HomeLoader =
-	| HomeLoader0
-	| HomeLoader1
-	| HomeLoader2
-	| HomeLoader3
-	| HomeLoader4
-	| HomeLoader5;
-
-type HomeLoaderMovieShow =
-	| HomeLoader5[]
-	| HomeLoader4[]
-	| HomeLoader3[]
-	| HomeLoader0[];
-
-type HomeLoaderGenre = HomeLoader1[] | HomeLoader2[];
-
 type HeroProps = {
-	loaderData: HomeLoader[];
-	loaderIndex: number;
-	genreIndex: number;
+	loaderData: HomeLoaderTuple;
+	loaderIndex: 0 | 3 | 4 | 5;
+	genreIndex: 1 | 2;
 	mediaType: string;
 };
 
@@ -50,7 +29,7 @@ function isMovie(
 }
 
 export const Hero = (props: HeroProps) => {
-	const [nowPlaying, setNowPlaying] = useState<HomeLoader[]>([]);
+	const [nowPlaying, setNowPlaying] = useState<HomeLoaderTuple>();
 
 	const formatRating = (rating: number): number => {
 		let percentage = rating * 10;
@@ -77,7 +56,7 @@ export const Hero = (props: HeroProps) => {
 		!nowPlaying ||
 		nowPlaying.length < 6 ||
 		!nowPlaying[5] ||
-		!(nowPlaying as HomeLoader5[])[5].results
+		!nowPlaying[5].results
 	) {
 		return null;
 	}
@@ -95,9 +74,7 @@ export const Hero = (props: HeroProps) => {
 						disableOnInteraction: false,
 					}}
 					modules={[Autoplay]}>
-					{(nowPlaying as HomeLoaderMovieShow)[
-						props.loaderIndex
-					].results.map((item) => (
+					{nowPlaying[props.loaderIndex].results.map((item) => (
 						<SwiperSlide key={`hero${item.id}`}>
 							<div
 								className="hero-backdrop hero-overlay"
@@ -131,24 +108,18 @@ export const Hero = (props: HeroProps) => {
 											</div>
 
 											{item.genre_ids.map((genreId) => {
-												return (
-													props.loaderData as HomeLoaderGenre
-												)[props.genreIndex].genres.map(
-													(loaderGenre) => {
-														return loaderGenre.id ===
-															genreId ? (
-															<p
-																key={
-																	loaderGenre.id
-																}
-																className="movie-show-genres">
-																{
-																	loaderGenre.name
-																}
-															</p>
-														) : null;
-													}
-												);
+												return props.loaderData[
+													props.genreIndex
+												].genres.map((loaderGenre) => {
+													return loaderGenre.id ===
+														genreId ? (
+														<p
+															key={loaderGenre.id}
+															className="movie-show-genres">
+															{loaderGenre.name}
+														</p>
+													) : null;
+												});
 											})}
 										</div>
 
