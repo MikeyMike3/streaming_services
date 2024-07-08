@@ -43,6 +43,7 @@ export const PopularMovies = () => {
 		const fetchData = async () => {
 			try {
 				const data = await loaderData;
+				console.log(data);
 				if (data.length > 3 && isHomeLoader3(data[3])) {
 					homeLoader3 = data[3];
 				}
