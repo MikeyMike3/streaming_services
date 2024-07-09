@@ -2,7 +2,6 @@ export interface HomeLoaderMovieResults {
 	id: number;
 	title: string | null;
 	poster_path: string | null;
-
 	overview: string;
 	genre_ids: number[];
 	release_date: string;
@@ -15,7 +14,6 @@ export interface HomeLoaderShowResults {
 	id: number;
 	name: string | null;
 	poster_path: string | null;
-
 	overview: string;
 	genre_ids: number[];
 	release_date: string;

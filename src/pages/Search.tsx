@@ -1,4 +1,10 @@
-import { useEffect, useState } from "react";
+import {
+	ChangeEvent,
+	FormEventHandler,
+	useEffect,
+	useRef,
+	useState,
+} from "react";
 import { Link, useNavigation } from "react-router-dom";
 
 import { options } from "../api/options";
@@ -7,9 +13,16 @@ import { ViewMoreButton } from "../components/ViewMoreButton";
 import { Spinner } from "../components/Spinner";
 
 import { SearchRotateLoader } from "../spinners/SearchRotateLoader";
+import {
+	SearchObject,
+	SearchMovieResults,
+	SearchShowResults,
+} from "../types/SearchTypes";
 
 export const Search = () => {
-	const [searchResults, setSearchResults] = useState([]);
+	const [searchResults, setSearchResults] = useState<
+		SearchMovieResults[] | SearchShowResults[] | []
+	>([]);
 	const [queryState, setQueryState] = useState("");
 	const [inputQuery, setInputQuery] = useState("");
 	const [pages, setPages] = useState(1);
@@ -23,6 +36,10 @@ export const Search = () => {
 
 	const [handleClickError, setHandleClickError] = useState(false);
 	const [searchHandleClickError, setSearchHandleClickError] = useState(false);
+
+	const inputRef = useRef<HTMLInputElement>(null);
+
+	let query: string;
 
 	const handleClick = async () => {
 		let nextPage = pages + 1;
@@ -52,10 +69,13 @@ export const Search = () => {
 		}
 	};
 
-	const handleSubmit = async (e) => {
+	const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
-		const query = e.target.querySelector("#search").value;
-		setQueryState(query);
+
+		if (inputRef.current) {
+			query = inputRef.current.value;
+			setInputQuery(query);
+		}
 
 		if (query.length === 0) {
 			setSearchResults([]);
@@ -66,7 +86,7 @@ export const Search = () => {
 					`https://api.themoviedb.org/3/search/multi?query=${query}&include_adult=false&language=en-US&page=1`,
 					options
 				);
-				const data = await response.json();
+				const data: SearchObject = await response.json();
 				setSearchResults(data.results);
 				setPages(1);
 				setTotalPages(data.total_pages);
@@ -89,7 +109,7 @@ export const Search = () => {
 		}
 	};
 
-	const onChange = (e) => {
+	const onChange = (e: ChangeEvent<HTMLInputElement>) => {
 		const query = e.target.value;
 		setInputQuery(query);
 	};
@@ -110,6 +130,7 @@ export const Search = () => {
 						id="search"
 						placeholder="Search"
 						onChange={onChange}
+						ref={inputRef}
 					/>
 					<button className="search-btn" type="submit">
 						Search
@@ -137,26 +158,29 @@ export const Search = () => {
 						<div className="search-grid">
 							{searchResults.map((item) => (
 								<>
-									<Link
-										to={`/${
-											item.media_type
-										}/${item.id.toString()}`}>
-										<MovieShowCard
-											genreIds={item.genre_ids}
-											id={item.id}
-											mediaType={item.media_type}
-											overview={item.overview}
-											posterPath={item.poster_path}
-											profilePath={item.profile_path}
-											backdropPath={item.backdrop_path}
-											releaseDate={item.release_date}
-											voteAverage={item.vote_average}
-											title={item.title}
-											name={item.name}
-											movieGenres={item.genre_ids}
-											showGenres={item.genre_ids}
-										/>
-									</Link>
+									{"name" in item ? (
+										<Link
+											to={`/${
+												item.media_type
+											}/${item.id.toString()}`}>
+											<MovieShowCard
+												mediaType={item.media_type}
+												posterPath={item.poster_path}
+												name={item.name}
+											/>
+										</Link>
+									) : (
+										<Link
+											to={`/${
+												item.media_type
+											}/${item.id.toString()}`}>
+											<MovieShowCard
+												mediaType={item.media_type}
+												posterPath={item.poster_path}
+												title={item.title}
+											/>
+										</Link>
+									)}
 								</>
 							))}
 						</div>
