@@ -12,7 +12,7 @@ import { HomeLoaderTuple } from "../types/homeTypes";
 
 export const PopularShowsSlider = () => {
 	const loaderData = useLoaderData() as HomeLoaderTuple;
-	const [popularShows, setPopularShows] = useState<HomeLoaderTuple | []>([]);
+	const [popularShows, setPopularShows] = useState<HomeLoaderTuple>();
 	const [loading, setLoading] = useState(true);
 
 	const swiperRef = useRef(null);

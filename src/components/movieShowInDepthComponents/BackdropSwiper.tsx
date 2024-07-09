@@ -5,7 +5,7 @@ import { Navigation, Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
-import { MovieShowDetailsMovie5 } from "../../pages/MovieShowInDepth";
+import { MovieShowDetailsMovie5 } from "../../types/movieShowInDepthTypes";
 
 type BackdropSwiperProps = {
 	array: MovieShowDetailsMovie5;

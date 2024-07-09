@@ -70,7 +70,7 @@ export const PopularMoviesSlider = () => {
 						<SwiperSlide key={`popularMovies${item.id}`}>
 							<Link to={`movie/${item.id.toString()}`}>
 								<MovieShowCard
-									mediaType={item.media_type}
+									mediaType={"movie"}
 									posterPath={item.poster_path}
 									title={item.title}
 								/>
