@@ -94,7 +94,7 @@ export const MovieShowDetails = (props: MovieShowDetailsProps) => {
 					</p>
 				)}
 
-				<Credits credits={props.credits as ShowCast[] | MovieCast[]} />
+				<Credits credits={props.credits} />
 			</div>
 		</div>
 	);

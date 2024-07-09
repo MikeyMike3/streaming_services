@@ -8,25 +8,10 @@ import { PopularShowsSlider } from "../components/PopularShowsSlider";
 import { HomeLoaderIcon } from "../components/HomeLoaderIcon";
 import { GeneralApiErrorMessage } from "../components/GeneralApiErrorMessage";
 
-import {
-	HomeLoader0,
-	HomeLoader1,
-	HomeLoader2,
-	HomeLoader3,
-	HomeLoader4,
-	HomeLoader5,
-} from "../types/homeTypes";
-
-type HomeLoader =
-	| HomeLoader0
-	| HomeLoader1
-	| HomeLoader2
-	| HomeLoader3
-	| HomeLoader4
-	| HomeLoader5;
+import { HomeLoaderTuple } from "../types/homeTypes";
 
 export const Home = () => {
-	const loaderData = useLoaderData() as HomeLoader[];
+	const loaderData = useLoaderData() as HomeLoaderTuple;
 	const navigation = useNavigation();
 
 	if (loaderData[6] !== null) {

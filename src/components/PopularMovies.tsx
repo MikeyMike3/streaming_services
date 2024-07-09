@@ -6,13 +6,15 @@ import { Grid } from "./movieShowInDepthComponents/Grid";
 import { ViewMoreButton } from "./ViewMoreButton";
 import { Spinner } from "./Spinner";
 
-export const PopularMovies = () => {
-	const loaderData = useLoaderData();
-	const [popularMovies, setPopularMovies] = useState([]);
+import { HomeLoaderTuple, HomeLoader3 } from "../types/homeTypes";
 
-	const [pages, setPages] = useState(1);
-	const [isLoading, setIsLoading] = useState(false);
-	const [handleClickError, setHandleClickError] = useState(false);
+export const PopularMovies = () => {
+	const loaderData = useLoaderData() as HomeLoaderTuple;
+	const [popularMovies, setPopularMovies] = useState<HomeLoader3>();
+
+	const [pages, setPages] = useState<number>(1);
+	const [isLoading, setIsLoading] = useState<boolean>(false);
+	const [handleClickError, setHandleClickError] = useState<boolean>(false);
 
 	const navigation = useNavigation();
 
@@ -20,7 +22,8 @@ export const PopularMovies = () => {
 		const fetchData = async () => {
 			try {
 				const data = await loaderData;
-				setPopularMovies(data);
+
+				setPopularMovies(data[3]);
 			} catch (error) {
 				console.error("Error fetching data:", error);
 			}
@@ -29,15 +32,8 @@ export const PopularMovies = () => {
 		fetchData();
 	}, [loaderData]);
 
-	useEffect(() => {}, [popularMovies]);
-
 	// Ensure popularMovies[5] and popularMovies[5].results are defined
-	if (
-		!popularMovies ||
-		popularMovies.length < 6 ||
-		!popularMovies[3] ||
-		!popularMovies[3].results
-	) {
+	if (!popularMovies || !popularMovies.results) {
 		return null;
 	}
 
@@ -51,11 +47,8 @@ export const PopularMovies = () => {
 			);
 			if (response.ok) {
 				const data = await response.json();
-				const updatedData = [...popularMovies];
-				updatedData[3].results = [
-					...updatedData[3].results,
-					...data.results,
-				];
+				const updatedData = popularMovies;
+				updatedData.results = [...updatedData.results, ...data.results];
 				setPopularMovies(updatedData);
 				setPages(nextPage);
 			}
@@ -76,13 +69,13 @@ export const PopularMovies = () => {
 			<div className="wrapper">
 				<h1 className="page-heading">Popular Movies</h1>
 
-				<Grid array={popularMovies[3].results} mediaType={"movie"} />
+				<Grid array={popularMovies.results} mediaType={"movie"} />
 
 				<ViewMoreButton
 					handleClick={handleClick}
 					handleClickError={handleClickError}
 					currentPage={pages}
-					totalPages={popularMovies[3].total_pages}
+					totalPages={popularMovies.total_pages}
 					isLoading={isLoading}
 				/>
 			</div>
