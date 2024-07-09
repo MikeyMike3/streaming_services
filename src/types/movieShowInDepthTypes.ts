@@ -117,7 +117,6 @@ export interface SimilarResults {
 	video: boolean | null;
 	vote_average: number | null;
 	vote_count: number | null;
-	media_type: string;
 	profile_path: string | null;
 	backdrop_path: string | null;
 	name: string | null;

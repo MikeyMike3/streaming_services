@@ -5,6 +5,8 @@ import { SimilarResults, PersonCast } from "../../types/movieShowInDepthTypes";
 import {
 	HomeLoaderMovieResults,
 	HomeLoaderShowResults,
+	HomeLoaderTrendingMovieResults,
+	HomeLoaderTrendingShowResults,
 } from "../../types/homeTypes";
 
 type GridProps = {
@@ -12,7 +14,9 @@ type GridProps = {
 		| SimilarResults[]
 		| PersonCast[]
 		| HomeLoaderMovieResults[]
-		| HomeLoaderShowResults[];
+		| HomeLoaderShowResults[]
+		| HomeLoaderTrendingMovieResults[]
+		| HomeLoaderTrendingShowResults[];
 	mediaType: string;
 	resetState?: () => null;
 };
@@ -22,25 +26,32 @@ export const Grid = (props: GridProps) => {
 		<div className="search-grid">
 			{props.array.map((item) => {
 				if (props.mediaType === "tv" || props.mediaType === "movie") {
-					if (
-						"media_type" in item &&
-						"title" in item &&
-						"name" in item
-					) {
+					if ("media_type" in item && "title" in item) {
 						return (
 							<Link
 								onClick={props.resetState}
 								key={item.id + props.mediaType}
-								to={`/${props.mediaType}/${item.id.toString()}`}>
+								to={`/${item.media_type}/${item.id.toString()}`}>
 								<MovieShowCard
 									mediaType={item.media_type}
 									posterPath={item.poster_path}
 									profilePath={item.profile_path}
 									title={item.title}
-									name={item.name}
 								/>
 							</Link>
 						);
+					} else if ("media_type" in item && "name" in item) {
+						<Link
+							onClick={props.resetState}
+							key={item.id + props.mediaType}
+							to={`/${item.media_type}/${item.id.toString()}`}>
+							<MovieShowCard
+								mediaType={item.media_type}
+								posterPath={item.poster_path}
+								profilePath={item.profile_path}
+								name={item.name}
+							/>
+						</Link>;
 					} else if ("name" in item) {
 						return (
 							<Link

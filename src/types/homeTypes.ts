@@ -2,7 +2,7 @@ export interface HomeLoaderMovieResults {
 	id: number;
 	title: string | null;
 	poster_path: string | null;
-	media_type: string;
+
 	overview: string;
 	genre_ids: number[];
 	release_date: string;
@@ -15,6 +15,19 @@ export interface HomeLoaderShowResults {
 	id: number;
 	name: string | null;
 	poster_path: string | null;
+
+	overview: string;
+	genre_ids: number[];
+	release_date: string;
+	vote_average: number;
+	backdrop_path: string;
+	profile_path: string;
+}
+
+export interface HomeLoaderTrendingShowResults {
+	id: number;
+	name: string | null;
+	poster_path: string | null;
 	media_type: string;
 	overview: string;
 	genre_ids: number[];
@@ -24,6 +37,18 @@ export interface HomeLoaderShowResults {
 	profile_path: string;
 }
 
+export interface HomeLoaderTrendingMovieResults {
+	id: number;
+	title: string | null;
+	poster_path: string | null;
+	media_type: string;
+	overview: string;
+	genre_ids: number[];
+	release_date: string;
+	vote_average: number;
+	backdrop_path: string;
+	profile_path: string;
+}
 interface Genres {
 	id: number;
 	name: string;
@@ -41,7 +66,7 @@ export type HomeLoaderTuple = [
 
 export interface HomeLoader0 {
 	page: number;
-	results: HomeLoaderMovieResults[] | HomeLoaderShowResults[];
+	results: HomeLoaderTrendingMovieResults[] | HomeLoaderTrendingShowResults[];
 	total_pages: number;
 }
 
