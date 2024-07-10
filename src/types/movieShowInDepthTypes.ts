@@ -103,7 +103,6 @@ export interface VideoResults {
 // MovieShowDetails index 4
 
 export interface SimilarResults {
-	movieShow: string;
 	adult: boolean | null;
 	genre_ids: number[] | null;
 	id: number;

@@ -34,6 +34,7 @@ import {
 	MovieShowDetailsMovieTuple,
 	MovieShowDetailsShowTuple,
 } from "../types/movieShowInDepthTypes";
+import { MovieShowCard } from "../components/MovieShowCard";
 
 export const MovieShowInDepth = () => {
 	const { id, mediaType } = useParams();
@@ -114,7 +115,10 @@ export const MovieShowInDepth = () => {
 
 	useEffect(() => {
 		if (movieShowDetails[movieShowDetails.length - 1] === null) {
-			if (mediaType !== "person" && isMovie(movieShowDetails)) {
+			if (
+				mediaType !== "person" &&
+				(isMovie(movieShowDetails) || isShow(movieShowDetails))
+			) {
 				if (!isEmpty(movieShowDetails[1].results)) {
 					if (typeof movieShowDetails[1].results.US !== "undefined") {
 						if (
@@ -136,7 +140,10 @@ export const MovieShowInDepth = () => {
 
 	useEffect(() => {
 		if (movieShowDetails[movieShowDetails.length - 1] === null) {
-			if (mediaType !== "person" && isMovie(movieShowDetails)) {
+			if (
+				mediaType !== "person" &&
+				(isMovie(movieShowDetails) || isShow(movieShowDetails))
+			) {
 				if (!isEmpty(movieShowDetails[1].results)) {
 					if (typeof movieShowDetails[1].results.US !== "undefined") {
 						if (
@@ -157,7 +164,10 @@ export const MovieShowInDepth = () => {
 
 	useEffect(() => {
 		if (movieShowDetails[movieShowDetails.length - 1] === null) {
-			if (mediaType !== "person" && isMovie(movieShowDetails)) {
+			if (
+				mediaType !== "person" &&
+				(isMovie(movieShowDetails) || isShow(movieShowDetails))
+			) {
 				if (!isEmpty(movieShowDetails[1].results)) {
 					if (typeof movieShowDetails[1].results.US !== "undefined") {
 						if (
@@ -179,7 +189,10 @@ export const MovieShowInDepth = () => {
 
 	useEffect(() => {
 		if (movieShowDetails[movieShowDetails.length - 1] === null) {
-			if (mediaType !== "person" && isMovie(movieShowDetails)) {
+			if (
+				mediaType !== "person" &&
+				(isMovie(movieShowDetails) || isShow(movieShowDetails))
+			) {
 				if (mediaType === "movie") {
 					if (typeof movieShowDetails[2].cast !== "undefined") {
 						const filteredCast = movieShowDetails[2].cast.filter(
@@ -327,7 +340,7 @@ export const MovieShowInDepth = () => {
 						<h1 className="heading">Videos</h1>
 						<div className="heading-underline"></div>
 
-						{/* <VideoSwiper array={movieShowDetails[3].results} /> */}
+						<VideoSwiper array={movieShowDetails[3].results} />
 
 						<h1 className="heading">Backdrops</h1>
 						<div className="heading-underline"></div>
