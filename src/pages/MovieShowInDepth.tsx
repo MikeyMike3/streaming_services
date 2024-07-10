@@ -265,10 +265,6 @@ export const MovieShowInDepth = () => {
 		return null;
 	};
 
-	useEffect(() => {
-		console.log(similar);
-	}, [similar]);
-
 	const handleClick = async () => {
 		let nextPage = pages + 1;
 		setBackToTop(false);

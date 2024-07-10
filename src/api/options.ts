@@ -1,4 +1,6 @@
-const apiKey = import.meta.env.VITE_API_KEY;
+/// <reference types="vite/client" />
+
+const apiKey: string = import.meta.env.VITE_REACT_API_KEY;
 
 export const options = {
 	method: "GET",
