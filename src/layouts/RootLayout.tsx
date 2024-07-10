@@ -32,7 +32,7 @@ export const RootLayout = () => {
 		},
 		[menuOpen]
 	);
-	console.log();
+
 	useEffect(() => {
 		if (menuOpen) {
 			document.addEventListener("click", handleClickOutside);
