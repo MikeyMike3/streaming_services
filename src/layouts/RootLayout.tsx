@@ -20,13 +20,13 @@ export const RootLayout = () => {
 	}, []);
 
 	const toggleMenu = () => {
-		event.stopPropagation();
 		setMenuOpen(!menuOpen);
 	};
 
 	const handleClickOutside = useCallback(
-		(event) => {
-			if (menuOpen && !event.target.closest(".slide-menu")) {
+		(event: MouseEvent | React.MouseEvent<Document>) => {
+			const target = event.target as HTMLElement;
+			if (menuOpen && !target.closest(".slide-menu")) {
 				setMenuOpen(false);
 			}
 		},
