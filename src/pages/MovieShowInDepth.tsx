@@ -510,6 +510,7 @@ export const MovieShowInDepth = () => {
 			)}
 			{mediaType === "person" && (
 				<>
+					{console.log(movieShowDetails)}
 					<div
 						className="movie-show-details-backdrop movie-show-details-backdrop-overlay"
 						style={{ backgroundImage: `url(${poster})` }}></div>

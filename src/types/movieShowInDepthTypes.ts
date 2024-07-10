@@ -134,6 +134,22 @@ export interface Images {
 	width: number | null;
 }
 
+export type MovieShowDetailsTuple = [
+	MovieShowDetailsMovie0 | null,
+	MovieShowDetailsMovie1 | null,
+	MovieShowDetailsMovie2 | null,
+	MovieShowDetailsMovie3 | null,
+	MovieShowDetailsMovie4 | null,
+	MovieShowDetailsMovie5 | null,
+	string | null,
+];
+
+export type MovieShowDetailsPeopleTuple = [
+	Person0 | null,
+	Person1 | null,
+	string | null,
+];
+
 // movies
 
 export interface MovieShowDetailsMovie0 {

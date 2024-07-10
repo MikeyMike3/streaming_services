@@ -17,11 +17,19 @@ import {
 } from "../api/showApi";
 
 import { fetchPersonDetails, fetchPersonCredits } from "../api/personApi";
+import {
+	MovieShowDetailsPeopleTuple,
+	MovieShowDetailsTuple,
+} from "../types/movieShowInDepthTypes";
 
-export const movieShowInDepthLoader = async ({ params }) => {
+let results: MovieShowDetailsTuple | MovieShowDetailsPeopleTuple;
+
+export const movieShowInDepthLoader = async ({
+	params,
+}: {
+	params: { mediaType: string; id: number };
+}) => {
 	const { mediaType, id } = params;
-
-	let results = [];
 
 	if (mediaType === "movie" || mediaType === "tv") {
 		results = [null, null, null, null, null, null, null];
@@ -86,8 +94,7 @@ export const movieShowInDepthLoader = async ({ params }) => {
 			results[1] = personCredits;
 		}
 	} catch (error) {
-		results[results.length - 1] =
-			error.message || "An error occurred while fetching data."; // Set error message at the last index
+		results[results.length - 1] = "An error occurred while fetching data."; // Set error message at the last index
 	}
 	return results;
 };
