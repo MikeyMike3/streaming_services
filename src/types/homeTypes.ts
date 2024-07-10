@@ -62,6 +62,16 @@ export type HomeLoaderTuple = [
 	string | null,
 ];
 
+export type HomeLoaderTupleDefault = [
+	HomeLoader0 | null,
+	HomeLoader1 | null,
+	HomeLoader2 | null,
+	HomeLoader3 | null,
+	HomeLoader4 | null,
+	HomeLoader5 | null,
+	string | null,
+];
+
 export interface HomeLoader0 {
 	page: number;
 	results: HomeLoaderTrendingMovieResults[] | HomeLoaderTrendingShowResults[];
