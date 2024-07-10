@@ -8,7 +8,7 @@ export const RootLayout = () => {
 	useEffect(() => {
 		const handleScroll = () => {
 			const scrollTop = window.scrollY;
-			const maxScroll = 500; // Adjust this value as needed
+			const maxScroll = 500;
 			const opacity = Math.min(scrollTop / maxScroll, 1);
 			setBgOpacity(opacity);
 		};
@@ -20,13 +20,13 @@ export const RootLayout = () => {
 	}, []);
 
 	const toggleMenu = () => {
-		event.stopPropagation();
-		setMenuOpen(!menuOpen);
+		setMenuOpen((prevMenuOpen) => !prevMenuOpen);
 	};
 
 	const handleClickOutside = useCallback(
-		(event) => {
-			if (menuOpen && !event.target.closest(".slide-menu")) {
+		(event: MouseEvent | React.MouseEvent<Document>) => {
+			const target = event.target as HTMLElement;
+			if (menuOpen && !target.closest(".slide-menu")) {
 				setMenuOpen(false);
 			}
 		},
