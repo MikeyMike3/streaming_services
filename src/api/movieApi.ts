@@ -1,6 +1,6 @@
 import { options } from "./options";
 
-export const fetchMovieDetails = async (movieId) => {
+export const fetchMovieDetails = async (movieId: number) => {
 	try {
 		const res = await fetch(
 			`https://api.themoviedb.org/3/movie/${movieId}?language=en-US`,
@@ -13,7 +13,7 @@ export const fetchMovieDetails = async (movieId) => {
 	}
 };
 
-export const fetchMovieProviders = async (movieId) => {
+export const fetchMovieProviders = async (movieId: number) => {
 	try {
 		const res = await fetch(
 			`https://api.themoviedb.org/3/movie/${movieId}/watch/providers`,
@@ -26,7 +26,7 @@ export const fetchMovieProviders = async (movieId) => {
 	}
 };
 
-export const fetchMovieCredits = async (movieId) => {
+export const fetchMovieCredits = async (movieId: number) => {
 	try {
 		const res = await fetch(
 			`https://api.themoviedb.org/3/movie/${movieId}/credits?language=en-US`,
@@ -39,7 +39,7 @@ export const fetchMovieCredits = async (movieId) => {
 	}
 };
 
-export const fetchMovieTrailer = async (movieId) => {
+export const fetchMovieTrailer = async (movieId: number) => {
 	try {
 		const res = await fetch(
 			`https://api.themoviedb.org/3/movie/${movieId}/videos?language=en-US`,
@@ -52,7 +52,7 @@ export const fetchMovieTrailer = async (movieId) => {
 	}
 };
 
-export const fetchSimilarMovies = async (movieId) => {
+export const fetchSimilarMovies = async (movieId: number) => {
 	try {
 		const res = await fetch(
 			`https://api.themoviedb.org/3/movie/${movieId}/recommendations?language=en-US&page=1`,
@@ -91,7 +91,7 @@ export const fetchNowPlaying = async () => {
 	}
 };
 
-export const fetchMovieImages = async (movieId) => {
+export const fetchMovieImages = async (movieId: number) => {
 	try {
 		const res = await fetch(
 			`https://api.themoviedb.org/3/movie/${movieId}/images?include_image_language=null`,

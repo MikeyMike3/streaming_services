@@ -41,17 +41,19 @@ export const Grid = (props: GridProps) => {
 							</Link>
 						);
 					} else if ("media_type" in item && "name" in item) {
-						<Link
-							onClick={props.resetState}
-							key={item.id + props.mediaType}
-							to={`/${item.media_type}/${item.id.toString()}`}>
-							<MovieShowCard
-								mediaType={item.media_type}
-								posterPath={item.poster_path}
-								profilePath={item.profile_path}
-								name={item.name}
-							/>
-						</Link>;
+						return (
+							<Link
+								onClick={props.resetState}
+								key={item.id + props.mediaType}
+								to={`/${item.media_type}/${item.id.toString()}`}>
+								<MovieShowCard
+									mediaType={item.media_type}
+									posterPath={item.poster_path}
+									profilePath={item.profile_path}
+									name={item.name}
+								/>
+							</Link>
+						);
 					} else if ("name" in item) {
 						return (
 							<Link

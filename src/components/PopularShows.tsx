@@ -51,7 +51,7 @@ export const PopularShows = () => {
 			if (response.ok) {
 				const data = await response.json();
 				const updatedData: HomeLoaderTuple = [...popularShows];
-				console.log(updatedData);
+
 				updatedData[4].results = [
 					...updatedData[4].results,
 					...data.results,

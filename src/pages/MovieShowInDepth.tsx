@@ -30,42 +30,18 @@ import {
 	MovieCast,
 	ShowCast,
 	SimilarResults,
-	MovieShowDetailsMovie0,
-	MovieShowDetailsMovie1,
-	MovieShowDetailsMovie2,
-	MovieShowDetailsMovie3,
-	MovieShowDetailsMovie4,
-	MovieShowDetailsMovie5,
-	MovieShowDetailsShow2,
-	Person0,
-	Person1,
+	MovieShowDetailsPeopleTuple,
+	MovieShowDetailsMovieTuple,
+	MovieShowDetailsShowTuple,
 } from "../types/movieShowInDepthTypes";
-
-//  shows
-
-interface MovieShowDetailsShow0 {}
-
-interface MovieShowDetailsShow1 {}
-
-interface MovieShowDetailsShow3 {}
-
-interface MovieShowDetailsShow4 {}
-
-interface MovieShowDetailsShow5 {}
-
-type MovieShowDetails =
-	| MovieShowDetailsMovie0
-	| MovieShowDetailsMovie1
-	| MovieShowDetailsMovie2
-	| MovieShowDetailsMovie3
-	| MovieShowDetailsMovie4
-	| MovieShowDetailsMovie5
-	| Person0
-	| Person1;
+import { MovieShowCard } from "../components/MovieShowCard";
 
 export const MovieShowInDepth = () => {
 	const { id, mediaType } = useParams();
-	const movieShowDetails = useLoaderData() as MovieShowDetails[];
+	const movieShowDetails = useLoaderData() as
+		| MovieShowDetailsPeopleTuple
+		| MovieShowDetailsMovieTuple
+		| MovieShowDetailsShowTuple;
 	const navigation = useNavigation();
 
 	const [movieShowId, setMovieShowId] = useState("");
@@ -99,31 +75,58 @@ export const MovieShowInDepth = () => {
 		return Object.keys(obj).length === 0;
 	};
 
+	function isMovie(
+		details:
+			| MovieShowDetailsPeopleTuple
+			| MovieShowDetailsMovieTuple
+			| MovieShowDetailsShowTuple
+	): details is MovieShowDetailsMovieTuple {
+		return (details as MovieShowDetailsMovieTuple)[0].title !== undefined;
+	}
+
+	function isShow(
+		details:
+			| MovieShowDetailsPeopleTuple
+			| MovieShowDetailsMovieTuple
+			| MovieShowDetailsShowTuple
+	): details is MovieShowDetailsShowTuple {
+		return (details as MovieShowDetailsShowTuple)[0].name !== undefined;
+	}
+
+	function isPerson(
+		details:
+			| MovieShowDetailsPeopleTuple
+			| MovieShowDetailsMovieTuple
+			| MovieShowDetailsShowTuple
+	): details is MovieShowDetailsPeopleTuple {
+		return (
+			(details as MovieShowDetailsPeopleTuple)[0].place_of_birth !==
+			undefined
+		);
+	}
+
 	if (backToTop) {
 		window.scrollTo(0, 0);
 	}
 
+	isMovie(movieShowDetails);
+	isShow(movieShowDetails);
+	isPerson(movieShowDetails);
+
 	useEffect(() => {
 		if (movieShowDetails[movieShowDetails.length - 1] === null) {
-			if (mediaType !== "person") {
-				if (
-					!isEmpty(
-						(movieShowDetails as MovieShowDetailsMovie1[])[1]
-							.results
-					)
-				) {
-					if (
-						typeof (movieShowDetails as MovieShowDetailsMovie1[])[1]
-							.results.US !== "undefined"
-					) {
+			if (
+				mediaType !== "person" &&
+				(isMovie(movieShowDetails) || isShow(movieShowDetails))
+			) {
+				if (!isEmpty(movieShowDetails[1].results)) {
+					if (typeof movieShowDetails[1].results.US !== "undefined") {
 						if (
-							typeof (
-								movieShowDetails as MovieShowDetailsMovie1[]
-							)[1].results.US.flatrate !== "undefined"
+							typeof movieShowDetails[1].results.US.flatrate !==
+							"undefined"
 						) {
-							const usFlatrate = (
-								movieShowDetails as MovieShowDetailsMovie1[]
-							)[1]?.results?.US?.flatrate;
+							const usFlatrate =
+								movieShowDetails[1]?.results?.US?.flatrate;
 
 							if (usFlatrate) {
 								setFlatRateStreamingServices(usFlatrate);
@@ -137,25 +140,17 @@ export const MovieShowInDepth = () => {
 
 	useEffect(() => {
 		if (movieShowDetails[movieShowDetails.length - 1] === null) {
-			if (mediaType !== "person") {
-				if (
-					!isEmpty(
-						(movieShowDetails as MovieShowDetailsMovie1[])[1]
-							.results
-					)
-				) {
-					if (
-						typeof (movieShowDetails as MovieShowDetailsMovie1[])[1]
-							.results.US !== "undefined"
-					) {
+			if (
+				mediaType !== "person" &&
+				(isMovie(movieShowDetails) || isShow(movieShowDetails))
+			) {
+				if (!isEmpty(movieShowDetails[1].results)) {
+					if (typeof movieShowDetails[1].results.US !== "undefined") {
 						if (
-							typeof (
-								movieShowDetails as MovieShowDetailsMovie1[]
-							)[1].results.US.buy !== "undefined"
+							typeof movieShowDetails[1].results.US.buy !==
+							"undefined"
 						) {
-							const usBuy = (
-								movieShowDetails as MovieShowDetailsMovie1[]
-							)[1]?.results?.US?.buy;
+							const usBuy = movieShowDetails[1]?.results?.US?.buy;
 
 							if (usBuy) {
 								setBuyStreamingServices(usBuy);
@@ -168,22 +163,19 @@ export const MovieShowInDepth = () => {
 	}, [movieShowDetails, mediaType]);
 
 	useEffect(() => {
-		const movieShowDetailsPlatform =
-			movieShowDetails as MovieShowDetailsMovie1[];
-
 		if (movieShowDetails[movieShowDetails.length - 1] === null) {
-			if (mediaType !== "person") {
-				if (!isEmpty(movieShowDetailsPlatform[1].results)) {
-					if (
-						typeof movieShowDetailsPlatform[1].results.US !==
-						"undefined"
-					) {
+			if (
+				mediaType !== "person" &&
+				(isMovie(movieShowDetails) || isShow(movieShowDetails))
+			) {
+				if (!isEmpty(movieShowDetails[1].results)) {
+					if (typeof movieShowDetails[1].results.US !== "undefined") {
 						if (
-							typeof movieShowDetailsPlatform[1].results.US
-								.rent !== "undefined"
+							typeof movieShowDetails[1].results.US.rent !==
+							"undefined"
 						) {
 							const usRent =
-								movieShowDetailsPlatform[1]?.results?.US?.rent;
+								movieShowDetails[1]?.results?.US?.rent;
 
 							if (usRent) {
 								setRentStreamingServices(usRent);
@@ -196,35 +188,24 @@ export const MovieShowInDepth = () => {
 	}, [movieShowDetails, mediaType]);
 
 	useEffect(() => {
-		const movieShowDetailsMovieCast =
-			movieShowDetails as MovieShowDetailsMovie2[];
-
-		const movieShowDetailsShowCast =
-			movieShowDetails as MovieShowDetailsShow2[];
-
 		if (movieShowDetails[movieShowDetails.length - 1] === null) {
-			if (mediaType !== "person") {
+			if (
+				mediaType !== "person" &&
+				(isMovie(movieShowDetails) || isShow(movieShowDetails))
+			) {
 				if (mediaType === "movie") {
-					if (
-						typeof movieShowDetailsMovieCast[2].cast !== "undefined"
-					) {
-						const filteredCast =
-							movieShowDetailsMovieCast[2].cast.filter(
-								(actor) =>
-									actor.known_for_department === "Acting"
-							);
+					if (typeof movieShowDetails[2].cast !== "undefined") {
+						const filteredCast = movieShowDetails[2].cast.filter(
+							(actor) => actor.known_for_department === "Acting"
+						);
 
 						setCredits(filteredCast);
 					}
 				} else if (mediaType === "tv") {
-					if (
-						typeof movieShowDetailsShowCast[2].cast !== "undefined"
-					) {
-						const filteredCast =
-							movieShowDetailsShowCast[2].cast.filter(
-								(actor) =>
-									actor.known_for_department === "Acting"
-							);
+					if (typeof movieShowDetails[2].cast !== "undefined") {
+						const filteredCast = movieShowDetails[2].cast.filter(
+							(actor) => actor.known_for_department === "Acting"
+						);
 
 						setCredits(filteredCast);
 					}
@@ -234,12 +215,10 @@ export const MovieShowInDepth = () => {
 	}, [movieShowDetails, mediaType]);
 
 	useEffect(() => {
-		const movieShowDetailsSimilar =
-			movieShowDetails as MovieShowDetailsMovie4[];
 		if (movieShowDetails[movieShowDetails.length - 1] === null) {
-			if (mediaType !== "person") {
-				if (!isEmpty(movieShowDetailsSimilar[4].results)) {
-					setSimilar(movieShowDetailsSimilar[4].results);
+			if (mediaType !== "person" && movieShowDetails[4]) {
+				if (!isEmpty(movieShowDetails[4].results)) {
+					setSimilar(movieShowDetails[4].results);
 				}
 			}
 		}
@@ -264,10 +243,6 @@ export const MovieShowInDepth = () => {
 
 		return null;
 	};
-
-	useEffect(() => {
-		console.log(similar);
-	}, [similar]);
 
 	const handleClick = async () => {
 		let nextPage = pages + 1;
@@ -340,26 +315,18 @@ export const MovieShowInDepth = () => {
 	return (
 		<>
 			<Spinner navigation={navigation} />
-			{mediaType === "movie" && (
+			{mediaType === "movie" && isMovie(movieShowDetails) && (
 				<>
-					<Backdrop
-						movieShowDetails={
-							movieShowDetails[0] as MovieShowDetailsMovie0
-						}
-					/>
+					<Backdrop movieShowDetails={movieShowDetails[0]} />
 
 					<div className="wrapper">
 						<MovieShowDetails
-							movieShowDetails={
-								movieShowDetails[0] as MovieShowDetailsMovie0
-							}
+							movieShowDetails={movieShowDetails[0]}
 							credits={credits}
 						/>
 
 						<AdditionalMovieShowInfo
-							movieShowDetails={
-								movieShowDetails[0] as MovieShowDetailsMovie0
-							}
+							movieShowDetails={movieShowDetails[0]}
 							mediaType={mediaType}
 						/>
 
@@ -373,23 +340,15 @@ export const MovieShowInDepth = () => {
 						<h1 className="heading">Videos</h1>
 						<div className="heading-underline"></div>
 
-						{/* <VideoSwiper array={movieShowDetails[3].results} /> */}
+						<VideoSwiper array={movieShowDetails[3].results} />
 
 						<h1 className="heading">Backdrops</h1>
 						<div className="heading-underline"></div>
-						<BackdropSwiper
-							array={
-								movieShowDetails[5] as MovieShowDetailsMovie5
-							}
-						/>
+						<BackdropSwiper array={movieShowDetails[5]} />
 
 						<h1 className="heading">Posters</h1>
 						<div className="heading-underline"></div>
-						<PosterSwiper
-							array={
-								movieShowDetails[5] as MovieShowDetailsMovie5
-							}
-						/>
+						<PosterSwiper array={movieShowDetails[5]} />
 
 						<h1 className="similar-movies-heading">
 							Similar Movies
@@ -407,11 +366,7 @@ export const MovieShowInDepth = () => {
 									handleClick={handleClick}
 									handleClickError={handleClickError}
 									currentPage={pages}
-									totalPages={
-										(
-											movieShowDetails as MovieShowDetailsMovie4[]
-										)[4].total_pages
-									}
+									totalPages={movieShowDetails[4].total_pages}
 									isLoading={isLoading}
 								/>
 							</>
@@ -423,26 +378,18 @@ export const MovieShowInDepth = () => {
 					</div>
 				</>
 			)}
-			{mediaType === "tv" && (
+			{mediaType === "tv" && isShow(movieShowDetails) && (
 				<>
-					<Backdrop
-						movieShowDetails={
-							movieShowDetails[0] as MovieShowDetailsMovie0
-						}
-					/>
+					<Backdrop movieShowDetails={movieShowDetails[0]} />
 
 					<div className="wrapper">
 						<MovieShowDetails
-							movieShowDetails={
-								movieShowDetails[0] as MovieShowDetailsMovie0
-							}
+							movieShowDetails={movieShowDetails[0]}
 							credits={credits}
 						/>
 
 						<AdditionalMovieShowInfo
-							movieShowDetails={
-								movieShowDetails[0] as MovieShowDetailsMovie0
-							}
+							movieShowDetails={movieShowDetails[0]}
 							mediaType={mediaType}
 						/>
 
@@ -456,29 +403,15 @@ export const MovieShowInDepth = () => {
 						<h1 className="heading">Videos</h1>
 						<div className="heading-underline"></div>
 
-						<VideoSwiper
-							array={
-								(
-									movieShowDetails as MovieShowDetailsMovie3[]
-								)[3].results
-							}
-						/>
+						<VideoSwiper array={movieShowDetails[3].results} />
 
 						<h1 className="heading">Backdrops</h1>
 						<div className="heading-underline"></div>
-						<BackdropSwiper
-							array={
-								movieShowDetails[5] as MovieShowDetailsMovie5
-							}
-						/>
+						<BackdropSwiper array={movieShowDetails[5]} />
 
 						<h1 className="heading">Posters</h1>
 						<div className="heading-underline"></div>
-						<PosterSwiper
-							array={
-								movieShowDetails[5] as MovieShowDetailsMovie5
-							}
-						/>
+						<PosterSwiper array={movieShowDetails[5]} />
 
 						<h1 className="similar-movies-heading">
 							Similar Shows
@@ -496,11 +429,7 @@ export const MovieShowInDepth = () => {
 									handleClickError={handleClickError}
 									handleClick={handleClick}
 									currentPage={pages}
-									totalPages={
-										(
-											movieShowDetails as MovieShowDetailsMovie4[]
-										)[4].total_pages
-									}
+									totalPages={movieShowDetails[4].total_pages}
 									isLoading={isLoading}
 								/>
 							</>
@@ -512,7 +441,7 @@ export const MovieShowInDepth = () => {
 					</div>
 				</>
 			)}
-			{mediaType === "person" && (
+			{mediaType === "person" && isPerson(movieShowDetails) && (
 				<>
 					<div
 						className="movie-show-details-backdrop movie-show-details-backdrop-overlay"
@@ -521,8 +450,7 @@ export const MovieShowInDepth = () => {
 					<div className="wrapper">
 						<div className="movie-show-details-container">
 							<div className="movie-show-poster-container">
-								{(movieShowDetails as Person0[])[0]
-									.profile_path === null ? (
+								{movieShowDetails[0].profile_path === null ? (
 									<div
 										className="movie-show-details-poster"
 										style={{
@@ -533,23 +461,19 @@ export const MovieShowInDepth = () => {
 									<div
 										className="movie-show-details-poster"
 										style={{
-											backgroundImage: `url(https://image.tmdb.org/t/p/w500/${(movieShowDetails as Person0[])[0].profile_path})`,
+											backgroundImage: `url(https://image.tmdb.org/t/p/w500/${movieShowDetails[0].profile_path})`,
 										}}
 									/>
 								)}
 							</div>
 							<div className="movie-show-details">
 								<h1 className="movie-show-title">
-									{(movieShowDetails as Person0[])[0].name}
+									{movieShowDetails[0].name}
 								</h1>
 
-								{(movieShowDetails as Person0[])[0]
-									.biography !== "" ? (
+								{movieShowDetails[0].biography !== "" ? (
 									<p className="movie-show-overview">
-										{
-											(movieShowDetails as Person0[])[0]
-												.biography
-										}
+										{movieShowDetails[0].biography}
 									</p>
 								) : (
 									<p className="movie-show-overview">
@@ -580,7 +504,7 @@ export const MovieShowInDepth = () => {
 						<h1 className="heading">Known Movies/Shows</h1>
 						<div className="heading-underline"></div>
 						<Grid
-							array={(movieShowDetails as Person1[])[1].cast}
+							array={movieShowDetails[1].cast}
 							mediaType={mediaType}
 							resetState={resetState}
 						/>

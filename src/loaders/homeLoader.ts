@@ -5,9 +5,18 @@ import {
 	fetchMovieGenre,
 	fetchShowGenre,
 } from "../api/trendingApi";
+import { HomeLoaderTupleDefault } from "../types/homeTypes";
 
 export const homeLoader = async () => {
-	const results = [null, null, null, null, null, null, null]; // Initialize array with null values
+	const results: HomeLoaderTupleDefault = [
+		null,
+		null,
+		null,
+		null,
+		null,
+		null,
+		null,
+	]; // Initialize array with null values
 
 	try {
 		const [
@@ -33,7 +42,7 @@ export const homeLoader = async () => {
 		results[4] = popularShows;
 		results[5] = nowPlayingMovies;
 	} catch (error) {
-		results[6] = error.message || "An error occurred while fetching data."; // Set error message at the last index
+		results[6] = "An error occurred while fetching data."; // Set error message at the last index
 	}
 
 	return results;

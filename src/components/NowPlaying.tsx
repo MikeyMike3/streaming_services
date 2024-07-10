@@ -6,10 +6,11 @@ import "swiper/css";
 import "swiper/css/free-mode";
 import { useEffect, useState } from "react";
 import { options } from "../api/options";
+import { HomeLoaderTuple } from "../types/homeTypes";
 
 export const NowPlaying = () => {
-	const loaderData = useLoaderData();
-	const [nowPlaying, setNowPlaying] = useState([]);
+	const loaderData = useLoaderData() as HomeLoaderTuple;
+	const [nowPlaying, setNowPlaying] = useState<HomeLoaderTuple>();
 	const [loading, setLoading] = useState(true);
 	const [pages, setPages] = useState(1);
 
@@ -51,11 +52,13 @@ export const NowPlaying = () => {
 			.then((response) => response.json())
 			.then((response) => {
 				// Update only the 5th array's results property
-				const updatedData = [...nowPlaying];
-				updatedData[5].results = [
-					...updatedData[5].results,
-					...response.results,
-				];
+				const updatedData: HomeLoaderTuple = [...nowPlaying];
+				if (updatedData[5]) {
+					updatedData[5].results = [
+						...updatedData[5].results,
+						...response.results,
+					];
+				}
 
 				// Update the state with the modified array
 				setNowPlaying(updatedData);
@@ -81,25 +84,14 @@ export const NowPlaying = () => {
 					slidesPerView={"auto"}
 					direction="horizontal"
 					modules={[FreeMode]}
-					freeMode={{
-						freeMode: { enabled: true },
-					}}>
+					freeMode={true}>
 					{nowPlaying[5].results.map((item) => (
 						<SwiperSlide key={item.id}>
 							<Link to={`movie/${item.id.toString()}`}>
 								<MovieShowCard
-									genreIds={item.genre_ids}
-									id={item.id}
-									mediaType={item.media_type}
-									overview={item.overview}
 									posterPath={item.poster_path}
-									backdropPath={item.backdrop_path}
-									releaseDate={item.release_date}
-									voteAverage={item.vote_average}
+									mediaType={"movie"}
 									title={item.title}
-									name={item.name}
-									movieGenres={nowPlaying[1].genres}
-									showGenres={nowPlaying[2].genres}
 								/>
 							</Link>
 						</SwiperSlide>
