@@ -1,8 +1,11 @@
 import poster from "../../imgs/tmdbPoster.jpg";
-import { MovieShowDetailsMovie0 } from "../../types/movieShowInDepthTypes";
+import {
+	MovieShowDetailsMovie0,
+	MovieShowDetailsShow0,
+} from "../../types/movieShowInDepthTypes";
 
 type BackdropProps = {
-	movieShowDetails: MovieShowDetailsMovie0;
+	movieShowDetails: MovieShowDetailsMovie0 | MovieShowDetailsShow0;
 };
 
 export const Backdrop = (props: BackdropProps) => {

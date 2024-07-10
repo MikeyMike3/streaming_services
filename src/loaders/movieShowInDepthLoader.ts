@@ -18,11 +18,11 @@ import {
 
 import { fetchPersonDetails, fetchPersonCredits } from "../api/personApi";
 import {
-	MovieShowDetailsPeopleTuple,
-	MovieShowDetailsTuple,
+	MovieShowDetailsPeopleTupleDefault,
+	MovieShowDetailsTupleDefault,
 } from "../types/movieShowInDepthTypes";
 
-let results: MovieShowDetailsTuple | MovieShowDetailsPeopleTuple;
+let results: MovieShowDetailsTupleDefault | MovieShowDetailsPeopleTupleDefault;
 
 export const movieShowInDepthLoader = async ({
 	params,

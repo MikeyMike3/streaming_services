@@ -134,7 +134,29 @@ export interface Images {
 	width: number | null;
 }
 
-export type MovieShowDetailsTuple = [
+export type MovieShowDetailsMovieTuple = [
+	MovieShowDetailsMovie0,
+	MovieShowDetailsMovie1,
+	MovieShowDetailsMovie2,
+	MovieShowDetailsMovie3,
+	MovieShowDetailsMovie4,
+	MovieShowDetailsMovie5,
+	string | null,
+];
+
+export type MovieShowDetailsShowTuple = [
+	MovieShowDetailsShow0,
+	MovieShowDetailsShow1,
+	MovieShowDetailsShow2,
+	MovieShowDetailsShow3,
+	MovieShowDetailsShow4,
+	MovieShowDetailsShow5,
+	string | null,
+];
+
+export type MovieShowDetailsPeopleTuple = [Person0, Person1, string | null];
+
+export type MovieShowDetailsTupleDefault = [
 	MovieShowDetailsMovie0 | null,
 	MovieShowDetailsMovie1 | null,
 	MovieShowDetailsMovie2 | null,
@@ -144,7 +166,7 @@ export type MovieShowDetailsTuple = [
 	string | null,
 ];
 
-export type MovieShowDetailsPeopleTuple = [
+export type MovieShowDetailsPeopleTupleDefault = [
 	Person0 | null,
 	Person1 | null,
 	string | null,
@@ -226,17 +248,35 @@ export interface MovieShowDetailsShow0 {
 	overview: string;
 }
 
-interface MovieShowDetailsShow1 {}
+interface MovieShowDetailsShow1 {
+	id: number;
+	results: {
+		[countryCode: string]: CountryResult;
+	};
+}
 
 export interface MovieShowDetailsShow2 {
 	cast: ShowCast[];
 }
 
-interface MovieShowDetailsShow3 {}
+interface MovieShowDetailsShow3 {
+	id: number | null;
+	results: VideoResults[];
+}
 
-interface MovieShowDetailsShow4 {}
+interface MovieShowDetailsShow4 {
+	page: number | null;
+	results: SimilarResults[];
+	total_pages: number | null;
+	total_results: number | null;
+}
 
-interface MovieShowDetailsShow5 {}
+interface MovieShowDetailsShow5 {
+	backdrops: Images[] | null;
+	id: number | null;
+	logos: Images[] | null;
+	posters: Images[] | null;
+}
 
 //   person
 
