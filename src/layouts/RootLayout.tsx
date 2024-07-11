@@ -23,6 +23,10 @@ export const RootLayout = () => {
 		setMenuOpen(!menuOpen);
 	};
 
+	useEffect(() => {
+		console.log(menuOpen);
+	});
+
 	const handleClickOutside = useCallback(
 		(event: MouseEvent | React.MouseEvent<Document>) => {
 			const target = event.target as HTMLElement;
@@ -35,13 +39,16 @@ export const RootLayout = () => {
 
 	useEffect(() => {
 		if (menuOpen) {
-			document.addEventListener("click", handleClickOutside);
+			const timer = setTimeout(() => {
+				document.addEventListener("click", handleClickOutside);
+			}, 0);
+			return () => {
+				clearTimeout(timer);
+				document.removeEventListener("click", handleClickOutside);
+			};
 		} else {
 			document.removeEventListener("click", handleClickOutside);
 		}
-		return () => {
-			document.removeEventListener("click", handleClickOutside);
-		};
 	}, [menuOpen, handleClickOutside]);
 	return (
 		<>
