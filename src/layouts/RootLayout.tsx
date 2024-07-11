@@ -23,10 +23,6 @@ export const RootLayout = () => {
 		setMenuOpen(!menuOpen);
 	};
 
-	useEffect(() => {
-		console.log(menuOpen);
-	});
-
 	const handleClickOutside = useCallback(
 		(event: MouseEvent | React.MouseEvent<Document>) => {
 			const target = event.target as HTMLElement;
