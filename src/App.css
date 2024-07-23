@@ -36,7 +36,9 @@ a {
 	margin-bottom: 25px;
 	text-align: center;
 	height: 45px;
-	transition: transform 400ms, 400ms;
+	transition:
+		transform 400ms,
+		400ms;
 }
 
 .search-container:hover {
@@ -72,7 +74,9 @@ a {
 	cursor: pointer;
 	background-color: aqua;
 	font-size: 1rem;
-	transition: transform 400ms, 400ms;
+	transition:
+		transform 400ms,
+		400ms;
 }
 
 .search-btn:hover {
@@ -231,7 +235,7 @@ nav > * {
 	top: 0;
 	right: -100%;
 	width: 70%;
-	height: 100%;
+	height: 100dvh;
 	background-color: rgba(20, 20, 20, 0.9);
 	display: flex;
 	flex-direction: column;
@@ -480,7 +484,9 @@ nav > * {
 	flex-direction: column;
 	height: 100%;
 	width: 100%;
-	transition: transform 400ms, 400ms;
+	transition:
+		transform 400ms,
+		400ms;
 	transform: scale(0.95);
 }
 
