@@ -120,6 +120,8 @@ export const Search = () => {
 		}
 	}, [inputQuery]);
 
+	console.log(searchResults);
+
 	return (
 		<div>
 			<Spinner navigation={navigation} />
@@ -166,6 +168,7 @@ export const Search = () => {
 											<MovieShowCard
 												mediaType={item.media_type}
 												posterPath={item.poster_path}
+												profilePath={item.profile_path}
 												name={item.name}
 											/>
 										</Link>

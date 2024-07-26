@@ -9,6 +9,7 @@ export interface SearchShowResults {
 	id: number;
 	name: string;
 	poster_path: string | null;
+	profile_path: string | null;
 	media_type: string;
 }
 
